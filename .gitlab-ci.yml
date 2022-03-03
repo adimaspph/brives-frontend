@@ -30,6 +30,5 @@ Deploy to Staging:
   before_script: 
     - yarn
   script:
-    - npx netlify-cli build
-    - npm run build
+    - yarn run build
     - npx netlify-cli deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --prod
