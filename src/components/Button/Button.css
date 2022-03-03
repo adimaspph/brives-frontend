@@ -145,18 +145,18 @@ button:active {
     background: #E19E0E;
 }
 
-button:disabled{
+.btn:disabled{
     color: #BBBBBB;
     background: #F6F6F6;
     cursor: auto;
 }
 
-button:disabled:hover{
+.btn:disabled:hover{
     background: #F6F6F6;
     cursor: auto;
 }
 
-button:disabled:active{
+.btn:disabled:active{
     background: #F6F6F6;
     cursor: auto;
 }
