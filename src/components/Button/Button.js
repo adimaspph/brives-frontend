@@ -4,7 +4,7 @@ import './Button.css'
 function Button(props) {
     return (
     <div>
-        <a className='btn btn-primary'>{props.title}</a>
+        <a className={props.className} href={props.href}>{props.children}</a>
     </div>
     )
 }
