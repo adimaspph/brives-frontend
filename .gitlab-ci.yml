@@ -1,18 +1,40 @@
 image: node:latest
 
-stages:
-  - deploy
+cache:
+  paths:
+    - node_modules/
 
-deploy:
-  stage: deploy
+before_script:  
+  - apt-get update -qq && apt-get install
+
+stages:
+  - build-staging
+  - deploy-staging
+
+
+Build to Staging:
+  stage: build-staging
+  environment:
+    name: development
+  before_script: 
+    - yarn config set cache-folder .yarn
+    - yarn install 
+  script:
+    - npx netlify-cli build
+  artifacts:
+    paths:
+      - out
+  only:
+    - staging
+    - merge_requests
+
+
+Deploy to Staging:
+  stage: deploy-staging
   environment:
     name: staging
     url: https://brives-staging.netlify.app
   only:
     - staging
   script:
-    - npm i
-    - npm start
-    - npm test
-    - npm run build
     - npx netlify-cli deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --prod
