@@ -1,4 +1,4 @@
-image: node:latest
+image: node:12.16.3-buster-slim
 
 before_script:  
   - apt-get update -qq && apt-get install
@@ -7,6 +7,17 @@ stages:
   # - build-staging
   - deploy-staging
 
+StagingDeployment:
+  image: ruby:2.7.1
+  stage: deploy-staging
+  script:
+    - apt-get update -qy
+    - apt-get install -y ruby-dev
+    - gem install dpl
+    - wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh
+    - dpl --provider=heroku --app=${DEPLOYMENT_NAME_STAGING} --api-key=${HEROKU_API}
+  only:
+    - staging
 
 # Build to Staging:
 #   stage: build-staging
@@ -20,15 +31,15 @@ stages:
 #     - staging
 
 
-Deploy to Staging:
-  stage: deploy-staging
-  environment:
-    name: development
-    url: https://brives-staging.netlify.app
-  only:
-    - staging
-  before_script: 
-    - yarn
-  script:
-    - yarn run build
-    - npx netlify-cli deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --prod
+# Deploy to Staging:
+#   stage: deploy-staging
+#   environment:
+#     name: development
+#     url: https://brives-staging.netlify.app
+#   only:
+#     - staging
+#   before_script: 
+#     - yarn
+#   script:
+#     - yarn run build
+#     - npx netlify-cli deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --prod
