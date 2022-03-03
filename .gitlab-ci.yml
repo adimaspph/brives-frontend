@@ -4,20 +4,20 @@ before_script:
   - apt-get update -qq && apt-get install
 
 stages:
-  - build-staging
+  # - build-staging
   - deploy-staging
 
 
-Build to Staging:
-  stage: build-staging
-  environment:
-    name: development
-  before_script: 
-    - yarn
-  script:
-    - npx netlify-cli build
-  only:
-    - staging
+# Build to Staging:
+#   stage: build-staging
+#   environment:
+#     name: development
+#   before_script: 
+#     - yarn
+#   script:
+#     - npx netlify-cli build
+#   only:
+#     - staging
 
 
 Deploy to Staging:
@@ -27,6 +27,9 @@ Deploy to Staging:
     url: https://brives-staging.netlify.app
   only:
     - staging
+  before_script: 
+    - yarn
   script:
+    - npx netlify-cli build
     - npm run build
     - npx netlify-cli deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --prod
