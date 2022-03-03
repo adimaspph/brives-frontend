@@ -11,7 +11,7 @@ import Design from "./pages/Design";
 
 function App() {
 	return (
-		<BrowserRouter forceRefresh={false}>
+		<BrowserRouter>
 			<Router>
 				<div className="sidebar-container">
 					<Sidebar />
