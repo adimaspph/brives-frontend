@@ -1,4 +1,3 @@
-import { hot } from "react-hot-loader/root";
 import React from "react";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 // import Route from "react-router";
@@ -15,14 +14,19 @@ function App() {
 			<Router>
 				<div className="sidebar-container">
 					<Sidebar />
+					{/* <ul>
+						<li>
+							<Link to="/design">Design</Link>
+						</li>
+						<li>
+							<Link to="/">Home</Link>
+						</li>
+					</ul> */}
 
 					<div className="content">
 						<Switch>
-							<Route
-								path="/design"
-								component={() => <Design />}
-							/>
-							<Route path="/" component={() => <Home />} />
+							<Route path="/design" component={Design} />
+							<Route path="/" component={Home} />
 						</Switch>
 					</div>
 				</div>
@@ -31,4 +35,4 @@ function App() {
 	);
 }
 
-export default hot(App);
+export default App;

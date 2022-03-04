@@ -1,35 +1,55 @@
 image: node:12.16.3-buster-slim
 
-before_script:  
-  - apt-get update -qq && apt-get install
+before_script:
+    - apt-get update -qq && apt-get install
 
 stages:
-  # - build-staging
-  - deploy-staging
+    # - build-staging
+    - deploy-heroku
+    - deploy-vercel
 
-StagingDeployment:
-  image: ruby:2.7.1
-  stage: deploy-staging
-  script:
-    - apt-get update -qy
-    - apt-get install -y ruby-dev
-    - gem install dpl
-    - wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh
-    - dpl --provider=heroku --app=${DEPLOYMENT_NAME_STAGING} --api-key=${HEROKU_API}
-  only:
-    - staging
+Deploy-to-heroku:
+    image: ruby:2.7.1
+    stage: deploy-heroku
+    script:
+        - apt-get update -qy
+        - apt-get install -y ruby-dev
+        - gem install dpl
+        - wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh
+        - dpl --provider=heroku --app=${DEPLOYMENT_NAME_STAGING} --api-key=${HEROKU_API}
+    only:
+        - staging
 
+Deploy-to-vercel:
+    stage: deploy-vercel
+    image: node:14-alpine
+    variables:
+        PREVIEW_URL: $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG.$VERCEL_USER.vercel.app
+        VERCEL_ORG_ID: $VERCEL_ORG_ID
+        VERCEL_PROJECT_ID: $VERCEL_PROJECT_ID
+
+    rules:
+        - if: $CI_COMMIT_TAG
+        - if: $CI_COMMIT_BRANCH == 'main'
+
+    environment:
+        name: vercel/$CI_COMMIT_REF_NAME
+        url: https://$PREVIEW_URL
+
+    script:
+        - npm i -g vercel
+        - DEPLOYMENT_URL=$(VERCEL_ORG_ID=$VERCEL_ORG_ID VERCEL_PROJECT_ID=$VERCEL_PROJECT_ID vercel --confirm -t $VERCEL_TOKEN --scope $VERCEL_SCOPE)
+        - vercel alias set $DEPLOYMENT_URL $PREVIEW_URL -t $VERCEL_TOKEN --scope $VERCEL_SCOPE
 # Build to Staging:
 #   stage: build-staging
 #   environment:
 #     name: development
-#   before_script: 
+#   before_script:
 #     - yarn
 #   script:
 #     - npx netlify-cli build
 #   only:
 #     - staging
-
 
 # Deploy to Staging:
 #   stage: deploy-staging
@@ -38,7 +58,7 @@ StagingDeployment:
 #     url: https://brives-staging.netlify.app
 #   only:
 #     - staging
-#   before_script: 
+#   before_script:
 #     - yarn
 #   script:
 #     - yarn run build
