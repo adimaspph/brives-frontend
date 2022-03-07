@@ -7,6 +7,7 @@ import Sidebar from "./components/Sidebar/Sidebar";
 
 import Home from "./pages/Home";
 import Design from "./pages/Design";
+import JadwalPage from "./pages/JadwalPage/JadwalPage";
 
 function App() {
 	return (
@@ -25,8 +26,9 @@ function App() {
 
 					<div className="content">
 						<Switch>
-							<Route path="/design" component={Design} />
-							<Route path="/" component={Home} />
+							<Route exact path="/" component={Home} />
+							<Route exact path="/design" component={Design} />
+							<Route exact path="/atur-jadwal" component={JadwalPage} />
 						</Switch>
 					</div>
 				</div>
