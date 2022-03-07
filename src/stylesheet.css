@@ -113,6 +113,7 @@ h6 {
 
 ::-webkit-scrollbar {
     width: 8px;
+	height: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -125,7 +126,12 @@ h6 {
 }
 
 .content {
-    /* display: flex; */
+    display: flex;
+	flex-grow: 1;
+	box-sizing: border-box;
+
     /* width: 100%; */
-    margin-left: 24px;
+    margin: 0 12px;
+
+	/* overflow-x: auto; */
 }
