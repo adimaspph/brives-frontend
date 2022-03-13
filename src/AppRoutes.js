@@ -8,27 +8,29 @@ import Sidebar from "./components/Sidebar/Sidebar";
 import Home from "./pages/Home";
 import Design from "./pages/Design";
 import JadwalPage from "./pages/JadwalPage/JadwalPage";
+import TestForm from "./pages/TestForm";
 
-function App() {
+function AppRoutes() {
 	return (
 		<BrowserRouter>
 			<Router>
 				<div className="sidebar-container">
 					<Sidebar />
-					{/* <ul>
-						<li>
-							<Link to="/design">Design</Link>
-						</li>
-						<li>
-							<Link to="/">Home</Link>
-						</li>
-					</ul> */}
 
 					<div className="content">
 						<Switch>
 							<Route exact path="/" component={Home} />
 							<Route exact path="/design" component={Design} />
-							<Route exact path="/atur-jadwal" component={JadwalPage} />
+							<Route
+								exact
+								path="/atur-jadwal"
+								component={JadwalPage}
+							/>
+							<Route
+								exact
+								path="/akun"
+								component={TestForm}
+							/>
 						</Switch>
 					</div>
 				</div>
@@ -37,4 +39,4 @@ function App() {
 	);
 }
 
-export default App;
+export default AppRoutes;
