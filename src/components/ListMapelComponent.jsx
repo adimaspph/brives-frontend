@@ -30,6 +30,7 @@ class ListMapelComponent extends Component {
                                 <th>Deskripsi</th>
                                 <th>Action</th>
                             </tr>
+                            
                         </thead>
                         <tbody>
                             {
