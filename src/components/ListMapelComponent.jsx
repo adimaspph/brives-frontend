@@ -7,6 +7,8 @@ class ListMapelComponent extends Component {
         this.state = {
             mapel: []
         }
+
+        this.addMapel = this.addMapel.bind(this);
     }
 
     componentDidMount(){
@@ -14,12 +16,19 @@ class ListMapelComponent extends Component {
             this.setState({ mapel: res.data});
         });
     }
+    
+    addMapel(){
+        this.props.history.push('/atur-mapel/add');
+    }
 
     render() {
         return (
             <div>
 
                 <h2 className='text-center'>Daftar Mapel</h2>
+                <a className="btn btn-blue" onClick={this.addMapel}>
+					Tambah Mata Pelajaran
+				</a>
                 <div className='row'>
                     <table className='table'>
                         <thead>

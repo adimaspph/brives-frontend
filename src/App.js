@@ -9,6 +9,7 @@ import Home from "./pages/Home";
 import Design from "./pages/Design";
 import JadwalPage from "./pages/JadwalPage/JadwalPage";
 import ListMapelComponent from "./components/ListMapelComponent";
+import CreateMapelComponent from "./components/CreateMapelComponent";
 
 function App() {
 	return (
@@ -31,6 +32,8 @@ function App() {
 							<Route exact path="/design" component={Design} />
 							<Route exact path="/atur-jadwal" component={JadwalPage} />
 							<Route exact path="/atur-mapel" component={ListMapelComponent} />
+							<Route exact path="/atur-mapel/add" component={CreateMapelComponent} />
+
 						</Switch>
 					</div>
 
