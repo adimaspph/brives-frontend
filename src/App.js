@@ -8,6 +8,7 @@ import Sidebar from "./components/Sidebar/Sidebar";
 import Home from "./pages/Home";
 import Design from "./pages/Design";
 import JadwalPage from "./pages/JadwalPage/JadwalPage";
+import ListMapelComponent from "./components/ListMapelComponent";
 
 function App() {
 	return (
@@ -29,8 +30,11 @@ function App() {
 							<Route exact path="/" component={Home} />
 							<Route exact path="/design" component={Design} />
 							<Route exact path="/atur-jadwal" component={JadwalPage} />
+							<Route exact path="/mapel" component={ListMapelComponent} />
 						</Switch>
 					</div>
+
+					
 				</div>
 			</Router>
 		</BrowserRouter>
