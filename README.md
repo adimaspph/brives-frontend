@@ -1,10 +1,12 @@
 ## Kelompok C09 - BRIVES
 - - -
+Live site : [Brives Frontend](https://brives-staging.herokuapp.com/)
+- - -
 **Dosen**: Dr. Panca Oktavia Hadi Putra B.Sc., M.Bus.  
 **Asisten dosen**: Michelle Melissa  
 **Anggota**:  
-[Nama] - Project Manager - [NPM]  
+**Eyota Wakanda** - Project Manager - 1906353832  
 **Salman Marsha** - Scrum Master - 1906299130  
-[Nama] - Lead Analyst - [NPM]  
-[Nama] - Lead Designer - [NPM]  
-[Nama] - Lead Programmer - [NPM]  
+**Karimah** - Lead Analyst - 1906319006    
+**Fadiya Latifah** - Lead Designer - 1906399442  
+**Adimas Putra Pratama H** - Lead Programmer - 1906305575  
