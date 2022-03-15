@@ -30,7 +30,7 @@ function App() {
 							<Route exact path="/" component={Home} />
 							<Route exact path="/design" component={Design} />
 							<Route exact path="/atur-jadwal" component={JadwalPage} />
-							<Route exact path="/mapel" component={ListMapelComponent} />
+							<Route exact path="/atur-mapel" component={ListMapelComponent} />
 						</Switch>
 					</div>
 
