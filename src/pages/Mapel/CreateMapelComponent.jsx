@@ -64,7 +64,7 @@ class CreateMapelComponent extends Component {
                         <div className='row'>
                             <div className='card'>
                                 <div className='card-body'>
-                                    <h4>Formulir Mata Pelajaran</h4>
+                                    <h4>Formulir Tambah Mata Pelajaran</h4>
                                     <form action="">
                                         <div className='form-group'>
                                             <label htmlFor="">Nama Mata Pelajaran <span className='star'>*</span> </label>

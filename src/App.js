@@ -35,7 +35,7 @@ function App() {
 							<Route exact path="/atur-jadwal" component={JadwalPage} />
 							<Route exact path="/atur-mapel" component={ListMapelComponent} />
 							<Route exact path="/atur-mapel/add" component={CreateMapelComponent} />
-							<Route exact path="/atur-mapel/update/:idMapel" component={UpdateMapelComponent} />
+							<Route exact path="/atur-mapel/:idMapel/update" component={UpdateMapelComponent} />
 
 						</Switch>
 					</div>

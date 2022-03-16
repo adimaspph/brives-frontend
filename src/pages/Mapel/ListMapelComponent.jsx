@@ -16,7 +16,7 @@ class ListMapelComponent extends Component {
     }
 
     editMapel(idMapel) {
-        this.props.history.push(generatePath("/atur-mapel/update/:idMapel", { idMapel }));
+        this.props.history.push(generatePath("/atur-mapel/:idMapel/update", { idMapel }));
 
     }
 

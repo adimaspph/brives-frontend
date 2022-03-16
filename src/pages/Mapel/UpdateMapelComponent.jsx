@@ -66,16 +66,16 @@ class UpdateMapelComponent extends Component {
         return (
 
             <div className='outer'>
-                <h2>Tambah Mata Pelajaran</h2>
+                <h2>Ubah Mata Pelajaran</h2>
                 <div className='tes'>
                     <div className='container'>
                         <div className='row'>
                             <div className='card'>
                                 <div className='card-body'>
-                                    <h4>Formulir Mata Pelajaran</h4>
+                                    <h4>Formulir Ubah Mata Pelajaran</h4>
                                     <form action="">
                                         <div className='form-group'>
-                                            <label htmlFor="">Id Mata Pelajaran <span className='star'>*</span> </label>
+                                            <label htmlFor="">Id Mata Pelajaran  </label>
                                             <input type="text" name="namaMapel" className='form-control'
                                                 value={this.state.idMapel} readOnly />
                                         </div>
