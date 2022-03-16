@@ -9,25 +9,19 @@ class CreateMapelComponent extends Component {
         this.state = {
             namaMapel: '',
             deskripsi: '',
-            jenjang: { "idJenjang": 1, "namaJenjang": "1 SMA" },
-            jenjanglist: [],
+            listJenjang: [{"idJenjang":1,"namaJenjang":"2 SMP"},{"idJenjang":2,"namaJenjang":"3 SMP"}],
         }
 
         this.changeNamaMapelHandler = this.changeNamaMapelHandler.bind(this);
         this.changeDeskripsiHandler = this.changeDeskripsiHandler.bind(this);
-        this.changeJenjangHandler = this.changeJenjangHandler.bind(this);
+        this.changeListJenjangHandler = this.changeListJenjangHandler.bind(this);
         this.saveMapel = this.saveMapel.bind(this);
         this.cancel = this.cancel.bind(this);
     }
-    // componentDidMount(){
-    //     MapelService.getJenjang.then((res) => {
-    //         this.setState({ jenjanglist: res.data});
-    //     });
-    // }
 
     saveMapel = (e) => {
         e.preventDefault();
-        let mapel = { namaMapel: this.state.namaMapel, deskripsi: this.state.deskripsi, jenjang: this.state.jenjang };
+        let mapel = { namaMapel: this.state.namaMapel, deskripsi: this.state.deskripsi, listJenjang: this.state.listJenjang };
         console.log('mapel => ' + JSON.stringify(mapel));
 
         MapelService.createMapel(mapel).then(res => {
@@ -43,9 +37,9 @@ class CreateMapelComponent extends Component {
         this.setState({ deskripsi: event.target.value });
     }
 
-    changeJenjangHandler = (event) => {
+    changeListJenjangHandler = (event) => {
         console.log('mapel => ' + JSON.stringify(event.target.value));
-        this.setState({ jenjang: event.target.value });
+        this.setState({ listJenjang: event.target.value });
     }
 
     cancel() {
@@ -75,16 +69,9 @@ class CreateMapelComponent extends Component {
                                         <div className='form-group'>
                                             <label htmlFor="">Jenjang <span className='star'>*</span> </label>
                                             <input type="text" name="jenjang" className='form-control'
-                                                value={this.state.jenjang} onChange={this.changeJenjangHandler} />
+                                                value={this.state.listJenjang} onChange={this.changeListJenjangHandler} />
 
-                                            {/* <select name='jenjang' className='form-control' value={this.state.jenjang} onChange={this.changeJenjangHandler}>
-                                            <option value={this.state.jenjang}>2 SMP</option>
-                                            <option value={this.state.jenjang}>3 SMP</option>
-                                        </select> */}
-
-                                            {/* <input className="form-control" type="select">
-                                            {jenjang.map(c => (<option key={c.idJenjang} value={c.idJenjang}>{c.namaJenjang}</option>))}
-                                        </input> */}
+                                            
 
                                         </div>
 
