@@ -10,6 +10,8 @@ import Design from "./pages/Design";
 import JadwalPage from "./pages/JadwalPage/JadwalPage";
 import ListMapelComponent from "./pages/Mapel/ListMapelComponent";
 import CreateMapelComponent from "./pages/Mapel/CreateMapelComponent";
+import UpdateMapelComponent from "./pages/Mapel/UpdateMapelComponent";
+
 
 function App() {
 	return (
@@ -33,6 +35,7 @@ function App() {
 							<Route exact path="/atur-jadwal" component={JadwalPage} />
 							<Route exact path="/atur-mapel" component={ListMapelComponent} />
 							<Route exact path="/atur-mapel/add" component={CreateMapelComponent} />
+							<Route exact path="/update/:idMapel" component={UpdateMapelComponent} />
 
 						</Switch>
 					</div>

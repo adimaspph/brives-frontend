@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import MapelService from '../../services/MapelService';
-import "./MapelForm.css";
+import "./Mapel.css";
+import { generatePath } from 'react-router-dom';
 
 
-class CreateMapelComponent extends Component {
+
+class UpdateMapelComponent extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            // idMapel: this.props.match.idMapel,
+            idMapel: this.props.match.idMapel,
             namaMapel: '',
             deskripsi: '',
             jenjang: { "idJenjang": 1, "namaJenjang": "1 SMA" },
@@ -16,23 +20,25 @@ class CreateMapelComponent extends Component {
         this.changeNamaMapelHandler = this.changeNamaMapelHandler.bind(this);
         this.changeDeskripsiHandler = this.changeDeskripsiHandler.bind(this);
         this.changeJenjangHandler = this.changeJenjangHandler.bind(this);
-        this.saveMapel = this.saveMapel.bind(this);
+        this.updateMapel = this.updateMapel.bind(this);
         this.cancel = this.cancel.bind(this);
     }
-    // componentDidMount(){
-    //     MapelService.getJenjang.then((res) => {
-    //         this.setState({ jenjanglist: res.data});
-    //     });
-    // }
+    componentDidMount(){
+        MapelService.getMapelById(this.state.idMapel).then( (res) => {
+            let mapel = res.data;
+            this.setState({namaMapel : mapel.namaMapel, 
+                deskripsi: mapel.deskripsi, 
+                jenjang: mapel.jenjang
+            });
+        });
+    }
 
-    saveMapel = (e) => {
+    updateMapel = (e) => {
         e.preventDefault();
         let mapel = { namaMapel: this.state.namaMapel, deskripsi: this.state.deskripsi, jenjang: this.state.jenjang };
         console.log('mapel => ' + JSON.stringify(mapel));
 
-        MapelService.createMapel(mapel).then(res => {
-            this.props.history.push('/atur-mapel');
-        })
+        
     }
 
     changeNamaMapelHandler = (event) => {
@@ -51,7 +57,6 @@ class CreateMapelComponent extends Component {
     cancel() {
         this.props.history.push('/atur-mapel');
     }
-
 
 
     render() {
@@ -95,7 +100,7 @@ class CreateMapelComponent extends Component {
                                         </div>
 
                                         <div className='box-right'>
-                                            <a className="btn btn-blue twobutton" onClick={this.saveMapel}>
+                                            <a className="btn btn-blue twobutton" onClick={this.updateMapel}>
                                                 Simpan
                                             </a>
                                             <a className="btn btn-outline-blue twobutton" onClick={this.cancel}>
@@ -118,4 +123,5 @@ class CreateMapelComponent extends Component {
     }
 }
 
-export default CreateMapelComponent;
+
+export default UpdateMapelComponent;

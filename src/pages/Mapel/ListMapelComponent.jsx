@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import MapelService from '../../services/MapelService';
 import "./Mapel.css";
+import { generatePath } from 'react-router-dom';
+
 
 class ListMapelComponent extends Component {
     constructor(props) {
@@ -10,15 +12,21 @@ class ListMapelComponent extends Component {
         }
 
         this.addMapel = this.addMapel.bind(this);
+        this.editMapel = this.editMapel.bind(this);
     }
 
-    componentDidMount(){
+    editMapel(idMapel) {
+        this.props.history.push(generatePath("/update/:idMapel", { idMapel }));
+
+    }
+
+    componentDidMount() {
         MapelService.getMapel().then((res) => {
-            this.setState({ mapel: res.data});
+            this.setState({ mapel: res.data });
         });
     }
-    
-    addMapel(){
+
+    addMapel() {
         this.props.history.push('/atur-mapel/add');
     }
 
@@ -26,11 +34,11 @@ class ListMapelComponent extends Component {
         return (
             <div>
 
-                
+
                 <h2 className='text-center'>Daftar Mapel</h2>
                 <a className="btn btn-blue" onClick={this.addMapel}>
-					Tambah Mata Pelajaran
-				</a>
+                    Tambah Mata Pelajaran
+                </a>
                 <div className='row'>
                     <table className='table'>
                         <thead>
@@ -45,13 +53,18 @@ class ListMapelComponent extends Component {
                         <tbody>
                             {
                                 this.state.mapel.map(
-                                    satuMapel => 
-                                    <tr key = {satuMapel.idMapel}>
-                                        <td scope='row'> {satuMapel.idMapel} </td>
-                                        <td> {satuMapel.namaMapel} </td>
-                                        <td> {satuMapel.jenjang.namaJenjang} </td>
-                                        <td> {satuMapel.deskripsi} </td>
-                                    </tr>
+                                    satuMapel =>
+                                        <tr key={satuMapel.idMapel}>
+                                            <td scope='row'> {satuMapel.idMapel} </td>
+                                            <td> {satuMapel.namaMapel} </td>
+                                            <td> {satuMapel.jenjang.namaJenjang} </td>
+                                            <td> {satuMapel.deskripsi} </td>
+                                            <td>
+                                                <a className="btn btn-blue" onClick={ () => this.editMapel(satuMapel.idMapel)}>
+                                                Update
+                                            </a>
+                                            </td>
+                                        </tr>
                                 )
                             }
                         </tbody>
