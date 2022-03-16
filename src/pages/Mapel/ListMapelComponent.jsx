@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import MapelService from '../services/MapelService';
+import MapelService from '../../services/MapelService';
+import "./Mapel.css";
 
 class ListMapelComponent extends Component {
     constructor(props) {
@@ -25,6 +26,7 @@ class ListMapelComponent extends Component {
         return (
             <div>
 
+                
                 <h2 className='text-center'>Daftar Mapel</h2>
                 <a className="btn btn-blue" onClick={this.addMapel}>
 					Tambah Mata Pelajaran
@@ -33,11 +35,11 @@ class ListMapelComponent extends Component {
                     <table className='table'>
                         <thead>
                             <tr>
-                                <th>Id Mapel</th>
-                                <th>Nama Mapel</th>
-                                <th>Jenjang</th>
-                                <th>Deskripsi</th>
-                                <th>Action</th>
+                                <th scope='col'>Id Mapel</th>
+                                <th scope='col'>Nama Mapel</th>
+                                <th scope='col'>Jenjang</th>
+                                <th scope='col'>Deskripsi</th>
+                                <th scope='col'>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -45,7 +47,7 @@ class ListMapelComponent extends Component {
                                 this.state.mapel.map(
                                     satuMapel => 
                                     <tr key = {satuMapel.idMapel}>
-                                        <td> {satuMapel.idMapel} </td>
+                                        <td scope='row'> {satuMapel.idMapel} </td>
                                         <td> {satuMapel.namaMapel} </td>
                                         <td> {satuMapel.jenjang.namaJenjang} </td>
                                         <td> {satuMapel.deskripsi} </td>

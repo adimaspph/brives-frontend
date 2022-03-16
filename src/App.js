@@ -8,8 +8,8 @@ import Sidebar from "./components/Sidebar/Sidebar";
 import Home from "./pages/Home";
 import Design from "./pages/Design";
 import JadwalPage from "./pages/JadwalPage/JadwalPage";
-import ListMapelComponent from "./components/ListMapelComponent";
-import CreateMapelComponent from "./components/CreateMapelComponent";
+import ListMapelComponent from "./pages/Mapel/ListMapelComponent";
+import CreateMapelComponent from "./pages/Mapel/CreateMapelComponent";
 
 function App() {
 	return (
