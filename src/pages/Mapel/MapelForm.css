@@ -40,9 +40,10 @@
   .card {
       /* background-color: #45a049; */
       box-shadow: rgba(80, 80, 80, 0.2) -1px 2px 6px 1px;
+      width: fit-content;
       border-radius: 16px;
       padding: 24px;
-      
+  
   }
 
   label {
@@ -55,5 +56,23 @@
 
   .twobutton {
       display: inline-block;
-      margin-right: 8px;
+      margin-left: 8px;
+  }
+
+  .box-right {
+      display: flex;
+      justify-content: right;
+  }
+
+  .outer {
+    /* box-shadow: rgba(0, 225, 255, 0.2) -1px 2px 6px 1px; */
+    width: 100%;
+    margin-left: 32px;
+    margin-right: 32px;
+  }
+
+  .tes {
+    /* width: 100%; */
+    display: flex;
+    justify-content: center;
   }
