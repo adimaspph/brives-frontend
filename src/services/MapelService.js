@@ -23,6 +23,9 @@ class MapelService {
         return axios.get(MAPEL_API_BASE_URL_2 + '/' + idMapel);
     }
 
+    updateMapel(mapel, idMapel){
+        return axios.put(MAPEL_API_BASE_URL_2 + '/' + idMapel, mapel);
+    }
 
 }
 

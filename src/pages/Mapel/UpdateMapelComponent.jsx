@@ -9,8 +9,7 @@ class UpdateMapelComponent extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            // idMapel: this.props.match.idMapel,
-            idMapel: this.props.match.idMapel,
+            idMapel: this.props.match.params.idMapel,
             namaMapel: '',
             deskripsi: '',
             jenjang: { "idJenjang": 1, "namaJenjang": "1 SMA" },
@@ -23,11 +22,12 @@ class UpdateMapelComponent extends Component {
         this.updateMapel = this.updateMapel.bind(this);
         this.cancel = this.cancel.bind(this);
     }
-    componentDidMount(){
-        MapelService.getMapelById(this.state.idMapel).then( (res) => {
+    componentDidMount() {
+        MapelService.getMapelById(this.state.idMapel).then((res) => {
             let mapel = res.data;
-            this.setState({namaMapel : mapel.namaMapel, 
-                deskripsi: mapel.deskripsi, 
+            this.setState({
+                namaMapel: mapel.namaMapel,
+                deskripsi: mapel.deskripsi,
                 jenjang: mapel.jenjang
             });
         });
@@ -38,7 +38,10 @@ class UpdateMapelComponent extends Component {
         let mapel = { namaMapel: this.state.namaMapel, deskripsi: this.state.deskripsi, jenjang: this.state.jenjang };
         console.log('mapel => ' + JSON.stringify(mapel));
 
-        
+        MapelService.updateMapel(mapel, this.state.idMapel).then(res => {
+            this.props.history.push('/atur-mapel');
+        });
+
     }
 
     changeNamaMapelHandler = (event) => {
@@ -61,16 +64,22 @@ class UpdateMapelComponent extends Component {
 
     render() {
         return (
-            
-                <div className='outer'>
-                    <h2>Tambah Mata Pelajaran</h2>
-                    <div className='tes'>
+
+            <div className='outer'>
+                <h2>Tambah Mata Pelajaran</h2>
+                <div className='tes'>
                     <div className='container'>
                         <div className='row'>
                             <div className='card'>
                                 <div className='card-body'>
                                     <h4>Formulir Mata Pelajaran</h4>
                                     <form action="">
+                                        <div className='form-group'>
+                                            <label htmlFor="">Id Mata Pelajaran <span className='star'>*</span> </label>
+                                            <input type="text" name="namaMapel" className='form-control'
+                                                value={this.state.idMapel} readOnly />
+                                        </div>
+
                                         <div className='form-group'>
                                             <label htmlFor="">Nama Mata Pelajaran <span className='star'>*</span> </label>
                                             <input type="text" name="namaMapel" className='form-control'
