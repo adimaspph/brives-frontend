@@ -26,7 +26,7 @@ class CreateMapelComponent extends Component {
 
     componentDidMount() {
         MapelService.getJenjang().then((res) => {
-            this.setState({ listJenjang: res.data });
+            this.setState({ listJenjang: res.data.result });
         });
 
 
@@ -73,7 +73,7 @@ class CreateMapelComponent extends Component {
         for (var i = 0; i < 5; i++) {
             if (this.state.jenjang[i]) {
                 // console.log(this.state.listJenjang[(i)-1])
-                this.state.jenjangTerpilih.push(this.state.listJenjang[(i)-1])
+                this.state.jenjangTerpilih.push(this.state.listJenjang[(i) - 1])
                 console.log(this.state.jenjangTerpilih)
             }
         }
@@ -83,9 +83,13 @@ class CreateMapelComponent extends Component {
 
     render() {
         return (
-
-
             <div className='outer'>
+                <ul class="breadcrumb">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Pictures</a></li>
+                    <li>Italy</li>
+                </ul>
+
                 <h2>Tambah Mata Pelajaran</h2>
                 <div className='tes'>
                     <div className='container'>
@@ -93,17 +97,17 @@ class CreateMapelComponent extends Component {
                             <div className='card'>
                                 <div className='card-body'>
                                     <h4>Formulir Tambah Mata Pelajaran</h4>
-                                    <form action="">
+                                    <form action="" onSubmit={this.saveMapel}>
                                         <div className='form-group'>
                                             <label htmlFor="">Nama Mata Pelajaran <span className='star'>*</span> </label>
                                             <input type="text" name="namaMapel" className='form-control'
-                                                value={this.state.namaMapel} onChange={this.changeNamaMapelHandler} required/>
+                                                value={this.state.namaMapel} onChange={this.changeNamaMapelHandler} required />
                                         </div>
 
                                         <div className='form-group jenjang'>
                                             <label htmlFor="">Jenjang </label>
                                             {/* <input type="text" name="jenjang" className='form-control'
-                                                value={this.state.listJenjang} onChange={this.changeListJenjangHandler} /> */} 
+                                                value={this.state.listJenjang} onChange={this.changeListJenjangHandler} /> */}
 
                                             <div>
                                                 {
@@ -126,9 +130,7 @@ class CreateMapelComponent extends Component {
                                         </div>
 
                                         <div className='box-right'>
-                                            <a className="btn btn-blue twobutton" onClick={this.saveMapel}>
-                                                Simpan
-                                            </a>
+                                            <button type="submit" className="btn btn-blue twobutton">Simpan</button>
                                             <a className="btn btn-outline-blue twobutton" onClick={this.cancel}>
                                                 Kembali
                                             </a>

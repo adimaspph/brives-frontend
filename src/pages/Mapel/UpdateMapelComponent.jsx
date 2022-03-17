@@ -25,14 +25,14 @@ class UpdateMapelComponent extends Component {
     }
     componentDidMount() {
         MapelService.getJenjang().then((res) => {
-            this.setState({ listJenjang: res.data });
+            this.setState({ listJenjang: res.data.result });
         });
 
         MapelService.getMapelById(this.state.idMapel).then((res) => {
             let mapel = res.data;
             this.setState({
-                namaMapel: mapel.namaMapel,
-                deskripsi: mapel.deskripsi,
+                namaMapel: mapel.result.namaMapel,
+                deskripsi: mapel.result.deskripsi,
             });
         });
     }
@@ -53,7 +53,7 @@ class UpdateMapelComponent extends Component {
         for (var i = 0; i < 5; i++) {
             if (this.state.jenjang[i]) {
                 // console.log(this.state.listJenjang[(i)-1])
-                this.state.jenjangTerpilih.push(this.state.listJenjang[(i)-1])
+                this.state.jenjangTerpilih.push(this.state.listJenjang[(i) - 1])
                 console.log(this.state.jenjangTerpilih)
             }
         }
@@ -96,7 +96,7 @@ class UpdateMapelComponent extends Component {
                             <div className='card'>
                                 <div className='card-body'>
                                     <h4>Formulir Ubah Mata Pelajaran</h4>
-                                    <form action="">
+                                    <form action="" onSubmit={this.updateMapel}>
                                         <div className='form-group'>
                                             <label htmlFor="">Id Mata Pelajaran  </label>
                                             <input type="text" name="namaMapel" className='form-control'
@@ -106,12 +106,12 @@ class UpdateMapelComponent extends Component {
                                         <div className='form-group'>
                                             <label htmlFor="">Nama Mata Pelajaran <span className='star'>*</span> </label>
                                             <input type="text" name="namaMapel" className='form-control'
-                                                value={this.state.namaMapel} onChange={this.changeNamaMapelHandler} />
+                                                value={this.state.namaMapel} onChange={this.changeNamaMapelHandler} required/>
                                         </div>
 
                                         <div className='form-group jenjang'>
                                             <label htmlFor="">Jenjang </label>
-                                            
+
                                             <div>
                                                 {
                                                     this.state.listJenjang.map(
@@ -129,13 +129,11 @@ class UpdateMapelComponent extends Component {
                                         <div className='form-group'>
                                             <label htmlFor="">Deskripsi Mata Pelajaran <span className='star'>*</span> </label>
                                             <textarea rows="4" cols="50" name="deskripsi" className='form-control'
-                                                value={this.state.deskripsi} onChange={this.changeDeskripsiHandler} > Enter text here...</textarea>
+                                                value={this.state.deskripsi} onChange={this.changeDeskripsiHandler} required > Enter text here...</textarea>
                                         </div>
 
                                         <div className='box-right'>
-                                            <a className="btn btn-blue twobutton" onClick={this.updateMapel}>
-                                                Simpan
-                                            </a>
+                                            <button type="submit" className="btn btn-blue twobutton">Simpan</button>
                                             <a className="btn btn-outline-blue twobutton" onClick={this.cancel}>
                                                 Kembali
                                             </a>
