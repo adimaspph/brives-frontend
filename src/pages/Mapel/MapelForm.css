@@ -76,3 +76,11 @@
     display: flex;
     justify-content: center;
   }
+
+  .namalabel {
+    font-weight: normal;
+  }
+
+  .jenjang {
+    margin-bottom: 10px;
+  }

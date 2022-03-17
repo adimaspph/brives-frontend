@@ -12,7 +12,9 @@ class UpdateMapelComponent extends Component {
             idMapel: this.props.match.params.idMapel,
             namaMapel: '',
             deskripsi: '',
-            listJenjang: [{"idJenjang":1,"namaJenjang":"2 SMP"},{"idJenjang":2,"namaJenjang":"3 SMP"}],
+            listJenjang: [],
+            jenjang: [],
+            jenjangTerpilih: [],
         }
 
         this.changeNamaMapelHandler = this.changeNamaMapelHandler.bind(this);
@@ -22,26 +24,48 @@ class UpdateMapelComponent extends Component {
         this.cancel = this.cancel.bind(this);
     }
     componentDidMount() {
+        MapelService.getJenjang().then((res) => {
+            this.setState({ listJenjang: res.data });
+        });
+
         MapelService.getMapelById(this.state.idMapel).then((res) => {
             let mapel = res.data;
             this.setState({
                 namaMapel: mapel.namaMapel,
                 deskripsi: mapel.deskripsi,
-                listJenjang: mapel.listJenjang
             });
         });
     }
 
     updateMapel = (e) => {
         e.preventDefault();
-        let mapel = { namaMapel: this.state.namaMapel, deskripsi: this.state.deskripsi, listJenjang: this.state.listJenjang };
+        let mapel = { namaMapel: this.state.namaMapel, deskripsi: this.state.deskripsi, listJenjang: this.state.jenjangTerpilih };
         console.log('mapel => ' + JSON.stringify(mapel));
+        this.submitJenjang();
 
         MapelService.updateMapel(mapel, this.state.idMapel).then(res => {
             this.props.history.push('/atur-mapel');
         });
 
     }
+
+    submitJenjang = () => {
+        for (var i = 0; i < 5; i++) {
+            if (this.state.jenjang[i]) {
+                // console.log(this.state.listJenjang[(i)-1])
+                this.state.jenjangTerpilih.push(this.state.listJenjang[(i)-1])
+                console.log(this.state.jenjangTerpilih)
+            }
+        }
+    }
+
+    handleChange = (event) => {
+        let state = this.state;
+        state.jenjang[event.target.value] = event.target.checked;
+        this.setState(state);
+        console.log(this.state.jenjang);
+        // console.log(this.state.listJenjang[(event.target.value)-1]);
+    };
 
     changeNamaMapelHandler = (event) => {
         this.setState({ namaMapel: event.target.value });
@@ -85,12 +109,20 @@ class UpdateMapelComponent extends Component {
                                                 value={this.state.namaMapel} onChange={this.changeNamaMapelHandler} />
                                         </div>
 
-                                        <div className='form-group'>
-                                            <label htmlFor="">Jenjang <span className='star'>*</span> </label>
-                                            <input type="text" name="jenjang" className='form-control'
-                                                value={this.state.listJenjang} onChange={this.changeListJenjangHandler} />
-
+                                        <div className='form-group jenjang'>
+                                            <label htmlFor="">Jenjang </label>
                                             
+                                            <div>
+                                                {
+                                                    this.state.listJenjang.map(
+                                                        satuJenjang =>
+                                                            <div key={satuJenjang.id}>
+                                                                <><input type="checkbox" name="jenjang" value={satuJenjang.idJenjang} onChange={this.handleChange}></input>
+                                                                    <label className='namalabel' htmlFor="">{satuJenjang.namaJenjang}</label></>
+                                                            </div>
+                                                    )
+                                                }
+                                            </div>
 
                                         </div>
 
