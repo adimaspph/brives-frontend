@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import MapelService from '../../services/MapelService';
 import "./MapelForm.css";
+import { generatePath } from 'react-router-dom';
 
 
 class CreateMapelComponent extends Component {
@@ -9,30 +10,38 @@ class CreateMapelComponent extends Component {
         this.state = {
             namaMapel: '',
             deskripsi: '',
-            jenjang: { "idJenjang": 1, "namaJenjang": "1 SMA" },
-            jenjanglist: [],
+            listJenjang: [],
+            jenjang: [],
+            jenjangTerpilih: [],
+
         }
 
         this.changeNamaMapelHandler = this.changeNamaMapelHandler.bind(this);
         this.changeDeskripsiHandler = this.changeDeskripsiHandler.bind(this);
-        this.changeJenjangHandler = this.changeJenjangHandler.bind(this);
+        this.changeListJenjangHandler = this.changeListJenjangHandler.bind(this);
         this.saveMapel = this.saveMapel.bind(this);
         this.cancel = this.cancel.bind(this);
     }
-    // componentDidMount(){
-    //     MapelService.getJenjang.then((res) => {
-    //         this.setState({ jenjanglist: res.data});
-    //     });
-    // }
+
+
+    componentDidMount() {
+        MapelService.getJenjang().then((res) => {
+            this.setState({ listJenjang: res.data });
+        });
+
+
+    }
 
     saveMapel = (e) => {
         e.preventDefault();
-        let mapel = { namaMapel: this.state.namaMapel, deskripsi: this.state.deskripsi, jenjang: this.state.jenjang };
+        let mapel = { namaMapel: this.state.namaMapel, deskripsi: this.state.deskripsi, listJenjang: this.state.jenjangTerpilih };
         console.log('mapel => ' + JSON.stringify(mapel));
+        this.submitJenjang();
 
         MapelService.createMapel(mapel).then(res => {
             this.props.history.push('/atur-mapel');
         })
+
     }
 
     changeNamaMapelHandler = (event) => {
@@ -43,55 +52,77 @@ class CreateMapelComponent extends Component {
         this.setState({ deskripsi: event.target.value });
     }
 
-    changeJenjangHandler = (event) => {
+    changeListJenjangHandler = (event) => {
         console.log('mapel => ' + JSON.stringify(event.target.value));
-        this.setState({ jenjang: event.target.value });
+        this.setState({ listJenjang: event.target.value });
     }
 
     cancel() {
         this.props.history.push('/atur-mapel');
     }
 
+    handleChange = (event) => {
+        let state = this.state;
+        state.jenjang[event.target.value] = event.target.checked;
+        this.setState(state);
+        console.log(this.state.jenjang);
+        // console.log(this.state.listJenjang[(event.target.value)-1]);
+    };
+
+    submitJenjang = () => {
+        for (var i = 0; i < 5; i++) {
+            if (this.state.jenjang[i]) {
+                // console.log(this.state.listJenjang[(i)-1])
+                this.state.jenjangTerpilih.push(this.state.listJenjang[(i)-1])
+                console.log(this.state.jenjangTerpilih)
+            }
+        }
+    }
+
 
 
     render() {
         return (
-            
-                <div className='outer'>
-                    <h2>Tambah Mata Pelajaran</h2>
-                    <div className='tes'>
+
+
+            <div className='outer'>
+                <h2>Tambah Mata Pelajaran</h2>
+                <div className='tes'>
                     <div className='container'>
                         <div className='row'>
                             <div className='card'>
                                 <div className='card-body'>
-                                    <h4>Formulir Mata Pelajaran</h4>
+                                    <h4>Formulir Tambah Mata Pelajaran</h4>
                                     <form action="">
                                         <div className='form-group'>
                                             <label htmlFor="">Nama Mata Pelajaran <span className='star'>*</span> </label>
                                             <input type="text" name="namaMapel" className='form-control'
-                                                value={this.state.namaMapel} onChange={this.changeNamaMapelHandler} />
+                                                value={this.state.namaMapel} onChange={this.changeNamaMapelHandler} required/>
                                         </div>
 
-                                        <div className='form-group'>
-                                            <label htmlFor="">Jenjang <span className='star'>*</span> </label>
-                                            <input type="text" name="jenjang" className='form-control'
-                                                value={this.state.jenjang} onChange={this.changeJenjangHandler} />
+                                        <div className='form-group jenjang'>
+                                            <label htmlFor="">Jenjang </label>
+                                            {/* <input type="text" name="jenjang" className='form-control'
+                                                value={this.state.listJenjang} onChange={this.changeListJenjangHandler} /> */} 
 
-                                            {/* <select name='jenjang' className='form-control' value={this.state.jenjang} onChange={this.changeJenjangHandler}>
-                                            <option value={this.state.jenjang}>2 SMP</option>
-                                            <option value={this.state.jenjang}>3 SMP</option>
-                                        </select> */}
-
-                                            {/* <input className="form-control" type="select">
-                                            {jenjang.map(c => (<option key={c.idJenjang} value={c.idJenjang}>{c.namaJenjang}</option>))}
-                                        </input> */}
+                                            <div>
+                                                {
+                                                    this.state.listJenjang.map(
+                                                        satuJenjang =>
+                                                            <div key={satuJenjang.id}>
+                                                                <><input type="checkbox" name="jenjang" value={satuJenjang.idJenjang} onChange={this.handleChange}></input>
+                                                                    <label className='namalabel' htmlFor="">{satuJenjang.namaJenjang}</label></>
+                                                            </div>
+                                                    )
+                                                }
+                                            </div>
 
                                         </div>
 
                                         <div className='form-group'>
                                             <label htmlFor="">Deskripsi Mata Pelajaran <span className='star'>*</span> </label>
                                             <textarea rows="4" cols="50" name="deskripsi" className='form-control'
-                                                value={this.state.deskripsi} onChange={this.changeDeskripsiHandler} > Enter text here...</textarea>
+                                                value={this.state.deskripsi} onChange={this.changeDeskripsiHandler} required > Enter text here...</textarea>
                                         </div>
 
                                         <div className='box-right'>

@@ -16,7 +16,7 @@ class ListMapelComponent extends Component {
     }
 
     editMapel(idMapel) {
-        this.props.history.push(generatePath("/atur-mapel/update/:idMapel", { idMapel }));
+        this.props.history.push(generatePath("/atur-mapel/:idMapel/update", { idMapel }));
 
     }
 
@@ -57,12 +57,21 @@ class ListMapelComponent extends Component {
                                         <tr key={satuMapel.idMapel}>
                                             <td scope='row'> {satuMapel.idMapel} </td>
                                             <td> {satuMapel.namaMapel} </td>
-                                            <td> {satuMapel.jenjang.namaJenjang} </td>
+                                            <td>
+                                                {
+                                                    satuMapel.listJenjang.map(
+                                                        jenjang =>
+                                                            <p> {jenjang.namaJenjang}</p>
+                                                    )
+                                                }
+
+
+                                            </td>
                                             <td> {satuMapel.deskripsi} </td>
                                             <td>
-                                                <a className="btn btn-blue" onClick={ () => this.editMapel(satuMapel.idMapel)}>
-                                                Update
-                                            </a>
+                                                <a className="btn btn-blue" onClick={() => this.editMapel(satuMapel.idMapel)}>
+                                                    Update
+                                                </a>
                                             </td>
                                         </tr>
                                 )
