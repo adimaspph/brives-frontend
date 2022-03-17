@@ -15,6 +15,8 @@ class UpdateMapelComponent extends Component {
             listJenjang: [],
             jenjang: [],
             jenjangTerpilih: [],
+            statusNama: '',
+            namaAwal: 'jk',
         }
 
         this.changeNamaMapelHandler = this.changeNamaMapelHandler.bind(this);
@@ -24,6 +26,7 @@ class UpdateMapelComponent extends Component {
         this.cancel = this.cancel.bind(this);
     }
     componentDidMount() {
+
         MapelService.getJenjang().then((res) => {
             this.setState({ listJenjang: res.data.result });
         });
@@ -39,12 +42,24 @@ class UpdateMapelComponent extends Component {
 
     updateMapel = (e) => {
         e.preventDefault();
+
         let mapel = { namaMapel: this.state.namaMapel, deskripsi: this.state.deskripsi, listJenjang: this.state.jenjangTerpilih };
         console.log('mapel => ' + JSON.stringify(mapel));
         this.submitJenjang();
 
-        MapelService.updateMapel(mapel, this.state.idMapel).then(res => {
-            this.props.history.push('/atur-mapel');
+        MapelService.getMapelByNama(this.state.namaMapel).then((res) => {
+            let mapell = res.data;
+
+            if (mapell.status == 400) {
+                console.log("Terdapat Mata Pelajaran dengan Nama yang Sama");
+                this.setState({ statusNama: 400 });
+            } else {
+
+                MapelService.updateMapel(mapel, this.state.idMapel).then(res => {
+                    this.props.history.push('/atur-mapel');
+                });
+
+            }
         });
 
     }
@@ -85,10 +100,17 @@ class UpdateMapelComponent extends Component {
     }
 
 
+
     render() {
         return (
 
             <div className='outer'>
+                <ul class="breadcrumb">
+                    <li><a href="/atur-mapel">Daftar Mata Pelajaran</a></li>
+                    <li><a href="/atur-mapel">Detail Mata Pelajaran</a></li>
+                    <li className='bractive'>Update Mata Pelajaran</li>
+                </ul>
+
                 <h2>Ubah Mata Pelajaran</h2>
                 <div className='tes'>
                     <div className='container'>
@@ -106,7 +128,7 @@ class UpdateMapelComponent extends Component {
                                         <div className='form-group'>
                                             <label htmlFor="">Nama Mata Pelajaran <span className='star'>*</span> </label>
                                             <input type="text" name="namaMapel" className='form-control'
-                                                value={this.state.namaMapel} onChange={this.changeNamaMapelHandler} required/>
+                                                value={this.state.namaMapel} onChange={this.changeNamaMapelHandler} required />
                                         </div>
 
                                         <div className='form-group jenjang'>

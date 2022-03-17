@@ -9,9 +9,9 @@ export default function Sidebar(props) {
 				<img src="/logo-bta.png" width={132} alt="" />
 			</Link>
 			<div className="sidebar-menu">
-				<Link className="sidebar-menu-btn" to="/akun">
+				<Link className="sidebar-menu-btn" to="/pengguna">
 					<img src="/assets/account.svg" alt="" />
-					Akun
+					Pengguna
 				</Link>
 				<Link className="sidebar-menu-btn" to="/dashboard">
 					<img src="/assets/dashboard.svg" alt="" />
@@ -32,6 +32,10 @@ export default function Sidebar(props) {
 				<Link className="sidebar-menu-btn" to="/kelas-tambahan">
 					<img src="/assets/plus.svg" alt="" />
 					Kelas Tambahan
+				</Link>
+				<Link className="sidebar-menu-btn" to="/profil-saya">
+					<img src="/assets/account.svg" alt="" />
+					Profil
 				</Link>
 				<Link className="sidebar-menu-btn" to="/logout">
 					<img src="/assets/logout.svg" alt="" />

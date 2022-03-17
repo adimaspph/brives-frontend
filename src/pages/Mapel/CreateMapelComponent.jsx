@@ -29,6 +29,13 @@ class CreateMapelComponent extends Component {
             this.setState({ listJenjang: res.data.result });
         });
 
+        MapelService.getMapelById(this.state.idMapel).then((res) => {
+            let mapel = res.data;
+            this.setState({
+                namaMapel: mapel.result.namaMapel,
+                deskripsi: mapel.result.deskripsi,
+            });
+        });
 
     }
 
@@ -38,9 +45,23 @@ class CreateMapelComponent extends Component {
         console.log('mapel => ' + JSON.stringify(mapel));
         this.submitJenjang();
 
-        MapelService.createMapel(mapel).then(res => {
-            this.props.history.push('/atur-mapel');
-        })
+        MapelService.getMapelByNama(this.state.namaMapel).then((res) => {
+            let mapell = res.data;
+
+            if (mapell.status == 400) {
+                console.log("Terdapat Mata Pelajaran dengan Nama yang Sama");
+                this.setState({ statusNama: 400 });
+            } else {
+
+                MapelService.createMapel(mapel).then(res => {
+                    this.props.history.push('/atur-mapel');
+                })
+
+            }
+        });
+
+
+        
 
     }
 
@@ -79,15 +100,19 @@ class CreateMapelComponent extends Component {
         }
     }
 
+    checkNama = (e) => {
+
+    } 
+
 
 
     render() {
         return (
             <div className='outer'>
+                
                 <ul class="breadcrumb">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Pictures</a></li>
-                    <li>Italy</li>
+                    <li><a href="/atur-mapel">Daftar Mata Pelajaran</a></li>
+                    <li className='bractive'>Tambah Mata Pelajaran</li>
                 </ul>
 
                 <h2>Tambah Mata Pelajaran</h2>
@@ -106,9 +131,6 @@ class CreateMapelComponent extends Component {
 
                                         <div className='form-group jenjang'>
                                             <label htmlFor="">Jenjang </label>
-                                            {/* <input type="text" name="jenjang" className='form-control'
-                                                value={this.state.listJenjang} onChange={this.changeListJenjangHandler} /> */}
-
                                             <div>
                                                 {
                                                     this.state.listJenjang.map(
