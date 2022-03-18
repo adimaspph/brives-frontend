@@ -102,6 +102,24 @@ button:active {
     border: 2px solid #B51D21;
     box-sizing: border-box;
 }
+
+.btn-outline-blue{
+    color: #3874AB;
+    background: #FFFFFF;
+    border: 2px solid #3874AB;
+    box-sizing: border-box;
+}
+
+.btn-outline-blue:hover{
+    color: #648DB3;
+    border: 2px solid #648DB3 !important;
+    cursor: pointer;
+}
+.btn-outline-blue:active{
+    color: #2B5E8C;
+    border: 2px solid #2B5E8C !important;
+}
+
 .btn-outline:hover {
     color: #FF9494;
     border: 2px solid #FF9494 !important;
@@ -126,6 +144,7 @@ button:active {
 .btn-blue{
     background: #3874AB;
     color: #FFFFFF;
+    border: 2px solid #3874AB;
 }
 .btn-blue:hover{
     background: #648DB3;

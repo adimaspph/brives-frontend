@@ -1,0 +1,129 @@
+
+
+  input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  .inactive {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    background-color: #DADADA;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  textarea, select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+
+  
+  input[type=submit] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  input[type=submit]:hover {
+    background-color: #45a049;
+  }
+  
+  .card {
+      /* background-color: #45a049; */
+      box-shadow: rgba(80, 80, 80, 0.2) -1px 2px 6px 1px;
+      width: fit-content;
+      border-radius: 16px;
+      padding: 24px;
+  
+  }
+
+  label {
+      font-weight: bold;
+  }
+
+  .star {
+      color: #FC182A;
+  }
+
+  .twobutton {
+      display: inline-block;
+      margin-left: 8px;
+  }
+
+  .box-right {
+      display: flex;
+      justify-content: right;
+  }
+
+  .outer {
+    /* box-shadow: rgba(0, 225, 255, 0.2) -1px 2px 6px 1px; */
+    width: 100%;
+    margin-left: 32px;
+    margin-right: 32px;
+  }
+
+  .tes {
+    /* width: 100%; */
+    display: flex;
+    justify-content: center;
+  }
+
+  .namalabel {
+    font-weight: normal;
+  }
+
+  .jenjang {
+    margin-bottom: 10px;
+  }
+
+  /* breadcrumb */
+  ul.breadcrumb {
+    padding: 10px 16px;
+    list-style: none;
+    background-color: #0BA95C;
+  }
+  ul.breadcrumb li {
+    display: inline;
+    font-size: 14px;
+  }
+  ul.breadcrumb li+li:before {
+    padding: 8px;
+    color: rgb(255, 255, 255);
+    content: "/\00a0";
+    font-size: 14px;
+  }
+  ul.breadcrumb li a {
+    color: rgb(233, 233, 233);
+    text-decoration: none;
+    font-size: 14px;
+  }
+  ul.breadcrumb li a:hover {
+    color: rgb(255, 255, 255);
+    text-decoration: underline;
+    font-size: 14px;
+  }
+
+  .bractive {
+    font-weight: bold;
+    color: #ffffff;
+  }

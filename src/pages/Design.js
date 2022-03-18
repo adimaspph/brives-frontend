@@ -1,15 +1,25 @@
-import React from 'react'
+import React, { useState, useEffect } from "react";
 import Button from "../components/Button/Button";
 import NeutralNotification from "../components/Notification/NeutralNotification";
 
 function Design() {
-    return (
+	const [nama, setNama] = useState(["adimas", "kari", "salman"]);
+
+	const ubahNama = () => {
+		setNama(nama.filter(word => word.length > 4));
+	}
+
+	return (
 		<div>
-			<h2>BRIVES</h2>
+			<h2 onClick={ubahNama}>BRIVES</h2>
 
 			<container>
-				<a className="btn btn-xl btn-primary" href="/">
-					XLarge Button
+				<a
+					className="btn btn-xl btn-primary"
+					
+					href="/"
+				>
+					XLarge Button {nama}
 				</a>
 				<br />
 				<a className="btn btn-l btn-primary" href="/">
@@ -48,6 +58,9 @@ function Design() {
 				<a className="btn btn-outline btn-s" href="/">
 					S Button Outline
 				</a>
+				<a className="btn btn-outline-blue" href="/">
+					M Blue Button
+				</a>
 				<br />
 			</div>
 			<div>
@@ -85,4 +98,4 @@ function Design() {
 	);
 }
 
-export default Design
+export default Design;
