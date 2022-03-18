@@ -100,5 +100,6 @@
 	.sidebar {
 		position: fixed;
 		transform: translateX(-100%);
+		z-index: 3;
 	}
 }

@@ -1,36 +1,36 @@
 .scheduler-container {
+	margin-top: 24px;
 }
 
 .scheduler-header-main {
 	background: #ff4c4c;
 	width: 100%;
-	height: 56px;
+	height: fit-content;
 	display: grid;
-	grid-template-columns: repeat(2, 0.7fr) repeat(7, 2fr);
-	min-width: 500px;
+	grid-template-columns: repeat(1, 1.5fr) repeat(7, 2fr);
+	/* min-width: 500px; */
 
 	margin-bottom: 5px;
+	padding: 16px 0;
 }
 
 .scheduler {
-	background: white;
+	background: #fafafa;
 	overflow-x: auto;
 
 	display: grid;
-	grid-template-columns: repeat(2, 0.7fr) repeat(7, 2fr);
+	grid-template-columns: repeat(1, 1.5fr) repeat(7, 2fr);
 	grid-template-rows: repeat(72, 30px);
 
 	justify-items: center;
 	align-items: center;
 
-	min-width: 500px;
+	/* min-width: 500px; */
 	/* border: 1px solid black; */
 
-	grid-template-areas: 'clock clock';
-	gap: 2px;
+	grid-template-areas: "clock clock";
+	gap: 1px;
 }
-
-
 
 .scheduler-header {
 	background-color: #ff4c4c;
@@ -43,39 +43,47 @@
 	font-style: normal;
 	font-weight: bold;
 	font-size: 16px;
-	line-height: 23px;
+	line-height: 18px;
 
 	color: #ffffff;
 
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	gap: 12px;
+
+	position: sticky;
 }
 
-.scheduler-clock {
-	/* grid-area: clock; */
-	grid-column-start: 1;
-	grid-column-end: 3;
+.scheduler-header span:nth-child(2) {
+	font-size: 20px;
 }
 
 .scheduler .spacer {
 	display: absolute;
-	background: #F4F4F4;
+	background: #f4f4f4;
 	width: 100%;
 	height: 100%;
-	grid-column-start: 3;
+
+	grid-column-start: 2;
 	grid-column-end: 10;
 
-	grid-row-start: 2;
+	grid-row-start: 3;
+	grid-row-end: 5;
 
-	border-bottom: 1px solid gray;
-	border-top: 1px solid gray;
+	border-bottom: 1px solid #c4c4c4;
+	border-top: 1px solid #c4c4c4;
 }
 
 .scheduler .schedule {
-	background: #caff4f;
+	background: rgba(27, 170, 86, 0.1);
+	font-size: 12px;
+	font-weight: bold;
 	width: 100%;
 	height: 100%;
+
+	display: flex;
 	border-radius: 10px;
 	padding: 10px;
 	box-sizing: border-box;
@@ -85,5 +93,43 @@
 	grid-row-start: 1;
 	grid-row-end: 6;
 
-	border-left: 5px solid rgb(68, 223, 29);
+	border-left: 3px solid #1baa56;
+}
+
+.week-selection {
+	display: flex;
+	align-items: center;
+
+	gap: 24px;
+
+	font-family: Ubuntu;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 16px;
+	line-height: 24px;
+}
+
+@media screen and (max-width: 769px) {
+	.scheduler-header span:nth-child(1) {
+		font-family: monospace;
+		width: 3ch;
+		overflow: hidden;
+		white-space: nowrap;
+	}
+
+	.scheduler-header span:nth-child(2) {
+		font-size: 16px;
+	}
+}
+
+@media screen and (max-width: 500px) {
+	.scheduler .schedule {
+		font-size: 8px;
+		padding: 5px;
+		/* border-left: 3px solid #1BAA56; */
+	}
+
+	.week-selection {
+		font-size: 14px;
+	}
 }
