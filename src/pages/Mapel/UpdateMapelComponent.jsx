@@ -53,7 +53,7 @@ class UpdateMapelComponent extends Component {
 
         let mapel = { namaMapel: this.state.namaMapel, deskripsi: this.state.deskripsi, listJenjang: this.state.jenjangTerpilih };
 
-        this.submitJenjang();
+        
         this.setState({errorM: false});
 
         MapelService.getMapelByNama(this.state.namaMapel).then((res) => {
@@ -69,6 +69,8 @@ class UpdateMapelComponent extends Component {
                         let mapel = { namaMapel: this.state.namaMapel, deskripsi: this.state.deskripsi, listJenjang: this.state.jenjangTerpilih };
                         console.log('mapel => ' + JSON.stringify(mapel));
 
+                        this.submitJenjang();
+
                         MapelService.updateMapel(mapel, this.state.idMapel).then(res => {
                             console.log('mapel => ' + JSON.stringify(mapel));
                             this.props.history.push('/atur-mapel');
@@ -82,7 +84,7 @@ class UpdateMapelComponent extends Component {
                 });
 
             } else {
-
+                this.submitJenjang();
                 MapelService.updateMapel(mapel, this.state.idMapel).then(res => {
                     console.log('mapel => ' + JSON.stringify(mapel));
                     this.props.history.push('/atur-mapel');
@@ -96,8 +98,8 @@ class UpdateMapelComponent extends Component {
     submitJenjang = () => {
         for (var i = 0; i < 5; i++) {
             if (this.state.jenjang[i]) {
-                // console.log(this.state.listJenjang[(i)-1])
                 this.state.jenjangTerpilih.push(this.state.listJenjang[(i) - 1])
+
                 console.log(this.state.jenjangTerpilih)
             }
         }
@@ -187,7 +189,7 @@ class UpdateMapelComponent extends Component {
 
                                         <div className='box-right'>
                                             <button type="submit" className="btn btn-blue twobutton">Simpan</button>
-                                            <a className="btn btn-outline-blue twobutton" onClick={this.cancel}>
+                                            <a className="btn btn-outline-blue twobutton" onClick={() => this.editMapel(this.state.idMapel)}>
                                                 Kembali
                                             </a>
                                         </div>

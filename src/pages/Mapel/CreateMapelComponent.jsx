@@ -45,7 +45,6 @@ class CreateMapelComponent extends Component {
         e.preventDefault();
         let mapel = { namaMapel: this.state.namaMapel, deskripsi: this.state.deskripsi, listJenjang: this.state.jenjangTerpilih };
         console.log('mapel => ' + JSON.stringify(mapel));
-        this.submitJenjang();
 
         this.setState({errorM: false});
 
@@ -61,6 +60,7 @@ class CreateMapelComponent extends Component {
                 this.setState({ statusNama: 400 });
             } else {
                 this.setState({berhasilM: true});
+                this.submitJenjang();
                 MapelService.createMapel(mapel).then(res => {
                     this.props.history.push('/atur-mapel');
                 })
