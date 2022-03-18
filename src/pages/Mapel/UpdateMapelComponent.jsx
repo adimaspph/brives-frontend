@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import MapelService from '../../services/MapelService';
 import "./Mapel.css";
 import { generatePath } from 'react-router-dom';
+import NeutralNotification from "../../components/Notification/NeutralNotification";
 
 
 
@@ -44,18 +45,38 @@ class UpdateMapelComponent extends Component {
         e.preventDefault();
 
         let mapel = { namaMapel: this.state.namaMapel, deskripsi: this.state.deskripsi, listJenjang: this.state.jenjangTerpilih };
-        console.log('mapel => ' + JSON.stringify(mapel));
+
         this.submitJenjang();
 
         MapelService.getMapelByNama(this.state.namaMapel).then((res) => {
             let mapell = res.data;
 
             if (mapell.status == 400) {
-                console.log("Terdapat Mata Pelajaran dengan Nama yang Sama");
                 this.setState({ statusNama: 400 });
+
+                MapelService.getMapelById(this.state.idMapel).then((res) => {
+                    let mapel = res.data.result.namaMapel;
+                    if (mapel == this.state.namaMapel) {
+                        console.log("Mata Pelajaran Tidak Berubah")
+                        let mapel = { namaMapel: this.state.namaMapel, deskripsi: this.state.deskripsi, listJenjang: this.state.jenjangTerpilih };
+                        console.log('mapel => ' + JSON.stringify(mapel));
+
+                        MapelService.updateMapel(mapel, this.state.idMapel).then(res => {
+                            console.log('mapel => ' + JSON.stringify(mapel));
+                            this.props.history.push('/atur-mapel');
+                        });
+
+                    } else {
+                        alert("Mata pelajaran ini telah dibuat sebelumnya. Silakan buat mata pelajaran baru!");
+                        // <NeutralNotification text="Ini adalah notifikasi singkat" />
+
+                    }
+                });
+
             } else {
 
                 MapelService.updateMapel(mapel, this.state.idMapel).then(res => {
+                    console.log('mapel => ' + JSON.stringify(mapel));
                     this.props.history.push('/atur-mapel');
                 });
 

@@ -49,7 +49,7 @@ class CreateMapelComponent extends Component {
             let mapell = res.data;
 
             if (mapell.status == 400) {
-                console.log("Terdapat Mata Pelajaran dengan Nama yang Sama");
+                alert("Mata pelajaran ini telah dibuat sebelumnya. Silakan buat mata pelajaran baru!");
                 this.setState({ statusNama: 400 });
             } else {
 
