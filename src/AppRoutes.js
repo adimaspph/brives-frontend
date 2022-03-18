@@ -26,11 +26,7 @@ function AppRoutes() {
 								path="/atur-jadwal"
 								component={JadwalPage}
 							/>
-							<Route
-								exact
-								path="/akun"
-								component={TestForm}
-							/>
+							<Route exact path="/akun" component={TestForm} />
 						</Switch>
 					</div>
 				</div>

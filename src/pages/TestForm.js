@@ -16,6 +16,7 @@ class TestForm extends React.Component {
 	handleSubmit(event) {
 		// alert("A name was submitted: " + this.state.value);
 		this.setState({ nama: this.state.value });
+        this.setState({ value: ""});
 		event.preventDefault();
 	}
 
@@ -30,6 +31,7 @@ class TestForm extends React.Component {
 							type="text"
 							value={this.state.value}
 							onChange={this.handleChange}
+                            required
 						/>
 					</label>
 					<input type="submit" value="Submit" />
