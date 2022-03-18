@@ -58,6 +58,9 @@ function Design() {
 				<a className="btn btn-outline btn-s" href="/">
 					S Button Outline
 				</a>
+				<a className="btn btn-outline-blue" href="/">
+					M Blue Button
+				</a>
 				<br />
 			</div>
 			<div>
