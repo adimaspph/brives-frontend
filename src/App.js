@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import BrowserRouter from "react-router-dom/BrowserRouter";
 import Sidebar from "./components/Sidebar/Sidebar";
 
+
 import Home from "./pages/Home";
 import Design from "./pages/Design";
 import JadwalPage from "./pages/JadwalPage/JadwalPage";

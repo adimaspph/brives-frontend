@@ -22,7 +22,7 @@ class ListMapelComponent extends Component {
 
     componentDidMount() {
         MapelService.getMapel().then((res) => {
-            this.setState({ mapel: res.data });
+            this.setState({ mapel: res.data.result });
         });
     }
 

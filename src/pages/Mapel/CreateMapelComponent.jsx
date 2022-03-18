@@ -26,9 +26,16 @@ class CreateMapelComponent extends Component {
 
     componentDidMount() {
         MapelService.getJenjang().then((res) => {
-            this.setState({ listJenjang: res.data });
+            this.setState({ listJenjang: res.data.result });
         });
 
+        MapelService.getMapelById(this.state.idMapel).then((res) => {
+            let mapel = res.data;
+            this.setState({
+                namaMapel: mapel.result.namaMapel,
+                deskripsi: mapel.result.deskripsi,
+            });
+        });
 
     }
 
@@ -38,9 +45,23 @@ class CreateMapelComponent extends Component {
         console.log('mapel => ' + JSON.stringify(mapel));
         this.submitJenjang();
 
-        MapelService.createMapel(mapel).then(res => {
-            this.props.history.push('/atur-mapel');
-        })
+        MapelService.getMapelByNama(this.state.namaMapel).then((res) => {
+            let mapell = res.data;
+
+            if (mapell.status == 400) {
+                alert("Mata pelajaran ini telah dibuat sebelumnya. Silakan buat mata pelajaran baru!");
+                this.setState({ statusNama: 400 });
+            } else {
+
+                MapelService.createMapel(mapel).then(res => {
+                    this.props.history.push('/atur-mapel');
+                })
+
+            }
+        });
+
+
+        
 
     }
 
@@ -73,19 +94,27 @@ class CreateMapelComponent extends Component {
         for (var i = 0; i < 5; i++) {
             if (this.state.jenjang[i]) {
                 // console.log(this.state.listJenjang[(i)-1])
-                this.state.jenjangTerpilih.push(this.state.listJenjang[(i)-1])
+                this.state.jenjangTerpilih.push(this.state.listJenjang[(i) - 1])
                 console.log(this.state.jenjangTerpilih)
             }
         }
     }
 
+    checkNama = (e) => {
+
+    } 
+
 
 
     render() {
         return (
-
-
             <div className='outer'>
+                
+                <ul class="breadcrumb">
+                    <li><a href="/atur-mapel">Daftar Mata Pelajaran</a></li>
+                    <li className='bractive'>Tambah Mata Pelajaran</li>
+                </ul>
+
                 <h2>Tambah Mata Pelajaran</h2>
                 <div className='tes'>
                     <div className='container'>
@@ -93,18 +122,15 @@ class CreateMapelComponent extends Component {
                             <div className='card'>
                                 <div className='card-body'>
                                     <h4>Formulir Tambah Mata Pelajaran</h4>
-                                    <form action="">
+                                    <form action="" onSubmit={this.saveMapel}>
                                         <div className='form-group'>
                                             <label htmlFor="">Nama Mata Pelajaran <span className='star'>*</span> </label>
                                             <input type="text" name="namaMapel" className='form-control'
-                                                value={this.state.namaMapel} onChange={this.changeNamaMapelHandler} required/>
+                                                value={this.state.namaMapel} onChange={this.changeNamaMapelHandler} required />
                                         </div>
 
                                         <div className='form-group jenjang'>
                                             <label htmlFor="">Jenjang </label>
-                                            {/* <input type="text" name="jenjang" className='form-control'
-                                                value={this.state.listJenjang} onChange={this.changeListJenjangHandler} /> */} 
-
                                             <div>
                                                 {
                                                     this.state.listJenjang.map(
@@ -126,9 +152,7 @@ class CreateMapelComponent extends Component {
                                         </div>
 
                                         <div className='box-right'>
-                                            <a className="btn btn-blue twobutton" onClick={this.saveMapel}>
-                                                Simpan
-                                            </a>
+                                            <button type="submit" className="btn btn-blue twobutton">Simpan</button>
                                             <a className="btn btn-outline-blue twobutton" onClick={this.cancel}>
                                                 Kembali
                                             </a>

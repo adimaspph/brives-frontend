@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import MapelService from '../../services/MapelService';
 import "./Mapel.css";
 import { generatePath } from 'react-router-dom';
+import NeutralNotification from "../../components/Notification/NeutralNotification";
 
 
 
@@ -15,6 +16,8 @@ class UpdateMapelComponent extends Component {
             listJenjang: [],
             jenjang: [],
             jenjangTerpilih: [],
+            statusNama: '',
+            namaAwal: 'jk',
         }
 
         this.changeNamaMapelHandler = this.changeNamaMapelHandler.bind(this);
@@ -22,29 +25,68 @@ class UpdateMapelComponent extends Component {
         this.changeListJenjangHandler = this.changeListJenjangHandler.bind(this);
         this.updateMapel = this.updateMapel.bind(this);
         this.cancel = this.cancel.bind(this);
+        this.editMapel = this.editMapel.bind(this);
     }
     componentDidMount() {
+
         MapelService.getJenjang().then((res) => {
-            this.setState({ listJenjang: res.data });
+            this.setState({ listJenjang: res.data.result });
         });
 
         MapelService.getMapelById(this.state.idMapel).then((res) => {
             let mapel = res.data;
             this.setState({
-                namaMapel: mapel.namaMapel,
-                deskripsi: mapel.deskripsi,
+                namaMapel: mapel.result.namaMapel,
+                deskripsi: mapel.result.deskripsi,
             });
         });
     }
 
+    editMapel(idMapel) {
+        this.props.history.push(generatePath("/atur-mapel/:idMapel", { idMapel }));
+
+    }
+
     updateMapel = (e) => {
         e.preventDefault();
+
         let mapel = { namaMapel: this.state.namaMapel, deskripsi: this.state.deskripsi, listJenjang: this.state.jenjangTerpilih };
-        console.log('mapel => ' + JSON.stringify(mapel));
+
         this.submitJenjang();
 
-        MapelService.updateMapel(mapel, this.state.idMapel).then(res => {
-            this.props.history.push('/atur-mapel');
+        MapelService.getMapelByNama(this.state.namaMapel).then((res) => {
+            let mapell = res.data;
+
+            if (mapell.status == 400) {
+                this.setState({ statusNama: 400 });
+
+                MapelService.getMapelById(this.state.idMapel).then((res) => {
+                    let mapel = res.data.result.namaMapel;
+                    if (mapel == this.state.namaMapel) {
+                        console.log("Mata Pelajaran Tidak Berubah")
+                        let mapel = { namaMapel: this.state.namaMapel, deskripsi: this.state.deskripsi, listJenjang: this.state.jenjangTerpilih };
+                        console.log('mapel => ' + JSON.stringify(mapel));
+
+                        MapelService.updateMapel(mapel, this.state.idMapel).then(res => {
+                            console.log('mapel => ' + JSON.stringify(mapel));
+                            this.props.history.push('/atur-mapel');
+                        });
+
+                    } else {
+                        alert("Mata pelajaran ini telah dibuat sebelumnya. Silakan buat mata pelajaran baru!");
+                        // <NeutralNotification text="Ini adalah notifikasi singkat" />
+
+                    }
+                });
+
+            } else {
+
+                MapelService.updateMapel(mapel, this.state.idMapel).then(res => {
+                    console.log('mapel => ' + JSON.stringify(mapel));
+                    this.props.history.push('/atur-mapel');
+                });
+
+            }
         });
 
     }
@@ -53,7 +95,7 @@ class UpdateMapelComponent extends Component {
         for (var i = 0; i < 5; i++) {
             if (this.state.jenjang[i]) {
                 // console.log(this.state.listJenjang[(i)-1])
-                this.state.jenjangTerpilih.push(this.state.listJenjang[(i)-1])
+                this.state.jenjangTerpilih.push(this.state.listJenjang[(i) - 1])
                 console.log(this.state.jenjangTerpilih)
             }
         }
@@ -85,10 +127,17 @@ class UpdateMapelComponent extends Component {
     }
 
 
+
     render() {
         return (
 
             <div className='outer'>
+                <ul class="breadcrumb">
+                    <li><a href="/atur-mapel">Daftar Mata Pelajaran</a></li>
+                    <li><a onClick={() => this.editMapel(this.state.idMapel)}>Detail Mata Pelajaran</a></li>
+                    <li className='bractive'>Update Mata Pelajaran</li>
+                </ul>
+
                 <h2>Ubah Mata Pelajaran</h2>
                 <div className='tes'>
                     <div className='container'>
@@ -96,7 +145,7 @@ class UpdateMapelComponent extends Component {
                             <div className='card'>
                                 <div className='card-body'>
                                     <h4>Formulir Ubah Mata Pelajaran</h4>
-                                    <form action="">
+                                    <form action="" onSubmit={this.updateMapel}>
                                         <div className='form-group'>
                                             <label htmlFor="">Id Mata Pelajaran  </label>
                                             <input type="text" name="namaMapel" className='form-control'
@@ -106,12 +155,12 @@ class UpdateMapelComponent extends Component {
                                         <div className='form-group'>
                                             <label htmlFor="">Nama Mata Pelajaran <span className='star'>*</span> </label>
                                             <input type="text" name="namaMapel" className='form-control'
-                                                value={this.state.namaMapel} onChange={this.changeNamaMapelHandler} />
+                                                value={this.state.namaMapel} onChange={this.changeNamaMapelHandler} required />
                                         </div>
 
                                         <div className='form-group jenjang'>
                                             <label htmlFor="">Jenjang </label>
-                                            
+
                                             <div>
                                                 {
                                                     this.state.listJenjang.map(
@@ -129,13 +178,11 @@ class UpdateMapelComponent extends Component {
                                         <div className='form-group'>
                                             <label htmlFor="">Deskripsi Mata Pelajaran <span className='star'>*</span> </label>
                                             <textarea rows="4" cols="50" name="deskripsi" className='form-control'
-                                                value={this.state.deskripsi} onChange={this.changeDeskripsiHandler} > Enter text here...</textarea>
+                                                value={this.state.deskripsi} onChange={this.changeDeskripsiHandler} required > Enter text here...</textarea>
                                         </div>
 
                                         <div className='box-right'>
-                                            <a className="btn btn-blue twobutton" onClick={this.updateMapel}>
-                                                Simpan
-                                            </a>
+                                            <button type="submit" className="btn btn-blue twobutton">Simpan</button>
                                             <a className="btn btn-outline-blue twobutton" onClick={this.cancel}>
                                                 Kembali
                                             </a>
