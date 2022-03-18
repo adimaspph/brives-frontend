@@ -34,8 +34,8 @@ export default function Sidebar(props) {
 					Kelas Tambahan
 				</Link>
 				<Link className="sidebar-menu-btn" to="/profil-saya">
-					<img src="/assets/account.svg" alt="" />
-					Profil
+					<img src="/assets/profil-saya.svg" alt="" />
+					Profil Saya
 				</Link>
 				<Link className="sidebar-menu-btn" to="/logout">
 					<img src="/assets/logout.svg" alt="" />

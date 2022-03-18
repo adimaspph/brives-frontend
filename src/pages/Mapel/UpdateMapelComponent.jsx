@@ -25,6 +25,7 @@ class UpdateMapelComponent extends Component {
         this.changeListJenjangHandler = this.changeListJenjangHandler.bind(this);
         this.updateMapel = this.updateMapel.bind(this);
         this.cancel = this.cancel.bind(this);
+        this.editMapel = this.editMapel.bind(this);
     }
     componentDidMount() {
 
@@ -39,6 +40,11 @@ class UpdateMapelComponent extends Component {
                 deskripsi: mapel.result.deskripsi,
             });
         });
+    }
+
+    editMapel(idMapel) {
+        this.props.history.push(generatePath("/atur-mapel/:idMapel", { idMapel }));
+
     }
 
     updateMapel = (e) => {
@@ -128,7 +134,7 @@ class UpdateMapelComponent extends Component {
             <div className='outer'>
                 <ul class="breadcrumb">
                     <li><a href="/atur-mapel">Daftar Mata Pelajaran</a></li>
-                    <li><a href="/atur-mapel">Detail Mata Pelajaran</a></li>
+                    <li><a onClick={() => this.editMapel(this.state.idMapel)}>Detail Mata Pelajaran</a></li>
                     <li className='bractive'>Update Mata Pelajaran</li>
                 </ul>
 
