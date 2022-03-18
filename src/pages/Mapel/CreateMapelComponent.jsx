@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import MapelService from '../../services/MapelService';
 import "./MapelForm.css";
 import { generatePath } from 'react-router-dom';
-
+import ErrorNotification from "../../components/Notification/ErrorNotification";
 
 class CreateMapelComponent extends Component {
     constructor(props) {
@@ -13,6 +13,8 @@ class CreateMapelComponent extends Component {
             listJenjang: [],
             jenjang: [],
             jenjangTerpilih: [],
+            errorM: false,
+            berhasilM:false,
 
         }
 
@@ -45,14 +47,20 @@ class CreateMapelComponent extends Component {
         console.log('mapel => ' + JSON.stringify(mapel));
         this.submitJenjang();
 
+        this.setState({errorM: false});
+
+
         MapelService.getMapelByNama(this.state.namaMapel).then((res) => {
             let mapell = res.data;
 
             if (mapell.status == 400) {
-                alert("Mata pelajaran ini telah dibuat sebelumnya. Silakan buat mata pelajaran baru!");
+                this.setState({errorM: true});
+                console.log(this.state.errorM);
+                // alert("Mata pelajaran ini telah dibuat sebelumnya. Silakan buat mata pelajaran baru!");
+
                 this.setState({ statusNama: 400 });
             } else {
-
+                this.setState({berhasilM: true});
                 MapelService.createMapel(mapel).then(res => {
                     this.props.history.push('/atur-mapel');
                 })
@@ -100,9 +108,9 @@ class CreateMapelComponent extends Component {
         }
     }
 
-    checkNama = (e) => {
-
-    } 
+    tes = (event) => {
+        console.log("berhasil")
+    }
 
 
 
@@ -114,6 +122,9 @@ class CreateMapelComponent extends Component {
                     <li><a href="/atur-mapel">Daftar Mata Pelajaran</a></li>
                     <li className='bractive'>Tambah Mata Pelajaran</li>
                 </ul>
+
+                {this.state.errorM ? (<ErrorNotification text="Mata pelajaran ini telah dibuat sebelumnya. Silakan buat mata pelajaran baru!" />): ("")}
+                {this.state.berhasilM ? (this.tes): ("")}
 
                 <h2>Tambah Mata Pelajaran</h2>
                 <div className='tes'>

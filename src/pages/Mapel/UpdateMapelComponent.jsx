@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import MapelService from '../../services/MapelService';
 import "./Mapel.css";
 import { generatePath } from 'react-router-dom';
-import NeutralNotification from "../../components/Notification/NeutralNotification";
+import ErrorNotification from "../../components/Notification/ErrorNotification";
 
 
 
@@ -18,6 +18,7 @@ class UpdateMapelComponent extends Component {
             jenjangTerpilih: [],
             statusNama: '',
             namaAwal: 'jk',
+            errorM: false,
         }
 
         this.changeNamaMapelHandler = this.changeNamaMapelHandler.bind(this);
@@ -53,6 +54,7 @@ class UpdateMapelComponent extends Component {
         let mapel = { namaMapel: this.state.namaMapel, deskripsi: this.state.deskripsi, listJenjang: this.state.jenjangTerpilih };
 
         this.submitJenjang();
+        this.setState({errorM: false});
 
         MapelService.getMapelByNama(this.state.namaMapel).then((res) => {
             let mapell = res.data;
@@ -73,8 +75,8 @@ class UpdateMapelComponent extends Component {
                         });
 
                     } else {
-                        alert("Mata pelajaran ini telah dibuat sebelumnya. Silakan buat mata pelajaran baru!");
-                        // <NeutralNotification text="Ini adalah notifikasi singkat" />
+                        this.setState({errorM: true});
+                        // alert("Mata pelajaran ini telah dibuat sebelumnya. Silakan buat mata pelajaran baru!");
 
                     }
                 });
@@ -135,8 +137,10 @@ class UpdateMapelComponent extends Component {
                 <ul class="breadcrumb">
                     <li><a href="/atur-mapel">Daftar Mata Pelajaran</a></li>
                     <li><a onClick={() => this.editMapel(this.state.idMapel)}>Detail Mata Pelajaran</a></li>
-                    <li className='bractive'>Update Mata Pelajaran</li>
+                    <li className='bractive'>Ubah Mata Pelajaran</li>
                 </ul>
+
+                {this.state.errorM ? (<ErrorNotification text="Mata pelajaran ini telah dibuat sebelumnya. Silakan buat mata pelajaran baru!" />): ("")}
 
                 <h2>Ubah Mata Pelajaran</h2>
                 <div className='tes'>
@@ -148,7 +152,7 @@ class UpdateMapelComponent extends Component {
                                     <form action="" onSubmit={this.updateMapel}>
                                         <div className='form-group'>
                                             <label htmlFor="">Id Mata Pelajaran  </label>
-                                            <input type="text" name="namaMapel" className='form-control'
+                                            <input type="text" name="namaMapel" className='form-control inactive'
                                                 value={this.state.idMapel} readOnly />
                                         </div>
 
@@ -166,7 +170,7 @@ class UpdateMapelComponent extends Component {
                                                     this.state.listJenjang.map(
                                                         satuJenjang =>
                                                             <div key={satuJenjang.id}>
-                                                                <><input type="checkbox" name="jenjang" value={satuJenjang.idJenjang} onChange={this.handleChange}></input>
+                                                                <><input type="checkbox" name="jenjang" value={satuJenjang.idJenjang} onChange={this.handleChange} ></input>
                                                                     <label className='namalabel' htmlFor="">{satuJenjang.namaJenjang}</label></>
                                                             </div>
                                                     )

@@ -3,6 +3,7 @@ import Button from "../components/Button/Button";
 import NeutralNotification from "../components/Notification/NeutralNotification";
 
 function Design() {
+
     return (
 		<div>
 			<h2>BRIVES</h2>
