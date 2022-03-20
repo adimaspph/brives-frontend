@@ -49,7 +49,7 @@ class CreateMapelComponent extends Component {
         this.setState({errorM: false});
 
 
-        MapelService.getMapelByNama(this.state.namaMapel).then((res) => {
+        MapelService.getMapelByNama(this.state.namaMapel.toUpperCase()).then((res) => {
             let mapell = res.data;
 
             if (mapell.status == 400) {
