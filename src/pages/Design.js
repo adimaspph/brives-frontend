@@ -1,16 +1,30 @@
-import React from 'react'
+import React, { useState, useEffect } from "react";
 import Button from "../components/Button/Button";
 import NeutralNotification from "../components/Notification/NeutralNotification";
 
 function Design() {
+<<<<<<< HEAD
 
     return (
+=======
+	const [nama, setNama] = useState(["adimas", "kari", "salman"]);
+
+	const ubahNama = () => {
+		setNama(nama.filter(word => word.length > 4));
+	}
+
+	return (
+>>>>>>> 0835882748902b82b813a00fd7717261e0df6c78
 		<div>
-			<h2>BRIVES</h2>
+			<h2 onClick={ubahNama}>BRIVES</h2>
 
 			<container>
-				<a className="btn btn-xl btn-primary" href="/">
-					XLarge Button
+				<a
+					className="btn btn-xl btn-primary"
+					
+					href="/"
+				>
+					XLarge Button {nama}
 				</a>
 				<br />
 				<a className="btn btn-l btn-primary" href="/">
@@ -89,4 +103,4 @@ function Design() {
 	);
 }
 
-export default Design
+export default Design;
