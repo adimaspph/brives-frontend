@@ -1,0 +1,47 @@
+.navbar {
+	/* background: #1b1b1b; */
+	background: linear-gradient(to right, #B51D21,#D71B25, #FC182A);
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+
+	width: auto;
+	height: 60px;
+    
+	position: sticky;
+	top: 0;
+	padding: 5px 20px;
+}
+
+.card {
+	display: flex;
+	justify-content: center;
+}
+
+.navbar-menu {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+    padding-top: 6px;
+	width: 100%;
+	gap: 16px;
+}
+
+.navbar-menu-btn {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	font-family: Ubuntu;
+	font-style: normal;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 24px;
+	/* identical to box height, or 150% */
+
+	
+
+	/* Neutral/White Primary */
+	padding: 0 16px;
+	color: #ffffff;
+	transition: background-color 0.2s ease-in-out;
+}
