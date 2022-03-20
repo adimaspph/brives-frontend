@@ -4,6 +4,7 @@ import "./Mapel.css";
 import { generatePath } from 'react-router-dom';
 
 
+
 class ListMapelComponent extends Component {
     constructor(props) {
         super(props)
