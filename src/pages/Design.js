@@ -3,10 +3,6 @@ import Button from "../components/Button/Button";
 import NeutralNotification from "../components/Notification/NeutralNotification";
 
 function Design() {
-<<<<<<< HEAD
-
-    return (
-=======
 	const [nama, setNama] = useState(["adimas", "kari", "salman"]);
 
 	const ubahNama = () => {
@@ -14,7 +10,6 @@ function Design() {
 	}
 
 	return (
->>>>>>> 0835882748902b82b813a00fd7717261e0df6c78
 		<div>
 			<h2 onClick={ubahNama}>BRIVES</h2>
 
