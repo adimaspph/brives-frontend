@@ -43,7 +43,7 @@ class CreateMapelComponent extends Component {
 
     saveMapel = (e) => {
         e.preventDefault();
-        let mapel = { namaMapel: this.state.namaMapel, deskripsi: this.state.deskripsi, listJenjang: this.state.jenjangTerpilih };
+        let mapel = { namaMapel: this.state.namaMapel.toLowerCase, deskripsi: this.state.deskripsi, listJenjang: this.state.jenjangTerpilih };
         console.log('mapel => ' + JSON.stringify(mapel));
 
         this.setState({errorM: false});
@@ -137,7 +137,7 @@ class CreateMapelComponent extends Component {
                                         <div className='form-group'>
                                             <label htmlFor="">Nama Mata Pelajaran <span className='star'>*</span> </label>
                                             <input type="text" name="namaMapel" className='form-control'
-                                                value={this.state.namaMapel} onChange={this.changeNamaMapelHandler} required />
+                                                value={this.state.namaMapel.toUpperCase()} onChange={this.changeNamaMapelHandler} required />
                                         </div>
 
                                         <div className='form-group jenjang'>
@@ -163,10 +163,12 @@ class CreateMapelComponent extends Component {
                                         </div>
 
                                         <div className='box-right'>
-                                            <button type="submit" className="btn btn-blue twobutton">Simpan</button>
+                                            
                                             <a className="btn btn-outline-blue twobutton" onClick={this.cancel}>
                                                 Kembali
                                             </a>
+                                            <button type="submit" className="btn btn-blue twobutton">Simpan</button>
+
                                         </div>
 
 
