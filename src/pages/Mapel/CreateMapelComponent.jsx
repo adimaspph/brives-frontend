@@ -43,7 +43,7 @@ class CreateMapelComponent extends Component {
 
     saveMapel = (e) => {
         e.preventDefault();
-        let mapel = { namaMapel: this.state.namaMapel.toLowerCase, deskripsi: this.state.deskripsi, listJenjang: this.state.jenjangTerpilih };
+        let mapel = { namaMapel: this.state.namaMapel.toUpperCase(), deskripsi: this.state.deskripsi, listJenjang: this.state.jenjangTerpilih };
         console.log('mapel => ' + JSON.stringify(mapel));
 
         this.setState({errorM: false});
