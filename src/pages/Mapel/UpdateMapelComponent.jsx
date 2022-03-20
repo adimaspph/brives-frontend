@@ -51,12 +51,12 @@ class UpdateMapelComponent extends Component {
     updateMapel = (e) => {
         e.preventDefault();
 
-        let mapel = { namaMapel: this.state.namaMapel.toUpperCase(), deskripsi: this.state.deskripsi, listJenjang: this.state.jenjangTerpilih };
+        let mapel = { namaMapel: this.state.namaMapel, deskripsi: this.state.deskripsi, listJenjang: this.state.jenjangTerpilih };
 
         
         this.setState({errorM: false});
 
-        MapelService.getMapelByNama(this.state.namaMapel).then((res) => {
+        MapelService.getMapelByNama(this.state.namaMapel.toUpperCase()).then((res) => {
             let mapell = res.data;
 
             if (mapell.status == 400) {
@@ -66,7 +66,7 @@ class UpdateMapelComponent extends Component {
                     let mapel = res.data.result.namaMapel;
                     if (mapel == this.state.namaMapel) {
                         console.log("Mata Pelajaran Tidak Berubah")
-                        let mapel = { namaMapel: this.state.namaMapel.toUpperCase(), deskripsi: this.state.deskripsi, listJenjang: this.state.jenjangTerpilih };
+                        let mapel = { namaMapel: this.state.namaMapel, deskripsi: this.state.deskripsi, listJenjang: this.state.jenjangTerpilih };
                         console.log('mapel => ' + JSON.stringify(mapel));
 
                         this.submitJenjang();
@@ -161,7 +161,7 @@ class UpdateMapelComponent extends Component {
                                         <div className='form-group'>
                                             <label htmlFor="">Nama Mata Pelajaran <span className='star'>*</span> </label>
                                             <input type="text" name="namaMapel" className='form-control'
-                                                value={this.state.namaMapel.toUpperCase()} onChange={this.changeNamaMapelHandler} required />
+                                                value={this.state.namaMapel} onChange={this.changeNamaMapelHandler} required />
                                         </div>
 
                                         <div className='form-group jenjang'>
