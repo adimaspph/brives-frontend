@@ -1,0 +1,53 @@
+.akun-container {
+    display: flex;
+}
+
+.akun-card {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    box-shadow: rgba(80, 80, 80, 0.2) -1px 2px 6px 1px;
+    width: 670px;
+    border-radius: 16px;
+    padding: 24px;
+}
+
+.two-blocks {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    gap: 20px;
+    width: auto;
+}
+
+input[type=text], select {
+	width: 100%;
+	padding: 12px 20px;
+	margin: 8px 0;
+    size: 5000px;
+	display: inline-block;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+}
+
+input[type=password], select {
+	width: 100%;
+	padding: 12px 20px;
+	margin: 8px 0;
+	display: inline-block;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+}
+
+.twobutton {
+    display: inline-block;
+    margin-left: 8px;
+    width: fit-content;
+}
+
+.box-right {
+    display: flex;
+    justify-content: right;
+}
