@@ -2,7 +2,11 @@ import React, { Component, Fragment } from 'react';
 import MapelService from '../../services/MapelService';
 import "./MapelForm.css";
 import { generatePath } from 'react-router-dom';
+import {ToastContainer, toast} from 'react-toastify';
 import ErrorNotification from "../../components/Notification/ErrorNotification";
+import NeutralNotification from '../../components/Notification/NeutralNotification';
+
+
 
 class CreateMapelComponent extends Component {
     constructor(props) {
@@ -14,7 +18,7 @@ class CreateMapelComponent extends Component {
             jenjang: [],
             jenjangTerpilih: [],
             errorM: false,
-            berhasilM:false,
+            successM:false,
 
         }
 
@@ -47,7 +51,7 @@ class CreateMapelComponent extends Component {
         console.log('mapel => ' + JSON.stringify(mapel));
 
         this.setState({errorM: false});
-
+        this.setState({ successM: false });
 
         MapelService.getMapelByNama(this.state.namaMapel.toUpperCase()).then((res) => {
             let mapell = res.data;
@@ -59,10 +63,11 @@ class CreateMapelComponent extends Component {
 
                 this.setState({ statusNama: 400 });
             } else {
-                this.setState({berhasilM: true});
+                this.setState({successM: true});
                 this.submitJenjang();
                 MapelService.createMapel(mapel).then(res => {
-                    this.props.history.push('/atur-mapel');
+                    this.demo();
+                    // this.props.history.push('/atur-mapel');
                 })
 
             }
@@ -71,6 +76,16 @@ class CreateMapelComponent extends Component {
 
         
 
+    }
+
+    async demo() {
+        this.setState({ successM: true });
+        await this.sleep(2000);
+        this.props.history.push('/atur-mapel');
+    }
+
+    sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
     }
 
     changeNamaMapelHandler = (event) => {
@@ -99,7 +114,7 @@ class CreateMapelComponent extends Component {
     };
 
     submitJenjang = () => {
-        for (var i = 0; i < 5; i++) {
+        for (var i = 0; i < 6; i++) {
             if (this.state.jenjang[i]) {
                 // console.log(this.state.listJenjang[(i)-1])
                 this.state.jenjangTerpilih.push(this.state.listJenjang[(i) - 1])
@@ -124,7 +139,7 @@ class CreateMapelComponent extends Component {
                 </ul>
 
                 {this.state.errorM ? (<ErrorNotification text="Mata pelajaran ini telah dibuat sebelumnya. Silakan buat mata pelajaran baru!" />): ("")}
-                {this.state.berhasilM ? (this.tes): ("")}
+                {this.state.successM ? (<NeutralNotification text="Mata Pelajaran Berhasil Dibuat!" />) : ("")}
 
                 <h2>Tambah Mata Pelajaran</h2>
                 <div className='tes'>
