@@ -3,7 +3,6 @@ import MapelService from '../../services/MapelService';
 import "./Mapel.css";
 import { generatePath } from 'react-router-dom';
 import ErrorNotification from "../../components/Notification/ErrorNotification";
-import { ToastContainer, toast } from 'react-toastify';
 import { StyledEngineProvider } from '@mui/material';
 import NeutralNotification from '../../components/Notification/NeutralNotification';
 
@@ -74,12 +73,12 @@ class UpdateMapelComponent extends Component {
         MapelService.getMapelByNama(this.state.namaMapel.toUpperCase()).then((res) => {
             let mapell = res.data;
 
-            if (mapell.status == 400) {
+            if (mapell.status === 400) {
                 this.setState({ statusNama: 400 });
 
                 MapelService.getMapelById(this.state.idMapel).then((res) => {
                     let mapel = res.data.result.namaMapel;
-                    if (mapel == this.state.namaMapel.toUpperCase()) {
+                    if (mapel === this.state.namaMapel.toUpperCase()) {
                         console.log("Mata Pelajaran Tidak Berubah")
                         let mapel = { namaMapel: this.state.namaMapel.toUpperCase(), deskripsi: this.state.deskripsi, listJenjang: this.state.jenjangTerpilih };
                         console.log('mapel => ' + JSON.stringify(mapel));
@@ -150,9 +149,7 @@ class UpdateMapelComponent extends Component {
         this.props.history.push('/atur-mapel');
     }
 
-    notify = (event) => {
-        toast("Wow so easy!");
-    }
+   
 
 
 
@@ -160,7 +157,6 @@ class UpdateMapelComponent extends Component {
         return (
 
             <div className='outer'>
-                <ToastContainer />
                 <ul class="breadcrumb">
                     <li><a href="/atur-mapel">Daftar Mata Pelajaran</a></li>
                     <li><a onClick={() => this.editMapel(this.state.idMapel)}>Detail Mata Pelajaran</a></li>
