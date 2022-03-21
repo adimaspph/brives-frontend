@@ -2,7 +2,6 @@ import React, { Component, Fragment } from 'react';
 import MapelService from '../../services/MapelService';
 import "./MapelForm.css";
 import { generatePath } from 'react-router-dom';
-import {ToastContainer, toast} from 'react-toastify';
 import ErrorNotification from "../../components/Notification/ErrorNotification";
 import NeutralNotification from '../../components/Notification/NeutralNotification';
 
@@ -56,7 +55,7 @@ class CreateMapelComponent extends Component {
         MapelService.getMapelByNama(this.state.namaMapel.toUpperCase()).then((res) => {
             let mapell = res.data;
 
-            if (mapell.status == 400) {
+            if (mapell.status === 400) {
                 this.setState({errorM: true});
                 console.log(this.state.errorM);
                 // alert("Mata pelajaran ini telah dibuat sebelumnya. Silakan buat mata pelajaran baru!");
