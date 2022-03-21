@@ -7,8 +7,8 @@ function CreateAkunPage() {
     const [role, setRole] = useState("");
     const [username, setUsername] = useState("");
     const [namaLengkap, setNamaLengkap] = useState("");
-    const [nomorPegawai, setNomorPegawai] = useState("");
-    const [nomorHP, setNomorHP] = useState("");
+    const [noPegawai, setNoPegawai] = useState("");
+    const [noHP, setNoHP] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [konfirmasiPassword, setKonfirmasiPassword] = useState("");
@@ -21,20 +21,20 @@ function CreateAkunPage() {
     });
 
     const handleChange = async (e) => {
+        e.preventDefault();
         APIConfig.post("/api/v1/user/create", {
 			username: username,
 			namaLengkap: namaLengkap,
             email: email,
             password: password,
-            nomorHP: nomorHP,
+            noHP: noHP,
             role: role,
-            nomorPegawai: nomorPegawai,
+            noPegawai: noPegawai,
             tarif: tarif,
             listMapel: listMapel
 		})
         .then((response) => {
-            alert(response)
-            console.log(response);
+            
 		});
     }
 
@@ -46,22 +46,27 @@ function CreateAkunPage() {
     });
 
     const handleRoleChange = (e) => {
+        e.preventDefault();
         setRole(e.target.value);
     }
 
     const handleUsernameChange = (e) => {
+        e.preventDefault();
         setUsername(e.target.value);
     }
 
     const handleNamaLengkapChange = (e) => {
+        e.preventDefault();
         setNamaLengkap(e.target.value);
     }
 
     const handleEmailChange = (e) => {
+        e.preventDefault();
         setEmail(e.target.value);
     }
 
     const handlePasswordChange = (e) => {
+        e.preventDefault();
         setPassword(e.target.value);
     }
 
@@ -69,14 +74,17 @@ function CreateAkunPage() {
         setKonfirmasiPassword(e.target.value);
     }
 
-    const handleNomorHPChange = (e) => {
-        setNomorHP(e.target.value);
+    const handleNoHPChange = (e) => {
+        e.preventDefault();
+        setNoHP(e.target.value);
     }
 
-    const handleNomorPegawaiChange = (e) => {
-        setNomorPegawai(e.target.value);
+    const handleNoPegawaiChange = (e) => {
+        e.preventDefault();
+        setNoPegawai(e.target.value);
     }
     const handleTarifChange = (e) => {
+        e.preventDefault();
         setTarif(e.target.value);
     }
 
@@ -116,11 +124,11 @@ function CreateAkunPage() {
                                 <div className="two-blocks">
                                     <div>
                                         <label htmlFor="">Nomor Pegawai<span className='star'>*</span> </label>
-                                        <input onChange={handleNomorPegawaiChange} type="text" name="nomorPegawai" className='form-control' required />
+                                        <input onChange={handleNoPegawaiChange} type="text" name="noPegawai" className='form-control' required />
                                     </div>
                                     <div>
                                         <label htmlFor="">Nomor Handphone<span className='star'>*</span> </label>
-                                        <input onChange={handleNomorHPChange} type="text" name="nomorHP" className='form-control' required />
+                                        <input onChange={handleNoHPChange} type="text" name="noHP" className='form-control' required />
                                     </div>
                                 </div>
                                 <div>
@@ -149,7 +157,6 @@ function CreateAkunPage() {
                                                 if (e.target.checked) {
                                                     setListMapel([...listMapel,mapel.namaMapel,]);
                                                   } else {
-                                                    // remove from list
                                                     setListMapel(
                                                       listMapel.filter((mapel) => mapel !== mapel.namaMapel),
                                                     );
@@ -162,10 +169,10 @@ function CreateAkunPage() {
                                          
                                     ))}
                                 </div>
-                                <div className='box-right'>
-                                    <button onClick={handleChange} type="submit" className="twobutton btn btn-blue">Simpan</button>
-                                </div>
                             </form>
+                            <div className='box-right'>
+                                <button onClick={handleChange} type="submit" className="twobutton btn btn-blue">Simpan</button>
+                            </div>
                         </div>
                     </div>
                 </div>
