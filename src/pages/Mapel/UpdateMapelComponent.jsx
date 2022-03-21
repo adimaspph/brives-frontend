@@ -147,17 +147,13 @@ class UpdateMapelComponent extends Component {
         this.props.history.push('/atur-mapel');
     }
 
-    notify = (event) => {
-        toast("Wow so easy!");
-    }
-
+    
 
 
     render() {
         return (
 
             <div className='outer'>
-                <ToastContainer />
                 <ul class="breadcrumb">
                     <li><a href="/atur-mapel">Daftar Mata Pelajaran</a></li>
                     <li><a onClick={() => this.editMapel(this.state.idMapel)}>Detail Mata Pelajaran</a></li>
