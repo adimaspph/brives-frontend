@@ -3,6 +3,10 @@ import { Link } from "react-router-dom";
 import "./Sidebar.css";
 
 export default function Sidebar(props) {
+	const handlerLogout = () => {
+		localStorage.removeItem("user");
+	};
+	
 	return (
 		<nav className="sidebar">
 			<Link className="sidebar-logo" to="/">
@@ -37,7 +41,7 @@ export default function Sidebar(props) {
 					<img src="/assets/profil-saya.svg" alt="" />
 					Profil Saya
 				</Link>
-				<Link className="sidebar-menu-btn" to="/logout">
+				<Link onClick={handlerLogout} className="sidebar-menu-btn" to="/login">
 					<img src="/assets/logout.svg" alt="" />
 					Logout
 				</Link>
