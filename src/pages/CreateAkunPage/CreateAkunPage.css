@@ -2,6 +2,10 @@
     display: flex;
 }
 
+.checkbox-mapel {
+	margin: 8px 0px;
+}
+
 .akun-card {
     display: flex;
     flex-direction: column;
@@ -32,6 +36,16 @@ input[type=text], select {
 }
 
 input[type=password], select {
+	width: 100%;
+	padding: 12px 20px;
+	margin: 8px 0;
+	display: inline-block;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+}
+
+input[type=email], select {
 	width: 100%;
 	padding: 12px 20px;
 	margin: 8px 0;
