@@ -13,28 +13,6 @@ function LoginPage() {
 	// APIConfig.defaults.withCredentials = true;
 
 	const handlerLogin = () => {
-		// try {
-		// 	const payload = {
-		// 		"username" : username,
-		// 		"password" : password,
-		// 	};
-		//     alert(payload.username)
-		// 	console.log(payload);
-		// 	const { data } = await axios.post(
-		// 		"https://brives-staging-backend.herokuapp.com/api/user/login",
-		// 		payload
-		// 	);
-
-		//     // if (data.token) {
-		//     //     this.props.history.push("/");
-		//     // }
-		// 	console.log(data);
-		// 	alert("login berhasil");
-		// 	localStorage.setItem("user", JSON.stringify(data));
-		// 	alert("berhasil local");
-		// } catch (e) {
-		// 	alert("login gagal cuk");
-		// }
 		console.log("melakukan login");
 		APIConfig.post("/api/user/login", {
 			username: username,
@@ -45,7 +23,7 @@ function LoginPage() {
 			if (response.data.token) {
 				console.log("login berhasil");
 				alert("berhasil");
-				localStorage.setItem("user", JSON.stringify(response.data));
+				localStorage.setItem("user", JSON.stringify({login:true, token: response.data.token, role : response.data.role[0].authority}));
 			} else {
 				console.log("gagal");
 				alert("gagal");
