@@ -21,19 +21,26 @@ function LoginPage() {
 		}).then((response) => {
 			// alert("test then");
 			console.log(response);
+			
 			if (response.data.token) {
 				// console.log("login berhasil");
 				// alert("berhasil");
 				localStorage.setItem("user", JSON.stringify({login:true, token: response.data.token, role : response.data.role[0].authority}));
 				// localStorage.setItem("user", JSON.stringify({login:true, token: response.data.token, role : response.data.role[0].authority}));
+				window.location = "/";
 				setRole(response.data.role[0].authority);
 				setJwt(response.data.token);
+				
 			} else {
 				// console.log("gagal");
 				// alert("gagal");
 			}
 		});
 	};
+
+	function myFunction() {
+		window.location = "http://www.yoururl.com";
+	  }
 
 	return (
 		<div className="jadwal-container">
