@@ -32,11 +32,7 @@ class MapelService {
         // return axios.get(MAPEL_API_BASE_URL_2 + '/' + idMapel);
     }
     getMapelByNama(namaMapel){
-<<<<<<< HEAD
-        return APIConfig.get(("/mapel/nama/" + namaMapel));
-=======
         return APIConfig.get("/mapel/nama/" + namaMapel);
->>>>>>> 2598d613d5d3493bb1377c1e1a1bbe0cb0768f0e
         // return axios.get(MAPEL_API_NAMA_URL_2 + '/' + namaMapel);
     }
 

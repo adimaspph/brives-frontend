@@ -17,8 +17,8 @@ class ListPengguna extends Component {
         this.editPengguna = this.editPengguna.bind(this);
     }
 
-    editPengguna(idUser) {
-        this.props.history.push(generatePath("/pengguna/:idUser", { idUser }));
+    editPengguna(username) {
+        this.props.history.push(generatePath("/pengguna/:username", { username }));
 
     }
 
@@ -90,7 +90,7 @@ class ListPengguna extends Component {
                                             <td> {satuMapel.staff.noPegawai} </td>
                                             <td> {satuMapel.noHP} </td>
                                             <td>
-                                                <a className="btn btn-blue" onClick={() => this.editPengguna(satuMapel.idUser)}>
+                                                <a className="btn btn-blue" onClick={() => this.editPengguna(satuMapel.username)}>
                                                     Lihat
                                                 </a>
                                             </td>
