@@ -6,10 +6,10 @@ import APIConfig from '../api/APIConfig';
 // const MAPEL_API_BASE_URL_2 = "https://brives-staging-backend.herokuapp.com/mapel";
 // const MAPEL_API_NAMA_URL_2 = "https://brives-staging-backend.herokuapp.com/mapel/nama";
 
-const MAPEL_API_BASE_URL = "http://localhost:8080/mapel/";
-const JENJANG_API_BASE_URL = "http://localhost:8080/jenjang/";
-const MAPEL_API_BASE_URL_2 = "http://localhost:8080/mapel";
-const MAPEL_API_NAMA_URL_2 = "http://localhost:8080/mapel/nama";
+// const MAPEL_API_BASE_URL = "http://localhost:8080/mapel/";
+// const JENJANG_API_BASE_URL = "http://localhost:8080/jenjang/";
+// const MAPEL_API_BASE_URL_2 = "http://localhost:8080/mapel";
+// const MAPEL_API_NAMA_URL_2 = "http://localhost:8080/mapel/nama";
 
 class MapelService {
     getMapel(){

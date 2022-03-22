@@ -3,6 +3,13 @@ import MapelService from '../../services/MapelService';
 import "./Mapel.css";
 import { generatePath } from 'react-router-dom';
 
+var AUTH_TOKEN = ""
+if (localStorage.getItem("user") != null) {
+	console.log("ada token");
+	const local = JSON.parse(localStorage.getItem("user"));
+	AUTH_TOKEN = "haloo " + local.token;
+	console.log(JSON.parse(localStorage.getItem("user")).token);
+}
 
 
 class ListMapelComponent extends Component {
@@ -22,9 +29,25 @@ class ListMapelComponent extends Component {
     }
 
     componentDidMount() {
+        if (localStorage.getItem("user") != null) {
+            console.log(JSON.parse(localStorage.getItem("user")).role);
+            if( JSON.parse(localStorage.getItem("user")).role === 'STAF_OPERASIONAL') {
+                console.log('staf op');
+            } else {
+                this.props.history.push('/403');
+            }
+        } else {
+
+            this.props.history.push('/login');
+        }
+        
         MapelService.getMapel().then((res) => {
             this.setState({ mapel: res.data.result });
         });
+
+        
+
+        
     }
 
     addMapel() {
