@@ -1,0 +1,36 @@
+.modal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+.modalContent {
+    width: 500px;
+    background-color: #fff;
+    border-radius: 10px;
+}
+.modalHeader {
+    padding: 20px;
+}
+.modalTitle {
+    margin: 0;
+    text-align: center;
+}
+.modalBody {
+    padding: 20px;
+    border-top: 1px solid #eee;
+}
+
+.modalButtonContainer {
+    display: flex;
+    justify-content: end;
+
+    margin-top: 24px;
+    gap: 16px;
+}
