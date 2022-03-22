@@ -4,6 +4,7 @@ import APIConfig from "../../api/APIConfig";
 import "./CreateAkunPage.css";
 
 function CreateAkunPage() {
+    const [errMessage, setErrMessage] = useState("");
     const [role, setRole] = useState("");
     const [username, setUsername] = useState("");
     const [namaLengkap, setNamaLengkap] = useState("");
@@ -22,6 +23,13 @@ function CreateAkunPage() {
 
     const handleChange = async (e) => {
         e.preventDefault();
+
+        // check condition
+        if (password !== konfirmasiPassword) {
+            setErrMessage("Field Password harus sama dengan field Konfirmasi Password");
+        };
+
+
         APIConfig.post("/api/v1/user/create", {
 			username: username,
 			namaLengkap: namaLengkap,
@@ -34,7 +42,14 @@ function CreateAkunPage() {
             listMapel: listMapel
 		})
         .then((response) => {
-            
+            alert("masuk then")
+            console.log(response)
+            if (response.data.status == 999) {
+                alert("masuk sini kok")
+                setErrMessage(response.data.message);
+                console.log(response.data.message);
+            }
+            alert("kesua")
 		});
     }
 
