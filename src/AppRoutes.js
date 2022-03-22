@@ -42,7 +42,7 @@ function AppRoutes() {
 							<PrivateRoute exact path="/atur-mapel" component={ListMapelComponent} />
 							<PrivateRoute exact path="/atur-mapel/add" component={CreateMapelComponent} />
 							<PrivateRoute exact path="/atur-mapel/:idMapel/update" component={UpdateMapelComponent} />
-							<PrivateRoute exact path="/atur-mapel/:idMapel/detail" component={DetailMapelComponent} />
+							<PrivateRoute exact path="/atur-mapel/:idMapel" component={DetailMapelComponent} />
 							<PrivateRoute exact path="/pengguna" component={ListPengguna} />
 							<PrivateRoute exact path="/pengguna/:idUser" component={DetailPengguna} />
 							{/* Not Found 404 */}

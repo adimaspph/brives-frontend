@@ -20,11 +20,11 @@ class ListMapelComponent extends Component {
         }
 
         this.addMapel = this.addMapel.bind(this);
-        this.editMapel = this.editMapel.bind(this);
+        this.detailMapel = this.detailMapel.bind(this);
     }
 
-    editMapel(idMapel) {
-        this.props.history.push(generatePath("/atur-mapel/:idMapel/update", { idMapel }));
+    detailMapel(idMapel) {
+        this.props.history.push(generatePath("/atur-mapel/:idMapel", { idMapel }));
 
     }
 
@@ -93,8 +93,8 @@ class ListMapelComponent extends Component {
                                             </td>
                                             <td> {satuMapel.deskripsi} </td>
                                             <td>
-                                                <a className="btn btn-blue" onClick={() => this.editMapel(satuMapel.idMapel)}>
-                                                    Update
+                                                <a className="btn btn-blue" onClick={() => this.detailMapel(satuMapel.idMapel)}>
+                                                    lihat
                                                 </a>
                                             </td>
                                         </tr>

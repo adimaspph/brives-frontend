@@ -7,6 +7,7 @@ import ErrorNotification from "../../components/Notification/ErrorNotification";
 import NeutralNotification from '../../components/Notification/NeutralNotification';
 
 
+
 export default function DetailMapelComponent(props) {
   const [mapel, setMapel] = useState({})
   const [idMapel,] = useState(parseInt(props.match.params.idMapel))
@@ -38,19 +39,41 @@ export default function DetailMapelComponent(props) {
       const { data } = await MapelService.getMapelById(idMapel)
       setMapel(data.result)
     } catch (err) {
+      props.history.push('/atur-mapel');
       setError(err.message)
     }
   }
 
-  const deleteHandler = () => {
-    setIsModal(true);
-    console.log('hapus')
+  const deleteHandler = async () => {
+    try {
+      const { data } = await MapelService.deleteMapel(idMapel)
+      console.log(data)
+      // props.history.push('/atur-mapel')
+    } catch (err) {
+      setError(err.message)
+    }
   }
 
   const cancleHandler = () => {
     setIsModal(false);
   }
 
+  const editHandler = () => {
+    props.history.push(`/atur-mapel/${idMapel}/update`);
+  }
+
+  const DeleteModalComponent = () => {
+    return (
+      <>
+        <h5>Konfirmasi</h5>
+        <p>Apakah Anda yakin akan menghapus mata Pelajaran ini?</p>
+        <div className='center'>
+          <button onClick={cancleHandler} type="submit" className="btn btn-outline-secondary twobutton">Kembali</button>
+          <button onClick={deleteHandler} type="submit" className="btn btn-red twobutton">Hapus</button>
+        </div>
+      </>
+    )
+  }
 
   return (
     <>
@@ -61,7 +84,7 @@ export default function DetailMapelComponent(props) {
         handleCloseModal={cancleHandler}
         modalTitle="Hapus Mata Pelajaran"
       >
-        <p>ok</p>
+        <DeleteModalComponent />
       </Modal>
       <div className='outer'>
         <ul class="breadcrumb">
@@ -96,14 +119,14 @@ export default function DetailMapelComponent(props) {
 
                 <hr />
                 <div className='center'>
-                  <button onClick={deleteHandler} type="submit" className="btn btn-outline-blue twobutton">Hapus</button>
-                  <button type="submit" className="btn btn-blue twobutton">Ubah</button>
+                  <button onClick={() => setIsModal(true)} type="submit" className="btn btn-outline-blue twobutton">Hapus</button>
+                  <button onClick={editHandler} type="submit" className="btn btn-blue twobutton">Ubah</button>
                 </div>
               </div>
             </div>
           </div>
 
-          
+
           <div>
             <h5>Pengajar pada Mata Pelajaran Ini</h5>
             <table className='table-max'>
