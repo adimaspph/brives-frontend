@@ -48,7 +48,6 @@ class ListPengguna extends Component {
 
                 <h2 className='text-center'>Daftar Pengguna</h2>
 
-
                 <div className='twobutton'>
                     <select onChange={this.handleRoleChange} name="role" id="role">
                         <option value="1">ADMIN</option>
