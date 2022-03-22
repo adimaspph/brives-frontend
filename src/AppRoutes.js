@@ -16,7 +16,7 @@ import TestForm from "./pages/TestForm";
 import ListMapelComponent from "./pages/Mapel/ListMapelComponent";
 import CreateMapelComponent from "./pages/Mapel/CreateMapelComponent";
 import UpdateMapelComponent from "./pages/Mapel/UpdateMapelComponent";
-
+import ListPengguna from "./pages/Pengguna/ListPengguna";
 
 function AppRoutes() {
 	
@@ -36,6 +36,7 @@ function AppRoutes() {
 								path="/atur-jadwal"
 								component={JadwalPage}
 							/>
+							<Route exact path="/pengguna" component={ListPengguna} />
 							<Route exact path="/akun/create" component={CreateAkunPage} />
 							<Route exact path="/atur-jadwal" component={JadwalPage} />
 							<Route exact path="/atur-mapel" component={ListMapelComponent} />
