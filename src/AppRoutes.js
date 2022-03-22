@@ -16,6 +16,7 @@ import TestForm from "./pages/TestForm";
 import ListMapelComponent from "./pages/Mapel/ListMapelComponent";
 import CreateMapelComponent from "./pages/Mapel/CreateMapelComponent";
 import UpdateMapelComponent from "./pages/Mapel/UpdateMapelComponent";
+import DetailMapelComponent from "./pages/Mapel/DetailMapelComponent";
 import ListPengguna from "./pages/Pengguna/ListPengguna";
 import DetailPengguna from "./pages/Pengguna/DetailPengguna";
 import { PrivateRoute } from "./PrivateRoute";
@@ -41,6 +42,7 @@ function AppRoutes() {
 							<PrivateRoute exact path="/atur-mapel" component={ListMapelComponent} />
 							<PrivateRoute exact path="/atur-mapel/add" component={CreateMapelComponent} />
 							<PrivateRoute exact path="/atur-mapel/:idMapel/update" component={UpdateMapelComponent} />
+							<PrivateRoute exact path="/atur-mapel/:idMapel/detail" component={DetailMapelComponent} />
 							<PrivateRoute exact path="/pengguna" component={ListPengguna} />
 							<PrivateRoute exact path="/pengguna/:idUser" component={DetailPengguna} />
 							{/* Not Found 404 */}
