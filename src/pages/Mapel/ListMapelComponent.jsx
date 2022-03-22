@@ -38,7 +38,7 @@ class ListMapelComponent extends Component {
 
                 <h2 className='text-center'>Daftar Mapel</h2>
                 <a className="btn btn-blue" onClick={this.addMapel}>
-                    Tambah Mata Pelajaran
+                    + Tambah Mata Pelajaran
                 </a>
                 <div className='row'>
                     <table className='table'>

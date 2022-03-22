@@ -58,7 +58,7 @@ class ListPengguna extends Component {
                     </select>
 
                     <a className="btn btn-blue" onClick={this.addPengguna}>
-                        Tambah Pengguna
+                        + Tambah Pengguna
                     </a>
                 </div>
 
