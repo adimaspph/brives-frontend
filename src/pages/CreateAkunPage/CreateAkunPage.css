@@ -2,6 +2,10 @@
     display: flex;
 }
 
+#eyepas	 {
+	margin-left: 8px;
+}
+
 .checkbox-mapel {
 	margin: 8px 0px;
 }
@@ -35,8 +39,8 @@ input[type=text], select {
 	box-sizing: border-box;
 }
 
-input[type=password], select {
-	width: 100%;
+#create-pass, select {
+	width: 96%;
 	padding: 12px 20px;
 	margin: 8px 0;
 	display: inline-block;
