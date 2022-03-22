@@ -28,6 +28,7 @@
     "react-bootstrap": "^2.2.1",
     "react-dom": "^17.0.2",
     "react-google-login": "^5.2.2",
+    "react-helper": "^3.2.0",
     "react-hot-loader": "^4.13.0",
     "react-nice-input-password": "^2.7.0",
     "react-router-dom": "^4.3.1",

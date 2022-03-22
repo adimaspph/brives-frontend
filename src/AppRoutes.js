@@ -18,6 +18,9 @@ import CreateMapelComponent from "./pages/Mapel/CreateMapelComponent";
 import UpdateMapelComponent from "./pages/Mapel/UpdateMapelComponent";
 import ListPengguna from "./pages/Pengguna/ListPengguna";
 import DetailPengguna from "./pages/Pengguna/DetailPengguna";
+import { PrivateRoute } from "./PrivateRoute";
+import { Redirect } from "react-router-dom";
+
 
 
 function AppRoutes() {
@@ -33,13 +36,15 @@ function AppRoutes() {
 							<Route exact path="/" component={Home} />
 							<Route exact path="/login" component={LoginPage} />
 							<Route exact path="/design" component={Design} />
-							<Route exact path="/akun/create" component={CreateAkunPage} />
-							<Route exact path="/atur-jadwal" component={JadwalPage} />
-							<Route exact path="/atur-mapel" component={ListMapelComponent} />
-							<Route exact path="/atur-mapel/add" component={CreateMapelComponent} />
-							<Route exact path="/atur-mapel/:idMapel/update" component={UpdateMapelComponent} />
-							<Route exact path="/pengguna" component={ListPengguna} />
-							<Route exact path="/pengguna/:idUser" component={DetailPengguna} />
+							<PrivateRoute exact path="/akun/create" component={CreateAkunPage} />
+							<PrivateRoute exact path="/atur-jadwal" component={JadwalPage} />
+							<PrivateRoute exact path="/atur-mapel" component={ListMapelComponent} />
+							<PrivateRoute exact path="/atur-mapel/add" component={CreateMapelComponent} />
+							<PrivateRoute exact path="/atur-mapel/:idMapel/update" component={UpdateMapelComponent} />
+							<PrivateRoute exact path="/pengguna" component={ListPengguna} />
+							<PrivateRoute exact path="/pengguna/:idUser" component={DetailPengguna} />
+							{/* Not Found 404 */}
+							<Redirect from="*" to="/" />
 						</Switch>
 					</div>
 
