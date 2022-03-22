@@ -20,6 +20,7 @@ import ListPengguna from "./pages/Pengguna/ListPengguna";
 import DetailPengguna from "./pages/Pengguna/DetailPengguna";
 import { PrivateRoute } from "./PrivateRoute";
 import { Redirect } from "react-router-dom";
+import error403 from "./pages/error403";
 
 
 
@@ -33,9 +34,10 @@ function AppRoutes() {
 
 					<div className="content">
 						<Switch>
-							<Route exact path="/" component={Home} />
+							<PrivateRoute exact path="/" component={Home} />
 							<Route exact path="/login" component={LoginPage} />
 							<Route exact path="/design" component={Design} />
+							<Route exact path="/403" component={error403} />
 							<PrivateRoute exact path="/akun/create" component={CreateAkunPage} />
 							<PrivateRoute exact path="/atur-jadwal" component={JadwalPage} />
 							<PrivateRoute exact path="/atur-mapel" component={ListMapelComponent} />
