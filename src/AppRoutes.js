@@ -16,7 +16,13 @@ import TestForm from "./pages/TestForm";
 import ListMapelComponent from "./pages/Mapel/ListMapelComponent";
 import CreateMapelComponent from "./pages/Mapel/CreateMapelComponent";
 import UpdateMapelComponent from "./pages/Mapel/UpdateMapelComponent";
-import ViewAkunPage from "./pages/ViewAkunPage/ViewAkunPage";
+
+import ViewProfilePage from "./pages/ViewProfilePage/ViewProfilePage";
+
+import ListPengguna from "./pages/Pengguna/ListPengguna";
+import DetailPengguna from "./pages/Pengguna/DetailPengguna";
+
+
 
 function AppRoutes() {
 	
@@ -31,7 +37,8 @@ function AppRoutes() {
 							<Route exact path="/" component={Home} />
 							<Route exact path="/login" component={LoginPage} />
 							<Route exact path="/design" component={Design} />
-							<Route exact path="/pengguna" component={ViewAkunPage} />
+
+							<Route exact path="/profil-saya" component={ViewProfilePage} />
 							<Route
 								exact
 								path="/atur-jadwal"
@@ -42,6 +49,8 @@ function AppRoutes() {
 							<Route exact path="/atur-mapel" component={ListMapelComponent} />
 							<Route exact path="/atur-mapel/add" component={CreateMapelComponent} />
 							<Route exact path="/atur-mapel/:idMapel/update" component={UpdateMapelComponent} />
+							<Route exact path="/pengguna" component={ListPengguna} />
+							<Route exact path="/pengguna/:idUser" component={DetailPengguna} />
 						</Switch>
 					</div>
 

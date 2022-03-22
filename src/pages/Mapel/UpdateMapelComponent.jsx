@@ -3,7 +3,6 @@ import MapelService from '../../services/MapelService';
 import "./Mapel.css";
 import { generatePath } from 'react-router-dom';
 import ErrorNotification from "../../components/Notification/ErrorNotification";
-import { StyledEngineProvider } from '@mui/material';
 import NeutralNotification from '../../components/Notification/NeutralNotification';
 
 
@@ -50,7 +49,6 @@ class UpdateMapelComponent extends Component {
 
     }
 
-
     async demo() {
         this.setState({ successM: true });
         await this.sleep(2000);
@@ -87,10 +85,10 @@ class UpdateMapelComponent extends Component {
 
                         MapelService.updateMapel(mapel, this.state.idMapel).then(res => {
                             console.log('mapel => ' + JSON.stringify(mapel));
-                            
+
                             this.demo();
-                            
-                            
+
+
                         });
 
                     } else {
@@ -104,7 +102,7 @@ class UpdateMapelComponent extends Component {
                 this.submitJenjang();
                 MapelService.updateMapel(mapel, this.state.idMapel).then(res => {
                     console.log('mapel => ' + JSON.stringify(mapel));
-                    
+
                     this.demo();
                     // this.props.history.push('/atur-mapel');
                 });
@@ -149,8 +147,7 @@ class UpdateMapelComponent extends Component {
         this.props.history.push('/atur-mapel');
     }
 
-   
-
+    
 
 
     render() {

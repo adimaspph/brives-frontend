@@ -1,7 +1,6 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import MapelService from '../../services/MapelService';
 import "./MapelForm.css";
-import { generatePath } from 'react-router-dom';
 import ErrorNotification from "../../components/Notification/ErrorNotification";
 import NeutralNotification from '../../components/Notification/NeutralNotification';
 
@@ -17,7 +16,7 @@ class CreateMapelComponent extends Component {
             jenjang: [],
             jenjangTerpilih: [],
             errorM: false,
-            successM:false,
+            successM: false,
 
         }
 
@@ -49,20 +48,20 @@ class CreateMapelComponent extends Component {
         let mapel = { namaMapel: this.state.namaMapel.toUpperCase(), deskripsi: this.state.deskripsi, listJenjang: this.state.jenjangTerpilih };
         console.log('mapel => ' + JSON.stringify(mapel));
 
-        this.setState({errorM: false});
+        this.setState({ errorM: false });
         this.setState({ successM: false });
 
         MapelService.getMapelByNama(this.state.namaMapel.toUpperCase()).then((res) => {
             let mapell = res.data;
 
             if (mapell.status === 400) {
-                this.setState({errorM: true});
+                this.setState({ errorM: true });
                 console.log(this.state.errorM);
                 // alert("Mata pelajaran ini telah dibuat sebelumnya. Silakan buat mata pelajaran baru!");
 
                 this.setState({ statusNama: 400 });
             } else {
-                this.setState({successM: true});
+                this.setState({ successM: true });
                 this.submitJenjang();
                 MapelService.createMapel(mapel).then(res => {
                     this.demo();
@@ -73,7 +72,7 @@ class CreateMapelComponent extends Component {
         });
 
 
-        
+
 
     }
 
@@ -131,13 +130,13 @@ class CreateMapelComponent extends Component {
     render() {
         return (
             <div className='outer'>
-                
+
                 <ul class="breadcrumb">
                     <li><a href="/atur-mapel">Daftar Mata Pelajaran</a></li>
                     <li className='bractive'>Tambah Mata Pelajaran</li>
                 </ul>
 
-                {this.state.errorM ? (<ErrorNotification text="Mata pelajaran ini telah dibuat sebelumnya. Silakan buat mata pelajaran baru!" />): ("")}
+                {this.state.errorM ? (<ErrorNotification text="Mata pelajaran ini telah dibuat sebelumnya. Silakan buat mata pelajaran baru!" />) : ("")}
                 {this.state.successM ? (<NeutralNotification text="Mata Pelajaran Berhasil Dibuat!" />) : ("")}
 
                 <h2>Tambah Mata Pelajaran</h2>
@@ -177,7 +176,7 @@ class CreateMapelComponent extends Component {
                                         </div>
 
                                         <div className='box-right'>
-                                            
+
                                             <a className="btn btn-outline-blue twobutton" onClick={this.cancel}>
                                                 Kembali
                                             </a>
