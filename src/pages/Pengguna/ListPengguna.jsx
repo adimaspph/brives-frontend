@@ -49,8 +49,8 @@ class ListPengguna extends Component {
 
                 <h2 className='text-center'>Daftar Pengguna</h2>
 
-                <div className='twobutton'>
-                    <select onChange={this.handleRoleChange} name="role" id="role">
+                <div className=''>
+                    <select onChange={this.handleRoleChange} name="role" id="role" className='twobutton'>
                         <option value="1">ADMIN</option>
                         <option value="2">PENGAJAR</option>
                         <option value="3">STAF_KEUANGAN</option>
@@ -58,7 +58,7 @@ class ListPengguna extends Component {
                         <option value="5">MANAGER</option>
                     </select>
 
-                    <a className="btn btn-blue" onClick={this.addPengguna}>
+                    <a className="btn btn-blue twobutton" onClick={this.addPengguna}>
                         + Tambah Pengguna
                     </a>
                 </div>
@@ -90,7 +90,7 @@ class ListPengguna extends Component {
                                             <td> {satuMapel.staff.noPegawai} </td>
                                             <td> {satuMapel.noHP} </td>
                                             <td>
-                                                <a className="btn btn-blue" onClick={() => this.editPengguna(satuMapel.username)}>
+                                                <a className="btn btn-outline" onClick={() => this.editPengguna(satuMapel.username)}>
                                                     Lihat
                                                 </a>
                                             </td>

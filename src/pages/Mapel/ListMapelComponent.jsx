@@ -93,8 +93,8 @@ class ListMapelComponent extends Component {
                                             </td>
                                             <td> {satuMapel.deskripsi} </td>
                                             <td>
-                                                <a className="btn btn-blue" onClick={() => this.detailMapel(satuMapel.idMapel)}>
-                                                    lihat
+                                                <a className="btn btn-outline" onClick={() => this.editMapel(satuMapel.idMapel)}>
+                                                    Update
                                                 </a>
                                             </td>
                                         </tr>

@@ -21,8 +21,8 @@ class PenggunaService {
         // return axios.get(ROLE_API_BASE_URL + '/' + idRole);
     }
 
-    getPenggunaById(idUser){
-        return APIConfig.get("/api/v1/user/" + idUser);
+    getPenggunaById(username){
+        return APIConfig.get("/api/v1/user/" + username);
         // return axios.get(IDPENGGUNA_API_BASE_URL + '/' + idUser);
     }
 
