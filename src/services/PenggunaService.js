@@ -2,9 +2,9 @@ import axios from 'axios';
 import APIConfig from '../api/APIConfig';
 
 
-const PENGGUNA_API_BASE_URL = "http://localhost:8080/api/v1/user/all";
-const ROLE_API_BASE_URL = "http://localhost:8080/role";
-const IDPENGGUNA_API_BASE_URL = "http://localhost:8080/api/v1/user";
+// const PENGGUNA_API_BASE_URL = "http://localhost:8080/api/v1/user/all";
+// const ROLE_API_BASE_URL = "http://localhost:8080/role";
+// const IDPENGGUNA_API_BASE_URL = "http://localhost:8080/api/v1/user";
 
 // const PENGGUNA_API_BASE_URL = "https://brives-staging-backend.herokuapp.com/api/v1/user/all";
 // const ROLE_API_BASE_URL = "https://brives-staging-backend.herokuapp.com/role";
