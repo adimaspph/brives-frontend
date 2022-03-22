@@ -55,6 +55,10 @@ function Home() {
 				Design System
 			</Link>
 			<br />
+			<Link className="btn btn-primary" to="/login">
+				Login
+			</Link>
+			<br />
 			<div>
 				<GoogleLogin
 					clientId="936851552513-7ul7bj59je2rjqecmj69tkpvubs7da7t.apps.googleusercontent.com"
