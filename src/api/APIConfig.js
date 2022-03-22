@@ -4,7 +4,7 @@ import Axios from "axios";
 
 const APIConfig = Axios.create({
 	baseURL: "https://brives-staging-backend.herokuapp.com",
-	// baseURL: "http://localhost:8080",
+	// baseURL: "http://localhost:8080", 
 });
 
 var AUTH_TOKEN = ""
