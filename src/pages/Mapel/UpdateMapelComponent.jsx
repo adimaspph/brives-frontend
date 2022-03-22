@@ -17,7 +17,6 @@ class UpdateMapelComponent extends Component {
             jenjang: [],
             jenjangTerpilih: [],
             statusNama: '',
-            namaAwal: 'jk',
             errorM: false,
             successM: false,
         }
