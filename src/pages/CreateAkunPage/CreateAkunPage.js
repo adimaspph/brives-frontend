@@ -1,10 +1,13 @@
-import { list } from '@chakra-ui/react';
 import React, { useState, useEffect } from 'react';
+import ErrorNotification from "../../components/Notification/ErrorNotification";
+import NeutralNotification from '../../components/Notification/NeutralNotification';
 import APIConfig from "../../api/APIConfig";
 import "./CreateAkunPage.css";
 
 function CreateAkunPage() {
     const [errMessage, setErrMessage] = useState("");
+    const [hasError, setHasError] = useState(false);
+    const [hasSubmit, setHasSubmit] = useState(false);
     const [role, setRole] = useState("");
     const [username, setUsername] = useState("");
     const [namaLengkap, setNamaLengkap] = useState("");
@@ -42,14 +45,16 @@ function CreateAkunPage() {
             listMapel: listMapel
 		})
         .then((response) => {
-            alert("masuk then")
-            console.log(response)
+            setHasSubmit(false);
+            setHasError(false);
+            setHasSubmit(true);
             if (response.data.status == 999) {
-                alert("masuk sini kok")
                 setErrMessage(response.data.message);
-                console.log(response.data.message);
+                setHasError(true);
+            } else {
+                setTimeout(function(){}, 4000); 
+                window.location.href = '/akun'; 
             }
-            alert("kesua")
 		});
     }
 
@@ -116,6 +121,8 @@ function CreateAkunPage() {
                     </div>
                     <div className="akun-card">
                         <h3>Formulir Tambah Pengguna</h3>
+                        {hasError&&hasSubmit? (<ErrorNotification text={errMessage}/>) : ("")}
+                        {!hasError&&hasSubmit? (<NeutralNotification text="Akun berhasil terbuat"/>) : ("")}
                         <div>
                             <form>
                                 <div>
@@ -171,11 +178,11 @@ function CreateAkunPage() {
                                             <input onChange={(e)=> {
                                                 if (e.target.checked) {
                                                     setListMapel([...listMapel,mapel.namaMapel,]);
-                                                  } else {
+                                                } else {
                                                     setListMapel(
                                                       listMapel.filter((mapel) => mapel !== mapel.namaMapel),
                                                     );
-                                                  }
+                                                }
                                                 
                                             }} 
                                             type="checkbox" value={mapel.namaMapel} />
