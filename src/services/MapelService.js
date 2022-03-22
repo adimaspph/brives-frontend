@@ -18,11 +18,13 @@ class MapelService {
     }
 
     createMapel(mapel){
-        return axios.post(MAPEL_API_BASE_URL, mapel);
+        return APIConfig.post("/mapel/", mapel);
+        // return axios.post(MAPEL_API_BASE_URL, mapel);
     }
 
     getJenjang(){
-        return axios.get(JENJANG_API_BASE_URL);
+        return APIConfig.get("/jenjang/");
+        // return axios.get(JENJANG_API_BASE_URL);
     }
 
     getMapelById(idMapel){
@@ -30,7 +32,8 @@ class MapelService {
         // return axios.get(MAPEL_API_BASE_URL_2 + '/' + idMapel);
     }
     getMapelByNama(namaMapel){
-        return axios.get(MAPEL_API_NAMA_URL_2 + '/' + namaMapel);
+        return APIConfig.get(("/mapel/nama/" + namaMapel));
+        // return axios.get(MAPEL_API_NAMA_URL_2 + '/' + namaMapel);
     }
 
     updateMapel(mapel, idMapel){

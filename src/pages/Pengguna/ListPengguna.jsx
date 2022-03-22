@@ -25,6 +25,7 @@ class ListPengguna extends Component {
     componentDidMount() {
         PenggunaService.getPenggunaByRole(this.state.number).then((res) => {
             this.setState({ pengguna: res.data.result.listUser });
+            console.log(res.data.result.listUser);
         });
 
     }
