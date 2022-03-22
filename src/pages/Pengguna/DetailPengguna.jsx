@@ -21,6 +21,7 @@ class DetailPengguna extends Component {
             listMapel: [],
             namaRole: '',
             idRole: '',
+            idUserReal: null,
 
         }
 
@@ -39,6 +40,7 @@ class DetailPengguna extends Component {
                 noPegawai: pengguna.result.staff.noPegawai,
                 tarif: pengguna.result.staff.tarif,
                 listMapel: pengguna.result.staff.listMapel,
+                idUserReal: pengguna.result.idUser,
 
             });
         });
@@ -79,37 +81,76 @@ class DetailPengguna extends Component {
                             <div className='card'>
                                 <div className='card-body'>
 
-                                    <p>IdUser = {this.state.idUser}</p>
-                                    <p>Nama Lengkap = {this.state.namaLengkap}</p>
-                                    <p>Username = {this.state.username}</p>
-                                    <p>Email = {this.state.email}</p>
-                                    <p>Nomor Handphone = {this.state.noHP}</p>
-                                    <p>Id Staff = {this.state.idStaff}</p>
-                                    <p>Nomor Pegawai = {this.state.noPegawai}</p>
-                                    <p>Role = {this.state.namaRole}</p>
+                                    <table>
+                                        <tr>
+                                            <th>Id User</th>
+                                            <td >{this.state.idUserReal}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Nama Lengkap</th>
+                                            <td>{this.state.namaLengkap}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Username</th>
+                                            <td>{this.state.username}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Email</th>
+                                            <td>{this.state.email}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Nomor Handphone</th>
+                                            <td>{this.state.noHP}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Id Staff</th>
+                                            <td>{this.state.idStaff}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Nomor Pegawai</th>
+                                            <td>{this.state.noPegawai}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Role</th>
+                                            <td>{this.state.namaRole}</td>
+                                        </tr>
 
-                                    {this.state.idRole === 2 ? (<div>
-                                        <p> Tarif = {this.state.tarif}</p>
-                                        <p>List Mata Pelajaran = </p>
-                                        <ul>
-                                        {
-                                            this.state.listMapel.map(
-                                                satuJenjang =>
-                                                    <li>{satuJenjang.namaMapel}</li>
-                                            )
-                                        }
-                                        </ul>
-                                        
+                                        {this.state.idRole === 2 ? (
+                                            <tr>
+                                                <th>Tarif</th>
+                                                <td>{this.state.tarif}</td>
+                                            </tr>
+
+
+                                        ) : ("")}
+
+                                        {this.state.idRole === 2 ? (
+                                            <tr>
+                                                <th>List Mata Pelajaran</th>
+                                                <td>{
+                                                this.state.listMapel.map(
+                                                    satuJenjang =>
+                                                        <li>{satuJenjang.namaMapel}</li>
+                                                )
+                                            }</td>
+                                            </tr>
+
+
+                                        ) : ("")}
+
+                                    </table>
+
+
+
+                                    <div className='center'>
+                                        <a className="btn btn-outline twobutton">
+                                            Hapus
+                                        </a>
+                                        <a className="btn btn-blue twobutton" >
+                                            Ubah
+                                        </a>
                                     </div>
-                                    ) : ("")}
 
-
-                                    <a className="btn btn-outline-blue twobutton">
-                                        Hapus
-                                    </a>
-                                    <a className="btn btn-blue twobutton">
-                                        Ubah
-                                    </a>
 
 
 
