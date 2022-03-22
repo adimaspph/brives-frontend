@@ -3,7 +3,7 @@ import MapelService from '../../services/MapelService';
 import "./Mapel.css";
 import { generatePath } from 'react-router-dom';
 import ErrorNotification from "../../components/Notification/ErrorNotification";
-
+import NeutralNotification from '../../components/Notification/NeutralNotification';
 
 
 class UpdateMapelComponent extends Component {
@@ -19,6 +19,7 @@ class UpdateMapelComponent extends Component {
             statusNama: '',
             namaAwal: 'jk',
             errorM: false,
+            successM: false,
         }
 
         this.changeNamaMapelHandler = this.changeNamaMapelHandler.bind(this);
@@ -48,23 +49,34 @@ class UpdateMapelComponent extends Component {
 
     }
 
+    async demo() {
+        this.setState({ successM: true });
+        await this.sleep(2000);
+        this.props.history.push('/atur-mapel');
+    }
+
+    sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
     updateMapel = (e) => {
         e.preventDefault();
 
         let mapel = { namaMapel: this.state.namaMapel.toUpperCase(), deskripsi: this.state.deskripsi, listJenjang: this.state.jenjangTerpilih };
 
-        
-        this.setState({errorM: false});
+
+        this.setState({ errorM: false });
+        this.setState({ successM: false });
 
         MapelService.getMapelByNama(this.state.namaMapel.toUpperCase()).then((res) => {
             let mapell = res.data;
 
-            if (mapell.status == 400) {
+            if (mapell.status === 400) {
                 this.setState({ statusNama: 400 });
 
                 MapelService.getMapelById(this.state.idMapel).then((res) => {
                     let mapel = res.data.result.namaMapel;
-                    if (mapel == this.state.namaMapel.toUpperCase()) {
+                    if (mapel === this.state.namaMapel.toUpperCase()) {
                         console.log("Mata Pelajaran Tidak Berubah")
                         let mapel = { namaMapel: this.state.namaMapel.toUpperCase(), deskripsi: this.state.deskripsi, listJenjang: this.state.jenjangTerpilih };
                         console.log('mapel => ' + JSON.stringify(mapel));
@@ -73,11 +85,14 @@ class UpdateMapelComponent extends Component {
 
                         MapelService.updateMapel(mapel, this.state.idMapel).then(res => {
                             console.log('mapel => ' + JSON.stringify(mapel));
-                            this.props.history.push('/atur-mapel');
+
+                            this.demo();
+
+
                         });
 
                     } else {
-                        this.setState({errorM: true});
+                        this.setState({ errorM: true });
                         // alert("Mata pelajaran ini telah dibuat sebelumnya. Silakan buat mata pelajaran baru!");
 
                     }
@@ -87,7 +102,9 @@ class UpdateMapelComponent extends Component {
                 this.submitJenjang();
                 MapelService.updateMapel(mapel, this.state.idMapel).then(res => {
                     console.log('mapel => ' + JSON.stringify(mapel));
-                    this.props.history.push('/atur-mapel');
+
+                    this.demo();
+                    // this.props.history.push('/atur-mapel');
                 });
 
             }
@@ -96,7 +113,7 @@ class UpdateMapelComponent extends Component {
     }
 
     submitJenjang = () => {
-        for (var i = 0; i < 5; i++) {
+        for (var i = 0; i < 6; i++) {
             if (this.state.jenjang[i]) {
                 this.state.jenjangTerpilih.push(this.state.listJenjang[(i) - 1])
 
@@ -130,6 +147,7 @@ class UpdateMapelComponent extends Component {
         this.props.history.push('/atur-mapel');
     }
 
+    
 
 
     render() {
@@ -142,7 +160,8 @@ class UpdateMapelComponent extends Component {
                     <li className='bractive'>Ubah Mata Pelajaran</li>
                 </ul>
 
-                {this.state.errorM ? (<ErrorNotification text="Mata pelajaran ini telah dibuat sebelumnya. Silakan buat mata pelajaran baru!" />): ("")}
+                {this.state.errorM ? (<ErrorNotification text="Mata pelajaran ini telah dibuat sebelumnya. Silakan buat mata pelajaran baru!" />) : ("")}
+                {this.state.successM ? (<NeutralNotification text="Mata Pelajaran Berhasil Diubah!" />) : ("")}
 
                 <h2>Ubah Mata Pelajaran</h2>
                 <div className='tes'>
@@ -188,13 +207,13 @@ class UpdateMapelComponent extends Component {
                                         </div>
 
                                         <div className='box-right'>
-                                            
+
                                             <a className="btn btn-outline-blue twobutton" onClick={() => this.editMapel(this.state.idMapel)}>
                                                 Kembali
                                             </a>
 
                                             <button type="submit" className="btn btn-blue twobutton">Simpan</button>
-                                            
+
                                         </div>
 
 

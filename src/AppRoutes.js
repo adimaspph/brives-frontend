@@ -19,6 +19,7 @@ import UpdateMapelComponent from "./pages/Mapel/UpdateMapelComponent";
 
 
 function AppRoutes() {
+	
 	return (
 		<BrowserRouter>
 			<Router>
@@ -30,11 +31,6 @@ function AppRoutes() {
 							<Route exact path="/" component={Home} />
 							<Route exact path="/login" component={LoginPage} />
 							<Route exact path="/design" component={Design} />
-							<Route
-								exact
-								path="/atur-jadwal"
-								component={JadwalPage}
-							/>
 							<Route exact path="/akun/create" component={CreateAkunPage} />
 							<Route exact path="/atur-jadwal" component={JadwalPage} />
 							<Route exact path="/atur-mapel" component={ListMapelComponent} />
