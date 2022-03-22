@@ -16,7 +16,7 @@ import TestForm from "./pages/TestForm";
 import ListMapelComponent from "./pages/Mapel/ListMapelComponent";
 import CreateMapelComponent from "./pages/Mapel/CreateMapelComponent";
 import UpdateMapelComponent from "./pages/Mapel/UpdateMapelComponent";
-
+import ViewAkunPage from "./pages/ViewAkunPage/ViewAkunPage";
 
 function AppRoutes() {
 	
@@ -31,6 +31,7 @@ function AppRoutes() {
 							<Route exact path="/" component={Home} />
 							<Route exact path="/login" component={LoginPage} />
 							<Route exact path="/design" component={Design} />
+							<Route exact path="/pengguna" component={ViewAkunPage} />
 							<Route
 								exact
 								path="/atur-jadwal"
