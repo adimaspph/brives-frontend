@@ -3,12 +3,13 @@ import Navbar from "../../components/Navbar/Navbar";
 import ButtonSubmit from "../../components/ButtonSubmit/ButtonSubmit";
 import "./LoginPage.css";
 import APIConfig from "../../api/APIConfig";
+import { UserContext } from "../utils/UserContext";
 import Axios from "axios";
 
 function LoginPage() {
+	const { role, jwt, setRole, setJwt } = useContext(UserContext);
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
-	const [role, setRole] = useState("");
 
 	// APIConfig.defaults.withCredentials = true;
 
@@ -18,15 +19,18 @@ function LoginPage() {
 			username: username,
 			password: password,
 		}).then((response) => {
-			alert("test then");
+			// alert("test then");
 			console.log(response);
 			if (response.data.token) {
-				console.log("login berhasil");
-				alert("berhasil");
+				// console.log("login berhasil");
+				// alert("berhasil");
 				localStorage.setItem("user", JSON.stringify({login:true, token: response.data.token, role : response.data.role[0].authority}));
+				// localStorage.setItem("user", JSON.stringify({login:true, token: response.data.token, role : response.data.role[0].authority}));
+				setRole(response.data.role[0].authority);
+				setJwt(response.data.token);
 			} else {
-				console.log("gagal");
-				alert("gagal");
+				// console.log("gagal");
+				// alert("gagal");
 			}
 		});
 	};

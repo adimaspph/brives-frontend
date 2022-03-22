@@ -26,9 +26,10 @@ function CreateAkunPage() {
 
     const handleChange = async (e) => {
         e.preventDefault();
-
+        setHasError(false);
         // check condition
         if (password !== konfirmasiPassword) {
+            setHasError(true);
             setErrMessage("Field Password harus sama dengan field Konfirmasi Password");
         };
 
@@ -91,6 +92,7 @@ function CreateAkunPage() {
     }
 
     const handleKonfirmasiPasswordChange = (e) => {
+        e.preventDefault();
         setKonfirmasiPassword(e.target.value);
     }
 
@@ -112,7 +114,7 @@ function CreateAkunPage() {
         <div className="akun-container">
             <div className="">
                 <ul className="breadcrumb">
-                    <li><a href="/atur-mapel">Daftar Pengguna</a></li>
+                    <li><a href="/akun">Daftar Pengguna</a></li>
                     <li className='bractive'>Tambah Pengguna</li>
                 </ul>
                 <div className="create-akun-content">
