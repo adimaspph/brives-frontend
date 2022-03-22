@@ -16,6 +16,7 @@ import TestForm from "./pages/TestForm";
 import ListMapelComponent from "./pages/Mapel/ListMapelComponent";
 import CreateMapelComponent from "./pages/Mapel/CreateMapelComponent";
 import UpdateMapelComponent from "./pages/Mapel/UpdateMapelComponent";
+import ListPengguna from "./pages/Pengguna/ListPengguna";
 
 
 function AppRoutes() {
@@ -36,6 +37,7 @@ function AppRoutes() {
 							<Route exact path="/atur-mapel" component={ListMapelComponent} />
 							<Route exact path="/atur-mapel/add" component={CreateMapelComponent} />
 							<Route exact path="/atur-mapel/:idMapel/update" component={UpdateMapelComponent} />
+							<Route exact path="/pengguna" component={ListPengguna} />
 						</Switch>
 					</div>
 
