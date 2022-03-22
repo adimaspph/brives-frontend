@@ -61,10 +61,11 @@ class UpdateMapelComponent extends Component {
 
     }
 
-    async demo() {
+    async demo(idMapel) {
         this.setState({ successM: true });
         await this.sleep(2000);
-        this.props.history.push('/atur-mapel');
+        this.props.history.push(generatePath("/atur-mapel/:idMapel", { idMapel }));
+        // this.props.history.push('/atur-mapel');
     }
 
     sleep(ms) {
@@ -98,7 +99,7 @@ class UpdateMapelComponent extends Component {
                         MapelService.updateMapel(mapel, this.state.idMapel).then(res => {
                             console.log('mapel => ' + JSON.stringify(mapel));
 
-                            this.demo();
+                            this.demo(this.state.idMapel);
 
 
                         });
@@ -115,7 +116,7 @@ class UpdateMapelComponent extends Component {
                 MapelService.updateMapel(mapel, this.state.idMapel).then(res => {
                     console.log('mapel => ' + JSON.stringify(mapel));
 
-                    this.demo();
+                    this.demo(this.state.idMapel);
                     // this.props.history.push('/atur-mapel');
                 });
 
