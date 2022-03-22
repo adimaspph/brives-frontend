@@ -1,6 +1,5 @@
 import axios from 'axios';
-
-
+import APIConfig from '../api/APIConfig';
 
 const MAPEL_API_BASE_URL = "https://brives-staging-backend.herokuapp.com/mapel/";
 const JENJANG_API_BASE_URL = "https://brives-staging-backend.herokuapp.com/jenjang/";
@@ -14,7 +13,8 @@ const MAPEL_API_NAMA_URL_2 = "https://brives-staging-backend.herokuapp.com/mapel
 
 class MapelService {
     getMapel(){
-        return axios.get(MAPEL_API_BASE_URL);
+        return APIConfig.get("/mapel/");
+        // return axios.get(MAPEL_API_BASE_URL);
     }
 
     createMapel(mapel){
@@ -26,7 +26,8 @@ class MapelService {
     }
 
     getMapelById(idMapel){
-        return axios.get(MAPEL_API_BASE_URL_2 + '/' + idMapel);
+        return APIConfig.get("/mapel/" + idMapel);
+        // return axios.get(MAPEL_API_BASE_URL_2 + '/' + idMapel);
     }
     getMapelByNama(namaMapel){
         return axios.get(MAPEL_API_NAMA_URL_2 + '/' + namaMapel);
