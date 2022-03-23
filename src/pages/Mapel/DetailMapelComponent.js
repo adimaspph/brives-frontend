@@ -128,7 +128,6 @@ export default function DetailMapelComponent(props) {
 
 
                     <div>
-                        {JSON.stringify(mapel)}
                         <h5>Pengajar pada Mata Pelajaran Ini</h5>
                         <table className='table-max'>
                             <tr id='head'>
