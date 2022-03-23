@@ -99,8 +99,6 @@ function Scheduler() {
 		lastday.setDate(lastday.getDate() - 7);
 		// console.log("clicked");
 	};
-
-	let zebra = []
 	
 
 	return (
