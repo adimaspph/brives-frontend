@@ -133,7 +133,7 @@ function CreateAkunPage() {
     }
 
 	return (
-        <div className="">
+        <div className="akun-container">
             <div className="">
                 <ul className="breadcrumb">
                     <li><a href="/pengguna">Daftar Pengguna</a></li>
