@@ -31,6 +31,10 @@ class PenggunaService {
         // return axios.get(IDPENGGUNA_API_BASE_URL + '/role/' + idUser);
     }
 
+    hapusUser(username){
+        return APIConfig.delete("/api/v1/user/" + username);
+    }
+
 }
 
 export default new PenggunaService()
