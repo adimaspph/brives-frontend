@@ -40,8 +40,7 @@ function CreateAkunPage() {
         if (!(role === "PENGAJAR")) {
             setListMapel([]);
             setTarif(0);
-        } 
-        
+        }         
 
         APIConfig.post("/api/v1/user/create", {
 			username: username,
@@ -148,7 +147,7 @@ function CreateAkunPage() {
                         {hasError&&hasSubmit? (<ErrorNotification text={errMessage}/>) : ("")}
                         {!hasError&&hasSubmit? (<NeutralNotification text="Akun berhasil terbuat"/>) : ("")}
                         <div>
-                            <form>
+                            <form onSubmit={handleChange}>
                                 <div>
                                     <label htmlFor="">Role<span className='star'>*</span> </label>
                                     <select onChange={handleRoleChange} name="role" id="role">
@@ -190,7 +189,7 @@ function CreateAkunPage() {
                                 <div>
                                     <div>
                                         <label htmlFor="">Tarif<span className='star'>*</span> </label>
-                                        <input onChange={handleTarifChange} type="text" name="tarif" className='form-control'  />
+                                        <input onChange={handleTarifChange} type="text" name="tarif" className='form-control' required />
                                     </div>
                                     <div>
                                         <label htmlFor="">Mata Pelajaran<span className='star'>*</span> </label>
@@ -213,10 +212,10 @@ function CreateAkunPage() {
                                         ))}
                                     </div>
                                 </div>}
+                                <div className='box-right'>
+                                    <button type="submit" className="twobutton btn btn-blue">Simpan</button>
+                                </div>
                             </form>
-                            <div className='box-right'>
-                                <button onClick={handleChange} type="submit" className="twobutton btn btn-blue">Simpan</button>
-                            </div>
                         </div>
                     </div>
                 </div>
