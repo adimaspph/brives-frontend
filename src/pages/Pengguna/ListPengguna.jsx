@@ -23,6 +23,18 @@ class ListPengguna extends Component {
     }
 
     componentDidMount() {
+        if (localStorage.getItem("user") != null) {
+            console.log(JSON.parse(localStorage.getItem("user")).role);
+            if( JSON.parse(localStorage.getItem("user")).role === 'ADMIN') {
+                console.log('admin');
+            } else {
+                this.props.history.push('/403');
+            }
+        } else {
+
+            this.props.history.push('/login');
+        }
+        
         PenggunaService.getPenggunaByRole(this.state.number).then((res) => {
             this.setState({ pengguna: res.data.result.listUser });
             console.log(res.data.result.listUser);

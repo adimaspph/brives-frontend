@@ -17,10 +17,15 @@ export default function Sidebar(props) {
 							<img src="/logo-bta.png" width={132} alt="" />
 						</Link>
 						<div className="sidebar-menu">
-							<Link className="sidebar-menu-btn" to="/pengguna">
-								<img src="/assets/account.svg" alt="" />
-								Pengguna
-							</Link>
+
+							{JSON.parse(localStorage.getItem("user")).role === 'ADMIN' ? (
+								<Link className="sidebar-menu-btn" to="/pengguna">
+									<img src="/assets/account.svg" alt="" />
+									Pengguna
+								</Link>
+							) : ('')}
+
+
 							<Link className="sidebar-menu-btn" to="/dashboard">
 								<img src="/assets/dashboard.svg" alt="" />
 								Dashboard
@@ -29,10 +34,14 @@ export default function Sidebar(props) {
 								<img src="/assets/checkout.svg" alt="" />
 								Lihat Pemesanan
 							</Link>
-							<Link className="sidebar-menu-btn" to="/atur-mapel">
+							
+							{JSON.parse(localStorage.getItem("user")).role === 'STAF_OPERASIONAL' ? (
+								<Link className="sidebar-menu-btn" to="/atur-mapel">
 								<img src="/assets/book.svg" alt="" />
 								Atur Mata Pelajaran
 							</Link>
+							) : ('')}
+							
 							<Link className="sidebar-menu-btn" to="/atur-jadwal">
 								<img src="/assets/schedule.svg" alt="" />
 								Atur Jadwal
