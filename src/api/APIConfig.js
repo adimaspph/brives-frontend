@@ -16,6 +16,7 @@ if (localStorage.getItem("user") != null) {
 	// console.log(AUTH_TOKEN);
 }
 
+
 APIConfig.defaults.headers.common["Authorization"] = AUTH_TOKEN;
 APIConfig.defaults.headers.post["Content-Type"] =
 	"application/x-www-form-urlencoded";

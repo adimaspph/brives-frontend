@@ -13,13 +13,12 @@ class ViewProfilePage extends Component {
             username: '',
             namaLengkap: '',
             email: '',
-            password: '',
             noHP: '',
             idStaff: '',
             noPegawai: null,
+            namaRole: JSON.parse(localStorage.getItem("user")).role,
             tarif: null,
             listMapel: [],
-            namaRole: '',
             idRole: '',
 
         }
@@ -32,10 +31,10 @@ class ViewProfilePage extends Component {
             let pengguna = res.data;
             console.log(pengguna);
             this.setState({
+                idUser: pengguna.result.idUser,
                 username: pengguna.result.username,
                 namaLengkap: pengguna.result.namaLengkap,
                 email: pengguna.result.email,
-                password: pengguna.result.password,
                 noHP: pengguna.result.noHP,
                 idStaff: pengguna.result.staff.idStaff,
                 noPegawai: pengguna.result.staff.noPegawai,
@@ -48,7 +47,7 @@ class ViewProfilePage extends Component {
         PenggunaService.getRolePengguna(this.state.idUser).then((res) => {
             let pengguna = res.data;
             this.setState({
-                namaRole: pengguna.result.namaRole,
+                // namaRole: pengguna.result.namaRole,
                 idRole: pengguna.result.idRole,
 
             });
@@ -79,7 +78,6 @@ class ViewProfilePage extends Component {
                                     <p>Nama Lengkap = {this.state.namaLengkap}</p>
                                     <p>Username = {this.state.username}</p>
                                     <p>Email = {this.state.email}</p>
-                                    <p>Password = {this.state.password}</p>
                                     <p>Nomor Handphone = {this.state.noHP}</p>
                                     <p>Id Staff = {this.state.idStaff}</p>
                                     <p>Nomor Pegawai = {this.state.noPegawai}</p>
