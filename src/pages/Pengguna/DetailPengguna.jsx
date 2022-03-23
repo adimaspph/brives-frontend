@@ -27,8 +27,19 @@ class DetailPengguna extends Component {
 
     }
 
-
     componentDidMount() {
+        if (localStorage.getItem("user") != null) {
+            console.log(JSON.parse(localStorage.getItem("user")).role);
+            if( JSON.parse(localStorage.getItem("user")).role === 'ADMIN') {
+                console.log('admin');
+            } else {
+                this.props.history.push('/403');
+            }
+        } else {
+
+            this.props.history.push('/login');
+        }
+
         PenggunaService.getPenggunaById(this.state.idUser).then((res) => {
             let pengguna = res.data;
             this.setState({
