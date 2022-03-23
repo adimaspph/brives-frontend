@@ -59,7 +59,7 @@ function JadwalPage() {
 							<option value="5">05</option>
 						</select>
 						<label> - </label>
-						<select className="waktu-end">
+						<select className="waktu-end" onChange={(e) => setMenit(e.target.value)}>
 							<option value="0">00</option>
 							<option value="15">15</option>
 							<option value="30">30</option>
