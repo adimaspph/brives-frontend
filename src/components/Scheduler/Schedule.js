@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import APIConfig from "../../api/APIConfig";
+import ErrorNotification from "../Notification/ErrorNotification";
+import NeutralNotification from "../Notification/NeutralNotification";
 
 export default function Schedule({ date, hari }) {
 	const [listJadwal, setListJadwal] = useState([]);
     const [deletedNotif, setDeletedNotif] = useState(false);
-    const [deleteFailNotif, setdeleteFailNotif] = useState(false);
+	const [errorMessage, setErrorMessage] = useState("");
+	const [hasError, setHasError] = useState(false);
 
 	useEffect(() => {
 		const parameter = {
@@ -44,6 +47,7 @@ export default function Schedule({ date, hari }) {
                 setDeletedNotif(true);
 			})
 			.catch((error) => {
+				setErrorMessage(error.response.data.message);
 				console.log("error delete");
 				console.log(error);
 			});
@@ -51,6 +55,12 @@ export default function Schedule({ date, hari }) {
 
 	return (
 		<React.Fragment>
+			{hasError ? <ErrorNotification text={errorMessage} /> : ""}
+			{deletedNotif ? (
+				<NeutralNotification text="Jadwal berhasil didelete" />
+			) : (
+				""
+			)}
 			{listJadwal.map((jadwal, key) => (
 				<div
 					key={key}

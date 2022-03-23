@@ -42,10 +42,13 @@ export default function Sidebar(props) {
 							</Link>
 							) : ('')}
 							
-							<Link className="sidebar-menu-btn" to="/atur-jadwal">
-								<img src="/assets/schedule.svg" alt="" />
-								Atur Jadwal
-							</Link>
+							{JSON.parse(localStorage.getItem("user")).role === 'PENGAJAR' ? (
+								<Link className="sidebar-menu-btn" to="/atur-jadwal">
+									<img src="/assets/schedule.svg" alt="" />
+									Atur Jadwal
+								</Link>
+							) : ('')}
+
 							<Link className="sidebar-menu-btn" to="/kelas-tambahan">
 								<img src="/assets/plus.svg" alt="" />
 								Kelas Tambahan
