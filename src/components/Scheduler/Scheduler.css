@@ -17,10 +17,11 @@
 .scheduler {
 	background: #fafafa;
 	overflow-x: auto;
+	overflow-y: none;
 
 	display: grid;
 	grid-template-columns: repeat(1, 1.5fr) repeat(7, 2fr);
-	grid-template-rows: repeat(72, 30px);
+	grid-template-rows: repeat(81, 20px);
 
 	justify-items: center;
 	align-items: center;
@@ -69,11 +70,20 @@
 	grid-column-start: 2;
 	grid-column-end: 10;
 
-	grid-row-start: 3;
-	grid-row-end: 5;
+	/* grid-row-start: 3;
+	grid-row-end: 5; */
 
 	border-bottom: 1px solid #c4c4c4;
 	border-top: 1px solid #c4c4c4;
+}
+
+.scheduler .clock {
+	grid-column-start: 1;
+	grid-column-end: 2;
+
+	/* grid-row-start: 1;
+	grid-row-end: 3; */
+
 }
 
 .scheduler .schedule {
@@ -90,8 +100,8 @@
 
 	grid-column-start: 6;
 
-	grid-row-start: 1;
-	grid-row-end: 6;
+	grid-row-start: 2;
+	grid-row-end: 8;
 
 	border-left: 3px solid #1baa56;
 }

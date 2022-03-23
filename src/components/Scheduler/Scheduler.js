@@ -1,6 +1,8 @@
 import { render } from "@testing-library/react";
 import React, { useState, useEffect } from "react";
+import Clock from "./Clock";
 import "./Scheduler.css";
+import ZebraStrip from "./ZebraStrip";
 
 function Scheduler() {
 	const [curr, setCurr] = useState(new Date());
@@ -97,6 +99,9 @@ function Scheduler() {
 		// console.log("clicked");
 	};
 
+	let zebra = []
+	
+
 	return (
 		<div>
 			<div className="week-selection">
@@ -173,11 +178,18 @@ function Scheduler() {
 					</div>
 				</div>
 				<div className="scheduler">
-					<div>
-						<b>08.00</b>
-					</div>
+					<ZebraStrip />
+					{/* <ZebraStrip start={5} /> */}
+					{/* <ZebraStrip start={13} />
+					<ZebraStrip start={21} /> */}
+					{/* <div className="clock">
+						<b>04.00</b>
+					</div> */}
+					<Clock />
 
-					<div className="spacer"></div>
+					{/* <div className="spacer"></div> */}
+					
+					
 
 					<div className="schedule">
 						<span>Biologi</span>
