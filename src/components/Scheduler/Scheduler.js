@@ -65,8 +65,8 @@ function Scheduler() {
 		// setFirstmonth(new Date(curr.setDate(firstday)).getMonth());
 		// setLastmonth(new Date(curr.setDate(lastday)).getMonth());
 		// console.log(first.getDate());
-		console.log(firstday);
-		console.log(lastday);
+		// console.log(firstday);
+		// console.log(lastday);
 	};
 
 	useEffect(() => {}, []);
