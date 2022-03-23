@@ -95,11 +95,11 @@ class DetailPengguna extends Component {
             let mapell = res.data;
 
             if (mapell.status === 400) {
-                console.log("gagal" + this.state.idUser);
-                
+                this.setState({ errorM: true });
 
                 this.setState({ statusNama: 400 });
             } else if (mapell.status === 200) {
+                
                 this.demo();
                 
             }
@@ -120,7 +120,7 @@ class DetailPengguna extends Component {
     render() {
         return (
             <div className='outer'>
-                {this.state.errorM ? (<ErrorNotification text="Pengguna gagal dihapus!" />) : ("")}
+                {this.state.errorM ? (<ErrorNotification text="Pengguna gagal dihapus karena terdapat mata pelejaran yang masih ada!" />) : ("")}
                 {this.state.successM ? (<NeutralNotification text="Pengguna berhasil dihapus!" />) : ("")}
 
                 <Modal
