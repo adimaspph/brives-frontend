@@ -20,11 +20,11 @@ class ListMapelComponent extends Component {
         }
 
         this.addMapel = this.addMapel.bind(this);
-        this.editMapel = this.editMapel.bind(this);
+        this.detailMapel = this.detailMapel.bind(this);
     }
 
-    editMapel(idMapel) {
-        this.props.history.push(generatePath("/atur-mapel/:idMapel/update", { idMapel }));
+    detailMapel(idMapel) {
+        this.props.history.push(generatePath("/atur-mapel/:idMapel", { idMapel }));
 
     }
 

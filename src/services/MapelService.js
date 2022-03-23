@@ -41,6 +41,11 @@ class MapelService {
         // return axios.put(MAPEL_API_BASE_URL_2 + '/' + idMapel, mapel);
     }
 
+    deleteMapel(idMapel){
+        return APIConfig.delete("/mapel/" + idMapel);
+        // return axios.put(MAPEL_API_BASE_URL_2 + '/' + idMapel, mapel);
+    }
+
 }
 
 export default new MapelService()
