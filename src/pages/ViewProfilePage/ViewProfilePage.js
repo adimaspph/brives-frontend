@@ -5,7 +5,7 @@ import NeutralNotification from '../../components/Notification/NeutralNotificati
 
 
 
-class DetailPengguna extends Component {
+class ViewProfilePage extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -104,11 +104,6 @@ class DetailPengguna extends Component {
                                     <a className="btn btn-blue twobutton">
                                         Edit
                                     </a>
-
-
-
-
-
                                 </div>
                             </div>
                         </div>
@@ -119,4 +114,5 @@ class DetailPengguna extends Component {
     }
 }
 
-export default DetailPengguna;
+// let ViewProfilePage;
+export default ViewProfilePage;

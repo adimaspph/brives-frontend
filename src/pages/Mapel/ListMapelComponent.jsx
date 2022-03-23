@@ -1,113 +1,88 @@
-import React, { Component } from 'react';
-import MapelService from '../../services/MapelService';
+import React, { Component, useState, useEffect } from "react";
+import MapelService from "../../services/MapelService";
 import "./Mapel.css";
-import { generatePath } from 'react-router-dom';
 
-var AUTH_TOKEN = ""
-if (localStorage.getItem("user") != null) {
-	console.log("ada token");
-	const local = JSON.parse(localStorage.getItem("user"));
-	AUTH_TOKEN = "haloo " + local.token;
-	console.log(JSON.parse(localStorage.getItem("user")).token);
+export default function DetailMapelComponent(props) {
+  const [mapels, setMapels] = useState([{}]);
+
+  useEffect(async () => {
+    checkUserRole();       
+    await getMapelsData();
+  }, []);
+
+  const checkUserRole = () => {
+    const userRaw = localStorage.getItem("user");
+    if (userRaw) {
+      const user = JSON.parse(userRaw);
+      if (user.role === "STAF_OPERASIONAL") {
+      } else {
+        props.history.push("/403");
+      }
+    } else {
+      props.history.push("/login");
+    }
+  };
+
+  const getMapelsData = async () => {
+    try {
+      const { data } = await MapelService.getMapel();
+      setMapels(data.result);
+    } catch (err) {
+      props.history.push("/atur-mapel");
+    }
+  };
+
+  const addMapelHandler = () => {
+    props.history.push(`/atur-mapel/add`);
+  };
+
+  const viewMapel = (idMapel) => {
+    props.history.push(`/atur-mapel/${idMapel}`);
+  };
+
+  return (
+    <>
+      <div className="outer">
+        <h1>Daftar Mata Pelajaran</h1>
+        <a className="btn btn-blue" href={`/atur-mapel/add`} onClick={addMapelHandler}>
+          + Tambah Mata Pelajaran
+        </a>
+        <br />
+        <div className="container">
+          <div className="row">
+            <table className="table-max table-none">
+              <tr>
+                <th scope="col">No</th>
+                <th scope="col">Nama Mapel</th>
+                <th scope="col">Jenjang</th>
+                <th scope="col">Deskripsi</th>
+                <th scope="col">Action</th>
+              </tr>
+              {mapels?.map((mapel, index) => (
+                <tr>
+                  <td>{index + 1}</td>
+                  <td>{mapel.namaMapel}</td>
+                  <td>
+                    {mapel.listJenjang?.map((m) => (
+                      <p> {m.namaJenjang} </p>
+                    ))}
+                  </td>
+                  <td>{mapel.deskripsi}</td>
+                  <td>
+                    <a
+                      className="btn btn-outline"
+                      href={`/atur-mapel/${mapel.idMapel}`}
+                      onClick={() => viewMapel(mapel.idMapel)}
+                    >
+                      lihat
+                    </a>
+                  </td>
+                </tr>
+              ))}
+            </table>
+          </div>
+        </div>
+      </div>
+    </>
+  );
 }
-
-
-class ListMapelComponent extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            mapel: []
-        }
-
-        this.addMapel = this.addMapel.bind(this);
-        this.editMapel = this.editMapel.bind(this);
-    }
-
-    editMapel(idMapel) {
-        this.props.history.push(generatePath("/atur-mapel/:idMapel/update", { idMapel }));
-
-    }
-
-    componentDidMount() {
-        if (localStorage.getItem("user") != null) {
-            console.log(JSON.parse(localStorage.getItem("user")).role);
-            if( JSON.parse(localStorage.getItem("user")).role === 'STAF_OPERASIONAL') {
-                console.log('staf op');
-            } else {
-                this.props.history.push('/403');
-            }
-        } else {
-
-            this.props.history.push('/login');
-        }
-        
-        MapelService.getMapel().then((res) => {
-            this.setState({ mapel: res.data.result });
-        });
-
-        
-
-        
-    }
-
-    addMapel() {
-        this.props.history.push('/atur-mapel/add');
-    }
-
-    render() {
-        return (
-            <div>
-
-
-                <h2 className='text-center'>Daftar Mapel</h2>
-                <a className="btn btn-blue" onClick={this.addMapel}>
-                    + Tambah Mata Pelajaran
-                </a>
-                <div className='row'>
-                    <table className='table'>
-                        <thead>
-                            <tr>
-                                <th scope='col'>Id Mapel</th>
-                                <th scope='col'>Nama Mapel</th>
-                                <th scope='col'>Jenjang</th>
-                                <th scope='col'>Deskripsi</th>
-                                <th scope='col'>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                this.state.mapel.map(
-                                    satuMapel =>
-                                        <tr key={satuMapel.idMapel}>
-                                            <td scope='row'> {satuMapel.idMapel} </td>
-                                            <td> {satuMapel.namaMapel} </td>
-                                            <td>
-                                                {
-                                                    satuMapel.listJenjang.map(
-                                                        jenjang =>
-                                                            <p> {jenjang.namaJenjang}</p>
-                                                    )
-                                                }
-
-
-                                            </td>
-                                            <td> {satuMapel.deskripsi} </td>
-                                            <td>
-                                                <a className="btn btn-blue" onClick={() => this.editMapel(satuMapel.idMapel)}>
-                                                    Update
-                                                </a>
-                                            </td>
-                                        </tr>
-                                )
-                            }
-                        </tbody>
-
-                    </table>
-                </div>
-
-            </div>
-        );
-    }
-}
-
-export default ListMapelComponent;

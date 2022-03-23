@@ -6,7 +6,7 @@ function PrivateRoute({ component: Component, ...rest }) {
     var auth = ""
     if (localStorage.getItem("user") != null) {
         auth = JSON.parse(localStorage.getItem("user")).login;
-		console.log(auth);
+		// console.log(auth);
 	}
     
 	return (

@@ -30,7 +30,7 @@ table {
   table th,
   table td {
     padding: .625em;
-    text-align: center;
+    text-align: left;
   }
   
   table th {
@@ -111,3 +111,89 @@ table {
     font-family: "Open Sans", sans-serif;
     line-height: 1.25;
   } */
+
+
+.table-none{
+    border-collapse: separate;
+    border: 1px solid transparent;
+}
+
+/* .table-none  td {
+    text-align: left;
+    padding: 0.5em 1em;
+} */
+
+
+.btn-outline-secondary {
+    color: #6c757d;
+    border: 2px solid #6c757d;
+    box-sizing: border-box;
+}
+
+.btn-outline-secondary:hover {
+    color: #fff;
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+.btn-outline-secondary:active{
+    color: #fff;
+    background-color: #51565a;
+    border-color: #51565a;
+}
+
+.btn-outline-red{
+    color: #B51D21;
+    background: #FFFFFF;
+    border: 2px solid #B51D21;
+    box-sizing: border-box;
+}
+.btn-outline-red:hover {
+    color: #FF9494;
+    border: 2px solid #FF9494 !important;
+    cursor: pointer;
+}
+.btn-outline-red:active{
+    color: #7A1013;
+    border: 2px solid #7A1013 !important;
+}
+
+
+.btn-red{
+    color: #FFFFFF;
+    background: #B51D21;
+    border: 2px solid #B51D21;
+    box-sizing: border-box;
+}
+.btn-red:hover {
+    background: #FF9494;
+    border: 2px solid #FF9494 !important;
+    cursor: pointer;
+}
+.btn-red:active{
+    background: #7A1013;
+    border: 2px solid #7A1013 !important;
+}
+
+.card-max-width {
+    box-shadow: rgba(80, 80, 80, 0.2) -1px 2px 6px 1px;
+    width: 100%;
+
+}
+
+.card-content {
+    padding: 1.5em 2em;
+}
+.center {
+    text-align: center;
+}
+
+.table-max {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: auto;
+}
+
+.table-max #head {
+    background-color: #B51D21;
+    color:white;
+}

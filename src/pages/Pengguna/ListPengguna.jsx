@@ -23,6 +23,17 @@ class ListPengguna extends Component {
     }
 
     componentDidMount() {
+        if (localStorage.getItem("user") != null) {
+            console.log(JSON.parse(localStorage.getItem("user")).role);
+            if( JSON.parse(localStorage.getItem("user")).role === 'ADMIN') {
+                console.log('staf op');
+            } else {
+                this.props.history.push('/403');
+            }
+        } else {
+            this.props.history.push('/login');
+        }
+        console.log(this.state.number)
         PenggunaService.getPenggunaByRole(this.state.number).then((res) => {
             this.setState({ pengguna: res.data.result.listUser });
             console.log(res.data.result.listUser);
@@ -49,16 +60,16 @@ class ListPengguna extends Component {
 
                 <h2 className='text-center'>Daftar Pengguna</h2>
 
-                <div className="twobutton">
-                        <select onChange={this.handleRoleChange} name="role" id="role">
+                <div className=''>
+                    <select onChange={this.handleRoleChange} name="role" id="role" className='twobutton'>
                         <option value="1">ADMIN</option>
                         <option value="2">PENGAJAR</option>
-                        <option value="3">STAF_KEUANGAN</option>
+                        <option value="6">STAF_KEUANGAN</option>
                         <option value="4">STAF_OPERASIONAL</option>
                         <option value="5">MANAGER</option>
                     </select>
 
-                    <a className="btn btn-blue" onClick={this.addPengguna}>
+                    <a className="btn btn-blue twobutton" onClick={this.addPengguna}>
                         + Tambah Pengguna
                     </a>
                 </div>
@@ -66,37 +77,37 @@ class ListPengguna extends Component {
                 <div className='row'>
                     <table className='table'>
                         <thead>
-                            <tr>
-                                <th scope='col'>Id User</th>
-                                <th scope='col'>Nama Lengkap</th>
-                                <th scope='col'>Username</th>
-                                <th scope='col'>Email</th>
-                                <th scope='col'>Nomor Pegawai</th>
-                                <th scope='col'>Nomor Handphone</th>
-                                <th scope='col'>Action</th>
+                        <tr>
+                            <th scope='col'>Id User</th>
+                            <th scope='col'>Nama Lengkap</th>
+                            <th scope='col'>Username</th>
+                            <th scope='col'>Email</th>
+                            <th scope='col'>Nomor Pegawai</th>
+                            <th scope='col'>Nomor Handphone</th>
+                            <th scope='col'>Action</th>
 
-                            </tr>
+                        </tr>
                         </thead>
 
                         <tbody>
-                            {
-                                this.state.pengguna.map(
-                                    satuMapel =>
-                                        <tr key={satuMapel.idUser}>
-                                            <td scope='row'> {satuMapel.idUser} </td>
-                                            <td> {satuMapel.namaLengkap} </td>
-                                            <td> {satuMapel.username} </td>
-                                            <td> {satuMapel.email} </td>
-                                            <td> {satuMapel.staff.noPegawai} </td>
-                                            <td> {satuMapel.noHP} </td>
-                                            <td>
-                                                <a className="btn btn-blue" onClick={() => this.editPengguna(satuMapel.username)}>
-                                                    Lihat
-                                                </a>
-                                            </td>
-                                        </tr>
-                                )
-                            }
+                        {
+                            this.state.pengguna.map(
+                                satuMapel =>
+                                    <tr key={satuMapel.idUser}>
+                                        <td scope='row'> {satuMapel.idUser} </td>
+                                        <td> {satuMapel.namaLengkap} </td>
+                                        <td> {satuMapel.username} </td>
+                                        <td> {satuMapel.email} </td>
+                                        <td> {satuMapel.staff.noPegawai} </td>
+                                        <td> {satuMapel.noHP} </td>
+                                        <td>
+                                            <a className="btn btn-outline" onClick={() => this.editPengguna(satuMapel.username)}>
+                                                Lihat
+                                            </a>
+                                        </td>
+                                    </tr>
+                            )
+                        }
                         </tbody>
 
 

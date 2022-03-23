@@ -50,7 +50,7 @@ function Home() {
 	return (
 		<div>
 			<h1>{role}</h1>
-			<h1>Ini home page</h1>
+			<h1>BTA Private E-Learning System (BRIVES)</h1>
 			<Link className="btn btn-primary" to="/design">
 				Design System
 			</Link>

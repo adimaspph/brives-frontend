@@ -1,6 +1,9 @@
 import { render } from "@testing-library/react";
 import React, { useState, useEffect } from "react";
+import Clock from "./Clock";
+import Schedule from "./Schedule";
 import "./Scheduler.css";
+import ZebraStrip from "./ZebraStrip";
 
 function Scheduler() {
 	const [curr, setCurr] = useState(new Date());
@@ -25,8 +28,6 @@ function Scheduler() {
 	const [lastday, setLastday] = useState(
 		new Date(curr.setDate(curr.getDate() - curr.getDay() + 7))
 	);
-	// const [firstmonth, setFirstmonth] = useState();
-	// const [lastmonth, setLastmonth] = useState();
 
 	const monthNames = [
 		"January",
@@ -43,58 +44,26 @@ function Scheduler() {
 		"December",
 	];
 
-	// var currday = new Date(); // get current date
-	// var first = curr.getDate() - curr.getDay() + 1; // First day is the day of the month - the day of the week
-
-	// var last = firstday + 6; // last day is the first day + 6
-
-	// var firstmonth = new Date(curr.setDate(firstday)).getMonth();
-	// firstmonth = monthNames[firstmonth];
-	// var lastmonth = new Date(curr.setDate(lastday)).getMonth();
-	// lastmonth = monthNames[lastmonth];
-
-	const getLastDay = () => {
-		// var temp = firstday;
-		// temp.setDate(temp.getDate() + 6);
-		// setLastday(temp);
-
-		// var last = new Date();
-		// last.setDate(last.getDate() + 6);
-		// setFirstday(first);
-		// firstday.setDate(curr.getDate() + 6);
-		// setFirstmonth(new Date(curr.setDate(firstday)).getMonth());
-		// setLastmonth(new Date(curr.setDate(lastday)).getMonth());
-		// console.log(first.getDate());
-		console.log(firstday);
-		console.log(lastday);
-	};
-
 	useEffect(() => {}, []);
 
 	const nextWeek = () => {
-		// firstday.setDate(firstday.getDate() + 7);
 		setFirstday(new Date(firstday.setDate(firstday.getDate() + 7)));
-		tuesday.setDate(tuesday.getDate() + 7);
-		wednesday.setDate(wednesday.getDate() + 7);
-		thursday.setDate(thursday.getDate() + 7);
-		friday.setDate(friday.getDate() + 7);
-		saturday.setDate(saturday.getDate() + 7);
-		lastday.setDate(lastday.getDate() + 7);
-
-		// console.log(firstday);
-		// console.log(lastday);
-		// console.log("clicked");
+		setTuesday(new Date(tuesday.setDate(tuesday.getDate() + 7)));
+		setWednesday(new Date(wednesday.setDate(wednesday.getDate() + 7)));
+		setThursday(new Date(thursday.setDate(thursday.getDate() + 7)));
+		setFriday(new Date(friday.setDate(friday.getDate() + 7)));
+		setSaturday(new Date(saturday.setDate(saturday.getDate() + 7)));
+		setLastday(new Date(lastday.setDate(lastday.getDate() + 7)));
 	};
 
 	const backWeek = () => {
 		setFirstday(new Date(firstday.setDate(firstday.getDate() - 7)));
-		tuesday.setDate(tuesday.getDate() - 7);
-		wednesday.setDate(wednesday.getDate() - 7);
-		thursday.setDate(thursday.getDate() - 7);
-		friday.setDate(friday.getDate() - 7);
-		saturday.setDate(saturday.getDate() - 7);
-		lastday.setDate(lastday.getDate() - 7);
-		// console.log("clicked");
+		setTuesday(new Date(tuesday.setDate(tuesday.getDate() - 7)));
+		setWednesday(new Date(wednesday.setDate(wednesday.getDate() - 7)));
+		setThursday(new Date(thursday.setDate(thursday.getDate() - 7)));
+		setFriday(new Date(friday.setDate(friday.getDate() - 7)));
+		setSaturday(new Date(saturday.setDate(saturday.getDate() - 7)));
+		setLastday(new Date(lastday.setDate(lastday.getDate() - 7)));
 	};
 
 	return (
@@ -173,15 +142,21 @@ function Scheduler() {
 					</div>
 				</div>
 				<div className="scheduler">
-					<div>
-						<b>08.00</b>
-					</div>
+					<ZebraStrip />
+					<Clock />
 
-					<div className="spacer"></div>
+					{/* <div className="spacer"></div> */}
 
-					<div className="schedule">
+					{/* <div className="schedule">
 						<span>Biologi</span>
-					</div>
+					</div> */}
+					<Schedule date={firstday} hari={1} />
+					<Schedule date={tuesday} hari={2} />
+					<Schedule date={wednesday} hari={3} />
+					<Schedule date={thursday} hari={4} />
+					<Schedule date={friday} hari={5} />
+					<Schedule date={saturday} hari={6} />
+					<Schedule date={lastday} hari={7} />
 				</div>
 			</div>
 		</div>

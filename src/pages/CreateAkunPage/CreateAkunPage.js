@@ -9,9 +9,10 @@ import "./CreateAkunPage.css";
 function CreateAkunPage() {
     const [errMessage, setErrMessage] = useState("");
     const [passwordShown, setPasswordShown] = useState(false);
+    const [pengajarShown, setPengajarShown] = useState(false);
     const [hasError, setHasError] = useState(false);
     const [hasSubmit, setHasSubmit] = useState(false);
-    const [role, setRole] = useState("");
+    const [role, setRole] = useState("ADMIN");
     const [username, setUsername] = useState("");
     const [namaLengkap, setNamaLengkap] = useState("");
     const [noPegawai, setNoPegawai] = useState("");
@@ -36,6 +37,12 @@ function CreateAkunPage() {
         e.preventDefault();
         setHasError(false);
 
+        if (!(role === "PENGAJAR")) {
+            setListMapel([]);
+            setTarif(0);
+        } 
+        
+
         APIConfig.post("/api/v1/user/create", {
 			username: username,
 			namaLengkap: namaLengkap,
@@ -57,11 +64,23 @@ function CreateAkunPage() {
             } else {
                 setTimeout(function(){}, 4000); 
                 window.location.href = '/pengguna'; 
+                console.log(response)
             }
 		});
     }
 
+
     useEffect(() => {
+        // otentikasi
+        if (localStorage.getItem("user") != null) {
+            if(!(JSON.parse(localStorage.getItem("user")).role === 'ADMIN')) {
+                window.location='/403';
+            }
+        } else {
+            window.location='/login';
+        }
+
+        // hit api mapel
         APIConfig.get("/mapel/")
         .then((response) => {
             setAllMapel(response.data);
@@ -71,6 +90,11 @@ function CreateAkunPage() {
     const handleRoleChange = (e) => {
         e.preventDefault();
         setRole(e.target.value);
+        if (e.target.value === "PENGAJAR") {
+            setPengajarShown(true);
+        } else {
+            setPengajarShown(false);
+        }
     }
 
     const handleUsernameChange = (e) => {
@@ -112,7 +136,7 @@ function CreateAkunPage() {
         <div className="akun-container">
             <div className="">
                 <ul className="breadcrumb">
-                    <li><a href="/akun">Daftar Pengguna</a></li>
+                    <li><a href="/pengguna">Daftar Pengguna</a></li>
                     <li className='bractive'>Tambah Pengguna</li>
                 </ul>
                 <div className="create-akun-content">
@@ -132,7 +156,7 @@ function CreateAkunPage() {
                                         <option value="PENGAJAR">PENGAJAR</option>
                                         <option value="STAF_KEUANGAN">STAF_KEUANGAN</option>
                                         <option value="STAF_OPERASIONAL">STAF_OPERASIONAL</option>
-                                        <option value="MANAGER">MANAGER</option>
+                                        <option value="MANAJEMEN">MANAGER</option>
                                     </select>
                                 </div>
                                 <div>
@@ -162,30 +186,33 @@ function CreateAkunPage() {
                                     <input id="create-pass" onChange={handlePasswordChange} type={passwordShown ? "text" : "password"} name="password" className='form-control' required />
                                     <i id="eyepas" onClick={togglePasswordVisiblity}>{eye}</i>
                                 </div>
+                                {pengajarShown && 
                                 <div>
-                                    <label htmlFor="">Tarif<span className='star'>*</span> </label>
-                                    <input onChange={handleTarifChange} type="text" name="tarif" className='form-control'  />
-                                </div>
-                                <div>
-                                    <label htmlFor="">Mata Pelajaran<span className='star'>*</span> </label>
-                                    {allMapel?.result.map((mapel) => (
-                                        <div className='checkbox-mapel' key={mapel.namaMapel}>
-                                            <input onChange={(e)=> {
-                                                if (e.target.checked) {
-                                                    setListMapel([...listMapel,mapel.namaMapel,]);
-                                                } else {
-                                                    setListMapel(
-                                                      listMapel.filter((mapel) => mapel !== mapel.namaMapel),
-                                                    );
-                                                }
-                                                
-                                            }} 
-                                            type="checkbox" value={mapel.namaMapel} />
-                                            {mapel.namaMapel}
-                                        </div>
-                                         
-                                    ))}
-                                </div>
+                                    <div>
+                                        <label htmlFor="">Tarif<span className='star'>*</span> </label>
+                                        <input onChange={handleTarifChange} type="text" name="tarif" className='form-control'  />
+                                    </div>
+                                    <div>
+                                        <label htmlFor="">Mata Pelajaran<span className='star'>*</span> </label>
+                                        {allMapel?.result.map((mapel) => (
+                                            <div className='checkbox-mapel' key={mapel.namaMapel}>
+                                                <input onChange={(e)=> {
+                                                    if (e.target.checked) {
+                                                        setListMapel([...listMapel,mapel.namaMapel,]);
+                                                    } else {
+                                                        setListMapel(
+                                                        listMapel.filter((mapel) => mapel !== mapel.namaMapel),
+                                                        );
+                                                    }
+                                                    
+                                                }} 
+                                                type="checkbox" value={mapel.namaMapel} />
+                                                {mapel.namaMapel}
+                                            </div>
+                                            
+                                        ))}
+                                    </div>
+                                </div>}
                             </form>
                             <div className='box-right'>
                                 <button onClick={handleChange} type="submit" className="twobutton btn btn-blue">Simpan</button>
