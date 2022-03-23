@@ -139,12 +139,12 @@ export default function DetailMapelComponent(props) {
                             </tr>
                             {mapel?.listStaff?.map((staff, index) => (
                                 <tr>
-                                    {/* TODO: kalo udh tau return nya apa nanti di tambah */}
+                                    
                                     <td>{index + 1}</td>
                                     <td>{staff?.user?.namaLengkap}</td>
                                     <td>{staff?.user?.email}</td>
                                     <td>{staff?.user?.noHP}</td>
-                                    <td>{staff?.user?.idUser}</td>
+                                    <td>{staff?.noPegawai}</td>
                                 </tr>
                             ))}
                         </table>
