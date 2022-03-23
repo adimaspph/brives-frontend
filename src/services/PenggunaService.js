@@ -35,6 +35,10 @@ class PenggunaService {
         return APIConfig.delete("/api/v1/user/" + username);
     }
 
+    getAuthenticatedUser() {
+        return APIConfig.get("/api/v1/user/auth/");
+
+    }
 }
 
 export default new PenggunaService()

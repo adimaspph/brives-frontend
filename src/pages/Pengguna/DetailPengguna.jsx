@@ -79,18 +79,18 @@ class DetailPengguna extends Component {
     }
 
     handleCancel = (event) => {
-		event.preventDefault();
+        event.preventDefault();
         this.setState({ modal: false });
-	};
+    };
 
     popup = (event) => {
-		event.preventDefault();
+        event.preventDefault();
         this.setState({ modal: true });
-	};
+    };
 
     hapusPengguna = (event) => {
-		event.preventDefault();
-        
+        event.preventDefault();
+
         PenggunaService.hapusUser(this.state.idUser).then((res) => {
             let mapell = res.data;
 
@@ -99,12 +99,12 @@ class DetailPengguna extends Component {
 
                 this.setState({ statusNama: 400 });
             } else if (mapell.status === 200) {
-                
+
                 this.demo();
-                
+
             }
         });
-	};
+    };
 
     async demo() {
         this.setState({ successM: true });
