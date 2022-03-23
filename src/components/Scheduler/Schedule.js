@@ -7,40 +7,37 @@ export default function Schedule({ date, hari }) {
 	useEffect(() => {
 		const parameter = {
 			tanggal: date.getDate(),
-			bulan: date.getMonth()+1,
+			bulan: date.getMonth() + 1,
 			tahun: date.getFullYear(),
 		};
-console.log(parameter);
 		APIConfig.get("/jadwal", {
 			params: parameter,
 		})
 			.then((response) => {
 				setListJadwal(response.data.result);
-                console.log(response.data);
 			})
 			.catch((error) => {
 				console.log("error data");
 			});
 	}, [date]);
 
-    const timeToRow = (waktu) => {
-        let result = 0;
-        let jam = Number(waktu.slice(0, 2));
-        let menit = Number(waktu.slice(3));
-        console.log(jam);
-        console.log(menit);
-        jam = (jam - 4 ) * 4;
+	const timeToRow = (waktu) => {
+		let result = 0;
+		let jam = Number(waktu.slice(0, 2));
+		let menit = Number(waktu.slice(3));
+		jam = (jam - 4) * 4;
 
-        result = result + jam + 2;
-        result = result + (menit/15);
+		result = result + jam + 2;
+		result = result + menit / 15;
 
-        return result;
-    }
+		return result;
+	};
 
 	return (
 		<React.Fragment>
 			{listJadwal.map((jadwal, key) => (
 				<div
+					key={key}
 					className="schedule"
 					style={{
 						gridRowStart: timeToRow(jadwal.waktuMulai),
@@ -48,7 +45,9 @@ console.log(parameter);
 						gridColumnStart: hari + 1,
 					}}
 				>
-					<span><b>{jadwal.mapel.namaMapel}</b></span>
+					<span>
+						<b>{jadwal.mapel.namaMapel}</b>
+					</span>
 					<span>{`${jadwal.waktuMulai} - ${jadwal.waktuSelesai}`}</span>
 				</div>
 			))}
