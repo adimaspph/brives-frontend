@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PenggunaService from '../../services/PenggunaService';
 import "./ListPengguna.css";
 import { generatePath } from 'react-router-dom';
+import searchIcon from "../../image/searchIcon.png"
 
 
 
@@ -11,6 +12,8 @@ class ListPengguna extends Component {
         this.state = {
             pengguna: [],
             number: 1,
+            // q: [],
+            // setQ: [],
         }
 
         this.addPengguna = this.addPengguna.bind(this);
@@ -60,7 +63,15 @@ class ListPengguna extends Component {
 
                 <h2 className='text-center'>Daftar Pengguna</h2>
 
+
                 <div className='space'>
+                    <div className="searchbox">
+                        {/*<i>src={searchIcon} className="search-logo" alt="searchIcon" <input>onKeyUp="filter()" type="text" id="value" placeholder="Masukkan nama pengguna"</input></i>*/}
+                        <img src={searchIcon} className="search-logo" alt="searchIcon" />
+                        <input onKeyUp="filter()" type="text" id="value" placeholder="Masukkan nama pengguna"/>
+                        {/*<input onKeyUp="filter()" type="text" id="value" placeholder="Masukkan nama pengguna" value={q} onChange={(e) => render(e.target.value)}/>*/}
+                    </div>
+
                     <select onChange={this.handleRoleChange} name="role" id="role" className='twobutton'>
                         <option value="1">ADMIN</option>
                         <option value="2">PENGAJAR</option>
