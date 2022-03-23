@@ -118,10 +118,10 @@ table {
     border: 1px solid transparent;
 }
 
-.table-none  td {
+/* .table-none  td {
     text-align: left;
     padding: 0.5em 1em;
-}
+} */
 
 
 .btn-outline-secondary {
