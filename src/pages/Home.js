@@ -1,10 +1,14 @@
-import React, { Component, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import GoogleLogin from "react-google-login";
+import { UserContext } from "./utils/UserContext";
+
 
 function Home() {
+	const { role, jwt, setRole, setJwt } = useContext(UserContext);
+
 	const handleFailure = (result) => {
-		alert(result);
+		// alert(result);
 	};
 
 	const handleLogin = (googleData) => {
@@ -23,6 +27,9 @@ function Home() {
 
 	useEffect(() => {
 		//change this to the script source you want to load, for example this is snap.js sandbox env
+
+		
+
 		const midtransScriptUrl =
 			"https://app.sandbox.midtrans.com/snap/snap.js";
 		//change this according to your client-key
@@ -42,9 +49,14 @@ function Home() {
 
 	return (
 		<div>
+			<h1>{role}</h1>
 			<h1>Ini home page</h1>
 			<Link className="btn btn-primary" to="/design">
 				Design System
+			</Link>
+			<br />
+			<Link className="btn btn-primary" to="/login">
+				Login
 			</Link>
 			<br />
 			<div>

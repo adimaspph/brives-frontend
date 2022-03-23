@@ -28,8 +28,9 @@ class DetailPengguna extends Component {
 
 
     componentDidMount() {
-        PenggunaService.getPenggunaById(this.state.idUser).then((res) => {
+        PenggunaService.getAuthenticatedUser().then((res) => {
             let pengguna = res.data;
+            console.log(pengguna);
             this.setState({
                 username: pengguna.result.username,
                 namaLengkap: pengguna.result.namaLengkap,

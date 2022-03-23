@@ -31,6 +31,18 @@ class UpdateMapelComponent extends Component {
     }
     componentDidMount() {
 
+        if (localStorage.getItem("user") != null) {
+            console.log(JSON.parse(localStorage.getItem("user")).role);
+            if( JSON.parse(localStorage.getItem("user")).role === 'STAF_OPERASIONAL') {
+                console.log('staf op');
+            } else {
+                this.props.history.push('/403');
+            }
+        } else {
+
+            this.props.history.push('/login');
+        }
+
         MapelService.getJenjang().then((res) => {
             this.setState({ listJenjang: res.data.result });
         });

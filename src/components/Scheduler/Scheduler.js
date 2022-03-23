@@ -7,6 +7,21 @@ function Scheduler() {
 	const [firstday, setFirstday] = useState(
 		new Date(curr.setDate(curr.getDate() - curr.getDay() + 1))
 	);
+	const [tuesday, setTuesday] = useState(
+		new Date(curr.setDate(curr.getDate() - curr.getDay() + 2))
+	);
+	const [wednesday, setWednesday] = useState(
+		new Date(curr.setDate(curr.getDate() - curr.getDay() + 3))
+	);
+	const [thursday, setThursday] = useState(
+		new Date(curr.setDate(curr.getDate() - curr.getDay() + 4))
+	);
+	const [friday, setFriday] = useState(
+		new Date(curr.setDate(curr.getDate() - curr.getDay() + 5))
+	);
+	const [saturday, setSaturday] = useState(
+		new Date(curr.setDate(curr.getDate() - curr.getDay() + 6))
+	);
 	const [lastday, setLastday] = useState(
 		new Date(curr.setDate(curr.getDate() - curr.getDay() + 7))
 	);
@@ -59,6 +74,11 @@ function Scheduler() {
 	const nextWeek = () => {
 		// firstday.setDate(firstday.getDate() + 7);
 		setFirstday(new Date(firstday.setDate(firstday.getDate() + 7)));
+		tuesday.setDate(tuesday.getDate() + 7);
+		wednesday.setDate(wednesday.getDate() + 7);
+		thursday.setDate(thursday.getDate() + 7);
+		friday.setDate(friday.getDate() + 7);
+		saturday.setDate(saturday.getDate() + 7);
 		lastday.setDate(lastday.getDate() + 7);
 
 		// console.log(firstday);
@@ -68,6 +88,11 @@ function Scheduler() {
 
 	const backWeek = () => {
 		setFirstday(new Date(firstday.setDate(firstday.getDate() - 7)));
+		tuesday.setDate(tuesday.getDate() - 7);
+		wednesday.setDate(wednesday.getDate() - 7);
+		thursday.setDate(thursday.getDate() - 7);
+		friday.setDate(friday.getDate() - 7);
+		saturday.setDate(saturday.getDate() - 7);
 		lastday.setDate(lastday.getDate() - 7);
 		// console.log("clicked");
 	};
@@ -124,23 +149,23 @@ function Scheduler() {
 					</div>
 					<div className="scheduler-header">
 						<span>Tuesday</span>
-						<span>{firstday.getDate() + 1}</span>
+						<span>{tuesday.getDate()}</span>
 					</div>
 					<div className="scheduler-header">
 						<span>Wednesday</span>
-						<span>{firstday.getDate() + 2}</span>
+						<span>{wednesday.getDate()}</span>
 					</div>
 					<div className="scheduler-header">
 						<span>Thursday</span>
-						<span>{firstday.getDate() + 3}</span>
+						<span>{thursday.getDate()}</span>
 					</div>
 					<div className="scheduler-header">
 						<span>Friday</span>
-						<span>{firstday.getDate() + 4}</span>
+						<span>{friday.getDate()}</span>
 					</div>
 					<div className="scheduler-header">
 						<span>Saturday</span>
-						<span>{firstday.getDate() + 5}</span>
+						<span>{saturday.getDate()}</span>
 					</div>
 					<div className="scheduler-header">
 						<span>Sunday</span>

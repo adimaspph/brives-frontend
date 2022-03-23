@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
 import ErrorNotification from "../../components/Notification/ErrorNotification";
 import NeutralNotification from '../../components/Notification/NeutralNotification';
 import APIConfig from "../../api/APIConfig";
@@ -6,6 +8,7 @@ import "./CreateAkunPage.css";
 
 function CreateAkunPage() {
     const [errMessage, setErrMessage] = useState("");
+    const [passwordShown, setPasswordShown] = useState(false);
     const [hasError, setHasError] = useState(false);
     const [hasSubmit, setHasSubmit] = useState(false);
     const [role, setRole] = useState("");
@@ -15,7 +18,6 @@ function CreateAkunPage() {
     const [noHP, setNoHP] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [konfirmasiPassword, setKonfirmasiPassword] = useState("");
     const [tarif, setTarif] = useState("0");
     const [listMapel, setListMapel] = useState([]);
     const [allMapel, setAllMapel] = useState({
@@ -23,15 +25,16 @@ function CreateAkunPage() {
         message: "success",
         result: [],
     });
+    
+    const eye = <FontAwesomeIcon icon={faEye} />;
+
+    const togglePasswordVisiblity = () => {
+        setPasswordShown(passwordShown ? false : true);
+    };
 
     const handleChange = async (e) => {
         e.preventDefault();
-
-        // check condition
-        if (password !== konfirmasiPassword) {
-            setErrMessage("Field Password harus sama dengan field Konfirmasi Password");
-        };
-
+        setHasError(false);
 
         APIConfig.post("/api/v1/user/create", {
 			username: username,
@@ -53,7 +56,7 @@ function CreateAkunPage() {
                 setHasError(true);
             } else {
                 setTimeout(function(){}, 4000); 
-                window.location.href = '/akun'; 
+                window.location.href = '/pengguna'; 
             }
 		});
     }
@@ -88,10 +91,7 @@ function CreateAkunPage() {
     const handlePasswordChange = (e) => {
         e.preventDefault();
         setPassword(e.target.value);
-    }
-
-    const handleKonfirmasiPasswordChange = (e) => {
-        setKonfirmasiPassword(e.target.value);
+        
     }
 
     const handleNoHPChange = (e) => {
@@ -112,7 +112,7 @@ function CreateAkunPage() {
         <div className="akun-container">
             <div className="">
                 <ul className="breadcrumb">
-                    <li><a href="/atur-mapel">Daftar Pengguna</a></li>
+                    <li><a href="/akun">Daftar Pengguna</a></li>
                     <li className='bractive'>Tambah Pengguna</li>
                 </ul>
                 <div className="create-akun-content">
@@ -157,15 +157,10 @@ function CreateAkunPage() {
                                     <label htmlFor="">Email<span className='star'>*</span> </label>
                                     <input onChange={handleEmailChange} type="email" name="email" className='form-control' required />
                                 </div>
-                                <div className="two-blocks">
-                                    <div>
-                                        <label htmlFor="">Password<span className='star'>*</span> </label>
-                                        <input onChange={handlePasswordChange} type="password" name="password" className='form-control' required />
-                                    </div>
-                                    <div>
-                                        <label htmlFor="">Konfirmasi Password<span className='star'>*</span> </label>
-                                        <input onChange={handleKonfirmasiPasswordChange} type="password" name="konfirmasiPassword" className='form-control' required />
-                                    </div>
+                                <div>
+                                    <label htmlFor="">Password<span className='star'>*</span> </label>
+                                    <input id="create-pass" onChange={handlePasswordChange} type={passwordShown ? "text" : "password"} name="password" className='form-control' required />
+                                    <i id="eyepas" onClick={togglePasswordVisiblity}>{eye}</i>
                                 </div>
                                 <div>
                                     <label htmlFor="">Tarif<span className='star'>*</span> </label>
