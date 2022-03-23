@@ -128,6 +128,7 @@ export default function DetailMapelComponent(props) {
 
 
                     <div>
+                        {JSON.stringify(mapel)}
                         <h5>Pengajar pada Mata Pelajaran Ini</h5>
                         <table className='table-max'>
                             <tr id='head'>
@@ -137,6 +138,16 @@ export default function DetailMapelComponent(props) {
                                 <td>Nomor HP</td>
                                 <td>Nomor Pegawai</td>
                             </tr>
+                            {mapel?.listStaff?.map((staff, index) => (
+                                <tr>
+                                    {/* TODO: kalo udh tau return nya apa nanti di tambah */}
+                                    <td>{index + 1}</td>
+                                    <td>{staff?.user?.namaLengkap}</td>
+                                    <td>{staff?.user?.email}</td>
+                                    <td>{staff?.user?.noHP}</td>
+                                    <td>{staff?.user?.idUser}</td>
+                                </tr>
+                            ))}
                         </table>
                     </div>
                 </div>
