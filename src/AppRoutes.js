@@ -22,11 +22,12 @@ import DetailPengguna from "./pages/Pengguna/DetailPengguna";
 import { PrivateRoute } from "./PrivateRoute";
 import { Redirect } from "react-router-dom";
 import error403 from "./pages/error403";
+import ViewProfilePage from "./pages/ViewProfilePage/ViewProfilePage";
 
 
 
 function AppRoutes() {
-	
+
 	return (
 		<BrowserRouter>
 			<Router>
@@ -47,12 +48,13 @@ function AppRoutes() {
 							<PrivateRoute exact path="/atur-mapel/:idMapel" component={DetailMapelComponent} />
 							<PrivateRoute exact path="/pengguna" component={ListPengguna} />
 							<PrivateRoute exact path="/pengguna/:idUser" component={DetailPengguna} />
+							<PrivateRoute exact path="/profil-saya" component={ViewProfilePage} />
 							{/* Not Found 404 */}
 							<Redirect from="*" to="/" />
 						</Switch>
 					</div>
 
-					
+
 				</div>
 			</Router>
 		</BrowserRouter>
