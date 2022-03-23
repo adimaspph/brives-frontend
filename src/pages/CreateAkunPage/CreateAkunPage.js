@@ -62,7 +62,7 @@ function CreateAkunPage() {
                 setHasError(true);
             } else {
                 setTimeout(function(){}, 4000); 
-                // window.location.href = '/pengguna'; 
+                window.location.href = '/pengguna'; 
                 console.log(response)
             }
 		});
