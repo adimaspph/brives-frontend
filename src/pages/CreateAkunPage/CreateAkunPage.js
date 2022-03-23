@@ -11,7 +11,7 @@ function CreateAkunPage() {
     const [passwordShown, setPasswordShown] = useState(false);
     const [hasError, setHasError] = useState(false);
     const [hasSubmit, setHasSubmit] = useState(false);
-    const [role, setRole] = useState("");
+    const [role, setRole] = useState("ADMIN");
     const [username, setUsername] = useState("");
     const [namaLengkap, setNamaLengkap] = useState("");
     const [noPegawai, setNoPegawai] = useState("");
@@ -36,6 +36,12 @@ function CreateAkunPage() {
         e.preventDefault();
         setHasError(false);
 
+        if (!(role === "PENGAJAR")) {
+            setListMapel([]);
+            setTarif(0);
+        } 
+        
+
         APIConfig.post("/api/v1/user/create", {
 			username: username,
 			namaLengkap: namaLengkap,
@@ -56,12 +62,23 @@ function CreateAkunPage() {
                 setHasError(true);
             } else {
                 setTimeout(function(){}, 4000); 
-                window.location.href = '/pengguna'; 
+                // window.location.href = '/pengguna'; 
+                console.log(response)
             }
 		});
     }
 
     useEffect(() => {
+        // otentikasi
+        if (localStorage.getItem("user") != null) {
+            if(!(JSON.parse(localStorage.getItem("user")).role === 'ADMIN')) {
+                window.location='/403';
+            }
+        } else {
+            window.location='/login';
+        }
+
+        // hit api mapel
         APIConfig.get("/mapel/")
         .then((response) => {
             setAllMapel(response.data);
@@ -112,7 +129,7 @@ function CreateAkunPage() {
         <div className="akun-container">
             <div className="">
                 <ul className="breadcrumb">
-                    <li><a href="/akun">Daftar Pengguna</a></li>
+                    <li><a href="/pengguna">Daftar Pengguna</a></li>
                     <li className='bractive'>Tambah Pengguna</li>
                 </ul>
                 <div className="create-akun-content">
@@ -132,7 +149,7 @@ function CreateAkunPage() {
                                         <option value="PENGAJAR">PENGAJAR</option>
                                         <option value="STAF_KEUANGAN">STAF_KEUANGAN</option>
                                         <option value="STAF_OPERASIONAL">STAF_OPERASIONAL</option>
-                                        <option value="MANAGER">MANAGER</option>
+                                        <option value="MANAJEMEN">MANAGER</option>
                                     </select>
                                 </div>
                                 <div>

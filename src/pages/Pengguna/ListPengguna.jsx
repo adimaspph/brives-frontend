@@ -33,6 +33,7 @@ class ListPengguna extends Component {
         } else {
             this.props.history.push('/login');
         }
+        console.log(this.state.number)
         PenggunaService.getPenggunaByRole(this.state.number).then((res) => {
             this.setState({ pengguna: res.data.result.listUser });
             console.log(res.data.result.listUser);
@@ -63,7 +64,7 @@ class ListPengguna extends Component {
                     <select onChange={this.handleRoleChange} name="role" id="role" className='twobutton'>
                         <option value="1">ADMIN</option>
                         <option value="2">PENGAJAR</option>
-                        <option value="3">STAF_KEUANGAN</option>
+                        <option value="6">STAF_KEUANGAN</option>
                         <option value="4">STAF_OPERASIONAL</option>
                         <option value="5">MANAGER</option>
                     </select>
