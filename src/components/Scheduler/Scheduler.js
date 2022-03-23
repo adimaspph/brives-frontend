@@ -1,6 +1,7 @@
 import { render } from "@testing-library/react";
 import React, { useState, useEffect } from "react";
 import Clock from "./Clock";
+import Schedule from "./Schedule";
 import "./Scheduler.css";
 import ZebraStrip from "./ZebraStrip";
 
@@ -179,21 +180,20 @@ function Scheduler() {
 				</div>
 				<div className="scheduler">
 					<ZebraStrip />
-					{/* <ZebraStrip start={5} /> */}
-					{/* <ZebraStrip start={13} />
-					<ZebraStrip start={21} /> */}
-					{/* <div className="clock">
-						<b>04.00</b>
-					</div> */}
 					<Clock />
 
 					{/* <div className="spacer"></div> */}
-					
-					
 
-					<div className="schedule">
+					{/* <div className="schedule">
 						<span>Biologi</span>
-					</div>
+					</div> */}
+					<Schedule date={firstday} hari={1} />
+					<Schedule date={tuesday} hari={2} />
+					<Schedule date={wednesday} hari={3} />
+					<Schedule date={thursday} hari={4} />
+					<Schedule date={friday} hari={5} />
+					<Schedule date={saturday} hari={6} />
+					<Schedule date={lastday} hari={7} />
 				</div>
 			</div>
 		</div>
