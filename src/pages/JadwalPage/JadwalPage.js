@@ -21,6 +21,7 @@ function JadwalPage() {
 	const [menit, setMenit] = useState(0);
 
 	const [hasError, setHasError] = useState(false);
+	const [errorMessage, setErrorMessage] = useState("");
 	const [hasSubmit, setHasSubmit] = useState(false);
 	const [hasSchedule, setHasSchedule] = useState(true);
 
@@ -83,14 +84,16 @@ function JadwalPage() {
 				console.log(response.data);
 			})
 			.catch((error) => {
+				setErrorMessage(error.response.data.message);
 				setHasError(true);
-				console.log(error);
+				console.log(error.response);
+				setModal(false)
 			});
 	};
 
 	return (
 		<div className="jadwal-container">
-			{hasError ? <ErrorNotification text="Jadwal Gagal dibuat" /> : ""}
+			{hasError ? <ErrorNotification text={errorMessage} /> : ""}
 			{hasSubmit ? (
 				<NeutralNotification text="Jadwal berhasil dibuat" />
 			) : (
