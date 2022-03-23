@@ -61,6 +61,7 @@ function CreateAkunPage() {
 		});
     }
 
+
     useEffect(() => {
         APIConfig.get("/mapel/")
         .then((response) => {
