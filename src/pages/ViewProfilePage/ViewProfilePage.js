@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PenggunaService from '../../services/PenggunaService';
+import "./ViewProfilePage";
 import ErrorNotification from "../../components/Notification/ErrorNotification";
 import NeutralNotification from '../../components/Notification/NeutralNotification';
 
@@ -73,15 +74,42 @@ class ViewProfilePage extends Component {
                         <div className='row'>
                             <div className='card'>
                                 <div className='card-body'>
+                                    <table className='table-none'>
+                                        <tr>
+                                            <td>IdUser</td>
+                                            <td>{this.state.idUser}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Nama Lengkap</td>
+                                            <td>{this.state.namaLengkap}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Username</td>
+                                            <td>{this.state.username}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Email</td>
+                                            <td>{this.state.email}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Nomor Handphone</td>
+                                            <td>{this.state.noHP}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Id Staff</td>
+                                            <td>{this.state.idStaff}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Nomor Pegawai</td>
+                                            <td>{this.state.noPegawai}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Role</td>
+                                            <td>{this.state.namaRole}</td>
+                                        </tr>
+                                    </table>
 
-                                    <p>IdUser = {this.state.idUser}</p>
-                                    <p>Nama Lengkap = {this.state.namaLengkap}</p>
-                                    <p>Username = {this.state.username}</p>
-                                    <p>Email = {this.state.email}</p>
-                                    <p>Nomor Handphone = {this.state.noHP}</p>
-                                    <p>Id Staff = {this.state.idStaff}</p>
-                                    <p>Nomor Pegawai = {this.state.noPegawai}</p>
-                                    <p>Role = {this.state.namaRole}</p>
+                                    <hr />
 
                                     {this.state.idRole === 2 ? (<div>
                                             <p> Tarif = {this.state.tarif}</p>
@@ -99,9 +127,11 @@ class ViewProfilePage extends Component {
                                     ) : ("")}
 
 
-                                    <a className="btn btn-blue twobutton">
-                                        Edit
-                                    </a>
+                                    <div className='center'>
+                                        <a className="btn btn-blue twobutton">
+                                            Edit
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
