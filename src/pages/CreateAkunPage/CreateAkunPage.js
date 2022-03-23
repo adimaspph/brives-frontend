@@ -9,6 +9,7 @@ import "./CreateAkunPage.css";
 function CreateAkunPage() {
     const [errMessage, setErrMessage] = useState("");
     const [passwordShown, setPasswordShown] = useState(false);
+    const [pengajarShown, setPengajarShown] = useState(false);
     const [hasError, setHasError] = useState(false);
     const [hasSubmit, setHasSubmit] = useState(false);
     const [role, setRole] = useState("ADMIN");
@@ -89,6 +90,11 @@ function CreateAkunPage() {
     const handleRoleChange = (e) => {
         e.preventDefault();
         setRole(e.target.value);
+        if (e.target.value === "PENGAJAR") {
+            setPengajarShown(true);
+        } else {
+            setPengajarShown(false);
+        }
     }
 
     const handleUsernameChange = (e) => {
@@ -180,30 +186,33 @@ function CreateAkunPage() {
                                     <input id="create-pass" onChange={handlePasswordChange} type={passwordShown ? "text" : "password"} name="password" className='form-control' required />
                                     <i id="eyepas" onClick={togglePasswordVisiblity}>{eye}</i>
                                 </div>
+                                {pengajarShown && 
                                 <div>
-                                    <label htmlFor="">Tarif<span className='star'>*</span> </label>
-                                    <input onChange={handleTarifChange} type="text" name="tarif" className='form-control'  />
-                                </div>
-                                <div>
-                                    <label htmlFor="">Mata Pelajaran<span className='star'>*</span> </label>
-                                    {allMapel?.result.map((mapel) => (
-                                        <div className='checkbox-mapel' key={mapel.namaMapel}>
-                                            <input onChange={(e)=> {
-                                                if (e.target.checked) {
-                                                    setListMapel([...listMapel,mapel.namaMapel,]);
-                                                } else {
-                                                    setListMapel(
-                                                      listMapel.filter((mapel) => mapel !== mapel.namaMapel),
-                                                    );
-                                                }
-                                                
-                                            }} 
-                                            type="checkbox" value={mapel.namaMapel} />
-                                            {mapel.namaMapel}
-                                        </div>
-                                         
-                                    ))}
-                                </div>
+                                    <div>
+                                        <label htmlFor="">Tarif<span className='star'>*</span> </label>
+                                        <input onChange={handleTarifChange} type="text" name="tarif" className='form-control'  />
+                                    </div>
+                                    <div>
+                                        <label htmlFor="">Mata Pelajaran<span className='star'>*</span> </label>
+                                        {allMapel?.result.map((mapel) => (
+                                            <div className='checkbox-mapel' key={mapel.namaMapel}>
+                                                <input onChange={(e)=> {
+                                                    if (e.target.checked) {
+                                                        setListMapel([...listMapel,mapel.namaMapel,]);
+                                                    } else {
+                                                        setListMapel(
+                                                        listMapel.filter((mapel) => mapel !== mapel.namaMapel),
+                                                        );
+                                                    }
+                                                    
+                                                }} 
+                                                type="checkbox" value={mapel.namaMapel} />
+                                                {mapel.namaMapel}
+                                            </div>
+                                            
+                                        ))}
+                                    </div>
+                                </div>}
                             </form>
                             <div className='box-right'>
                                 <button onClick={handleChange} type="submit" className="twobutton btn btn-blue">Simpan</button>
