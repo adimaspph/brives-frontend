@@ -1,3 +1,7 @@
+.fsubmit {
+	width: 88.5%;
+}
+
 .blockd {
 	width: 88.5%;
 }
@@ -26,8 +30,8 @@ input[type=text], select {
 	box-sizing: border-box;
 }
 
-input[type=password], select {
-	width: 100%;
+#log-pos, select {
+	width: 92%;
 	padding: 12px 20px;
 	margin: 8px 0;
 	display: inline-block;

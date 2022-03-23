@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
 import Navbar from "../../components/Navbar/Navbar";
 import "./LoginPage.css";
 import APIConfig from "../../api/APIConfig";
@@ -8,8 +10,14 @@ import NeutralNotification from '../../components/Notification/NeutralNotificati
 function LoginPage() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [passwordShown, setPasswordShown] = useState(false);
 	const [hasError, setHasError] = useState(false);
     const [hasSubmit, setHasSubmit] = useState(false);
+
+    const eye = <FontAwesomeIcon icon={faEye} />;
+    const togglePasswordVisiblity = () => {
+        setPasswordShown(passwordShown ? false : true);
+    };
 
     const handlerLogin = () => {
         console.log("melakukan login");
@@ -68,7 +76,8 @@ function LoginPage() {
                                         Password<span className="star">*</span>{" "}
                                     </label>
                                     <input
-                                        type="password"
+                                        id="log-pos"
+                                        type={passwordShown ? "text" : "password"}
                                         name="password"
                                         value={password}
                                         className="form-control"
@@ -77,6 +86,7 @@ function LoginPage() {
                                             setPassword(e.target.value)
                                         }
                                     />
+                                    <i id="eyepas" onClick={togglePasswordVisiblity}>{eye}</i>
                                 </div>
                             </form>
                             <div
