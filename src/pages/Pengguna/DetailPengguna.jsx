@@ -3,6 +3,7 @@ import PenggunaService from '../../services/PenggunaService';
 import "./ListPengguna";
 import ErrorNotification from "../../components/Notification/ErrorNotification";
 import NeutralNotification from '../../components/Notification/NeutralNotification';
+import Modal from "../../components/Modal/Modal";
 
 
 
@@ -22,6 +23,9 @@ class DetailPengguna extends Component {
             namaRole: '',
             idRole: '',
             idUserReal: null,
+            modal: false,
+            successM: false,
+            errorM: false,
 
         }
 
@@ -30,7 +34,7 @@ class DetailPengguna extends Component {
     componentDidMount() {
         if (localStorage.getItem("user") != null) {
             console.log(JSON.parse(localStorage.getItem("user")).role);
-            if( JSON.parse(localStorage.getItem("user")).role === 'ADMIN') {
+            if (JSON.parse(localStorage.getItem("user")).role === 'ADMIN') {
                 console.log('admin');
             } else {
                 this.props.history.push('/403');
@@ -74,10 +78,70 @@ class DetailPengguna extends Component {
         this.props.history.push('/atur-mapel');
     }
 
+    handleCancel = (event) => {
+		event.preventDefault();
+        this.setState({ modal: false });
+	};
+
+    popup = (event) => {
+		event.preventDefault();
+        this.setState({ modal: true });
+	};
+
+    hapusPengguna = (event) => {
+		event.preventDefault();
+        
+        PenggunaService.hapusUser(this.state.idUser).then((res) => {
+            let mapell = res.data;
+
+            if (mapell.status === 400) {
+                console.log("gagal" + this.state.idUser);
+                
+
+                this.setState({ statusNama: 400 });
+            } else if (mapell.status === 200) {
+                this.demo();
+                
+            }
+        });
+	};
+
+    async demo() {
+        this.setState({ successM: true });
+        await this.sleep(2000);
+        this.props.history.push('/pengguna');
+    }
+
+    sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
 
     render() {
         return (
             <div className='outer'>
+                {this.state.errorM ? (<ErrorNotification text="Pengguna gagal dihapus!" />) : ("")}
+                {this.state.successM ? (<NeutralNotification text="Pengguna berhasil dihapus!" />) : ("")}
+
+                <Modal
+                    show={this.state.modal}
+                    handleCloseModal={this.handleCancel}
+                    modalTitle="Konfirmasi"
+                >
+                    <p>Apakah Anda yakin akan menghapus pengguna ini?</p>
+                    <div className="modalButtonContainer">
+
+                        <div className="btn btn-outline" onClick={this.handleCancel}>
+                            Kembali
+                        </div>
+
+                        <div className="btn btn-primary" onClick={this.hapusPengguna}>
+                            Hapus
+                        </div>
+                    </div>
+
+
+                </Modal>
 
                 <ul class="breadcrumb">
                     <li><a href="/pengguna">Daftar Pengguna</a></li>
@@ -139,11 +203,11 @@ class DetailPengguna extends Component {
                                             <tr>
                                                 <th>List Mata Pelajaran</th>
                                                 <td>{
-                                                this.state.listMapel.map(
-                                                    satuJenjang =>
-                                                        <li>{satuJenjang.namaMapel}</li>
-                                                )
-                                            }</td>
+                                                    this.state.listMapel.map(
+                                                        satuJenjang =>
+                                                            <li>{satuJenjang.namaMapel}</li>
+                                                    )
+                                                }</td>
                                             </tr>
 
 
@@ -154,7 +218,7 @@ class DetailPengguna extends Component {
 
 
                                     <div className='center'>
-                                        <a className="btn btn-outline twobutton">
+                                        <a className="btn btn-outline twobutton" onClick={this.popup}>
                                             Hapus
                                         </a>
                                         <a className="btn btn-blue twobutton" >
