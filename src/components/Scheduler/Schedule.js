@@ -3,6 +3,8 @@ import APIConfig from "../../api/APIConfig";
 
 export default function Schedule({ date, hari }) {
 	const [listJadwal, setListJadwal] = useState([]);
+    const [deletedNotif, setDeletedNotif] = useState(false);
+    const [deleteFailNotif, setdeleteFailNotif] = useState(false);
 
 	useEffect(() => {
 		const parameter = {
@@ -18,8 +20,9 @@ export default function Schedule({ date, hari }) {
 			})
 			.catch((error) => {
 				console.log("error data");
+				console.log(error);
 			});
-	}, [date]);
+	}, [date, deletedNotif]);
 
 	const timeToRow = (waktu) => {
 		let result = 0;
@@ -31,6 +34,19 @@ export default function Schedule({ date, hari }) {
 		result = result + menit / 15;
 
 		return result;
+	};
+
+    const handleDelete = id => () => {
+        setDeletedNotif(false);
+		APIConfig.delete(("/jadwal/" + id))
+			.then((response) => {
+				console.log("berhasil delete");
+                setDeletedNotif(true);
+			})
+			.catch((error) => {
+				console.log("error delete");
+				console.log(error);
+			});
 	};
 
 	return (
@@ -45,10 +61,21 @@ export default function Schedule({ date, hari }) {
 						gridColumnStart: hari + 1,
 					}}
 				>
-					<span>
-						<b>{jadwal.mapel.namaMapel}</b>
-					</span>
-					<span>{`${jadwal.waktuMulai} - ${jadwal.waktuSelesai}`}</span>
+					<div>
+						<div>
+							<b>{jadwal.mapel.namaMapel}</b>
+							<br />
+						</div>
+						<br />
+						<span>{`${jadwal.waktuMulai} - ${jadwal.waktuSelesai}`}</span>
+					</div>
+
+					<div
+						className="btn btn-s btn-green"
+						onClick={handleDelete(jadwal.idJadwal)}
+					>
+						Delete
+					</div>
 				</div>
 			))}
 		</React.Fragment>
