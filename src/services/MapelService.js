@@ -36,6 +36,11 @@ class MapelService {
         // return axios.get(MAPEL_API_NAMA_URL_2 + '/' + namaMapel);
     }
 
+    getPengajarByMapelId(idMapel){
+        return APIConfig.get("/mapel/pengajar/" + idMapel);
+        // return axios.get(MAPEL_API_NAMA_URL_2 + '/' + namaMapel);
+    }
+
     updateMapel(mapel, idMapel){
         return APIConfig.put("/mapel/" + idMapel, mapel);
         // return axios.put(MAPEL_API_BASE_URL_2 + '/' + idMapel, mapel);

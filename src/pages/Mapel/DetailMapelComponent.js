@@ -10,6 +10,7 @@ import NeutralNotification from '../../components/Notification/NeutralNotificati
 
 export default function DetailMapelComponent(props) {
     const [mapel, setMapel] = useState({})
+    const [pengajar, setPengajar] = useState([])
     const [idMapel,] = useState(parseInt(props.match.params.idMapel))
     const [error, setError] = useState("")
     const [isModal, setIsModal] = useState(false);
@@ -17,7 +18,7 @@ export default function DetailMapelComponent(props) {
     useEffect(async () => {
         checkUserRole()
         await getMapelDetail()
-
+        await getPengajar()
     }, [])
 
 
@@ -38,6 +39,17 @@ export default function DetailMapelComponent(props) {
         try {
             const { data } = await MapelService.getMapelById(idMapel)
             setMapel(data.result)
+        } catch (err) {
+            props.history.push('/atur-mapel');
+            setError(err.message)
+        }
+    }
+
+    const getPengajar = async () => {
+        try {
+            const { data } = await MapelService.getPengajarByMapelId(idMapel)
+            console.log('pengajar', data.result)
+            setPengajar(data.result)
         } catch (err) {
             props.history.push('/atur-mapel');
             setError(err.message)
@@ -137,14 +149,14 @@ export default function DetailMapelComponent(props) {
                                 <td>Nomor HP</td>
                                 <td>Nomor Pegawai</td>
                             </tr>
-                            {mapel?.listStaff?.map((staff, index) => (
+                            {pengajar?.map((user, index) => (
                                 <tr>
                                     
                                     <td>{index + 1}</td>
-                                    <td>{staff?.user?.namaLengkap}</td>
-                                    <td>{staff?.user?.email}</td>
-                                    <td>{staff?.user?.noHP}</td>
-                                    <td>{staff?.noPegawai}</td>
+                                    <td>{user?.namaLengkap}</td>
+                                    <td>{user?.email}</td>
+                                    <td>{user?.noHP}</td>
+                                    <td>{user?.staff?.noPegawai}</td>
                                 </tr>
                             ))}
                         </table>
