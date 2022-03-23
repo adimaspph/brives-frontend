@@ -88,7 +88,13 @@
   .twobutton {
       display: inline-block;
       margin-left: 8px;
+      margin-top: 8px;
   }
+
+  .twobuttonsearch {
+    display: inline-block;
+    margin-top: 8px;
+}
 
   .box-right {
       display: flex;
@@ -104,6 +110,11 @@
 
   .tes {
     /* width: 100%; */
+    display: flex;
+    justify-content: center;
+  }
+
+  .center {
     display: flex;
     justify-content: center;
   }
