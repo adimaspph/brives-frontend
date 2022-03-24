@@ -28,7 +28,7 @@ class ListPengguna extends Component {
     componentDidMount() {
         if (localStorage.getItem("user") != null) {
             console.log(JSON.parse(localStorage.getItem("user")).role);
-            if( JSON.parse(localStorage.getItem("user")).role === 'ADMIN') {
+            if (JSON.parse(localStorage.getItem("user")).role === 'ADMIN') {
                 console.log('staf op');
             } else {
                 this.props.history.push('/403');
@@ -57,19 +57,37 @@ class ListPengguna extends Component {
         console.log(this.state.number);
     };
 
+    myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[1];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+
     render() {
         return (
             <div>
 
                 <h2 className='text-center'>Daftar Pengguna</h2>
-
+<div>
+</div>
 
                 <div className='space'>
                     <div className="searchbox">
-                        {/*<i>src={searchIcon} className="search-logo" alt="searchIcon" <input>onKeyUp="filter()" type="text" id="value" placeholder="Masukkan nama pengguna"</input></i>*/}
-                        <img src={searchIcon} className="search-logo" alt="searchIcon" />
-                        <input onKeyUp="filter()" type="text" id="value" placeholder="Masukkan nama pengguna"/>
-                        {/*<input onKeyUp="filter()" type="text" id="value" placeholder="Masukkan nama pengguna" value={q} onChange={(e) => render(e.target.value)}/>*/}
+                        {/* <img src={searchIcon} className="search-logo" alt="searchIcon" /> */}
+                        <input onKeyUp={this.myFunction} type="text" id="myInput" placeholder="Cari nama pengguna" />
                     </div>
 
                     <select onChange={this.handleRoleChange} name="role" id="role" className='twobutton'>
@@ -86,39 +104,39 @@ class ListPengguna extends Component {
                 </div>
 
                 <div className='row'>
-                    <table className='table'>
+                    <table className='table' id='myTable'>
                         <thead>
-                        <tr>
-                            <th scope='col'>Id User</th>
-                            <th scope='col'>Nama Lengkap</th>
-                            <th scope='col'>Username</th>
-                            <th scope='col'>Email</th>
-                            <th scope='col'>Nomor Pegawai</th>
-                            <th scope='col'>Nomor Handphone</th>
-                            <th scope='col'>Action</th>
+                            <tr>
+                                <th scope='col'>Id User</th>
+                                <th scope='col'>Nama Lengkap</th>
+                                <th scope='col'>Username</th>
+                                <th scope='col'>Email</th>
+                                <th scope='col'>Nomor Pegawai</th>
+                                <th scope='col'>Nomor Handphone</th>
+                                <th scope='col'>Action</th>
 
-                        </tr>
+                            </tr>
                         </thead>
 
                         <tbody>
-                        {
-                            this.state.pengguna.map(
-                                satuMapel =>
-                                    <tr key={satuMapel.idUser}>
-                                        <td scope='row'> {satuMapel.idUser} </td>
-                                        <td> {satuMapel.namaLengkap} </td>
-                                        <td> {satuMapel.username} </td>
-                                        <td> {satuMapel.email} </td>
-                                        <td> {satuMapel.staff.noPegawai} </td>
-                                        <td> {satuMapel.noHP} </td>
-                                        <td>
-                                            <a className="btn btn-outline" onClick={() => this.editPengguna(satuMapel.username)}>
-                                                Lihat
-                                            </a>
-                                        </td>
-                                    </tr>
-                            )
-                        }
+                            {
+                                this.state.pengguna.map(
+                                    satuMapel =>
+                                        <tr key={satuMapel.idUser}>
+                                            <td scope='row'> {satuMapel.idUser} </td>
+                                            <td> {satuMapel.namaLengkap} </td>
+                                            <td> {satuMapel.username} </td>
+                                            <td> {satuMapel.email} </td>
+                                            <td> {satuMapel.staff.noPegawai} </td>
+                                            <td> {satuMapel.noHP} </td>
+                                            <td>
+                                                <a className="btn btn-outline" onClick={() => this.editPengguna(satuMapel.username)}>
+                                                    Lihat
+                                                </a>
+                                            </td>
+                                        </tr>
+                                )
+                            }
                         </tbody>
 
 
