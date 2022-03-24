@@ -156,43 +156,43 @@ class DetailPengguna extends Component {
                             <div className='card'>
                                 <div className='card-body'>
 
-                                    <table>
+                                    <table className='table-none'>
                                         <tr>
-                                            <th>Id User</th>
+                                            <td>Id User</td>
                                             <td >{this.state.idUserReal}</td>
                                         </tr>
                                         <tr>
-                                            <th>Nama Lengkap</th>
+                                            <td>Nama Lengkap</td>
                                             <td>{this.state.namaLengkap}</td>
                                         </tr>
                                         <tr>
-                                            <th>Username</th>
+                                            <td>Username</td>
                                             <td>{this.state.username}</td>
                                         </tr>
                                         <tr>
-                                            <th>Email</th>
+                                            <td>Email</td>
                                             <td>{this.state.email}</td>
                                         </tr>
                                         <tr>
-                                            <th>Nomor Handphone</th>
+                                            <td>Nomor Handphone</td>
                                             <td>{this.state.noHP}</td>
                                         </tr>
                                         <tr>
-                                            <th>Id Staff</th>
+                                            <td>Id Staff</td>
                                             <td>{this.state.idStaff}</td>
                                         </tr>
                                         <tr>
-                                            <th>Nomor Pegawai</th>
+                                            <td>Nomor Pegawai</td>
                                             <td>{this.state.noPegawai}</td>
                                         </tr>
                                         <tr>
-                                            <th>Role</th>
+                                            <td>Role</td>
                                             <td>{this.state.namaRole}</td>
                                         </tr>
 
                                         {this.state.idRole === 2 ? (
                                             <tr>
-                                                <th>Tarif</th>
+                                                <td>Tarif</td>
                                                 <td>{this.state.tarif}</td>
                                             </tr>
 
@@ -201,7 +201,7 @@ class DetailPengguna extends Component {
 
                                         {this.state.idRole === 2 ? (
                                             <tr>
-                                                <th>List Mata Pelajaran</th>
+                                                <td>List Mata Pelajaran</td>
                                                 <td>{
                                                     this.state.listMapel.map(
                                                         satuJenjang =>
@@ -215,7 +215,7 @@ class DetailPengguna extends Component {
 
                                     </table>
 
-
+                                    <hr />
 
                                     <div className='center'>
                                         <a className="btn btn-outline twobutton" onClick={this.popup}>
