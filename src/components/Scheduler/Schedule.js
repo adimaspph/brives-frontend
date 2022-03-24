@@ -2,10 +2,31 @@ import React, { useState, useEffect } from "react";
 import APIConfig from "../../api/APIConfig";
 import ErrorNotification from "../Notification/ErrorNotification";
 import NeutralNotification from "../Notification/NeutralNotification";
+import Modal from "../../components/Modal/Modal";
 
 export default function Schedule({ date, hari }) {
+	const [modal, setModal] = useState(false);
+	const [jadwal, setJadwal] = useState({
+		idJadwal: null,
+		waktuMulai: null,
+		waktuSelesai: null,
+		tanggal: null,
+		linkZoom: null,
+		jenisKelas: null,
+		mapel: {
+			idMapel: 1,
+			namaMapel: null,
+			deskripsi: null,
+			listJenjang: [
+				{
+					idJenjang: null,
+					namaJenjang: null,
+				},
+			],
+		},
+	});
 	const [listJadwal, setListJadwal] = useState([]);
-    const [deletedNotif, setDeletedNotif] = useState(false);
+	const [deletedNotif, setDeletedNotif] = useState(false);
 	const [errorMessage, setErrorMessage] = useState("");
 	const [hasError, setHasError] = useState(false);
 
@@ -39,12 +60,18 @@ export default function Schedule({ date, hari }) {
 		return result;
 	};
 
-    const handleDelete = id => () => {
-        setDeletedNotif(false);
-		APIConfig.delete(("/jadwal/" + id))
+	const handleCancel = (event) => {
+		event.preventDefault();
+		setModal(false);
+	};
+
+	const handleDelete = (id) => () => {
+		setDeletedNotif(false);
+		setModal(false);
+		APIConfig.delete("/jadwal/" + id)
 			.then((response) => {
 				console.log("berhasil delete");
-                setDeletedNotif(true);
+				setDeletedNotif(true);
 			})
 			.catch((error) => {
 				setErrorMessage(error.response.data.message);
@@ -62,6 +89,29 @@ export default function Schedule({ date, hari }) {
 			) : (
 				""
 			)}
+			<Modal
+				show={modal}
+				handleCloseModal={handleCancel}
+				modalTitle="Konfirmasi"
+			>
+				<p>Apakah Anda yakin akan menghapus jadwal berikut</p>
+				<p><b>Mapel : </b>{jadwal.mapel.namaMapel}</p>
+				<p><b>Tanggal : </b>{jadwal.tanggal}</p>
+				<p><b>Waktu : </b>{jadwal.waktuMulai} - {jadwal.waktuSelesai}</p>
+
+				<div className="modalButtonContainer">
+					<div className="btn btn-outline" onClick={handleCancel}>
+						Kembali
+					</div>
+
+					<div
+						className="btn btn-primary"
+						onClick={handleDelete(jadwal.idJadwal)}
+					>
+						Hapus
+					</div>
+				</div>
+			</Modal>
 			{listJadwal.map((jadwal, key) => (
 				<div
 					key={key}
@@ -83,7 +133,10 @@ export default function Schedule({ date, hari }) {
 
 					<div
 						className="btn btn-s btn-green"
-						onClick={handleDelete(jadwal.idJadwal)}
+						onClick={() => {
+							setModal(true);
+							setJadwal(jadwal);
+						}}
 					>
 						Delete
 					</div>
