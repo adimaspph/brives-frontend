@@ -77,6 +77,29 @@
   
   }
 
+  .card-awal {
+    /* background-color: #45a049; */
+    box-shadow: rgba(80, 80, 80, 0.2) -1px 2px 6px 1px;
+    width:fit-content;
+    border-radius: 16px;
+    padding: 24px;
+    margin-top: 40px;
+
+}
+
+.card-role {
+  background-color: #E4F2EA;
+  box-shadow: rgba(80, 80, 80, 0.2) -1px 2px 6px 1px;
+  outline-style: dashed;
+  /* width:fit-content; */
+  border-radius: 16px;
+  margin-bottom: 24px;
+  padding: 8px;
+  display: flex;
+  justify-content: center;
+
+}
+
   label {
       font-weight: bold;
   }
