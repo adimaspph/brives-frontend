@@ -31,10 +31,7 @@ button:active {
     transform: scale(0.99);
 }
 
-.fsubmit {
-    display: block;
-    width: 100%;
-}
+
 /* Button styles end */
 
 .btn{

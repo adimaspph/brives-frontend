@@ -11,7 +11,12 @@
 	position: sticky;
 	top: 0;
 	padding: 5px 20px;
+
+	
+	
 }
+
+
 
 .card {
 	display: flex;
@@ -45,3 +50,42 @@
 	color: #ffffff;
 	transition: background-color 0.2s ease-in-out;
 }
+
+
+/* FOOTER CSS */
+
+.footer {
+    /* height: 300px; */
+	background: linear-gradient(to right, #B51D21,#D71B25, #FC182A);
+
+	margin-top: 32px;
+	padding-top: 32px;
+	padding-bottom: 32px;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   background-color: red;
+   color: white;
+   text-align: center;
+}
+
+/* .footer-menu {
+	display: flex;
+    padding-top: 6px;
+	gap: 16px;
+	padding: 0 32px;
+	color: #ffffff;
+} */
+
+.footer-menu {
+	display: flex;
+justify-content: center;
+/* justify-content: space-between; */
+}
+
+.text-footer {
+	margin-left: 16px;
+}
+
+
+
