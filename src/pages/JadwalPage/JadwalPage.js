@@ -93,7 +93,8 @@ function JadwalPage() {
 
 	return (
 		<div className="jadwal-container">
-			{hasError ? <ErrorNotification text={errorMessage} /> : ""}
+			{/* {hasError ? <ErrorNotification text={errorMessage} /> : ""} */}
+			{hasError ? <ErrorNotification text="Jadwal gagal dibuat" /> : ""}
 			{hasSubmit ? (
 				<NeutralNotification text="Jadwal berhasil dibuat" />
 			) : (
