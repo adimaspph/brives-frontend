@@ -9,6 +9,21 @@
 .page-title {
 	display: flex;
 	justify-content: center;	
+	margin-top: 24px;
+	text-align: center;
+}
+
+#login-title {
+	display: flex;
+	justify-content: center;	
+	margin-top: 0%;
+	margin-bottom: 24px;
+}
+
+.register {
+	display: flex;
+	justify-content: center;	
+	margin-top: 24px;
 }
 
 .error-message {
@@ -58,6 +73,7 @@ label {
 
 .star {
 	color: #FC182A;
+	margin-left: 4px;
 	
 }
 .outer {

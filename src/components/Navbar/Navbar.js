@@ -16,7 +16,7 @@ export default function Navbar(props) {
                         Home
                     </div>    
 				</Link>
-				<Link className="navbar-menu-btn" to="/dashboard">
+				<Link className="navbar-menu-btn" to="/privat">
                     <div className="navbar-text">
                         Kelas Privat
                     </div>  

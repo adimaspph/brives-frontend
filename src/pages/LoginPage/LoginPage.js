@@ -6,12 +6,14 @@ import "./LoginPage.css";
 import APIConfig from "../../api/APIConfig";
 import ErrorNotification from "../../components/Notification/ErrorNotification";
 import NeutralNotification from '../../components/Notification/NeutralNotification';
+import { Link } from "react-router-dom";
+
 
 function LoginPage() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [passwordShown, setPasswordShown] = useState(false);
-	const [hasError, setHasError] = useState(false);
+    const [hasError, setHasError] = useState(false);
     const [hasSubmit, setHasSubmit] = useState(false);
 
     const eye = <FontAwesomeIcon icon={faEye} />;
@@ -27,10 +29,10 @@ function LoginPage() {
         }).then((response) => {
             setHasSubmit(false);
             setHasSubmit(true);
-			setHasError(false);
+            setHasError(false);
             if (response.data.token) {
-                localStorage.setItem("user", JSON.stringify({login:true, token: response.data.token, role : response.data.role[0].authority}));
-                window.location = "/";   
+                localStorage.setItem("user", JSON.stringify({ login: true, token: response.data.token, role: response.data.role[0].authority }));
+                window.location = "/";
             }
         }).catch((error) => {
             setHasSubmit(false);
@@ -43,19 +45,21 @@ function LoginPage() {
     return (
         <div className="jadwal-container">
             <Navbar></Navbar>
-			{hasError&&hasSubmit? (<ErrorNotification text="Akun tidak terverifikasi, silahkan coba lagi"/>) : ("")}
-            {!hasError&&hasSubmit? (<NeutralNotification text="Akun terverifikasi, berhasil login"/>) : ("")}
+            {hasError && hasSubmit ? (<ErrorNotification text="Akun tidak terverifikasi, silahkan coba lagi" />) : ("")}
+            {!hasError && hasSubmit ? (<NeutralNotification text="Akun terverifikasi, berhasil login" />) : ("")}
             <div className="container">
                 <div className="row">
-                    <div className="page-title">
-                        <h1>Login</h1>
+                    <div className="">
+                        <h2 className="page-title">BTA GROUP</h2>
+                        <h3 className="page-title">Private E-Learning Information System</h3>
                     </div>
                     <div className="login-card">
                         <div className="error-message">
-                            <p></p>
                         </div>
                         <div className="login-form">
+                            <h4 id="login-title">Login</h4>
                             <form action="">
+
                                 <div className="form-group">
                                     <label htmlFor="">
                                         Username<span className="star">*</span>{" "}
@@ -95,9 +99,29 @@ function LoginPage() {
                             >
                                 Login
                             </div>
+
+
+                            <Link className="" to="/login">
+                                <div className="register">
+                                    Belum memiliki akun? <span className="star">Daftar Disini</span>
+                                </div>
+                            </Link>
+
+
                         </div>
                     </div>
                 </div>
+            </div>
+
+            {/* footer */}
+            <div className="footer">
+                <div className="footer-menu">
+                    <Link className="footer-logo" to="/">
+                        <img src="/logo-navbar.png" width={60} alt="" />
+                    </Link>
+                    <p className="text-footer">BTA Group © 2022</p>
+                </div>
+
             </div>
         </div>
     );
