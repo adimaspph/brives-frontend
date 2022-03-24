@@ -50,7 +50,7 @@ export default function DetailMapelComponent(props) {
         <br />
         <div className="container">
           <div className="row">
-            <table className="table-max table-none">
+            <table className="table-max table-none space">
               <tr>
                 <th scope="col">No</th>
                 <th scope="col">Nama Mapel</th>
