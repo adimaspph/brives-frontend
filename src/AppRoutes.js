@@ -23,6 +23,7 @@ import { PrivateRoute } from "./PrivateRoute";
 import { Redirect } from "react-router-dom";
 import error403 from "./pages/error403";
 import ViewProfilePage from "./pages/ViewProfilePage/ViewProfilePage";
+import StaffRoute from "./StaffRoute";
 
 
 
@@ -31,11 +32,17 @@ function AppRoutes() {
 	return (
 		<BrowserRouter>
 			<Router>
-				<div className="sidebar-container">
+				<Switch>
+					<Route exact path="/login" component={LoginPage} />
+					<Route exact path="/design" component={Design} />
+					<Route exact path="/403" component={error403} />
+					<PrivateRoute path="/" component={StaffRoute} />
+					<Redirect from="*" to="/404" />
+					{/* <div className="sidebar-container">
 					<Sidebar />
 
 					<div className="content">
-						<Switch>
+						
 							<PrivateRoute exact path="/" component={Home} />
 							<Route exact path="/login" component={LoginPage} />
 							<Route exact path="/design" component={Design} />
@@ -49,13 +56,12 @@ function AppRoutes() {
 							<PrivateRoute exact path="/pengguna" component={ListPengguna} />
 							<PrivateRoute exact path="/pengguna/:idUser" component={DetailPengguna} />
 							<PrivateRoute exact path="/profil-saya" component={ViewProfilePage} />
-							{/* Not Found 404 */}
+							
 							<Redirect from="*" to="/" />
-						</Switch>
+						
 					</div>
-
-
-				</div>
+				</div> */}
+				</Switch>
 			</Router>
 		</BrowserRouter>
 	);

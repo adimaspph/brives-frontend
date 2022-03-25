@@ -57,10 +57,10 @@ export default function Sidebar(props) {
 								<img src="/assets/profil-saya.svg" alt="" />
 								Profil Saya
 							</Link>
-							<Link onClick={handlerLogout} className="sidebar-menu-btn" to="/login">
+							<a onClick={handlerLogout} className="sidebar-menu-btn" href="/login">
 								<img src="/assets/logout.svg" alt="" />
 								Logout
-							</Link>
+							</a>
 							<div>
 								<br />
 							</div>

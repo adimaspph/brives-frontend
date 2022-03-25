@@ -33,18 +33,19 @@ export default function DetailMapelComponent(props) {
   };
 
   const addMapelHandler = () => {
-    props.history.push(`/atur-mapel/add`);
+    console.log("return to / add");
+    props.history.push(`/atur-mapel/${"add"}`);
   };
 
   const viewMapel = (idMapel) => {
-    props.history.push(`/atur-mapel/${idMapel}`);
+    props.history.push(`/atur-mapel/view/${idMapel}`);
   };
 
   return (
     <>
       <div className="outer">
         <h1>Daftar Mata Pelajaran</h1>
-        <a className="btn btn-blue" href={`/atur-mapel/add`} onClick={addMapelHandler}>
+        <a className="btn btn-blue" onClick={addMapelHandler}>
           + Tambah Mata Pelajaran
         </a>
         <br />
@@ -71,7 +72,7 @@ export default function DetailMapelComponent(props) {
                   <td>
                     <a
                       className="btn btn-outline"
-                      href={`/atur-mapel/${mapel.idMapel}`}
+                      // href={`/atur-mapel/${mapel.idMapel}`}
                       onClick={() => viewMapel(mapel.idMapel)}
                     >
                       lihat

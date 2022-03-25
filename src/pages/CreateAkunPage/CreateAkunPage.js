@@ -5,6 +5,7 @@ import ErrorNotification from "../../components/Notification/ErrorNotification";
 import NeutralNotification from '../../components/Notification/NeutralNotification';
 import APIConfig from "../../api/APIConfig";
 import "./CreateAkunPage.css";
+import { Link } from 'react-router-dom';
 
 function CreateAkunPage() {
     const [errMessage, setErrMessage] = useState("");
@@ -135,7 +136,7 @@ function CreateAkunPage() {
         <div className="akun-container">
             <div className="">
                 <ul className="breadcrumb">
-                    <li><a href="/pengguna">Daftar Pengguna</a></li>
+                    <li><Link to="/pengguna">Daftar Pengguna</Link></li>
                     <li className='bractive'>Tambah Pengguna</li>
                 </ul>
                 <div className="create-akun-content">
