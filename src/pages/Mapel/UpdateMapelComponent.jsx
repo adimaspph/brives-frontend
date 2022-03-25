@@ -57,7 +57,7 @@ class UpdateMapelComponent extends Component {
     }
 
     editMapel(idMapel) {
-        this.props.history.push(generatePath("/atur-mapel/:idMapel", { idMapel }));
+        this.props.history.push(generatePath("/atur-mapel/view/:idMapel", { idMapel }));
 
     }
 
