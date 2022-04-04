@@ -64,7 +64,7 @@ class UpdateMapelComponent extends Component {
     async demo(idMapel) {
         this.setState({ successM: true });
         await this.sleep(2000);
-        this.props.history.push(generatePath("/atur-mapel/:idMapel", { idMapel }));
+        this.props.history.push(generatePath("/atur-mapel/view/:idMapel", { idMapel }));
         // this.props.history.push('/atur-mapel');
     }
 

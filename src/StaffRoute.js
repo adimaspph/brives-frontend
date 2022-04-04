@@ -40,8 +40,8 @@ export default function StaffRoute() {
                             <PrivateRoute exact path="/pengguna/:idUser" component={DetailPengguna} />
                             <PrivateRoute exact path="/profil-saya" component={ViewProfilePage} />
                             
-                            <Redirect from="*" to="/not-found" />
-                            {/* <Route path='*' component={error403} /> */}
+                            {/* <Redirect from="*" to="/not-found" /> */}
+                            <Route path='*' component={error403} />
                             
                         </Switch>
                     </div>
