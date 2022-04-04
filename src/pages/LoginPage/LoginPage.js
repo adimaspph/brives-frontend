@@ -47,8 +47,8 @@ function LoginPage() {
             <Navbar></Navbar>
             {hasError && hasSubmit ? (<ErrorNotification text="Akun tidak terverifikasi, silahkan coba lagi" />) : ("")}
             {!hasError && hasSubmit ? (<NeutralNotification text="Akun terverifikasi, berhasil login" />) : ("")}
-            <div className="container">
-                <div className="row">
+            <div className="">
+                <div className="">
                     <div className="">
                         <h2 className="page-title">BTA GROUP</h2>
                         <h3 className="page-title">Private E-Learning Information System</h3>

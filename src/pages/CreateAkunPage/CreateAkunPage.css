@@ -1,5 +1,6 @@
 .akun-container {
     width: 100%;
+	margin-bottom: 2em;
 }
 
 #eyepas	 {
@@ -40,7 +41,7 @@ input[type=text], select {
 }
 
 #create-pass, select {
-	width: 96%;
+	width: 95%;
 	padding: 12px 20px;
 	margin: 8px 0;
 	display: inline-block;

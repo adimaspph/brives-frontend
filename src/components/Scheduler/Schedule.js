@@ -83,9 +83,9 @@ export default function Schedule({ date, hari }) {
 	return (
 		<React.Fragment>
 			{/* {hasError ? <ErrorNotification text={errorMessage} /> : ""} */}
-			{hasError ? <ErrorNotification text="Jadwal gagal didelete" /> : ""}
+			{hasError ? <ErrorNotification text="Jadwal gagal dihapus" /> : ""}
 			{deletedNotif ? (
-				<NeutralNotification text="Jadwal berhasil didelete" />
+				<NeutralNotification text="Jadwal berhasil dihapus" />
 			) : (
 				""
 			)}

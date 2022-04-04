@@ -69,8 +69,10 @@
 		#e01a26 67.32%,
 		#fc182a 92.98%
 	); */
+	color: #ffffff;
 	background: var(--dark-red);
 	border-radius: 0px 20px 20px 0px;
+	text-decoration: none;
 }
 
 @keyframes sidebar-in {

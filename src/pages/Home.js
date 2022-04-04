@@ -138,7 +138,7 @@ class Home extends Component {
 		return (
 			<div className='outer'>
 				<div className='tes'>
-					<div className='container'>
+					<div className=''>
 						<div className='row'>
 
 							<div className='card-awal'>

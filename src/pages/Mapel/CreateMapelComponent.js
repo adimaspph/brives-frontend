@@ -153,9 +153,9 @@ class CreateMapelComponent extends Component {
 
                 <h2>Tambah Mata Pelajaran</h2>
                 <div className='tes'>
-                    <div className='container'>
+                    <div className=''>
                         <div className='row'>
-                            <div className='card'>
+                            <div className='cardd'>
                                 <div className='card-body'>
                                     <h4>Formulir Tambah Mata Pelajaran</h4>
                                     <form action="" onSubmit={this.saveMapel}>
