@@ -70,9 +70,9 @@ class ViewProfilePage extends Component {
 
                 <h2>Profil Saya </h2>
                 <div className='tes'>
-                    <div className='container'>
+                    <div className=''>
                         <div className='row'>
-                            <div className='card'>
+                            <div className='cardd'>
                                 <div className='card-body'>
                                     <table className='table-none'>
                                         <tr>

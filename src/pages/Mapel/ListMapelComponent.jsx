@@ -49,8 +49,8 @@ export default function DetailMapelComponent(props) {
           + Tambah Mata Pelajaran
         </a>
         <br />
-        <div className="container">
-          <div className="row">
+        <div className="">
+          <div className="">
             <table className="table-max table-none">
               <tr>
                 <th scope="col">No</th>

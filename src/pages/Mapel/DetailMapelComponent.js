@@ -106,8 +106,8 @@ export default function DetailMapelComponent(props) {
 
                 <h2>Detail Mata Pelajaran</h2>
 
-                <div className='container'>
-                    <div className='row'>
+                <div className=''>
+                    <div className=''>
                         <div className='card-max-width'>
                             <div className='card-content'>
                                 <table className='table-none'>
@@ -151,7 +151,7 @@ export default function DetailMapelComponent(props) {
                             </tr>
                             {pengajar?.map((user, index) => (
                                 <tr>
-                                    
+
                                     <td>{index + 1}</td>
                                     <td>{user?.namaLengkap}</td>
                                     <td>{user?.email}</td>

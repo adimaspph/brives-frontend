@@ -132,8 +132,12 @@ function CreateAkunPage() {
         setTarif(e.target.value);
     }
 
+    const cancel = (e) => {
+        window.location='/pengguna';
+    }
+
 	return (
-        <div className="akun-container">
+        <div className="akun-container outer">
             <div className="">
                 <ul className="breadcrumb">
                     <li><Link to="/pengguna">Daftar Pengguna</Link></li>
@@ -141,10 +145,10 @@ function CreateAkunPage() {
                 </ul>
                 <div className="create-akun-content">
                     <div>
-                        <h2>Tambah Pengguna</h2>
+                        <h2 className='judul-form'>Tambah Pengguna</h2>
                     </div>
                     <div className="akun-card">
-                        <h3>Formulir Tambah Pengguna</h3>
+                        <h3 className='judul-form'>Formulir Tambah Pengguna</h3>
                         {hasError&&hasSubmit? (<ErrorNotification text={errMessage}/>) : ("")}
                         {!hasError&&hasSubmit? (<NeutralNotification text="Akun berhasil terbuat"/>) : ("")}
                         <div>
@@ -214,8 +218,13 @@ function CreateAkunPage() {
                                     </div>
                                 </div>}
                                 <div className='box-right'>
+                                <a className="btn btn-outline-blue twobutton" onClick={cancel}>
+                                                Kembali
+                                            </a>
                                     <button type="submit" className="twobutton btn btn-blue">Simpan</button>
                                 </div>
+
+                                
                             </form>
                         </div>
                     </div>

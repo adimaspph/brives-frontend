@@ -78,11 +78,11 @@ class ListPengguna extends Component {
 
     render() {
         return (
-            <div>
+            <div className='outer'>
 
-                <h2 className='text-center'>Daftar Pengguna</h2>
-<div>
-</div>
+                <h1 className=''>Daftar Pengguna</h1>
+                <div>
+                </div>
 
                 <div className='space'>
                     <div className="searchbox">
@@ -103,8 +103,8 @@ class ListPengguna extends Component {
                     </a>
                 </div>
 
-                <div className='row'>
-                    <table className='table' id='myTable'>
+                <div className=''>
+                    <table className='table-max table-none' id='myTable'>
                         <thead>
                             <tr>
                                 <th scope='col'>Id User</th>

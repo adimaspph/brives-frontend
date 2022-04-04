@@ -1,5 +1,4 @@
 import React from 'react'
-// import './ButtonSubmit.css'
 
 function ButtonSubmit(props) {
     return (
