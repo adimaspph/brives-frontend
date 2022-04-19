@@ -30,24 +30,29 @@ export default function Sidebar(props) {
 								<img src="/assets/dashboard.svg" alt="" />
 								Dashboard
 							</Link>
-							<Link className="sidebar-menu-btn" to="/pemesanan">
+							<Link className="sidebar-menu-btn" to="/pesanan">
 								<img src="/assets/checkout.svg" alt="" />
-								Lihat Pemesanan
+								Pesanan
 							</Link>
-							
+
 							{JSON.parse(localStorage.getItem("user")).role === 'STAF_OPERASIONAL' ? (
 								<Link className="sidebar-menu-btn" to="/atur-mapel">
-								<img src="/assets/book.svg" alt="" />
-								Atur Mata Pelajaran
-							</Link>
+									<img src="/assets/book.svg" alt="" />
+									Atur Mata Pelajaran
+								</Link>
 							) : ('')}
-							
+
 							{JSON.parse(localStorage.getItem("user")).role === 'PENGAJAR' ? (
 								<Link className="sidebar-menu-btn" to="/atur-jadwal">
 									<img src="/assets/schedule.svg" alt="" />
 									Atur Jadwal
 								</Link>
 							) : ('')}
+
+							<Link className="sidebar-menu-btn" to="/log">
+								<img src="/assets/log.svg" alt="" />
+								Log
+							</Link>
 
 							<Link className="sidebar-menu-btn" to="/kelas-tambahan">
 								<img src="/assets/plus.svg" alt="" />
