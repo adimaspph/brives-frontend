@@ -11,6 +11,7 @@ import ListMapelComponent from "./pages/Mapel/ListMapelComponent";
 import CreateMapelComponent from "./pages/Mapel/CreateMapelComponent";
 import UpdateMapelComponent from "./pages/Mapel/UpdateMapelComponent";
 import DetailMapelComponent from "./pages/Mapel/DetailMapelComponent";
+import DetailPesanan from "./pages/Pesanan/DetailPesanan";
 import ListPengguna from "./pages/Pengguna/ListPengguna";
 import ListPesanan from "./pages/Pesanan/ListPesanan";
 import DetailPengguna from "./pages/Pengguna/DetailPengguna";
@@ -39,6 +40,7 @@ export default function StaffRoute() {
                             <PrivateRoute exact path="/atur-mapel/:idMapel/update" component={UpdateMapelComponent} />
                             <PrivateRoute exact path="/pengguna" component={ListPengguna} />
                             <PrivateRoute exact path="/pesanan" component={ListPesanan} />
+                            <PrivateRoute exact path="/pesanan/:idPesanan" component={DetailPesanan} />
                             <PrivateRoute exact path="/pengguna/:idUser" component={DetailPengguna} />
                             <PrivateRoute exact path="/profil-saya" component={ViewProfilePage} />
                             

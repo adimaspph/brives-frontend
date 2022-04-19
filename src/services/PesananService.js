@@ -14,6 +14,14 @@ class PesananService {
         return APIConfig.get("/api/v1/user/siswa/" + idSiswa);
     }
 
+    getUserByIdStaff(idStaff){
+        return APIConfig.get("/api/v1/user/staff/" + idStaff);
+    }
+
+    getStaffByIdJadwal(idJadwal){
+        return APIConfig.get("/api/v1/staf/jadwal/" + idJadwal);
+    }
+
     getPesananByIdStatus(idStatus){
         return APIConfig.get("/pesanan/status/" + idStatus);
     }

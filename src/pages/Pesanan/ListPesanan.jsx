@@ -67,7 +67,7 @@ class ListPesanan extends Component {
                 <h1 className=''>Daftar Pesanan</h1>
 
                 <div className='d-flex flex-row'>
-                    <p className="p-2 align-self-center">Pilih Status: </p>
+                    <p className="p-2 align-self-end">Pilih Status: </p>
                     <select onChange={this.handleStatusChange} name="role" id="role" className='twobutton p-2'>
                         <option value="0">Semua</option>
                         <option value="1">Belum Dibayar</option>
