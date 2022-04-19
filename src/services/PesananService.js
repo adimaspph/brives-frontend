@@ -14,6 +14,10 @@ class PesananService {
         return APIConfig.get("/api/v1/user/siswa/" + idSiswa);
     }
 
+    getPesananByIdStatus(idStatus){
+        return APIConfig.get("/pesanan/status/" + idStatus);
+    }
+
 }
 
 export default new PesananService()
