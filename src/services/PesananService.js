@@ -30,6 +30,10 @@ class PesananService {
         return APIConfig.put("/jadwal/addLink/" + idJadwal, jadwal);
     }
 
+    updateStatusPesanan(status, idPesanan){
+        return APIConfig.put("/pesanan/status/" + idPesanan, status);
+    }
+
 }
 
 export default new PesananService()
