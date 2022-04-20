@@ -1,5 +1,5 @@
 import React, { Component, useState, useEffect } from "react";
-
+import Modal from "../../components/Modal/Modal";
 import PesananService from '../../services/PesananService';
 import { generatePath } from 'react-router-dom';
 
@@ -22,9 +22,11 @@ class ListPesanan extends Component {
             usernameSiswa: '',
             emailSiswa: '',
             nomorHpSiswa: '',
-            idJadwal:0,
-            idStaff:0,
+            idJadwal: 0,
+            idStaff: 0,
             namaPengajar: '',
+            isClickedAddLink: false,
+            isClickedUpdateLink: false,
         }
 
         this.viewPesanan = this.viewPesanan.bind(this);
@@ -61,21 +63,21 @@ class ListPesanan extends Component {
                 console.log(res.data)
                 this.setState({
                     idStaff: res.data.result[0].idStaff,
-                    
+
                 });
                 // console.log(this.state.idStaff);
                 PesananService.getUserByIdStaff(this.state.idStaff).then((res) => {
                     console.log(res.data)
                     this.setState({
                         namaPengajar: res.data.result[0].namaLengkap,
-                        
+
                     });
-                    
+
                 });
             });
-              
+
             PesananService.getUserByIdSiswa(res.data.result.siswa.idSiswa).then((res) => {
-                
+
                 this.setState({
                     namaSiswa: res.data.result[0].namaLengkap,
                     usernameSiswa: res.data.result[0].username,
@@ -90,13 +92,71 @@ class ListPesanan extends Component {
 
     }
 
+    addLink = (event) => {
+        this.setState({ isClickedAddLink: true });
+        console.log('eh kepencet add')
+    };
 
+    updateLink = (event) => {
+        this.setState({ isClickedUpdateLink: true });
+        console.log('eh kepencet update')
+    };
+
+    handleCancelAddLink = (event) => {
+        this.setState({ isClickedAddLink: false });
+    }
+
+    changeLinkZoomBaruHandler = (event) => {
+        this.setState({ linkZoomBaru: event.target.value });
+    }
+
+    saveAddLink = (e) => {
+        e.preventDefault();
+        let pesanan = { linkZoom: this.state.linkZoomBaru, status: 'Dijadwalkan' };
+
+        // PesananService.updateLinkZoomJadwal(jadwal, this.state.idJadwal).then(res => {
+        //     console.log('jadwal => ' + JSON.stringify(jadwal));
+
+        // });
+
+    }
 
 
     render() {
         return (
             <div className='outer'>
 
+                <Modal
+                    show={this.state.isClickedAddLink}
+                    handleCloseModal={this.cancleHandler}
+                    modalTitle="Tambah Link Zoom"
+                >
+
+                    <form action="" onSubmit={this.saveAddLink}>
+
+
+                        <div className='form-group'>
+                            <label htmlFor="">Link Zoom <span className='star'>*</span> </label>
+                            <input type="text" name="namaMapel" className='form-control'
+                                value={this.state.linkZoomBaru} onChange={this.changeLinkZoomBaruHandler} required />
+                        </div>
+
+                        <div className='modalButtonContainer'>
+
+                            <div className="btn btn-outline-blue" onClick={this.handleCancelAddLink}>
+                                Kembali
+                            </div>
+
+                            <button type="submit" className="btn btn-blue">Simpan</button>
+
+                        </div>
+
+
+                    </form>
+
+
+
+                </Modal>
 
                 <ul class="breadcrumb">
                     <li><a href="/pesanan">Daftar Pesanan</a></li>
@@ -139,10 +199,18 @@ class ListPesanan extends Component {
                                     <td>Mata Pelajaran</td>
                                     <td>{this.state.mapel}</td>
                                 </tr>
-                                <tr>
+
+                                <tr >
                                     <td>Link Meeting</td>
-                                    <td>{this.state.linkZoom}</td>
+                                    <div className=" flex-row">
+                                        {this.state.status === 'Terverifikasi' ? (<div><a className="btn btn-blue" onClick={this.addLink}>Tambah Link </a></div>) : (<td>{this.state.linkZoom}</td>)}
+                                        {this.state.status === 'Dijadwalkan' ? (<td><a className="btn btn-blue" onClick={this.updateLink}>Update Link </a></td>) : (<td>{this.state.linkZoom}</td>)}
+                                    </div>
                                 </tr>
+
+
+
+
                                 <tr>
                                     <td>Status Pesanan</td>
                                     <td>{this.state.status}</td>
@@ -183,7 +251,7 @@ class ListPesanan extends Component {
                                     <td>Nomor HP</td>
                                     <td>{this.state.nomorHpSiswa}</td>
                                 </tr>
-                                
+
                             </table>
                         </div>
                     </div>

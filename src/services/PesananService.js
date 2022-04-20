@@ -26,6 +26,10 @@ class PesananService {
         return APIConfig.get("/pesanan/status/" + idStatus);
     }
 
+    updateLinkZoomJadwal(jadwal, idJadwal){
+        return APIConfig.put("/jadwal/" + idJadwal, jadwal);
+    }
+
 }
 
 export default new PesananService()
