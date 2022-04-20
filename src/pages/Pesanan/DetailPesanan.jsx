@@ -128,6 +128,10 @@ class ListPesanan extends Component {
         });
         window.location.reload();
 
+        let status = { idStatusPesanan: 5, jenisStatus: "Dijadwalkan"}
+        PesananService.updateStatusPesanan(status, this.state.idPesanan).then(res => {
+        });
+
     }
 
     saveUpdateLink = (event) => {
