@@ -30,6 +30,9 @@ class ListPesanan extends Component {
         }
 
         this.viewPesanan = this.viewPesanan.bind(this);
+        this.handleCancelAddLink = this.handleCancelAddLink.bind(this);
+        this.saveAddLink = this.saveAddLink.bind(this);
+        this.saveUpdateLink = this.saveUpdateLink.bind(this);
     }
 
     viewPesanan(idPesanan) {
@@ -102,22 +105,37 @@ class ListPesanan extends Component {
         console.log('eh kepencet update')
     };
 
-    handleCancelAddLink = (event) => {
+
+    handleCancelAddLink(idPesanan) {
         this.setState({ isClickedAddLink: false });
+
+    }
+
+    handleCancelUpdateLink(idPesanan) {
+        this.setState({ isClickedUpdateLink: false });
+
     }
 
     changeLinkZoomBaruHandler = (event) => {
         this.setState({ linkZoomBaru: event.target.value });
+
     }
 
-    saveAddLink = (e) => {
-        e.preventDefault();
-        let pesanan = { linkZoom: this.state.linkZoomBaru, status: 'Dijadwalkan' };
+    saveAddLink = (event) => {
+        event.preventDefault();
+        let jadwal = { linkZoom: this.state.linkZoomBaru };
+        PesananService.updateLinkZoomJadwal(jadwal, this.state.idJadwal).then(res => {
+        });
+        window.location.reload();
 
-        // PesananService.updateLinkZoomJadwal(jadwal, this.state.idJadwal).then(res => {
-        //     console.log('jadwal => ' + JSON.stringify(jadwal));
+    }
 
-        // });
+    saveUpdateLink = (event) => {
+        event.preventDefault();
+        let jadwal = { linkZoom: this.state.linkZoomBaru };
+        PesananService.updateLinkZoomJadwal(jadwal, this.state.idJadwal).then(res => {
+        });
+        window.location.reload();
 
     }
 
@@ -128,34 +146,40 @@ class ListPesanan extends Component {
 
                 <Modal
                     show={this.state.isClickedAddLink}
-                    handleCloseModal={this.cancleHandler}
                     modalTitle="Tambah Link Zoom"
                 >
-
                     <form action="" onSubmit={this.saveAddLink}>
-
-
                         <div className='form-group'>
                             <label htmlFor="">Link Zoom <span className='star'>*</span> </label>
-                            <input type="text" name="namaMapel" className='form-control'
+                            <input type="text" className='form-control'
                                 value={this.state.linkZoomBaru} onChange={this.changeLinkZoomBaruHandler} required />
                         </div>
-
                         <div className='modalButtonContainer'>
-
-                            <div className="btn btn-outline-blue" onClick={this.handleCancelAddLink}>
+                            <div className="btn btn-outline-blue" onClick={() => this.handleCancelAddLink(this.state.idPesanan)}>
                                 Kembali
                             </div>
-
                             <button type="submit" className="btn btn-blue">Simpan</button>
-
                         </div>
-
-
                     </form>
+                </Modal>
 
-
-
+                <Modal
+                    show={this.state.isClickedUpdateLink}
+                    modalTitle="Update Link Zoom"
+                >
+                    <form action="" onSubmit={this.saveUpdateLink}>
+                        <div className='form-group'>
+                            <label htmlFor="">Link Zoom <span className='star'>*</span> </label>
+                            <input type="text" className='form-control'
+                                value={this.state.linkZoomBaru} onChange={this.changeLinkZoomBaruHandler} required />
+                        </div>
+                        <div className='modalButtonContainer'>
+                            <div className="btn btn-outline-blue" onClick={() => this.handleCancelUpdateLink(this.state.idPesanan)}>
+                                Kembali
+                            </div>
+                            <button type="submit" className="btn btn-blue">Simpan</button>
+                        </div>
+                    </form>
                 </Modal>
 
                 <ul class="breadcrumb">
@@ -164,7 +188,6 @@ class ListPesanan extends Component {
                 </ul>
 
                 <h2>Detail Pesanan</h2>
-
 
                 <div className=''>
                     <div className='card-max-width'>

@@ -27,7 +27,7 @@ class PesananService {
     }
 
     updateLinkZoomJadwal(jadwal, idJadwal){
-        return APIConfig.put("/jadwal/" + idJadwal, jadwal);
+        return APIConfig.put("/jadwal/addLink/" + idJadwal, jadwal);
     }
 
 }
