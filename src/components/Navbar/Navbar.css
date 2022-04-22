@@ -1,9 +1,9 @@
 .navbar {
 	/* background: #1b1b1b; */
 	background: linear-gradient(to right, #B51D21,#D71B25, #FC182A);
-	display: flex;
-	flex-direction: column;
-	flex-wrap: nowrap;
+	/* display: flex; */
+	/* flex-direction: column; */
+	/* flex-wrap: nowrap; */
 
 	width: auto;
 	height: 60px;

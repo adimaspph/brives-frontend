@@ -32,7 +32,7 @@ function LoginPage() {
             setHasError(false);
             if (response.data.token) {
                 localStorage.setItem("user", JSON.stringify({ login: true, token: response.data.token, role: response.data.role[0].authority }));
-                window.location = "/";
+                window.location = "/profil-saya";
             }
         }).catch((error) => {
             setHasSubmit(false);

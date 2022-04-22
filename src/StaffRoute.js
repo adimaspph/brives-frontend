@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Route, Switch, Link, Redirect } from "react-ro
 import React from "react";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Home from "./pages/Home";
+import Homepage from "./pages/Homepage";
 import Design from "./pages/Design";
 import JadwalPage from "./pages/JadwalPage/JadwalPage";
 import CreateAkunPage from "./pages/CreateAkunPage/CreateAkunPage";
@@ -28,7 +29,7 @@ export default function StaffRoute() {
                     <Sidebar />
                     <div className="content">
                         <Switch>
-                            <PrivateRoute exact path="/" component={Home} />
+                            <Route exact path="/" component={Homepage} />
                             <PrivateRoute exact path="/akun/create" component={CreateAkunPage} />
                             <PrivateRoute exact path="/atur-jadwal" component={JadwalPage} />
                             
