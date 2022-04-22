@@ -2,10 +2,11 @@ import React, { Component, useState, useEffect } from "react";
 import Modal from "../../components/Modal/Modal";
 import PesananService from '../../services/PesananService';
 import { generatePath } from 'react-router-dom';
+import NeutralNotification from '../../components/Notification/NeutralNotification';
 
 
 
-class ListPesanan extends Component {
+class DetailPesanan extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -27,6 +28,10 @@ class ListPesanan extends Component {
             namaPengajar: '',
             isClickedAddLink: false,
             isClickedUpdateLink: false,
+            isClickedTolakPesanan:false,
+            successAdd: false,
+            successUpdate: false,
+            isTolak:false,
         }
 
         this.viewPesanan = this.viewPesanan.bind(this);
@@ -97,12 +102,14 @@ class ListPesanan extends Component {
 
     addLink = (event) => {
         this.setState({ isClickedAddLink: true });
-        console.log('eh kepencet add')
     };
 
     updateLink = (event) => {
         this.setState({ isClickedUpdateLink: true });
-        console.log('eh kepencet update')
+    };
+
+    clickedtTolakPesanan = (event) => {
+        this.setState({ isClickedTolakPesanan: true });
     };
 
 
@@ -116,8 +123,24 @@ class ListPesanan extends Component {
 
     }
 
+    handleCancelTolak(idPesanan) {
+        this.setState({ isClickedTolakPesanan: false });
+
+    }
+
     changeLinkZoomBaruHandler = (event) => {
         this.setState({ linkZoomBaru: event.target.value });
+
+    }
+
+    tolakPesanan = (event) => {
+        event.preventDefault();
+
+        let status = { idStatusPesanan: 7, jenisStatus: "Dibatalkan" }
+        PesananService.updateStatusPesanan(status, this.state.idPesanan).then(res => {
+        });
+
+        this.demoTolak();
 
     }
 
@@ -126,11 +149,12 @@ class ListPesanan extends Component {
         let jadwal = { linkZoom: this.state.linkZoomBaru };
         PesananService.updateLinkZoomJadwal(jadwal, this.state.idJadwal).then(res => {
         });
-        window.location.reload();
 
-        let status = { idStatusPesanan: 5, jenisStatus: "Dijadwalkan"}
+        let status = { idStatusPesanan: 5, jenisStatus: "Dijadwalkan" }
         PesananService.updateStatusPesanan(status, this.state.idPesanan).then(res => {
         });
+
+        this.demoSave();
 
     }
 
@@ -139,8 +163,31 @@ class ListPesanan extends Component {
         let jadwal = { linkZoom: this.state.linkZoomBaru };
         PesananService.updateLinkZoomJadwal(jadwal, this.state.idJadwal).then(res => {
         });
-        window.location.reload();
 
+        this.demoUpdate();
+
+    }
+
+    async demoSave() {
+        this.setState({ successAdd: true });
+        await this.sleep(1500);
+        window.location.reload();
+    }
+
+    async demoUpdate() {
+        this.setState({ successUpdate: true });
+        await this.sleep(1500);
+        window.location.reload();
+    }
+
+    async demoTolak() {
+        this.setState({ isTolak: true });
+        await this.sleep(1500);
+        window.location.reload();
+    }
+
+    sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
     }
 
 
@@ -185,6 +232,32 @@ class ListPesanan extends Component {
                         </div>
                     </form>
                 </Modal>
+
+
+                <Modal
+                    show={this.state.isClickedTolakPesanan}
+                    handleCloseModal={this.handleCancel}
+                    modalTitle="Konfirmasi"
+                >
+                    <p>Apakah Anda yakin akan menolak pesanan ini?</p>
+                    <div className="modalButtonContainer">
+
+                        <div className="btn btn-outline" onClick={() => this.handleCancelTolak(this.state.idPesanan)}>
+                            Kembali
+                        </div>
+
+                        <div className="btn btn-primary" onClick={this.tolakPesanan}>
+                            Tolak
+                        </div>
+                    </div>
+
+
+                </Modal>
+
+                {this.state.successAdd ? (<NeutralNotification text="Link Meeting Berhasil Ditambahkan!" />) : ("")}
+                {this.state.successUpdate ? (<NeutralNotification text="Link Meeting Berhasil Diubah!" />) : ("")}
+                {this.state.isTolak ? (<NeutralNotification text="Pesanan Berhasil Ditolak!" />) : ("")}
+
 
                 <ul class="breadcrumb">
                     <li><a href="/pesanan">Daftar Pesanan</a></li>
@@ -235,9 +308,6 @@ class ListPesanan extends Component {
                                     </div>
                                 </tr>
 
-
-
-
                                 <tr>
                                     <td>Status Pesanan</td>
                                     <td>{this.state.status}</td>
@@ -251,6 +321,13 @@ class ListPesanan extends Component {
                                     <td>{this.state.pesanan.buktiBayar}</td>
                                 </tr>
                             </table>
+
+                            <hr />
+
+                            {this.state.status === 'Belum Dibayar' ? (<div className='center'>
+                                    <button  onClick={this.clickedtTolakPesanan} type="submit" className="btn btn-primary twobutton">Tolak Pesanan</button>
+                            </div>) : ('')}
+                            
                         </div>
                     </div>
                 </div>
@@ -296,4 +373,4 @@ class ListPesanan extends Component {
     }
 }
 
-export default ListPesanan;
+export default DetailPesanan;

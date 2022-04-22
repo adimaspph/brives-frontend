@@ -8,6 +8,7 @@ import Sidebar from "./components/Sidebar/Sidebar";
 
 
 import Home from "./pages/Home";
+import Homepage from "./pages/Homepage";
 import Design from "./pages/Design";
 import JadwalPage from "./pages/JadwalPage/JadwalPage";
 import CreateAkunPage from "./pages/CreateAkunPage/CreateAkunPage";
@@ -36,6 +37,7 @@ function AppRoutes() {
 					<Route exact path="/login" component={LoginPage} />
 					<Route exact path="/design" component={Design} />
 					<Route exact path="/403" component={error403} />
+					<Route exact path="/home" component={Homepage} />
 					<PrivateRoute path="/" component={StaffRoute} />
 					<Redirect from="*" to="/404" />
 					{/* <div className="sidebar-container">

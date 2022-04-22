@@ -43,7 +43,7 @@ function LoginPage() {
     };
 
     return (
-        <div className="jadwal-container">
+        <div className="">
             <Navbar></Navbar>
             {hasError && hasSubmit ? (<ErrorNotification text="Akun tidak terverifikasi, silahkan coba lagi" />) : ("")}
             {!hasError && hasSubmit ? (<NeutralNotification text="Akun terverifikasi, berhasil login" />) : ("")}
