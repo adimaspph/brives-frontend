@@ -27,41 +27,70 @@ export default function Navbar(props) {
 		}
 	}
 
-	return (
-		<nav className="navbar navbar-dark">
-			<div className="navbar-menu">
-				<Link className="navbar-logo" to="/">
-					<img src="/logo-navbar.png" width={60} alt="" />
-				</Link>
-				<Link className="navbar-menu-btn" to="/home">
-					<div className="navbar-text">
-						Home
-					</div>
-				</Link>
-				<Link className="navbar-menu-btn" to="/privat">
-					<div className="navbar-text">
-						Kelas Privat
-					</div>
-				</Link>
-				<Link className="navbar-menu-btn" to="/riwayat-pesanan">
-					<div className="navbar-text">
-						Riwayat Pesanan
-					</div>
-				</Link>
-				<Link className="navbar-menu-btn" to="/login">
-					<div className="navbar-text">
-						Login
-					</div>
-				</Link>
-				<Link className="navbar-menu-btn" to="/login">
-					<div className="navbar-text">
-						Logout
-					</div>
-				</Link>
-			</div>
-		</nav>
+	const handlerLogout = () => {
+		localStorage.removeItem("user");
+	};
 
-		
+	return (
+		<div>
+			<nav className="navbar navbar-expand-lg navbar-dark">
+				<div className="navbar-menu">
+					<Link className="navbar-logo" to="/">
+						<img src="/logo-navbar.png" width={60} alt="" />
+					</Link>
+					<Link className="navbar-menu-btn" to="/">
+						<div className="navbar-text">
+							Beranda
+						</div>
+					</Link>
+					<Link className="navbar-menu-btn" to="/privat">
+						<div className="navbar-text">
+							Kelas Privat
+						</div>
+					</Link>
+
+					{localStorage.getItem("user") != null && JSON.parse(localStorage.getItem("user")).role === 'PELAJAR' ? (
+						<Link className="navbar-menu-btn" to="/riwayat-pesanan">
+							<div className="navbar-text">
+								Riwayat Pesanan
+							</div>
+						</Link>
+					) : ("")}
+
+					{localStorage.getItem("user") === null ? (
+						<Link className="navbar-menu-btn" to="/login">
+							<div className="navbar-text">
+								Login
+							</div>
+						</Link>
+					) : ("")}
+
+					{localStorage.getItem("user") != null && JSON.parse(localStorage.getItem("user")).role === 'PELAJAR' ? (
+						<div className='navbar-menu-btn'>
+							<div className='navbar-text'>
+								<a onClick={handlerLogout} className="" href="/login">
+									Logout
+								</a>
+							</div>
+						</div>
+					) : ("")}
+
+					{localStorage.getItem("user") != null && JSON.parse(localStorage.getItem("user")).role === 'PELAJAR' ? (
+						<Link className="navbar-menu-btn" to="/profil-saya">
+							<div className="navbar-text">
+								Profil
+							</div>
+						</Link>
+					) : ("")}
+
+
+
+				</div>
+			</nav>
+
+		</div>
+
+
 
 		// <nav class="navbar navbar-expand-lg navbar-dark">
 		// 	<Link className="navbar-logo navbar-brand" to="/">

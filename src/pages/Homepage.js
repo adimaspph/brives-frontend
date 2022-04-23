@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext, Component } from "react";
 import PenggunaService from '../services/PenggunaService';
 import Navbar from "../components/Navbar/Navbar";
+import "./Homepage.css";
 
 
 class Homepage extends Component {
@@ -17,33 +18,42 @@ class Homepage extends Component {
 		return (
 			<div>
 				<Navbar></Navbar>
-				<div class="jumbotron">
-					<h1 class="display-4">Pesan Bimbingan Privat</h1>
-					<p class="lead">Sedang mencari bimbel privat harian untuk persiapan ulangan mu? Segera pesan disini!</p>
+				<div class="jumbotron row d-flex ">
+					<div col-lg-8>
+						<h1 class="">Pesan Kelas Bimbingan Privat</h1>
+						<p class="lead">Sedang mencari bimbel privat harian untuk persiapan ujian? Segera pesan disini!</p>
+						<p class="lead">
+							<a class="btn btn-primary btn-lg" href="/privat" role="button">Pesan Kelas</a>
+						</p>
+					</div>
+					<div className="col-lg-5 d-flex justify-content-center logo-bta-col">
+						<img className="logo-bta" src="/logo-bta.png"  />
+					</div>
 
-					<p class="lead">
-						<a class="btn btn-primary btn-lg" href="/privat" role="button">Pesan Kelas</a>
-					</p>
 				</div>
 
-				<div className="row ">
-					<div className="col-lg-6">
+				<div className="row d-flex justify-content-center ">
 
-						<div id="baris1" className="mt-5 mb-5">
-							<h2>Manfaat Mengikuti Kelas Privat</h2>
-							<p>Tanpa mengikuti bimbel tahunan, kamu bisa memesan kelas bimbel harian</p>
-							<p>Kamu akan diajar oleh pengajar terbaik BTA</p>
-							<p>Kamu bebas memilih materi yang ingin diajarkan</p>
-							<p>Harga kelas terjangkau</p>
+					<div class="col-lg-5 d-flex justify-content-center">
+						<img className="gambar-privat" src="/gambar-privat.png" width={400} />
+					</div>
+
+					<div className="col-lg-7 d-flex justify-content-center">
+						<div className="mt-5 mb-5 benefit">
+							<h2>Manfaat Mengikuti Kelas Privat di BTA</h2>
+							<p>1. Tanpa mengikuti bimbel tahunan, kamu bisa memesan kelas bimbel harian</p>
+							<p>2. Kamu akan diajar oleh pengajar terbaik BTA</p>
+							<p>3. Kamu bebas memilih materi yang ingin diajarkan</p>
+							<p>4. Harga kelas terjangkau</p>
 						</div>
-
 					</div>
 
-					<div class="col-lg-6 mt-5 mb-5">
-						<img src="/logo-bta.png" />
 
-					</div>
+
 				</div>
+
+
+
 
 
 			</div>

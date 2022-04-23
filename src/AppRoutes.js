@@ -37,7 +37,7 @@ function AppRoutes() {
 					<Route exact path="/login" component={LoginPage} />
 					<Route exact path="/design" component={Design} />
 					<Route exact path="/403" component={error403} />
-					<Route exact path="/home" component={Homepage} />
+					<Route exact path="/" component={Homepage} />
 					<Route path="/" component={StaffRoute} />
 					<Redirect from="*" to="/404" />
 					{/* <div className="sidebar-container">

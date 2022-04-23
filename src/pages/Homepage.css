@@ -1,0 +1,29 @@
+.benefit {
+    padding-top: 9%;
+    
+}
+
+.jumbotron {
+    background-color: #EEFFEF;
+    /* padding-top: 10%; */
+    padding-top: 10vw;
+    
+    z-index: -3;
+    position: relative;
+}
+
+.logo-bta {
+    z-index: -1;
+    position: relative;
+}
+
+.gambar-privat {
+    z-index: -2;
+    position: relative;
+}
+
+/* .logo-bta-col {
+    background-image: url("../../public/logo-bta.png");
+    background-repeat: no-repeat;
+    width: fit-content;
+} */
