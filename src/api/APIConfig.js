@@ -5,6 +5,7 @@ import Axios from "axios";
 const APIConfig = Axios.create({
 	baseURL: "https://brives-staging-backend.herokuapp.com",
 	// baseURL: "http://localhost:8080",
+	// baseURL: "https://be.dev.bta8jakarta.com",
 });
 
 var AUTH_TOKEN = "";
