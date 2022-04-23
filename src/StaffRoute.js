@@ -1,7 +1,9 @@
 import { BrowserRouter as Router, Route, Switch, Link, Redirect } from "react-router-dom";
 import React from "react";
 import Sidebar from "./components/Sidebar/Sidebar";
+import Navbar from "./components/Navbar/Navbar";
 import Home from "./pages/Home";
+import Homepage from "./pages/Homepage";
 import Design from "./pages/Design";
 import JadwalPage from "./pages/JadwalPage/JadwalPage";
 import CreateAkunPage from "./pages/CreateAkunPage/CreateAkunPage";
@@ -20,37 +22,36 @@ import error403 from "./pages/error403";
 import ViewProfilePage from "./pages/ViewProfilePage/ViewProfilePage";
 
 export default function StaffRoute() {
-	return (
-		<Router>
-			{/* <Switch> */}
-			{/* <Route path="/" component={Home} /> */}
-			<div className="sidebar-container">
-                    <Sidebar />
-                    <div className="content">
-                        <Switch>
-                            <PrivateRoute exact path="/" component={Home} />
-                            <PrivateRoute exact path="/akun/create" component={CreateAkunPage} />
-                            <PrivateRoute exact path="/atur-jadwal" component={JadwalPage} />
-                            
-                            
-                            <PrivateRoute exact path="/atur-mapel" component={ListMapelComponent} />
-                            <PrivateRoute exact path="/atur-mapel/add" component={CreateMapelComponent} />
-                            
-                            <PrivateRoute exact path="/atur-mapel/view/:idMapel" component={DetailMapelComponent} />
-                            <PrivateRoute exact path="/atur-mapel/:idMapel/update" component={UpdateMapelComponent} />
-                            <PrivateRoute exact path="/pengguna" component={ListPengguna} />
-                            <PrivateRoute exact path="/pesanan" component={ListPesanan} />
-                            <PrivateRoute exact path="/pesanan/:idPesanan" component={DetailPesanan} />
-                            <PrivateRoute exact path="/pengguna/:idUser" component={DetailPengguna} />
-                            <PrivateRoute exact path="/profil-saya" component={ViewProfilePage} />
-                            
-                            {/* <Redirect from="*" to="/not-found" /> */}
-                            <Route path='*' component={error403} />
-                            
-                        </Switch>
-                    </div>
+    return (
+        <Router>
+            {/* <Switch> */}
+            {/* <Route path="/" component={Home} /> */}
+            <div className="sidebar-container">
+                <Sidebar />
+                <div className="content">
+                    <Switch>
+                        <PrivateRoute exact path="/akun/create" component={CreateAkunPage} />
+                        <PrivateRoute exact path="/atur-jadwal" component={JadwalPage} />
+
+
+                        <PrivateRoute exact path="/atur-mapel" component={ListMapelComponent} />
+                        <PrivateRoute exact path="/atur-mapel/add" component={CreateMapelComponent} />
+
+                        <PrivateRoute exact path="/atur-mapel/view/:idMapel" component={DetailMapelComponent} />
+                        <PrivateRoute exact path="/atur-mapel/:idMapel/update" component={UpdateMapelComponent} />
+                        <PrivateRoute exact path="/pengguna" component={ListPengguna} />
+                        <PrivateRoute exact path="/pesanan" component={ListPesanan} />
+                        <PrivateRoute exact path="/pesanan/:idPesanan" component={DetailPesanan} />
+                        <PrivateRoute exact path="/pengguna/:idUser" component={DetailPengguna} />
+                        <PrivateRoute exact path="/profil-saya" component={ViewProfilePage} />
+
+                        {/* <Redirect from="*" to="/not-found" /> */}
+                        <Route path='*' component={error403} />
+
+                    </Switch>
                 </div>
-			{/* </Switch> */}
-		</Router>
-	);
+            </div>
+            {/* </Switch> */}
+        </Router>
+    );
 }

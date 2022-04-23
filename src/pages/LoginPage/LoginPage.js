@@ -32,7 +32,13 @@ function LoginPage() {
             setHasError(false);
             if (response.data.token) {
                 localStorage.setItem("user", JSON.stringify({ login: true, token: response.data.token, role: response.data.role[0].authority }));
-                window.location = "/";
+                if(JSON.parse(localStorage.getItem("user")).role === 'PELAJAR') {
+                    window.location = "/";
+                } else {
+                    console.log(JSON.parse(localStorage.getItem("user")).role)
+                    window.location = "/profil-saya";
+                }
+                
             }
         }).catch((error) => {
             setHasSubmit(false);
@@ -43,7 +49,7 @@ function LoginPage() {
     };
 
     return (
-        <div className="jadwal-container">
+        <div className="">
             <Navbar></Navbar>
             {hasError && hasSubmit ? (<ErrorNotification text="Akun tidak terverifikasi, silahkan coba lagi" />) : ("")}
             {!hasError && hasSubmit ? (<NeutralNotification text="Akun terverifikasi, berhasil login" />) : ("")}

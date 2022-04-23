@@ -9,7 +9,7 @@ export default function Sidebar(props) {
 
 	return (
 		<div>
-			{localStorage.getItem("user") != null ? (
+			{localStorage.getItem("user") != null && JSON.parse(localStorage.getItem("user")).role != 'PELAJAR' ? (
 				<nav className="sidebar">
 
 					<div>
