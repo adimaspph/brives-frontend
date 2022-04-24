@@ -15,7 +15,6 @@
 }
 
 
-
 .cardd {
 	display: flex;
 	justify-content: center;
@@ -32,6 +31,7 @@
 
 .navbar-menu-btn {
 	display: flex;
+	color: white;
 	flex-direction: row;
 	align-items: center;
 	font-family: Ubuntu;
@@ -39,6 +39,7 @@
 	font-weight: 500;
 	font-size: 16px;
 	line-height: 24px;
+	text-decoration: none;
 	/* identical to box height, or 150% */
 
 	
@@ -55,7 +56,7 @@
 .footer {
     /* height: 300px; */
 	background: linear-gradient(to right, #B51D21,#D71B25, #FC182A);
-
+	
 	margin-top: 32px;
 	padding-top: 32px;
 	padding-bottom: 32px;

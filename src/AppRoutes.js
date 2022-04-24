@@ -12,6 +12,7 @@ import Design from "./pages/Design";
 import JadwalPage from "./pages/JadwalPage/JadwalPage";
 import CreateAkunPage from "./pages/CreateAkunPage/CreateAkunPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
+import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import TestForm from "./pages/TestForm";
 import ListMapelComponent from "./pages/Mapel/ListMapelComponent";
 import CreateMapelComponent from "./pages/Mapel/CreateMapelComponent";
@@ -34,6 +35,7 @@ function AppRoutes() {
 			<Router>
 				<Switch>
 					<Route exact path="/login" component={LoginPage} />
+					<Route exact path="/register" component={RegisterPage} />
 					<Route exact path="/design" component={Design} />
 					<Route exact path="/403" component={error403} />
 					<PrivateRoute path="/" component={StaffRoute} />
