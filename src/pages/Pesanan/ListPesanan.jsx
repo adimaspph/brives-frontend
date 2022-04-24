@@ -10,6 +10,8 @@ class ListPesanan extends Component {
         super(props)
         this.state = {
             pesanan: [],
+            usernameSiswa: '',
+            siswa: [],
         }
 
         this.viewPesanan = this.viewPesanan.bind(this);
@@ -37,18 +39,13 @@ class ListPesanan extends Component {
 
 
     getUsernamee(idSiswa) {
-        // const {x} = await PesananService.getUserByIdSiswa(idSiswa);
-        // var x = 'a';
-        // PesananService.getUserByIdSiswa(idSiswa)
-        //     .then((response) => {
-        //         console.log(response.data);
-        //     })
-        // PesananService.getUserByIdSiswa(idSiswa).then((res) => {
-
-        //     x = res.data.result[0].username;
-        //     // console.log('request received:', request, response);
-        //     // console.log(res.data.result[0].username);
-        // });
+        
+        PesananService.getUserByIdSiswa(idSiswa)
+            .then((res) => {
+                this.setState({ siswa: res.data.result });
+                console.log(this.state.siswa)
+            })
+        
         // return x;
     };
 
@@ -102,10 +99,8 @@ class ListPesanan extends Component {
                                 <td> {SatuPesanan.waktuDibuat} </td>
                                 <td scope='row'> {SatuPesanan.idPesanan} </td>
                                 <td> {SatuPesanan.siswa.idSiswa} </td>
-                                {/* <td> {this.getUsernamee(SatuPesanan.siswa.idSiswa)} </td> */}
-                                <td> {SatuPesanan.nominal} </td>
-                                {/* <td> baru bisa id jadwal </td> */}
-                                <td> {SatuPesanan.jadwal.tanggal} </td>
+                                <td> Rp {SatuPesanan.nominal} </td>
+                                <td> {SatuPesanan.jadwal.tanggal} {SatuPesanan.jadwal.waktuMulai} - {SatuPesanan.jadwal.waktuSelesai}  </td>
                                 <td> {SatuPesanan.status.jenisStatus} </td>
                                 <td>
                                     <a className="btn btn-outline" onClick={() => this.viewPesanan(SatuPesanan.idPesanan)}>

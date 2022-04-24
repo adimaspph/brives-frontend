@@ -157,17 +157,24 @@ button, input[type="submit"], input[type="reset"] {
 }
 
 
+
+.container-403 {
+	width: 100%;
+	margin: 0 px;
+	margin-top: 10vw;
+}
+
 .text-403 {
 	margin-top: 17%;
 	font-size: 7vw;
 	margin-bottom: 0px;
-	color: #fafafa;
+	color: #000000;
 	text-align: center;
-	
+	padding-top: 15%;
 }
 
 .text-small-403 {
-	color: #fafafa;
+	color: #000000;
 	text-align: center;
 	
 }
