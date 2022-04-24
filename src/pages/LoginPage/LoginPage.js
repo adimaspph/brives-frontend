@@ -107,7 +107,7 @@ function LoginPage() {
                             </div>
 
 
-                            <Link className="" to="/login">
+                            <Link className="" to="/register">
                                 <div className="register">
                                     Belum memiliki akun? <span className="star">Daftar Disini</span>
                                 </div>
@@ -120,7 +120,7 @@ function LoginPage() {
             </div>
 
             {/* footer */}
-            <div className="footer">
+            {/* <div className="footer">
                 <div className="footer-menu">
                     <Link className="footer-logo" to="/">
                         <img src="/logo-navbar.png" width={60} alt="" />
@@ -128,7 +128,7 @@ function LoginPage() {
                     <p className="text-footer">BTA Group © 2022</p>
                 </div>
 
-            </div>
+            </div> */}
         </div>
     );
 }

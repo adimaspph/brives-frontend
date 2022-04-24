@@ -15,6 +15,10 @@ function PrivateRoute({ component: Component, ...rest }) {
 			render={(props) => {
 				if (!auth) {
 					// not logged in so redirect to login page with the return url
+
+					if (window.location === "/register") {
+						return <Redirect to="/register" />;
+					}
 					return <Redirect to="/login" />;
 				}
 
