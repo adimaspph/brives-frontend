@@ -64,7 +64,6 @@ function CreateAkunPage() {
             } else {
                 setTimeout(function(){}, 4000); 
                 window.location.href = '/pengguna'; 
-                console.log(response)
             }
 		});
     }

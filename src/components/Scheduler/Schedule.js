@@ -43,7 +43,6 @@ export default function Schedule({ date, hari }) {
 				setListJadwal(response.data.result);
 			})
 			.catch((error) => {
-				console.log("error data");
 				console.log(error);
 			});
 	}, [date, deletedNotif]);
@@ -70,12 +69,10 @@ export default function Schedule({ date, hari }) {
 		setModal(false);
 		APIConfig.delete("/jadwal/" + id)
 			.then((response) => {
-				console.log("berhasil delete");
 				setDeletedNotif(true);
 			})
 			.catch((error) => {
 				setErrorMessage(error.response.data.message);
-				console.log("error delete");
 				console.log(error);
 			});
 	};

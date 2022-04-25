@@ -16,7 +16,6 @@ export default function Navbar(props) {
 		if (userRaw) {
 			const user = JSON.parse(userRaw)
 			setRoleUser(user.role)
-			console.log(roleUser)
 			if (user.role === 'STAF_OPERASIONAL') {
 
 			} else {

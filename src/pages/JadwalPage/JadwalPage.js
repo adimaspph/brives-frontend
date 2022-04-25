@@ -39,7 +39,6 @@ function JadwalPage() {
 				setListMapel(response.data.result);
 			})
 			.catch((error) => {
-				console.log("error mapel");
 				console.log(error);
 			});
 		// return result;
