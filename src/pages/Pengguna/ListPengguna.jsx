@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PenggunaService from '../../services/PenggunaService';
 import "./ListPengguna.css";
 import { generatePath } from 'react-router-dom';
-import searchIcon from "../../image/searchIcon.png"
+//import searchIcon from "../../image/searchIcon.png"
 
 
 
