@@ -4,13 +4,13 @@ before_script:
     - apt-get update -qq && apt-get install
 
 stages:
-    # - build
     - deploy-heroku
+    # - build
     # - deploy-digitalocean
 
-cache:
-    paths:
-        - node_modules/
+# cache:
+#     paths:
+#         - node_modules/
 
 Deploy-to-heroku:
     image: ruby:2.7.1
