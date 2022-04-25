@@ -44,7 +44,7 @@ class AkunPage extends React.Component {
         return (
             <div className="">
                 <Navbar></Navbar>
-                <div className="jumbotron">
+                <div className="jumbotron jumbotron-akun">
                     <div className='d-flex flex justify-content-center'>
                         <h1>Profil Saya</h1>
                     </div>
@@ -82,13 +82,19 @@ class AkunPage extends React.Component {
                                             </tr>
                                         </table>
                                         <hr />
-                                        <div className='center'>
-                                            <a className="btn btn-outline twobutton" onClick={() => this.redirectUbahPasswordPage()}>
-                                                Ubah Password
-                                            </a>
-                                            <a className="btn btn-blue twobutton" onClick={() => this.redirectUbahPasswordPage()}>
-                                                Ubah Profil
-                                            </a>
+                                        <div className='col'>
+                                        <div className='d-flex flex justify-content-center my-3'>
+                                                <a className="btn btn-outline" onClick={() => this.redirectUbahPasswordPage()}>
+                                                    Ubah Profil
+                                                </a>
+                                            </div>
+                                            <div className='d-flex flex justify-content-center my-3'>
+                                                <a className="btn btn-outline" onClick={() => this.redirectUbahPasswordPage()}>
+                                                    Ubah Password
+                                                </a>
+                                            </div>
+                                            
+                                            
                                         </div>
                                     </div>
                                 </div>

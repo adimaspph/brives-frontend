@@ -91,7 +91,7 @@ function RegisterPage() {
                 setHasError(true);
             } else {
                 setTimeout(function(){}, 4000)
-                console.log(response)
+                window.location="/login"
             }
 		});
     }
