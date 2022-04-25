@@ -4,13 +4,19 @@ before_script:
     - apt-get update -qq && apt-get install
 
 stages:
+    - build
     - deploy-heroku
-    # - build
+    - test
     # - deploy-digitalocean
 
-# cache:
-#     paths:
-#         - node_modules/
+build:
+    stage: build
+    image: node
+    script: 
+        - echo "Start building App"
+        - npm install
+        - npm build
+        - echo "Build successfully!"
 
 Deploy-to-heroku:
     image: ruby:2.7.1
@@ -23,6 +29,16 @@ Deploy-to-heroku:
         - dpl --provider=heroku --app=${DEPLOYMENT_NAME_STAGING} --api-key=${HEROKU_API}
     only:
         - staging
+
+
+test:
+    stage: test
+    image: node
+    script:
+        - echo "Testing App"
+        - npm install
+        - CI=true npm test
+        - echo "Test successfully!"
 
 # install_dependencies:
 #     stage: build
