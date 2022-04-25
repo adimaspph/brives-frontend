@@ -40,8 +40,10 @@ deploy:
     before_script:
         - echo "deploying app"
     script:
-        - chmod 400 $DIGITALOCEAN_PRIVATE_KEY
+        - ssh -i $DIGITALOCEAN_PRIVATE_KEY root@157.245.63.146
         - scp -o StrictHostKeyChecking=no -i $DIGITALOCEAN_PRIVATE_KEY build root@157.245.63.146:/frontend
+    only:
+        - staging
 
 # install_dependencies:
 #     stage: build
