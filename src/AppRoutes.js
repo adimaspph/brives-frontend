@@ -8,10 +8,15 @@ import Sidebar from "./components/Sidebar/Sidebar";
 
 
 import Home from "./pages/Home";
+import Homepage from "./pages/Homepage";
 import Design from "./pages/Design";
 import JadwalPage from "./pages/JadwalPage/JadwalPage";
 import CreateAkunPage from "./pages/CreateAkunPage/CreateAkunPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
+import RegisterPage from "./pages/RegisterPage/RegisterPage";
+import AkunPage from "./pages/AkunPage/AkunPage";
+import EditAkunPage from "./pages/AkunPage/EditAkunPage";
+import UbahPasswordPage from "./pages/AkunPage/UbahPasswordPage";
 import TestForm from "./pages/TestForm";
 import ListMapelComponent from "./pages/Mapel/ListMapelComponent";
 import CreateMapelComponent from "./pages/Mapel/CreateMapelComponent";
@@ -23,7 +28,8 @@ import { PrivateRoute } from "./PrivateRoute";
 import { Redirect } from "react-router-dom";
 import error403 from "./pages/error403";
 import ViewProfilePage from "./pages/ViewProfilePage/ViewProfilePage";
-
+import StaffRoute from "./StaffRoute";
+import PesanKelasPage from "./pages/PesanKelasPage/PesanKelasPage";
 
 
 function AppRoutes() {
@@ -31,31 +37,20 @@ function AppRoutes() {
 	return (
 		<BrowserRouter>
 			<Router>
-				<div className="sidebar-container">
-					<Sidebar />
-
-					<div className="content">
-						<Switch>
-							<PrivateRoute exact path="/" component={Home} />
-							<Route exact path="/login" component={LoginPage} />
-							<Route exact path="/design" component={Design} />
-							<Route exact path="/403" component={error403} />
-							<PrivateRoute exact path="/akun/create" component={CreateAkunPage} />
-							<PrivateRoute exact path="/atur-jadwal" component={JadwalPage} />
-							<PrivateRoute exact path="/atur-mapel" component={ListMapelComponent} />
-							<PrivateRoute exact path="/atur-mapel/add" component={CreateMapelComponent} />
-							<PrivateRoute exact path="/atur-mapel/:idMapel/update" component={UpdateMapelComponent} />
-							<PrivateRoute exact path="/atur-mapel/:idMapel" component={DetailMapelComponent} />
-							<PrivateRoute exact path="/pengguna" component={ListPengguna} />
-							<PrivateRoute exact path="/pengguna/:idUser" component={DetailPengguna} />
-							<PrivateRoute exact path="/profil-saya" component={ViewProfilePage} />
-							{/* Not Found 404 */}
-							<Redirect from="*" to="/" />
-						</Switch>
-					</div>
-
-
-				</div>
+				<Switch>
+					<Route exact path="/login" component={LoginPage} />
+					<Route exact path="/register" component={RegisterPage} />
+					<Route exact path="/akun/profil" component={AkunPage} />
+					{/* <Route exact path="/akun/profil/edit" component={EditAkunPage} />
+					<Route exact path="/akun/profil/ganti-password" component={UbahPasswordPage} /> */}
+					<Route exact path="/design" component={Design} />
+					<Route exact path="/403" component={error403} />
+					<Route exact path="/privat" component={PesanKelasPage} />
+					<Route exact path="/" component={Homepage} />
+					<Route path="/" component={StaffRoute} />
+					<Redirect from="*" to="/404" />
+					
+				</Switch>
 			</Router>
 		</BrowserRouter>
 	);

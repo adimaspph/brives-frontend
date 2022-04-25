@@ -1,0 +1,12 @@
+.jumbotron-akun {
+    background-color: #fff;
+    padding-top: 12vh;
+}
+
+.table-none tr {
+    background-color: #fff;
+}
+
+tr:nth-child(even) {
+    background-color: #fff;
+}

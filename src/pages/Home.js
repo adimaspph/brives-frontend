@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext, Component } from "react";
 import PenggunaService from '../services/PenggunaService';
 
 
+
 // function Home() {
 // 	const { role, jwt, setRole, setJwt } = useContext(UserContext);
 
@@ -101,7 +102,6 @@ class Home extends Component {
 	componentDidMount() {
 		PenggunaService.getAuthenticatedUser().then((res) => {
 			let pengguna = res.data;
-			console.log(pengguna);
 			this.setState({
 				idUser: pengguna.result.idUser,
 				username: pengguna.result.username,
@@ -138,7 +138,7 @@ class Home extends Component {
 		return (
 			<div className='outer'>
 				<div className='tes'>
-					<div className='container'>
+					<div className=''>
 						<div className='row'>
 
 							<div className='card-awal'>

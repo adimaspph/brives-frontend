@@ -8,7 +8,7 @@ import APIConfig from "../../api/APIConfig";
 import "./AkunPage.css";
 import { generatePath } from 'react-router-dom';
 
-class AkunPage extends React.Component {
+class EditAkunPage extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -16,14 +16,18 @@ class AkunPage extends React.Component {
             namaLengkap:"",
             asalSekolah:"",
             noHP:"",
-            email:""
+            email:"",
+            errMessage: "",
+            passwordShown: false,
+            pengajarShown: false,
+            hasError: false,
+            hasSubmit: false,
         }
         this.redirectUbahProfilPage = this.redirectUbahProfilPage.bind(this);
         this.redirectUbahPasswordPage = this.redirectUbahPasswordPage.bind(this);
     }
     
     redirectUbahProfilPage() {
-        console.log("masuk")
         this.props.history.push("/akun/profil/edit");
     }
     redirectUbahPasswordPage () {
@@ -108,4 +112,4 @@ class AkunPage extends React.Component {
     
 }
 
-export default AkunPage;
+export default EditAkunPage;

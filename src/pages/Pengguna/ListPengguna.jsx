@@ -17,11 +17,17 @@ class ListPengguna extends Component {
         }
 
         this.addPengguna = this.addPengguna.bind(this);
+        this.lihatPengguna = this.lihatPengguna.bind(this);
         this.editPengguna = this.editPengguna.bind(this);
     }
 
-    editPengguna(username) {
+    lihatPengguna(username) {
         this.props.history.push(generatePath("/pengguna/:username", { username }));
+
+    }
+
+   editPengguna(username) {
+        this.props.history.push(generatePath("/pengguna/edit/:username", { username }));
 
     }
 
@@ -78,11 +84,11 @@ class ListPengguna extends Component {
 
     render() {
         return (
-            <div>
+            <div className='outer'>
 
-                <h2 className='text-center'>Daftar Pengguna</h2>
-<div>
-</div>
+                <h1 className=''>Daftar Pengguna</h1>
+                <div>
+                </div>
 
                 <div className='space'>
                     <div className="searchbox">
@@ -97,23 +103,25 @@ class ListPengguna extends Component {
                         <option value="4">STAF_OPERASIONAL</option>
                         <option value="5">MANAGER</option>
                     </select>
-
-                    <a className="btn btn-blue twobutton" onClick={this.addPengguna}>
-                        + Tambah Pengguna
-                    </a>
+                    <div className='mt-1 pt-1 twobutton'>
+                        <a className="btn btn-blue" onClick={this.addPengguna}>
+                            + Tambah Pengguna
+                        </a>
+                    </div>
+                    
                 </div>
 
-                <div className='row'>
-                    <table className='table' id='myTable'>
+                <div className='mt-2'>
+                    <table className='table-max table-none' id='myTable'>
                         <thead>
-                            <tr>
-                                <th scope='col'>Id User</th>
-                                <th scope='col'>Nama Lengkap</th>
-                                <th scope='col'>Username</th>
-                                <th scope='col'>Email</th>
-                                <th scope='col'>Nomor Pegawai</th>
-                                <th scope='col'>Nomor Handphone</th>
-                                <th scope='col'>Action</th>
+                            <tr className=''>
+                                <th className='text-center' scope='col'>Id User</th>
+                                <th className='text-center' scope='col'>Nama Lengkap</th>
+                                <th className='text-center' scope='col'>Username</th>
+                                <th className='text-center' scope='col'>Email</th>
+                                <th className='text-center' scope='col'>Nomor Pegawai</th>
+                                <th className='text-center' scope='col'>Nomor Handphone</th>
+                                <th className='text-center' scope='col'>Action</th>
 
                             </tr>
                         </thead>
@@ -130,9 +138,21 @@ class ListPengguna extends Component {
                                             <td> {satuMapel.staff.noPegawai} </td>
                                             <td> {satuMapel.noHP} </td>
                                             <td>
-                                                <a className="btn btn-outline" onClick={() => this.editPengguna(satuMapel.username)}>
-                                                    Lihat
-                                                </a>
+                                                <div className='col'>
+                                                    <div className='my-2 d-flex flex justify-content-center'>
+                                                        <a className="btn btn-outline" onClick={() => this.lihatPengguna(satuMapel.username)}>
+                                                            Lihat
+                                                        </a>
+                                                    </div>
+                                                    
+                                                    <div className='my-2 d-flex flex justify-content-center'>
+                                                        <a className="btn btn-outline" onClick={() => this.editPengguna(satuMapel.username)}>
+                                                            Edit
+                                                        </a>
+                                                    </div>
+                                                    
+                                                </div>
+                                                
                                             </td>
                                         </tr>
                                 )

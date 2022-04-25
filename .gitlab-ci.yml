@@ -4,9 +4,13 @@ before_script:
     - apt-get update -qq && apt-get install
 
 stages:
-    # - build-staging
     - deploy-heroku
-    - deploy-vercel
+    # - build
+    # - deploy-digitalocean
+
+# cache:
+#     paths:
+#         - node_modules/
 
 Deploy-to-heroku:
     image: ruby:2.7.1
@@ -20,26 +24,35 @@ Deploy-to-heroku:
     only:
         - staging
 
-Deploy-to-vercel:
-    stage: deploy-vercel
-    image: node:14-alpine
-    variables:
-        PREVIEW_URL: $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG.$VERCEL_USER.vercel.app
-        VERCEL_ORG_ID: $VERCEL_ORG_ID
-        VERCEL_PROJECT_ID: $VERCEL_PROJECT_ID
+# install_dependencies:
+#     stage: build
+#     script:
+#         - npm install
+#     artifacts:
+#         paths:
+#             - node_modules/
 
-    rules:
-        - if: $CI_COMMIT_TAG
-        - if: $CI_COMMIT_BRANCH == 'main'
+# Deploy-to-digitalocean:
+#     image: node:latest
+#     stage: deploy-digitalocean
+#     # environment:
+#     #     name: staging
+#     #     url: theknowledgeapp.com
+#     before_script:
+#         - apt-get update -qq
+#         - apt-get install -qq git
+#         # Setup SSH deploy keys
+#         - 'which ssh-agent || ( apt-get install -qq openssh-client )'
+#         - eval $(ssh-agent -s)
+#         - ssh-add <(echo "$SSH_PRIVATE_KEY")
+#         - mkdir -p ~/.ssh
+#         - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+#     script:
+#         - ssh -i ${} {$SSH_USERNAME}@{$SSH_IP} "cd /var/www/{path-to-project} && git checkout dev && git pull origin staging && npm run build && exit"
+#     only :
+#         - staging
 
-    environment:
-        name: vercel/$CI_COMMIT_REF_NAME
-        url: https://$PREVIEW_URL
 
-    script:
-        - npm i -g vercel
-        - DEPLOYMENT_URL=$(VERCEL_ORG_ID=$VERCEL_ORG_ID VERCEL_PROJECT_ID=$VERCEL_PROJECT_ID vercel --confirm -t $VERCEL_TOKEN --scope $VERCEL_SCOPE)
-        - vercel alias set $DEPLOYMENT_URL $PREVIEW_URL -t $VERCEL_TOKEN --scope $VERCEL_SCOPE
 # Build to Staging:
 #   stage: build-staging
 #   environment:

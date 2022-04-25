@@ -32,7 +32,13 @@ function LoginPage() {
             setHasError(false);
             if (response.data.token) {
                 localStorage.setItem("user", JSON.stringify({ login: true, token: response.data.token, role: response.data.role[0].authority }));
-                window.location = "/";
+                if(JSON.parse(localStorage.getItem("user")).role === 'PELAJAR') {
+                    window.location = "/";
+                } else {
+                    console.log(JSON.parse(localStorage.getItem("user")).role)
+                    window.location = "/profil-saya";
+                }
+                
             }
         }).catch((error) => {
             setHasSubmit(false);
@@ -43,12 +49,12 @@ function LoginPage() {
     };
 
     return (
-        <div className="jadwal-container">
+        <div className="">
             <Navbar></Navbar>
             {hasError && hasSubmit ? (<ErrorNotification text="Akun tidak terverifikasi, silahkan coba lagi" />) : ("")}
             {!hasError && hasSubmit ? (<NeutralNotification text="Akun terverifikasi, berhasil login" />) : ("")}
-            <div className="container">
-                <div className="row">
+            <div className="jumbotron-akun">
+                <div className="">
                     <div className="">
                         <h2 className="page-title">BTA GROUP</h2>
                         <h3 className="page-title">Private E-Learning Information System</h3>
@@ -101,7 +107,7 @@ function LoginPage() {
                             </div>
 
 
-                            <Link className="" to="/login">
+                            <Link className="" to="/register">
                                 <div className="register">
                                     Belum memiliki akun? <span className="star">Daftar Disini</span>
                                 </div>
@@ -114,7 +120,7 @@ function LoginPage() {
             </div>
 
             {/* footer */}
-            <div className="footer">
+            {/* <div className="footer">
                 <div className="footer-menu">
                     <Link className="footer-logo" to="/">
                         <img src="/logo-navbar.png" width={60} alt="" />
@@ -122,7 +128,7 @@ function LoginPage() {
                     <p className="text-footer">BTA Group © 2022</p>
                 </div>
 
-            </div>
+            </div> */}
         </div>
     );
 }

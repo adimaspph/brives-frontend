@@ -39,7 +39,6 @@ function JadwalPage() {
 				setListMapel(response.data.result);
 			})
 			.catch((error) => {
-				console.log("error mapel");
 				console.log(error);
 			});
 		// return result;
@@ -169,9 +168,9 @@ function JadwalPage() {
 				</form>
 			</Modal>
 
-			<div className="btn btn-primary" onClick={handleTambahJadwal}>
-				Tambah Jadwal
-			</div>
+			<a className="btn btn-blue" onClick={handleTambahJadwal}>
+				+ Tambah Jadwal
+			</a>
 			<br />
 			{hasSchedule ? <Scheduler /> : ""}
 			{/* <Scheduler /> */}

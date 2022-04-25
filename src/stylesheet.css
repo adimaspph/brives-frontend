@@ -68,22 +68,59 @@ u {
 	font-size: 64px;
 }
 h1 {
+	font-family: 'Ubuntu';
+	font-style: normal;
+	font-weight: 700;
 	font-size: 48px;
+	line-height: 60px;
+	/* identical to box height, or 125% */
+
+	color: #303030;
 }
 h2 {
+	font-family: 'Ubuntu';
+	font-style: normal;
+	font-weight: 700;
 	font-size: 32px;
+	line-height: 40px;
+	/* identical to box height, or 125% */
+	color: #303030;
 }
 h3 {
+	font-family: 'Ubuntu';
+	font-style: normal;
+	font-weight: 700;
 	font-size: 28px;
+	line-height: 36px;
+	/* identical to box height, or 129% */
+	color: #303030;
 }
 h4 {
+	font-family: 'Ubuntu';
+	font-style: normal;
+	font-weight: 700;
 	font-size: 24px;
+	line-height: 32px;
+	/* identical to box height, or 133% */
+	color: #303030;
 }
 h5 {
+	font-family: 'Ubuntu';
+	font-style: normal;
+	font-weight: 700;
 	font-size: 20px;
+	line-height: 28px;
+	/* identical to box height, or 140% */
+	color: #303030;
 }
 h6 {
+	font-family: 'Ubuntu';
+	font-style: normal;
+	font-weight: 700;
 	font-size: 18px;
+	line-height: 26px;
+	/* identical to box height, or 144% */
+	color: #303030;
 }
 
 /* BACKGROUND COLOR */
@@ -157,17 +194,24 @@ button, input[type="submit"], input[type="reset"] {
 }
 
 
+
+.container-403 {
+	width: 100%;
+	margin: 0 px;
+	margin-top: 10vw;
+}
+
 .text-403 {
 	margin-top: 17%;
 	font-size: 7vw;
 	margin-bottom: 0px;
-	color: #fafafa;
+	color: #000000;
 	text-align: center;
-	
+	padding-top: 15%;
 }
 
 .text-small-403 {
-	color: #fafafa;
+	color: #000000;
 	text-align: center;
 	
 }

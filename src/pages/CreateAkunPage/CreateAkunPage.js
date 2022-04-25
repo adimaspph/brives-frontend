@@ -5,6 +5,7 @@ import ErrorNotification from "../../components/Notification/ErrorNotification";
 import NeutralNotification from '../../components/Notification/NeutralNotification';
 import APIConfig from "../../api/APIConfig";
 import "./CreateAkunPage.css";
+import { Link } from 'react-router-dom';
 
 function CreateAkunPage() {
     const [errMessage, setErrMessage] = useState("");
@@ -63,7 +64,6 @@ function CreateAkunPage() {
             } else {
                 setTimeout(function(){}, 4000); 
                 window.location.href = '/pengguna'; 
-                console.log(response)
             }
 		});
     }
@@ -131,19 +131,23 @@ function CreateAkunPage() {
         setTarif(e.target.value);
     }
 
+    const cancel = (e) => {
+        window.location='/pengguna';
+    }
+
 	return (
-        <div className="akun-container">
+        <div className="akun-container outer">
             <div className="">
                 <ul className="breadcrumb">
-                    <li><a href="/pengguna">Daftar Pengguna</a></li>
+                    <li><Link to="/pengguna">Daftar Pengguna</Link></li>
                     <li className='bractive'>Tambah Pengguna</li>
                 </ul>
                 <div className="create-akun-content">
                     <div>
-                        <h2>Tambah Pengguna</h2>
+                        <h2 className='judul-form'>Tambah Pengguna</h2>
                     </div>
                     <div className="akun-card">
-                        <h3>Formulir Tambah Pengguna</h3>
+                        <h3 className='judul-form'>Formulir Tambah Pengguna</h3>
                         {hasError&&hasSubmit? (<ErrorNotification text={errMessage}/>) : ("")}
                         {!hasError&&hasSubmit? (<NeutralNotification text="Akun berhasil terbuat"/>) : ("")}
                         <div>
@@ -213,8 +217,13 @@ function CreateAkunPage() {
                                     </div>
                                 </div>}
                                 <div className='box-right'>
+                                <a className="btn btn-outline-blue twobutton" onClick={cancel}>
+                                                Kembali
+                                            </a>
                                     <button type="submit" className="twobutton btn btn-blue">Simpan</button>
                                 </div>
+
+                                
                             </form>
                         </div>
                     </div>

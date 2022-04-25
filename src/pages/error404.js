@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar/Navbar";
 
-class error403 extends React.Component {
+class error404 extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = { value: "", nama: "" };
@@ -28,12 +28,12 @@ class error403 extends React.Component {
 				<div className="row d-flex justify-content-center ">
 
 					<div class="col-lg-4 d-flex justify-content-center">
-						<img className="gambar-privat" src="/gambar-403.png" width={400} />
+						<img className="gambar-privat" src="/gambar-404.png" width={400} height={280} />
 					</div>
 
 					<div className="col-lg-4 d-flex justify-content-center">
 						<div className="mt-5 mb-5 text-403">
-							<h2>Anda tidak memiliki akses untuk melihat halaman ini.</h2>
+							<h2>Oops.. Halaman tidak dapat dapat ditemukan.</h2>
 							<div className='centerin'>
 							<button onClick={this.handlerBeranda} className="btn btn-blue ">Kembali Ke Beranda</button>
 						</div>
@@ -51,4 +51,4 @@ class error403 extends React.Component {
 	}
 }
 
-export default error403;
+export default error404;

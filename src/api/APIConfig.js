@@ -5,14 +5,13 @@ import Axios from "axios";
 const APIConfig = Axios.create({
 	baseURL: "https://brives-staging-backend.herokuapp.com",
 	// baseURL: "http://localhost:8080",
+	// baseURL: "https://be.dev.bta8jakarta.com",
 });
 
 var AUTH_TOKEN = "";
 if (localStorage.getItem("user") != null) {
-	// console.log("ada token");
 	const local = JSON.parse(localStorage.getItem("user"));
 	AUTH_TOKEN = "Bearer " + local.token;
-	// console.log(AUTH_TOKEN);
 }
 
 APIConfig.defaults.headers.common["Authorization"] = AUTH_TOKEN;

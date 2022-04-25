@@ -9,11 +9,11 @@ export default function Sidebar(props) {
 
 	return (
 		<div>
-			{localStorage.getItem("user") != null ? (
+			{localStorage.getItem("user") != null && JSON.parse(localStorage.getItem("user")).role != 'PELAJAR' ? (
 				<nav className="sidebar">
 
 					<div>
-						<Link className="sidebar-logo" to="/">
+						<Link className="sidebar-logo" to="/beranda">
 							<img src="/logo-bta.png" width={132} alt="" />
 						</Link>
 						<div className="sidebar-menu">
@@ -30,24 +30,29 @@ export default function Sidebar(props) {
 								<img src="/assets/dashboard.svg" alt="" />
 								Dashboard
 							</Link>
-							<Link className="sidebar-menu-btn" to="/pemesanan">
+							<Link className="sidebar-menu-btn" to="/pesanan">
 								<img src="/assets/checkout.svg" alt="" />
-								Lihat Pemesanan
+								Pesanan
 							</Link>
-							
+
 							{JSON.parse(localStorage.getItem("user")).role === 'STAF_OPERASIONAL' ? (
 								<Link className="sidebar-menu-btn" to="/atur-mapel">
-								<img src="/assets/book.svg" alt="" />
-								Atur Mata Pelajaran
-							</Link>
+									<img src="/assets/book.svg" alt="" />
+									Atur Mata Pelajaran
+								</Link>
 							) : ('')}
-							
+
 							{JSON.parse(localStorage.getItem("user")).role === 'PENGAJAR' ? (
 								<Link className="sidebar-menu-btn" to="/atur-jadwal">
 									<img src="/assets/schedule.svg" alt="" />
 									Atur Jadwal
 								</Link>
 							) : ('')}
+
+							<Link className="sidebar-menu-btn" to="/log">
+								<img src="/assets/log.svg" alt="" />
+								Log
+							</Link>
 
 							<Link className="sidebar-menu-btn" to="/kelas-tambahan">
 								<img src="/assets/plus.svg" alt="" />
@@ -57,10 +62,10 @@ export default function Sidebar(props) {
 								<img src="/assets/profil-saya.svg" alt="" />
 								Profil Saya
 							</Link>
-							<Link onClick={handlerLogout} className="sidebar-menu-btn" to="/login">
+							<a onClick={handlerLogout} className="sidebar-menu-btn" href="/login">
 								<img src="/assets/logout.svg" alt="" />
 								Logout
-							</Link>
+							</a>
 							<div>
 								<br />
 							</div>

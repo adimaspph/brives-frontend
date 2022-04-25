@@ -1,5 +1,5 @@
 .fsubmit {
-	width: 88.5%;
+	width: 100%;
 }
 
 .blockd {
@@ -9,7 +9,6 @@
 .page-title {
 	display: flex;
 	justify-content: center;	
-	margin-top: 24px;
 	text-align: center;
 }
 
@@ -58,13 +57,14 @@ input[type=text], select {
 .login-card {
 	/* background-color: #45a049; */
 	box-shadow: rgba(80, 80, 80, 0.2) -1px 2px 6px 1px;
-	height: 300px;
+	height: fit-content;
 	border-radius: 16px;
-	padding: 50px 40px 10px;
+	padding: 50px 40px 40px 50px;
 	display: flex;
 	flex-direction: column;
 	margin: auto;
 	width: fit-content;
+	margin-top: 20px;
 }
 
 label {
@@ -75,12 +75,6 @@ label {
 	color: #FC182A;
 	margin-left: 4px;
 	
-}
-.outer {
-/* box-shadow: rgba(0, 225, 255, 0.2) -1px 2px 6px 1px; */
-width: 100%;
-margin-left: 32px;
-margin-right: 32px;
 }
 
 .tes {
@@ -125,3 +119,4 @@ font-size: 14px;
 font-weight: bold;
 color: #ffffff;
 }
+
