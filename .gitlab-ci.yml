@@ -24,13 +24,13 @@ Deploy-to-heroku:
     only:
         - staging
 
-install_dependencies:
-    stage: build
-    script:
-        - npm install
-    artifacts:
-        paths:
-            - node_modules/
+# install_dependencies:
+#     stage: build
+#     script:
+#         - npm install
+#     artifacts:
+#         paths:
+#             - node_modules/
 
 # Deploy-to-digitalocean:
 #     image: node:latest
