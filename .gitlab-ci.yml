@@ -6,7 +6,7 @@ before_script:
 stages:
     - build
     - deploy-heroku
-    # - deploy-digitalocean
+    - deploy-digitalocean
 
 build:
     stage: build
@@ -35,7 +35,7 @@ Deploy-to-heroku:
         - staging
 
 deploy:
-    stage: deploy
+    stage: deploy-digitalocean
     image: kroniak/ssh-client
     before_script:
         - echo "deploying app"
