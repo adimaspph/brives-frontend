@@ -2,16 +2,22 @@ import React, { useState, useEffect, useContext, Component } from "react";
 import PenggunaService from '../services/PenggunaService';
 import Navbar from "../components/Navbar/Navbar";
 import "./Homepage.css";
+import { Redirect } from "react-router-dom";
 
 
 class Homepage extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-
-
 		}
+	}
 
+	componentDidMount() {
+		const userRaw = localStorage.getItem("user");
+		console.log(userRaw);
+		if (userRaw != null && userRaw.role != "PELAJAR") {
+			this.props.history.push("/beranda");
+		}
 	}
 
 	render() {

@@ -26,7 +26,7 @@ import { Redirect } from "react-router-dom";
 import error403 from "./pages/error403";
 import ViewProfilePage from "./pages/ViewProfilePage/ViewProfilePage";
 import StaffRoute from "./StaffRoute";
-
+import PesanKelasPage from "./pages/PesanKelasPage/PesanKelasPage";
 
 
 function AppRoutes() {
@@ -39,32 +39,11 @@ function AppRoutes() {
 					<Route exact path="/register" component={RegisterPage} />
 					<Route exact path="/design" component={Design} />
 					<Route exact path="/403" component={error403} />
+					<Route exact path="/privat" component={PesanKelasPage} />
 					<Route exact path="/" component={Homepage} />
 					<Route path="/" component={StaffRoute} />
 					<Redirect from="*" to="/404" />
-					{/* <div className="sidebar-container">
-					<Sidebar />
-
-					<div className="content">
-						
-							<PrivateRoute exact path="/" component={Home} />
-							<Route exact path="/login" component={LoginPage} />
-							<Route exact path="/design" component={Design} />
-							<Route exact path="/403" component={error403} />
-							<PrivateRoute exact path="/akun/create" component={CreateAkunPage} />
-							<PrivateRoute exact path="/atur-jadwal" component={JadwalPage} />
-							<PrivateRoute exact path="/atur-mapel" component={ListMapelComponent} />
-							<PrivateRoute exact path="/atur-mapel/add" component={CreateMapelComponent} />
-							<PrivateRoute exact path="/atur-mapel/:idMapel/update" component={UpdateMapelComponent} />
-							<PrivateRoute exact path="/atur-mapel/:idMapel" component={DetailMapelComponent} />
-							<PrivateRoute exact path="/pengguna" component={ListPengguna} />
-							<PrivateRoute exact path="/pengguna/:idUser" component={DetailPengguna} />
-							<PrivateRoute exact path="/profil-saya" component={ViewProfilePage} />
-							
-							<Redirect from="*" to="/" />
-						
-					</div>
-				</div> */}
+					
 				</Switch>
 			</Router>
 		</BrowserRouter>
