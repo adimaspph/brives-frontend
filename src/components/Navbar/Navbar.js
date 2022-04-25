@@ -55,7 +55,14 @@ export default function Navbar(props) {
 							</div>
 						</Link>
 					) : ("")}
-
+					{localStorage.getItem("user") != null && JSON.parse(localStorage.getItem("user")).role === 'PELAJAR' ? (
+						<Link className="navbar-menu-btn" to="/akun/profil">
+							<div className="navbar-text">
+								Profil
+							</div>
+						</Link>
+					) : ("")}
+					
 					{localStorage.getItem("user") === null ? (
 						<Link className="navbar-menu-btn" to="/login">
 							<div className="navbar-text">
@@ -74,13 +81,7 @@ export default function Navbar(props) {
 						</div>
 					) : ("")}
 
-					{localStorage.getItem("user") != null && JSON.parse(localStorage.getItem("user")).role === 'PELAJAR' ? (
-						<Link className="navbar-menu-btn" to="/profil-saya">
-							<div className="navbar-text">
-								Profil
-							</div>
-						</Link>
-					) : ("")}
+					
 
 
 

@@ -14,6 +14,9 @@ import JadwalPage from "./pages/JadwalPage/JadwalPage";
 import CreateAkunPage from "./pages/CreateAkunPage/CreateAkunPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
+import AkunPage from "./pages/AkunPage/AkunPage";
+import EditAkunPage from "./pages/AkunPage/EditAkunPage";
+import UbahPasswordPage from "./pages/AkunPage/UbahPasswordPage";
 import TestForm from "./pages/TestForm";
 import ListMapelComponent from "./pages/Mapel/ListMapelComponent";
 import CreateMapelComponent from "./pages/Mapel/CreateMapelComponent";
@@ -37,6 +40,9 @@ function AppRoutes() {
 				<Switch>
 					<Route exact path="/login" component={LoginPage} />
 					<Route exact path="/register" component={RegisterPage} />
+					<Route exact path="/akun/profil" component={AkunPage} />
+					{/* <Route exact path="/akun/profil/edit" component={EditAkunPage} />
+					<Route exact path="/akun/profil/ganti-password" component={UbahPasswordPage} /> */}
 					<Route exact path="/design" component={Design} />
 					<Route exact path="/403" component={error403} />
 					<Route exact path="/" component={Homepage} />
