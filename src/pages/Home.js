@@ -102,7 +102,6 @@ class Home extends Component {
 	componentDidMount() {
 		PenggunaService.getAuthenticatedUser().then((res) => {
 			let pengguna = res.data;
-			console.log(pengguna);
 			this.setState({
 				idUser: pengguna.result.idUser,
 				username: pengguna.result.username,

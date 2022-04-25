@@ -17,6 +17,7 @@ import DetailPesanan from "./pages/Pesanan/DetailPesanan";
 import ListPengguna from "./pages/Pengguna/ListPengguna";
 import ListPesanan from "./pages/Pesanan/ListPesanan";
 import DetailPengguna from "./pages/Pengguna/DetailPengguna";
+import EditPengguna from "./pages/Pengguna/EditPengguna";
 import { PrivateRoute } from "./PrivateRoute";
 import error403 from "./pages/error403";
 import ViewProfilePage from "./pages/ViewProfilePage/ViewProfilePage";
@@ -43,6 +44,7 @@ export default function StaffRoute() {
                         <PrivateRoute exact path="/pesanan" component={ListPesanan} />
                         <PrivateRoute exact path="/pesanan/:idPesanan" component={DetailPesanan} />
                         <PrivateRoute exact path="/pengguna/:idUser" component={DetailPengguna} />
+                        <PrivateRoute exact path="/pengguna/edit/:idUser" component={EditPengguna} />
                         <PrivateRoute exact path="/profil-saya" component={ViewProfilePage} />
 
                         {/* <Redirect from="*" to="/not-found" /> */}

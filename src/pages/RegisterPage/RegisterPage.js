@@ -99,8 +99,8 @@ function RegisterPage() {
     return (
         <div className="">
             <Navbar></Navbar>
-            {hasError && hasSubmit ? (<ErrorNotification text="Akun tidak terverifikasi, silahkan coba lagi" />) : ("")}
-            {!hasError && hasSubmit ? (<NeutralNotification text="Akun terverifikasi, berhasil login" />) : ("")}
+            {hasError&&hasSubmit? (<ErrorNotification text={errMessage}/>) : ("")}
+            {!hasError&&hasSubmit? (<NeutralNotification text="Akun berhasil terbuat"/>) : ("")}
             <div className="flex my-3">
                 <div className='d-flex flex justify-content-center my-3'>
                     <h1>Register</h1>

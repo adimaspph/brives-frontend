@@ -17,11 +17,17 @@ class ListPengguna extends Component {
         }
 
         this.addPengguna = this.addPengguna.bind(this);
+        this.lihatPengguna = this.lihatPengguna.bind(this);
         this.editPengguna = this.editPengguna.bind(this);
     }
 
-    editPengguna(username) {
+    lihatPengguna(username) {
         this.props.history.push(generatePath("/pengguna/:username", { username }));
+
+    }
+
+   editPengguna(username) {
+        this.props.history.push(generatePath("/pengguna/edit/:username", { username }));
 
     }
 
@@ -106,14 +112,14 @@ class ListPengguna extends Component {
                 <div className=''>
                     <table className='table-max table-none' id='myTable'>
                         <thead>
-                            <tr>
-                                <th scope='col'>Id User</th>
-                                <th scope='col'>Nama Lengkap</th>
-                                <th scope='col'>Username</th>
-                                <th scope='col'>Email</th>
-                                <th scope='col'>Nomor Pegawai</th>
-                                <th scope='col'>Nomor Handphone</th>
-                                <th scope='col'>Action</th>
+                            <tr className=''>
+                                <th className='text-center' scope='col'>Id User</th>
+                                <th className='text-center' scope='col'>Nama Lengkap</th>
+                                <th className='text-center' scope='col'>Username</th>
+                                <th className='text-center' scope='col'>Email</th>
+                                <th className='text-center' scope='col'>Nomor Pegawai</th>
+                                <th className='text-center' scope='col'>Nomor Handphone</th>
+                                <th className='text-center' scope='col'>Action</th>
 
                             </tr>
                         </thead>
@@ -130,9 +136,16 @@ class ListPengguna extends Component {
                                             <td> {satuMapel.staff.noPegawai} </td>
                                             <td> {satuMapel.noHP} </td>
                                             <td>
-                                                <a className="btn btn-outline" onClick={() => this.editPengguna(satuMapel.username)}>
-                                                    Lihat
-                                                </a>
+                                                <div>
+                                                    <a className="btn btn-outline" onClick={() => this.lihatPengguna(satuMapel.username)}>
+                                                        Lihat
+                                                    </a>
+
+                                                    <a className="btn btn-outline" onClick={() => this.editPengguna(satuMapel.username)}>
+                                                        Edit
+                                                    </a>
+                                                </div>
+                                                
                                             </td>
                                         </tr>
                                 )
