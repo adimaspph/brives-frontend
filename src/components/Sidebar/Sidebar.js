@@ -13,7 +13,7 @@ export default function Sidebar(props) {
 				<nav className="sidebar">
 
 					<div>
-						<Link className="sidebar-logo" to="/">
+						<Link className="sidebar-logo" to="/beranda">
 							<img src="/logo-bta.png" width={132} alt="" />
 						</Link>
 						<div className="sidebar-menu">

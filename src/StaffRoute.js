@@ -31,6 +31,7 @@ export default function StaffRoute() {
                 <Sidebar />
                 <div className="content">
                     <Switch>
+                        <PrivateRoute exact path="/beranda" component={Home} />
                         <PrivateRoute exact path="/akun/create" component={CreateAkunPage} />
                         <PrivateRoute exact path="/atur-jadwal" component={JadwalPage} />
 

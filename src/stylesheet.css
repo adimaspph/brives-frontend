@@ -68,22 +68,59 @@ u {
 	font-size: 64px;
 }
 h1 {
+	font-family: 'Ubuntu';
+	font-style: normal;
+	font-weight: 700;
 	font-size: 48px;
+	line-height: 60px;
+	/* identical to box height, or 125% */
+
+	color: #303030;
 }
 h2 {
+	font-family: 'Ubuntu';
+	font-style: normal;
+	font-weight: 700;
 	font-size: 32px;
+	line-height: 40px;
+	/* identical to box height, or 125% */
+	color: #303030;
 }
 h3 {
+	font-family: 'Ubuntu';
+	font-style: normal;
+	font-weight: 700;
 	font-size: 28px;
+	line-height: 36px;
+	/* identical to box height, or 129% */
+	color: #303030;
 }
 h4 {
+	font-family: 'Ubuntu';
+	font-style: normal;
+	font-weight: 700;
 	font-size: 24px;
+	line-height: 32px;
+	/* identical to box height, or 133% */
+	color: #303030;
 }
 h5 {
+	font-family: 'Ubuntu';
+	font-style: normal;
+	font-weight: 700;
 	font-size: 20px;
+	line-height: 28px;
+	/* identical to box height, or 140% */
+	color: #303030;
 }
 h6 {
+	font-family: 'Ubuntu';
+	font-style: normal;
+	font-weight: 700;
 	font-size: 18px;
+	line-height: 26px;
+	/* identical to box height, or 144% */
+	color: #303030;
 }
 
 /* BACKGROUND COLOR */
