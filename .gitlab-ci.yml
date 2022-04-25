@@ -6,7 +6,6 @@ before_script:
 stages:
     - build
     - deploy-heroku
-    - test
     # - deploy-digitalocean
 
 build:
@@ -15,8 +14,13 @@ build:
     script: 
         - echo "Start building App"
         - npm install
-        - npm run build
+        - CI=false npm run build
         - echo "Build successfully!"
+    artifacts:
+        expire_in: 1 hour
+        paths:
+            - build
+            - node_modules/
 
 Deploy-to-heroku:
     image: ruby:2.7.1
@@ -30,15 +34,14 @@ Deploy-to-heroku:
     only:
         - staging
 
-
-test:
-    stage: test
-    image: node
+deploy:
+    stage: deploy
+    image: kroniak/ssh-client
+    before_script:
+        - echo "deploying app"
     script:
-        - echo "Testing App"
-        - npm install
-        - CI=true npm test
-        - echo "Test successfully!"
+        - chmod 400 $DIGITALOCEAN_PRIVATE_KEY
+        - scp -o StrictHostKeyChecking=no -i $DIGITALOCEAN_PRIVATE_KEY build root@157.245.63.146:/frontend
 
 # install_dependencies:
 #     stage: build
