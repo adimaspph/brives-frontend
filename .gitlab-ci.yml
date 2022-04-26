@@ -39,10 +39,12 @@ Deploy-to-digitalocean:
     stage: deploy-digitalocean
     image: kroniak/ssh-client
     before_script:
+        - sudo apt update
+        - sudo apt install openssh-server
         - echo "deploying app"
     script:
         - touch test.txt
-        - echo 'hello world' > test.text
+        - echo 'hello world' > test.txt
         - scp -i $DIGITALOCEAN_PRIVATE_KEY test.txt root@$SSH_IP:/testscp
         - scp -i $DIGITALOCEAN_PRIVATE_KEY -r ./build root@$SSH_IP:/frontend
     only:
