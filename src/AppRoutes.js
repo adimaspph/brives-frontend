@@ -41,8 +41,8 @@ function AppRoutes() {
 					<Route exact path="/login" component={LoginPage} />
 					<Route exact path="/register" component={RegisterPage} />
 					<Route exact path="/akun/profil" component={AkunPage} />
-					{/* <Route exact path="/akun/profil/edit" component={EditAkunPage} />
-					<Route exact path="/akun/profil/ganti-password" component={UbahPasswordPage} /> */}
+					<Route exact path="/akun/profil/edit" component={EditAkunPage} />
+					<Route exact path="/akun/profil/ganti-password" component={UbahPasswordPage} />
 					<Route exact path="/design" component={Design} />
 					<Route exact path="/403" component={error403} />
 					<Route exact path="/privat" component={PesanKelasPage} />
