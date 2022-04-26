@@ -62,8 +62,14 @@ function CreateAkunPage() {
                 setErrMessage(response.data.message);
                 setHasError(true);
             } else {
-                setTimeout(function(){}, 4000); 
-                window.location.href = '/pengguna'; 
+                setTimeout(
+                    function() {
+                        window.location.href = '/pengguna'; 
+                    }
+                    .bind(this),
+                    2000
+                );
+                
             }
 		});
     }

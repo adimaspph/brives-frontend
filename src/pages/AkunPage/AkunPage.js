@@ -24,6 +24,7 @@ class AkunPage extends React.Component {
     
     redirectUbahProfilPage = (e) => {
         e.preventDefault();
+        console.log("ke klik kok bang")
         this.props.history.push("/akun/profil/edit");
     }
     redirectUbahPasswordPage = (e) => {
@@ -85,15 +86,15 @@ class AkunPage extends React.Component {
                                         <hr />
                                         <div className='col'>
                                             <div className='d-flex flex justify-content-center my-3'>
-                                                <button className="twobutton btn btn-red" onClick={() => this.redirectUbahProfilPage}>
+                                                <a className="twobutton btn btn-outline-red" onClick={this.redirectUbahProfilPage}>
                                                     Ubah Profil
-                                                </button>
+                                                </a>
                                             </div>
-                                            <div className='d-flex flex justify-content-center my-3'>
-                                                <button className="twobutton btn btn-red btn-outline-red" onClick={() => this.redirectUbahPasswordPage}>
+                                            {/* <div className='d-flex flex justify-content-center my-3'>
+                                                <a  className="twobutton btn btn-outline-red">
                                                     Ubah Password
-                                                </button>
-                                            </div>                                            
+                                                </a>
+                                            </div>                                             */}
                                         </div>
                                     </div>
                                 </div>
