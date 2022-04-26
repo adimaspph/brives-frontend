@@ -21,9 +21,7 @@ build:
         paths:
             - build
             - node_modules/
-    only:
-        - staging
-        - main
+        
 
 Deploy-to-heroku:
     image: ruby:2.7.1
@@ -43,11 +41,8 @@ deploy:
     before_script:
         - echo "deploying app"
     script:
-        - ssh -i $DIGITALOCEAN_PRIVATE_KEY root@157.245.63.146
-        - scp -o StrictHostKeyChecking=no -i $DIGITALOCEAN_PRIVATE_KEY -r ~/build root@157.245.63.146:/frontend
-    only:
-        - staging
-        - main
+        - scp -o StrictHostKeyChecking=no -i $DIGITALOCEAN_PRIVATE_KEY -r ./build root@157.245.63.146:/frontend
+    
 
 # install_dependencies:
 #     stage: build
