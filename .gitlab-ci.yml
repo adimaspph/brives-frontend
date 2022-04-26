@@ -17,7 +17,6 @@ build:
         - CI=false npm run build
         - echo "Build successfully!"
     artifacts:
-        expire_in: 1 hour
         paths:
             - build
             - node_modules/
@@ -42,7 +41,7 @@ deploy:
     before_script:
         - echo "deploying app"
     script:
-        - scp -i $DIGITALOCEAN_PRIVATE_KEY -r ~/build root@$SSH_IP:/frontend
+        - scp -i $DIGITALOCEAN_PRIVATE_KEY -r ./build root@$SSH_IP:/frontend
     only:
         - adimas
 
