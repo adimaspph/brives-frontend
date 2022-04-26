@@ -37,16 +37,24 @@ Deploy-to-heroku:
 
 Deploy-to-digitalocean:
     stage: deploy-digitalocean
-    image: kroniak/ssh-client
+    image: tetraweb/php
     before_script:
+        # - ....
+        - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+        - mkdir -p ~/.ssh
+        - eval $(ssh-agent -s)
+        - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
         - echo "deploying app"
     script:
         - touch test.txt
         - touch private.key
-        - echo $DIGITALOCEAN_PRIVATE_KEY > private.key
-        - echo `cat private.key`
-        - scp -i private.key test.txt root@$SSH_IP:/testscp
-        - scp -i $DIGITALOCEAN_PRIVATE_KEY -r ./build root@$SSH_IP:/frontend
+        - echo "hello world" > test.txt
+        - ssh-add <(echo "$DIGITALOCEAN_PRIVATE_KEY")
+        - scp -p22 test.txt root@$SSH_IP:/testscp
+        - scp -p22 -r ./build root@$SSH_IP:/frontend
+    artifacts:
+    paths:
+        - build/
     only:
         - adimas
 
