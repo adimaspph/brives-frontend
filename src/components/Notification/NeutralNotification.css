@@ -12,25 +12,26 @@
     font-size: 14px;
     line-height: 140%;
 
-    color: #163618;
+    color: #3F0D0E;
     max-width: fit-content;
+    max-height: fit-content;
     width: 80%;
-
+    
     position: fixed;
-    bottom: 0px;
+    z-index: 999;
+    top: 5%;
     left: 50%;
     /* bring your own prefixes */
     transform: translate(-50%, -50%);
     transition: all 0.5s ease-in;
     animation: toast-in-bottom 0.5s ease-out;
-    display:block;
 }
 
 .notif-hide{
-    bottom: -20%;
+    top: -20%;
 }
 .notif-show{
-    bottom: 0px;
+    top: 0px;
 }
 
 .notif-left{
@@ -66,12 +67,12 @@
 
 @keyframes toast-in-bottom {
     from {
-        bottom: -20%;
+        top: -20%;
         /* transform: translateY(100%);
         transform: translate(-50%, -50%); */
     }
     to {
-        bottom: 0px;
+        top: 0px;
         /* transform: translate(-50%, -50%);
         transform: translateY(0%); */
     }

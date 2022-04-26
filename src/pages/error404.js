@@ -28,12 +28,12 @@ class error404 extends React.Component {
 				<div className="row d-flex justify-content-center ">
 
 					<div class="col-lg-4 d-flex justify-content-center">
-						<img className="gambar-privat" src="/gambar-404.png" width={400} height={280} />
+						<img className="gambar-404" src="/gambar-404.png" />
 					</div>
 
 					<div className="col-lg-4 d-flex justify-content-center">
-						<div className="mt-5 mb-5 text-403">
-							<h2>Oops.. Halaman tidak dapat dapat ditemukan.</h2>
+						<div className=" text-404">
+							<h2 className="text-404">Oops.. Halaman tidak dapat dapat ditemukan.</h2>
 							<div className='centerin'>
 							<button onClick={this.handlerBeranda} className="btn btn-blue ">Kembali Ke Beranda</button>
 						</div>

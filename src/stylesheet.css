@@ -210,6 +210,14 @@ button, input[type="submit"], input[type="reset"] {
 	padding-top: 15%;
 }
 
+.text-404 {
+	margin-top: 0px;
+	margin-bottom: 0px;
+	color: #000000;
+	text-align: center;
+	padding-top: 10%;
+}
+
 .text-small-403 {
 	color: #000000;
 	text-align: center;
@@ -225,4 +233,49 @@ button, input[type="submit"], input[type="reset"] {
 .centerin {
 	display: flex;
 	justify-content: center;
+}
+.gambar-404 {
+    width: 400px;
+    height: 280px;
+}
+
+.gambar-403 {
+    width: 400px;
+}
+
+@media (max-width: 570px) {
+    
+	.text-404 {
+		margin-top: 0px;
+		font-size: 7vw;
+		margin-bottom: 0px;
+		color: #000000;
+		text-align: center;
+		padding-top: 0px;
+	}
+
+	.gambar-404 {
+        width: 300px;
+        height: 220px;
+		margin-top: 20px;
+    }
+
+	.gambar-403 {
+		margin-top: 20px;
+        width: 300px;
+    }
+
+	.text-403 {
+		margin-top: 0px;
+		font-size: 7vw;
+		margin-bottom: 0px;
+		color: #000000;
+		text-align: center;
+		padding-top: 0px;
+	}
+
+	.font-403 {
+        font-size: 7vw;
+    }
+
 }

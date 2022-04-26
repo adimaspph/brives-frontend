@@ -1,29 +1,61 @@
 .benefit {
-    padding-top: 9%;
+    padding-top: 2%;
+    padding-left: 3vw;
     
 }
 
-.jumbotron {
-    background-color: #EEFFEF;
-    /* padding-top: 10%; */
-    padding-top: 10 vw;
-    
+.jumbotronn {
+    background-color: #d9ffdb;
+    margin-top: 30px;
     z-index: -3;
     position: relative;
+    height: fit-content;
+    padding-top: 6vw;
+    padding-bottom: 3vw;
+    padding-left: 3vw;
 }
+
 
 .logo-bta {
     z-index: -1;
     position: relative;
+    padding-left: 3vw;
+    
 }
 
 .gambar-privat {
     z-index: -2;
     position: relative;
+    /* width: 200px;
+    height: 200px; */
+    
 }
 
-/* .logo-bta-col {
-    background-image: url("../../public/logo-bta.png");
-    background-repeat: no-repeat;
-    width: fit-content;
-} */
+
+
+@media (max-width: 570px) {
+    .jumbotronn {
+        padding-top: 12vw;
+    }
+
+    .benefit {
+        padding-top: 0;
+    }
+
+    .logo-bta {
+        display: none;
+        
+    }
+
+    .gambar-privat {
+        z-index: -2;
+        position: relative;
+        width: 300px;
+        height: 300px;
+        
+    }
+
+    
+
+
+}
