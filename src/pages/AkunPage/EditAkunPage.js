@@ -38,6 +38,13 @@ class EditAkunPage extends React.Component {
         this.props.history.push("/akun/profil/ganti-password");
     }
     componentDidMount() {
+        // authentication
+        if (localStorage.getItem("user") != null) {
+            if(!(JSON.parse(localStorage.getItem("user")).role === 'PELAJAR')) {
+                window.location='/403';
+            }
+        }
+
         APIConfig.get("/api/v1/user/auth/")
         .then((response) => {
             this.setState({ username: response.data.result.username })
