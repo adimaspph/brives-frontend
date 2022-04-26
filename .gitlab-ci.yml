@@ -42,7 +42,9 @@ deploy:
     before_script:
         - echo "deploying app"
     script:
-        - scp -o StrictHostKeyChecking=no -i $DIGITALOCEAN_PRIVATE_KEY -r ./build root@$SSH_IP:/frontend
+        - ll
+        - ls
+        - scp -i $DIGITALOCEAN_PRIVATE_KEY -r ./build root@$SSH_IP:/frontend
     only:
         - adimas
 
