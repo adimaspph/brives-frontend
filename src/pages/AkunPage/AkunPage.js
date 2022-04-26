@@ -6,7 +6,7 @@ import ErrorNotification from "../../components/Notification/ErrorNotification";
 import NeutralNotification from '../../components/Notification/NeutralNotification';
 import APIConfig from "../../api/APIConfig";
 import "./AkunPage.css";
-import { generatePath } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 class AkunPage extends React.Component {
     constructor(props) {
@@ -22,14 +22,23 @@ class AkunPage extends React.Component {
         this.redirectUbahPasswordPage = this.redirectUbahPasswordPage.bind(this);
     }
     
-    redirectUbahProfilPage() {
-        console.log("masuk")
+    redirectUbahProfilPage = (e) => {
+        e.preventDefault();
+        console.log("ke klik kok bang")
         this.props.history.push("/akun/profil/edit");
     }
-    redirectUbahPasswordPage () {
+    redirectUbahPasswordPage = (e) => {
+        e.preventDefault();
         this.props.history.push("/akun/profil/ganti-password");
     }
     componentDidMount() {
+        // authorization
+        if (localStorage.getItem("user") != null) {
+            if(!(JSON.parse(localStorage.getItem("user")).role === 'PELAJAR')) {
+                window.location='/403';
+            }
+        }
+
         APIConfig.get("/api/v1/user/auth/")
         .then((response) => {
             this.setState({ username: response.data.result.username })
@@ -44,7 +53,7 @@ class AkunPage extends React.Component {
         return (
             <div className="">
                 <Navbar></Navbar>
-                <div className="jumbotron">
+                <div className=" jumbotron-akun">
                     <div className='d-flex flex justify-content-center'>
                         <h1>Profil Saya</h1>
                     </div>
@@ -82,13 +91,17 @@ class AkunPage extends React.Component {
                                             </tr>
                                         </table>
                                         <hr />
-                                        <div className='center'>
-                                            <a className="btn btn-outline twobutton" onClick={() => this.redirectUbahPasswordPage()}>
-                                                Ubah Password
-                                            </a>
-                                            <a className="btn btn-blue twobutton" onClick={() => this.redirectUbahPasswordPage()}>
-                                                Ubah Profil
-                                            </a>
+                                        <div className='col'>
+                                            <div className='d-flex flex justify-content-center my-3'>
+                                                <a className="twobutton btn btn-outline-red" onClick={this.redirectUbahProfilPage}>
+                                                    Ubah Profil
+                                                </a>
+                                            </div>
+                                            {/* <div className='d-flex flex justify-content-center my-3'>
+                                                <a  className="twobutton btn btn-outline-red">
+                                                    Ubah Password
+                                                </a>
+                                            </div>                                             */}
                                         </div>
                                     </div>
                                 </div>

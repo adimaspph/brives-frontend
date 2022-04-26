@@ -22,7 +22,6 @@ function LoginPage() {
     };
 
     const handlerLogin = () => {
-        console.log("melakukan login");
         APIConfig.post("/api/user/login", {
             username: username,
             password: password,
@@ -33,10 +32,21 @@ function LoginPage() {
             if (response.data.token) {
                 localStorage.setItem("user", JSON.stringify({ login: true, token: response.data.token, role: response.data.role[0].authority }));
                 if(JSON.parse(localStorage.getItem("user")).role === 'PELAJAR') {
-                    window.location = "/";
+                    setTimeout(
+                        function() {
+                            window.location = '/';
+                        }
+                        .bind(this),
+                        2000
+                    );
                 } else {
-                    console.log(JSON.parse(localStorage.getItem("user")).role)
-                    window.location = "/profil-saya";
+                    setTimeout(
+                        function() {
+                            window.location = "/profil-saya";
+                        }
+                        .bind(this),
+                        2000
+                    );
                 }
                 
             }

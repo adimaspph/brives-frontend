@@ -90,8 +90,13 @@ function RegisterPage() {
                 setErrMessage(response.data.message);
                 setHasError(true);
             } else {
-                setTimeout(function(){}, 4000)
-                console.log(response)
+                setTimeout(
+                    function() {
+                        window.location.href = '/login';
+                    }
+                    .bind(this),
+                    2000
+                );
             }
 		});
     }

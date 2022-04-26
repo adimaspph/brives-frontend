@@ -25,6 +25,7 @@ class EditPengguna extends React.Component {
             password:"",
             tarif:'0',
             listMapel: [],
+            selectedMapel:[],
             listRole: ["ADMIN","PENGAJAR","STAF_KEUANGAN","STAF_OPERASIONAL","MANAJEMEN"],
             allMapel: {
                 status: 200,
@@ -37,7 +38,6 @@ class EditPengguna extends React.Component {
         this.handleRoleChange = this.handleRoleChange.bind(this);
         this.handleNamaLengkapChange = this.handleNamaLengkapChange.bind(this);
         this.handleEmailChange = this.handleEmailChange.bind(this);
-        this.handlePasswordChange = this.handlePasswordChange.bind(this);
         this.handleNoHPChange = this.handleNoHPChange.bind(this);
         this.handleNoPegawaiChange = this.handleNoPegawaiChange.bind(this);
         this.handleTarifChange = this.handleTarifChange.bind(this);
@@ -46,23 +46,18 @@ class EditPengguna extends React.Component {
 
     handleChange = async (e) => {
         e.preventDefault();
-        this.setState({ hasError : false });
+        this.setState({ hasError : false });  
 
-        if (!(this.role === "PENGAJAR")) {
-            this.setState({ listMapel : [] });
-            this.setState({ tarif : 0 });
-        }         
-
-        APIConfig.post("/api/v1/user/update/" + this.state.username, {
-			username: this.username,
-			namaLengkap: this.namaLengkap,
-            email: this.email,
-            password: this.password,
-            noHP: this.noHP,
-            role: this.role,
-            noPegawai: this.noPegawai,
-            tarif: this.tarif,
-            listMapel: this.listMapel
+        APIConfig.post("/api/v1/user/update/staf/" + this.state.username, {
+			username: this.state.username,
+			namaLengkap: this.state.namaLengkap,
+            email: this.state.email,
+            password: this.state.password,
+            noHP: this.state.noHP,
+            role: this.state.role,
+            noPegawai: this.state.noPegawai,
+            tarif: this.state.tarif,
+            listMapel: this.state.listMapel
 		})
         .then((response) => {
             this.setState({ hasSubmit : false });
@@ -72,10 +67,16 @@ class EditPengguna extends React.Component {
                 this.setState({ errMessage : response.data.message });
                 this.setState({ hasError : true });
             } else {
-                setTimeout(function(){}, 4000); 
-                window.location.href = '/pengguna'; 
+                setTimeout(
+                    function() {
+                        window.location.href = '/pengguna';
+                    }
+                    .bind(this),
+                    2000
+                );
             }
 		});
+        console.log(this.state.listMapel)
     }
 
 
@@ -101,12 +102,25 @@ class EditPengguna extends React.Component {
             this.setState({ noPegawai : response.data.result.staff.noPegawai });
             this.setState({ noHP : response.data.result.noHP });
             this.setState({ email : response.data.result.email });
-            //password blm ada di jsonnya
+            this.setState({ tarif : response.data.result.staff.tarif });
+            this.setState({ selectedMapel : response.data.result.staff.listMapel });
+
+            this.state.selectedMapel.forEach(element => {
+                this.setState({
+                    listMapel: this.state.listMapel.concat(element.namaMapel)
+                })
+            });
+
+            console.log(this.state.listMapel);
+           
         });
 
         APIConfig.get("/api/v1/user/role/" + this.state.username)
         .then((response) => {
             this.setState({ role : response.data.result.namaRole });
+            if (this.state.role === "PENGAJAR") {
+                this.setState({ pengajarShown: true })
+            }
         });
     };
 
@@ -123,6 +137,22 @@ class EditPengguna extends React.Component {
     handleNamaLengkapChange = (e) => {
         e.preventDefault();
         this.setState({ namaLengkap : e.target.value });
+    }
+
+    handleCheckBoxChange = async (e) => {
+        const target = e.target;
+        const value = target.checked
+        const name = target.name;
+
+        value ? 
+        this.setState({
+            listMapel: this.state.listMapel.concat([name])
+        }) :
+        this.setState({
+            listMapel: this.state.listMapel.filter(mapel => mapel!==name)
+        })
+
+        console.log(this.state.listMapel)
     }
 
     handleEmailChange = (e) => {
@@ -163,7 +193,7 @@ class EditPengguna extends React.Component {
                         <div className="akun-card">
                             <h3 className='judul-form'>Formulir Edit Pengguna</h3>
                             {this.state.hasError&&this.state.hasSubmit? (<ErrorNotification text={this.state.errMessage}/>) : ("")}
-                            {!this.state.hasError&&this.state.hasSubmit? (<NeutralNotification text="Akun berhasil terbuat"/>) : ("")}
+                            {!this.state.hasError&&this.state.hasSubmit? (<NeutralNotification text="Akun staff berhasil diubah!"/>) : ("")}
                             <div>
                                 <form onSubmit={this.handleChange}>
                                     <div>
@@ -198,7 +228,7 @@ class EditPengguna extends React.Component {
                                         <label htmlFor="">Email<span className='star'>*</span> </label>
                                         <input value={this.state.email} onChange={this.handleEmailChange} type="email" name="email" className='form-control' required />
                                     </div>
-                                    {this.pengajarShown && 
+                                    {this.state.pengajarShown && 
                                     <div>
                                         <div>
                                             <label htmlFor="">Tarif<span className='star'>*</span> </label>
@@ -208,15 +238,13 @@ class EditPengguna extends React.Component {
                                             <label htmlFor="">Mata Pelajaran<span className='star'>*</span> </label>
                                             {this.state.allMapel?.result.map((mapel) => (
                                                 <div className='checkbox-mapel' key={mapel.namaMapel}>
-                                                    <input onChange={(e)=> {
-                                                        if (e.target.checked) {
-                                                            this.setState({ listMapel : [...this.state.listMapel,mapel.namaMapel,] });
-                                                        } else {
-                                                            this.setState({ listMapel : this.state.listMapel.filter((mapel) => mapel !== mapel.namaMapel) });
-                                                        }
-                                                        
-                                                    }} 
-                                                    type="checkbox" value={mapel.namaMapel} />
+                                                    <input 
+                                                    onChange={this.handleCheckBoxChange} 
+                                                    type="checkbox"
+                                                    checked={this.state.listMapel.some(precheckedMapel => precheckedMapel === mapel.namaMapel)}
+                                                    value={mapel.namaMapel}
+                                                    name={mapel.namaMapel}
+                                                    id={mapel.namaMapel} />
                                                     {mapel.namaMapel}
                                                 </div>
                                                 

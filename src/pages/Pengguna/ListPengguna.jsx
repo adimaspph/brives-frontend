@@ -103,13 +103,15 @@ class ListPengguna extends Component {
                         <option value="4">STAF_OPERASIONAL</option>
                         <option value="5">MANAGER</option>
                     </select>
-
-                    <a className="btn btn-blue twobutton" onClick={this.addPengguna}>
-                        + Tambah Pengguna
-                    </a>
+                    <div className='mt-1 pt-1 twobutton'>
+                        <a className="btn btn-blue" onClick={this.addPengguna}>
+                            + Tambah Pengguna
+                        </a>
+                    </div>
+                    
                 </div>
 
-                <div className=''>
+                <div className='mt-2'>
                     <table className='table-max table-none' id='myTable'>
                         <thead>
                             <tr className=''>
@@ -136,14 +138,19 @@ class ListPengguna extends Component {
                                             <td> {satuMapel.staff.noPegawai} </td>
                                             <td> {satuMapel.noHP} </td>
                                             <td>
-                                                <div>
-                                                    <a className="btn btn-outline" onClick={() => this.lihatPengguna(satuMapel.username)}>
-                                                        Lihat
-                                                    </a>
-
-                                                    <a className="btn btn-outline" onClick={() => this.editPengguna(satuMapel.username)}>
-                                                        Edit
-                                                    </a>
+                                                <div className='col'>
+                                                    <div className='my-2 d-flex flex justify-content-center'>
+                                                        <a className="btn btn-outline" onClick={() => this.lihatPengguna(satuMapel.username)}>
+                                                            Lihat
+                                                        </a>
+                                                    </div>
+                                                    
+                                                    <div className='my-2 d-flex flex justify-content-center'>
+                                                        <a className="btn btn-outline" onClick={() => this.editPengguna(satuMapel.username)}>
+                                                            Edit
+                                                        </a>
+                                                    </div>
+                                                    
                                                 </div>
                                                 
                                             </td>
