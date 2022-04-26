@@ -61,7 +61,7 @@ Deploy-to-digitalocean:
         - eval "$(ssh-agent -s)"
         - ssh-add ~/.ssh/id_rsa
         - ssh-keyscan -H 'gitlab.com' >> ~/.ssh/known_hosts
-        - chmod +x ./deploy-staging.sh
+        # - chmod +x ./deploy-staging.sh
 
         # - echo "REPOSITORY_URL=\"$REPOSITORY_URL\"" | tr -d '\r' >> .env
         # - echo "NODE_ENV=production" | tr -d '\r' >> .env
@@ -71,7 +71,7 @@ Deploy-to-digitalocean:
         # - echo "AWS_SECRET_ACCESS_KEY=\"$AWS_SECRET_ACCESS_KEY\"" | tr -d '\r' >> .env
 
         - scp -o StrictHostKeyChecking=no test.txt root@$SSH_IP:/testscp
-        - bash ./deploy-staging.sh
+        # - bash ./deploy-staging.sh
 
         - scp -o StrictHostKeyChecking=no -r ./build root@$SSH_IP:/frontend
         - scp -p22 test.txt root@$SSH_IP:/testscp
