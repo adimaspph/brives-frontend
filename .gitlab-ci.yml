@@ -21,7 +21,8 @@ build:
         paths:
             - build
             - node_modules/
-        
+    only:
+        - adimas
 
 Deploy-to-heroku:
     image: ruby:2.7.1
@@ -41,8 +42,9 @@ deploy:
     before_script:
         - echo "deploying app"
     script:
-        - scp -o StrictHostKeyChecking=no -i $DIGITALOCEAN_PRIVATE_KEY -r ./build root@157.245.63.146:/frontend
-    
+        - scp -o StrictHostKeyChecking=no -i $DIGITALOCEAN_PRIVATE_KEY -r ./build root@$SSH_IP:/frontend
+    only:
+        - adimas
 
 # install_dependencies:
 #     stage: build
