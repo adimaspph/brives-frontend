@@ -1,11 +1,36 @@
-import "./Footer.css"
+
 import React, { Component, useState, useEffect } from 'react';
 
 import { Link } from "react-router-dom";
 
+import "./Footer2.css"
+
 export default function Footer(props) {
 
 	const [roleUser, setRoleUser] = useState("")
+
+	useEffect(async () => {
+		// checkUserRole()
+	}, [])
+
+	const checkUserRole = () => {
+		const userRaw = localStorage.getItem("user")
+		if (userRaw) {
+			const user = JSON.parse(userRaw)
+			setRoleUser(user.role)
+			if (user.role === 'STAF_OPERASIONAL') {
+
+			} else {
+				props.history.push('/403');
+			}
+		} else {
+			props.history.push('/login');
+		}
+	}
+
+	const handlerLogout = () => {
+		localStorage.removeItem("user");
+	};
 
 
 	return (
@@ -57,3 +82,5 @@ export default function Footer(props) {
 
 	);
 }
+
+export const MemoizedFooter = React.memo(Footer);
