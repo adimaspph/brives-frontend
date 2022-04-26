@@ -39,7 +39,12 @@ Deploy-to-digitalocean:
     stage: deploy-digitalocean
     image: tetraweb/php
     before_script:
-        # - ....
+        - apt-get update
+        - apt-get install zip unzip
+        - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+        - php composer-setup.php
+        - php -r "unlink('composer-setup.php');"
+        - php composer.phar install
         - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
         - mkdir -p ~/.ssh
         - eval $(ssh-agent -s)
