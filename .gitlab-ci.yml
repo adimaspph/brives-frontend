@@ -4,13 +4,26 @@ before_script:
     - apt-get update -qq && apt-get install
 
 stages:
+    - build
     - deploy-heroku
-    # - build
-    # - deploy-digitalocean
+    - deploy-digitalocean
 
-# cache:
-#     paths:
-#         - node_modules/
+build:
+    stage: build
+    image: node
+    script: 
+        - echo "Start building App"
+        - npm install
+        - CI=false npm run build
+        - echo "Build successfully!"
+    artifacts:
+        expire_in: 1 hour
+        paths:
+            - build
+            - node_modules/
+    only:
+        - staging
+        - main
 
 Deploy-to-heroku:
     image: ruby:2.7.1
@@ -23,6 +36,18 @@ Deploy-to-heroku:
         - dpl --provider=heroku --app=${DEPLOYMENT_NAME_STAGING} --api-key=${HEROKU_API}
     only:
         - staging
+
+deploy:
+    stage: deploy-digitalocean
+    image: kroniak/ssh-client
+    before_script:
+        - echo "deploying app"
+    script:
+        - ssh -i $DIGITALOCEAN_PRIVATE_KEY root@157.245.63.146
+        - scp -o StrictHostKeyChecking=no -i $DIGITALOCEAN_PRIVATE_KEY -r ~/build root@157.245.63.146:/frontend
+    only:
+        - staging
+        - main
 
 # install_dependencies:
 #     stage: build
