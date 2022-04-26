@@ -6,7 +6,7 @@ import ErrorNotification from "../../components/Notification/ErrorNotification";
 import NeutralNotification from '../../components/Notification/NeutralNotification';
 import APIConfig from "../../api/APIConfig";
 import "./AkunPage.css";
-import { generatePath } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 class AkunPage extends React.Component {
     constructor(props) {
@@ -22,11 +22,12 @@ class AkunPage extends React.Component {
         this.redirectUbahPasswordPage = this.redirectUbahPasswordPage.bind(this);
     }
     
-    redirectUbahProfilPage() {
-        console.log("masuk")
+    redirectUbahProfilPage = (e) => {
+        e.preventDefault();
         this.props.history.push("/akun/profil/edit");
     }
-    redirectUbahPasswordPage () {
+    redirectUbahPasswordPage = (e) => {
+        e.preventDefault();
         this.props.history.push("/akun/profil/ganti-password");
     }
     componentDidMount() {
@@ -44,7 +45,7 @@ class AkunPage extends React.Component {
         return (
             <div className="">
                 <Navbar></Navbar>
-                <div className="jumbotron jumbotron-akun">
+                <div className=" jumbotron-akun">
                     <div className='d-flex flex justify-content-center'>
                         <h1>Profil Saya</h1>
                     </div>
@@ -83,18 +84,16 @@ class AkunPage extends React.Component {
                                         </table>
                                         <hr />
                                         <div className='col'>
-                                        <div className='d-flex flex justify-content-center my-3'>
-                                                <a className="btn btn-outline" onClick={() => this.redirectUbahPasswordPage()}>
+                                            <div className='d-flex flex justify-content-center my-3'>
+                                                <button className="twobutton btn btn-red" onClick={() => this.redirectUbahProfilPage}>
                                                     Ubah Profil
-                                                </a>
+                                                </button>
                                             </div>
                                             <div className='d-flex flex justify-content-center my-3'>
-                                                <a className="btn btn-outline" onClick={() => this.redirectUbahPasswordPage()}>
+                                                <button className="twobutton btn btn-red btn-outline-red" onClick={() => this.redirectUbahPasswordPage}>
                                                     Ubah Password
-                                                </a>
-                                            </div>
-                                            
-                                            
+                                                </button>
+                                            </div>                                            
                                         </div>
                                     </div>
                                 </div>
