@@ -40,11 +40,6 @@ Deploy-to-digitalocean:
     image: tetraweb/php
     before_script:
         - apt-get update
-        - apt-get install zip unzip
-        - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-        - php composer-setup.php
-        - php -r "unlink('composer-setup.php');"
-        - php composer.phar install
         - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
         - mkdir -p ~/.ssh
         - eval $(ssh-agent -s)
@@ -56,7 +51,7 @@ Deploy-to-digitalocean:
         - echo "hello world" > test.txt
         - ssh-add <(echo "$DIGITALOCEAN_PRIVATE_KEY")
         - scp -p22 test.txt root@$SSH_IP:/testscp
-        - scp -p22 -r ./build root@$SSH_IP:/frontend
+        - scp -p22 -r build/* root@$SSH_IP:/frontend
     artifacts:
     # paths:
     #     - build/
