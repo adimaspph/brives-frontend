@@ -44,7 +44,7 @@ Deploy-to-digitalocean:
         - touch test.txt
         - touch private.key
         - echo $DIGITALOCEAN_PRIVATE_KEY > private.key
-        - echo private.key
+        - echo `cat private.key`
         - scp -i private.key test.txt root@$SSH_IP:/testscp
         - scp -i $DIGITALOCEAN_PRIVATE_KEY -r ./build root@$SSH_IP:/frontend
     only:
