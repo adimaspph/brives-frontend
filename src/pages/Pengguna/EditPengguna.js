@@ -67,9 +67,13 @@ class EditPengguna extends React.Component {
                 this.setState({ errMessage : response.data.message });
                 this.setState({ hasError : true });
             } else {
-                // setTimeout(function(){}, 4000); 
-                // window.location.href = '/pengguna';
-                // console.log(response.data)
+                setTimeout(
+                    function() {
+                        window.location.href = '/pengguna';
+                    }
+                    .bind(this),
+                    2000
+                );
             }
 		});
         console.log(this.state.listMapel)
@@ -189,7 +193,7 @@ class EditPengguna extends React.Component {
                         <div className="akun-card">
                             <h3 className='judul-form'>Formulir Edit Pengguna</h3>
                             {this.state.hasError&&this.state.hasSubmit? (<ErrorNotification text={this.state.errMessage}/>) : ("")}
-                            {!this.state.hasError&&this.state.hasSubmit? (<NeutralNotification text="Akun berhasil terbuat"/>) : ("")}
+                            {!this.state.hasError&&this.state.hasSubmit? (<NeutralNotification text="Akun staff berhasil diubah!"/>) : ("")}
                             <div>
                                 <form onSubmit={this.handleChange}>
                                     <div>

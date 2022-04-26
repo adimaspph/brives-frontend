@@ -71,6 +71,9 @@ class EditAkunPage extends React.Component {
 
     handleChange = (e) => {
         e.preventDefault();
+        this.setState({ hasSubmit: false })
+        this.setState({ hasError: false })
+        this.setState({ hasSubmit: true })
         APIConfig.post("/api/v1/user/update/"+this.state.username, {
             username: this.state.username,
 			namaLengkap: this.state.namaLengkap,
@@ -85,12 +88,27 @@ class EditAkunPage extends React.Component {
             this.setState({ noHP: response.data.result.noHP })
             this.setState({ email: response.data.result.email })
             this.setState({ asalSekolah: response.data.result.siswa.asalSekolah })
+
+            setTimeout(
+                function() {
+                    window.location.href = '/akun/profil';
+                }
+                .bind(this),
+                2000
+            );
+
+            
+        })
+        .catch((error) => {
+            this.setState({ hasError: true })
         })
     }
 
     render() {
         return (
             <div className="">
+                {this.state.hasError&&this.state.hasSubmit? (<ErrorNotification text="Akun gagal diubah, silahkan coba lagi!"/>) : ("")}
+                {!this.state.hasError&&this.state.hasSubmit? (<NeutralNotification text="Akun Anda berhasil diubah!"/>) : ("")}
                 <Navbar></Navbar>
                 <div className="jumbotron-akun">
                     <div className='d-flex flex justify-content-center'>
@@ -119,8 +137,8 @@ class EditAkunPage extends React.Component {
                                                 <input value={this.state.asalSekolah} onChange={this.handleAsalSekolahChange} type="text" name="asalSekolah" className='form-control' required />
                                             </div>
                                             <div className='box-right mt-4'>
-                                                <a className="btn btn-outline-red twobutton" onClick={this.cancel}>Kembali</a>
-                                                <button type="submit" className="twobutton btn btn-red">Update</button>
+                                                <a className="btn btn-outline-blue twobutton" onClick={this.cancel}>Kembali</a>
+                                                <button type="submit" className="twobutton btn btn-blue">Update</button>
                                             </div>
                                         
                                         </form>
