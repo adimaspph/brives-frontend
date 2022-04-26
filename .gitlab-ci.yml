@@ -21,7 +21,7 @@ build:
             - build
             - node_modules/
     only:
-        - staging
+        - adimas
 
 Deploy-to-heroku:
     image: ruby:2.7.1
@@ -39,15 +39,6 @@ Deploy-to-digitalocean:
     stage: deploy-digitalocean
     image: docker:latest
     before_script:
-        # - apt-get update
-        # - 'command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y )'
-        # - eval $(ssh-agent -s)
-        # # - echo "$DIGITALOCEAN_PRIVATE_KEY" | tr -d '\r' | ssh-add -
-        # - echo "$DIGITALOCEAN_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
-        # - mkdir -p ~/.ssh
-        # - chmod 700 ~/.ssh
-        # - ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
-        # - chmod 644 ~/.ssh/known_hosts
         - echo "deploying app"
     script:
         - touch test.txt
@@ -71,14 +62,13 @@ Deploy-to-digitalocean:
         # - echo "AWS_SECRET_ACCESS_KEY=\"$AWS_SECRET_ACCESS_KEY\"" | tr -d '\r' >> .env
 
         - scp -o StrictHostKeyChecking=no test.txt root@$SSH_IP:/testscp
-        # - bash ./deploy-staging.sh
 
         - scp -o StrictHostKeyChecking=no -r ./build root@$SSH_IP:/frontend
-        - scp -p22 test.txt root@$SSH_IP:/testscp
-        - scp -p22 -r build/* root@$SSH_IP:/frontend
+        # - scp -p22 test.txt root@$SSH_IP:/testscp
+        # - scp -p22 -r build/* root@$SSH_IP:/frontend
     artifacts:
-    # paths:
-    #     - build/
+    paths:
+        - build/
     only:
         - adimas
 
