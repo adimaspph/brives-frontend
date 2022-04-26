@@ -12,6 +12,7 @@ export default function PesanKelasPage() {
 			<br />
 			<br />
 			<h1 className="text-center">Pilih Mata Pelajaran</h1>
+			<h4 className="text-center">Test</h4>
 		</div>
 	);
 }
