@@ -39,8 +39,8 @@ Deploy-to-digitalocean:
     stage: deploy-digitalocean
     image: kroniak/ssh-client
     before_script:
-        - sudo apt update
-        - sudo apt install openssh-server
+        - apt-get update
+        - apt-get install openssh-server
         - echo "deploying app"
     script:
         - touch test.txt
