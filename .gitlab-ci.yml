@@ -66,9 +66,6 @@ Deploy-to-digitalocean:
         - scp -o StrictHostKeyChecking=no -r ./build root@$SSH_IP:/frontend
         # - scp -p22 test.txt root@$SSH_IP:/testscp
         # - scp -p22 -r build/* root@$SSH_IP:/frontend
-    artifacts:
-    paths:
-        - build/
     only:
         - adimas
 
