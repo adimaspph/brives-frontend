@@ -33,6 +33,7 @@ export default function Navbar(props) {
 	return (
 		<div>
 			<nav className="navbar navbar-expand-lg navbar-dark">
+				
 				<div className="navbar-menu">
 					<Link className="navbar-logo" to="/">
 						<img src="/logo-navbar.png" width={60} alt="" />

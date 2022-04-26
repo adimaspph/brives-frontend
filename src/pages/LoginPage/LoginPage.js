@@ -7,7 +7,7 @@ import APIConfig from "../../api/APIConfig";
 import ErrorNotification from "../../components/Notification/ErrorNotification";
 import NeutralNotification from '../../components/Notification/NeutralNotification';
 import { Link } from "react-router-dom";
-
+import Footer from "../../components/Footer/Footer";
 
 function LoginPage() {
     const [username, setUsername] = useState("");
@@ -129,16 +129,7 @@ function LoginPage() {
                 </div>
             </div>
 
-            {/* footer */}
-            {/* <div className="footer">
-                <div className="footer-menu">
-                    <Link className="footer-logo" to="/">
-                        <img src="/logo-navbar.png" width={60} alt="" />
-                    </Link>
-                    <p className="text-footer">BTA Group © 2022</p>
-                </div>
-
-            </div> */}
+            <Footer></Footer>
         </div>
     );
 }
