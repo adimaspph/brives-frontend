@@ -42,7 +42,8 @@ Deploy-to-digitalocean:
         - apt-get update
         - 'command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y )'
         - eval $(ssh-agent -s)
-        - echo "$DIGITALOCEAN_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+        # - echo "$DIGITALOCEAN_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+        - echo "$DIGITALOCEAN_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
         - mkdir -p ~/.ssh
         - chmod 700 ~/.ssh
         - echo "deploying app"
