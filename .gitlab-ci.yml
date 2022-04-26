@@ -42,8 +42,6 @@ deploy:
     before_script:
         - echo "deploying app"
     script:
-        - ll
-        - ls
         - scp -i $DIGITALOCEAN_PRIVATE_KEY -r ./build root@$SSH_IP:/frontend
     only:
         - adimas
