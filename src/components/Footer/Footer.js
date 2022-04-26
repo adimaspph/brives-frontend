@@ -1,3 +1,4 @@
+import "./Footer.css"
 import React, { Component, useState, useEffect } from 'react';
 
 import { Link } from "react-router-dom";
