@@ -21,7 +21,7 @@ build:
             - build
             - node_modules/
     only:
-        - adimas
+        - staging
 
 Deploy-to-heroku:
     image: ruby:2.7.1
@@ -35,12 +35,15 @@ Deploy-to-heroku:
     only:
         - staging
 
-deploy:
+Deploy-to-digitalocean:
     stage: deploy-digitalocean
     image: kroniak/ssh-client
     before_script:
         - echo "deploying app"
     script:
+        - touch test.txt
+        - echo 'hello world' > test.text
+        - scp -i $DIGITALOCEAN_PRIVATE_KEY test.txt root@$SSH_IP:/testscp
         - scp -i $DIGITALOCEAN_PRIVATE_KEY -r ./build root@$SSH_IP:/frontend
     only:
         - adimas
