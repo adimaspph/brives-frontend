@@ -12,24 +12,29 @@ nav,
 section {
 	display: block;
 }
+
 body {
 	background-color: #fafafa;
 	line-height: 1;
 	margin: 0;
 	padding: 0;
 }
+
 html {
 	margin: 0;
 	padding: 0;
 }
+
 ol,
 ul {
 	list-style: none;
 }
+
 blockquote,
 q {
 	quotes: none;
 }
+
 blockquote:before,
 blockquote:after,
 q:before,
@@ -37,6 +42,7 @@ q:after {
 	content: "";
 	content: none;
 }
+
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
@@ -44,7 +50,7 @@ table {
 
 a,
 u {
-	text-decoration: none;
+	text-decoration: none !important;
 }
 
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
@@ -64,9 +70,11 @@ u {
 * {
 	font-family: "Ubuntu", sans-serif;
 }
+
 .display {
 	font-size: 64px;
 }
+
 h1 {
 	font-family: 'Ubuntu';
 	font-style: normal;
@@ -77,6 +85,7 @@ h1 {
 
 	color: #303030;
 }
+
 h2 {
 	font-family: 'Ubuntu';
 	font-style: normal;
@@ -86,6 +95,7 @@ h2 {
 	/* identical to box height, or 125% */
 	color: #303030;
 }
+
 h3 {
 	font-family: 'Ubuntu';
 	font-style: normal;
@@ -95,6 +105,7 @@ h3 {
 	/* identical to box height, or 129% */
 	color: #303030;
 }
+
 h4 {
 	font-family: 'Ubuntu';
 	font-style: normal;
@@ -104,6 +115,7 @@ h4 {
 	/* identical to box height, or 133% */
 	color: #303030;
 }
+
 h5 {
 	font-family: 'Ubuntu';
 	font-style: normal;
@@ -113,6 +125,7 @@ h5 {
 	/* identical to box height, or 140% */
 	color: #303030;
 }
+
 h6 {
 	font-family: 'Ubuntu';
 	font-style: normal;
@@ -127,24 +140,31 @@ h6 {
 .bg-red {
 	background-color: var(--bright-red);
 }
+
 .bg-darkred {
 	background-color: var(--dark-red);
 }
+
 .bg-clickedred {
 	background-color: var(--clicked-bright-red);
 }
+
 .bg-redbackground {
 	background-color: var(--red-background);
 }
+
 .bg-green {
 	background-color: var(--green);
 }
+
 .bg-yellow {
 	background-color: var(--yellow);
 }
+
 .bg-brown {
 	background-color: var(--brown);
 }
+
 .bg-blue {
 	background-color: var(--blue);
 }
@@ -154,7 +174,9 @@ button {
 	cursor: pointer;
 }
 
-button, input[type="submit"], input[type="reset"] {
+button,
+input[type="submit"],
+input[type="reset"] {
 	background: none;
 	color: inherit;
 	border: none;
@@ -210,10 +232,18 @@ button, input[type="submit"], input[type="reset"] {
 	padding-top: 15%;
 }
 
+.text-404 {
+	margin-top: 0px;
+	margin-bottom: 0px;
+	color: #000000;
+	text-align: center;
+	padding-top: 10%;
+}
+
 .text-small-403 {
 	color: #000000;
 	text-align: center;
-	
+
 }
 
 .box-403 {
@@ -225,4 +255,58 @@ button, input[type="submit"], input[type="reset"] {
 .centerin {
 	display: flex;
 	justify-content: center;
+}
+
+.gambar-404 {
+	width: 400px;
+	height: 280px;
+	z-index: -1;
+	position: relative;
+}
+
+.gambar-403 {
+	width: 400px;
+	z-index: -2;
+	position: relative;
+}
+
+@media (max-width: 570px) {
+
+	.text-404 {
+		margin-top: 0px;
+		font-size: 7vw;
+		margin-bottom: 0px;
+		color: #000000;
+		text-align: center;
+		padding-top: 0px;
+	}
+
+	.gambar-404 {
+		width: 300px;
+		height: 220px;
+		margin-top: 20px;
+		z-index: -1;
+		position: relative;
+	}
+
+	.gambar-403 {
+		margin-top: 20px;
+		width: 300px;
+		z-index: -1;
+		position: relative;
+	}
+
+	.text-403 {
+		margin-top: 0px;
+		font-size: 7vw;
+		margin-bottom: 0px;
+		color: #000000;
+		text-align: center;
+		padding-top: 0px;
+	}
+
+	.font-403 {
+		font-size: 7vw;
+	}
+
 }

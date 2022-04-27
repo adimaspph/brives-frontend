@@ -1,12 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye } from "@fortawesome/free-solid-svg-icons";
+import React from 'react';
 import Navbar from "../../components/Navbar/Navbar";
-import ErrorNotification from "../../components/Notification/ErrorNotification";
-import NeutralNotification from '../../components/Notification/NeutralNotification';
 import APIConfig from "../../api/APIConfig";
 import "./AkunPage.css";
-import { generatePath } from 'react-router-dom';
+import Footer from "../../components/Footer/Footer";
 
 class AkunPage extends React.Component {
     constructor(props) {
@@ -22,14 +18,23 @@ class AkunPage extends React.Component {
         this.redirectUbahPasswordPage = this.redirectUbahPasswordPage.bind(this);
     }
     
-    redirectUbahProfilPage() {
-        console.log("masuk")
+    redirectUbahProfilPage = (e) => {
+        e.preventDefault();
+        console.log("ke klik kok bang")
         this.props.history.push("/akun/profil/edit");
     }
-    redirectUbahPasswordPage () {
+    redirectUbahPasswordPage = (e) => {
+        e.preventDefault();
         this.props.history.push("/akun/profil/ganti-password");
     }
     componentDidMount() {
+        // authorization
+        if (localStorage.getItem("user") != null) {
+            if(!(JSON.parse(localStorage.getItem("user")).role === 'PELAJAR')) {
+                window.location='/403';
+            }
+        }
+
         APIConfig.get("/api/v1/user/auth/")
         .then((response) => {
             this.setState({ username: response.data.result.username })
@@ -44,7 +49,7 @@ class AkunPage extends React.Component {
         return (
             <div className="">
                 <Navbar></Navbar>
-                <div className="jumbotron jumbotron-akun">
+                <div className=" jumbotron-akun">
                     <div className='d-flex flex justify-content-center'>
                         <h1>Profil Saya</h1>
                     </div>
@@ -83,18 +88,16 @@ class AkunPage extends React.Component {
                                         </table>
                                         <hr />
                                         <div className='col'>
-                                        <div className='d-flex flex justify-content-center my-3'>
-                                                <a className="btn btn-outline" onClick={() => this.redirectUbahPasswordPage()}>
+                                            <div className='d-flex flex justify-content-center my-3'>
+                                                <a className="twobutton button button-outline" onClick={this.redirectUbahProfilPage}>
                                                     Ubah Profil
                                                 </a>
                                             </div>
-                                            <div className='d-flex flex justify-content-center my-3'>
-                                                <a className="btn btn-outline" onClick={() => this.redirectUbahPasswordPage()}>
+                                            {/* <div className='d-flex flex justify-content-center my-3'>
+                                                <a  className="twobutton btn btn-outline-red">
                                                     Ubah Password
                                                 </a>
-                                            </div>
-                                            
-                                            
+                                            </div>                                             */}
                                         </div>
                                     </div>
                                 </div>
@@ -102,6 +105,7 @@ class AkunPage extends React.Component {
                         </div>
                     </div>
                 </div>
+                <Footer></Footer>
             </div>
         );
     }

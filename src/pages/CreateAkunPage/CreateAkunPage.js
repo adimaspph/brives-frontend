@@ -62,8 +62,14 @@ function CreateAkunPage() {
                 setErrMessage(response.data.message);
                 setHasError(true);
             } else {
-                setTimeout(function(){}, 4000); 
-                window.location.href = '/pengguna'; 
+                setTimeout(
+                    function() {
+                        window.location.href = '/pengguna'; 
+                    }
+                    .bind(this),
+                    2000
+                );
+                
             }
 		});
     }
@@ -186,8 +192,11 @@ function CreateAkunPage() {
                                 </div>
                                 <div>
                                     <label htmlFor="">Password<span className='star'>*</span> </label>
-                                    <input id="create-pass" onChange={handlePasswordChange} type={passwordShown ? "text" : "password"} name="password" className='form-control' required />
-                                    <i id="eyepas" onClick={togglePasswordVisiblity}>{eye}</i>
+                                    <div className='d-flex flex justify-content-between'>
+                                        <input id="create-pass" onChange={handlePasswordChange} type={passwordShown ? "text" : "password"} name="password" className='form-control' required />
+                                        <i id="eyepas" onClick={togglePasswordVisiblity}>{eye}</i>
+                                    </div>
+                                    
                                 </div>
                                 {pengajarShown && 
                                 <div>
@@ -217,10 +226,10 @@ function CreateAkunPage() {
                                     </div>
                                 </div>}
                                 <div className='box-right'>
-                                <a className="btn btn-outline-blue twobutton" onClick={cancel}>
+                                <a className="button button-outline-blue twobutton" onClick={cancel}>
                                                 Kembali
                                             </a>
-                                    <button type="submit" className="twobutton btn btn-blue">Simpan</button>
+                                    <button type="submit" className="twobutton button button-blue">Simpan</button>
                                 </div>
 
                                 

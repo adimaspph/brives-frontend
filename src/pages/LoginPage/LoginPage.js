@@ -7,7 +7,7 @@ import APIConfig from "../../api/APIConfig";
 import ErrorNotification from "../../components/Notification/ErrorNotification";
 import NeutralNotification from '../../components/Notification/NeutralNotification';
 import { Link } from "react-router-dom";
-
+import Footer from "../../components/Footer/Footer";
 
 function LoginPage() {
     const [username, setUsername] = useState("");
@@ -22,7 +22,6 @@ function LoginPage() {
     };
 
     const handlerLogin = () => {
-        console.log("melakukan login");
         APIConfig.post("/api/user/login", {
             username: username,
             password: password,
@@ -33,10 +32,21 @@ function LoginPage() {
             if (response.data.token) {
                 localStorage.setItem("user", JSON.stringify({ login: true, token: response.data.token, role: response.data.role[0].authority }));
                 if(JSON.parse(localStorage.getItem("user")).role === 'PELAJAR') {
-                    window.location = "/";
+                    setTimeout(
+                        function() {
+                            window.location = '/';
+                        }
+                        .bind(this),
+                        2000
+                    );
                 } else {
-                    console.log(JSON.parse(localStorage.getItem("user")).role)
-                    window.location = "/profil-saya";
+                    setTimeout(
+                        function() {
+                            window.location = "/profil-saya";
+                        }
+                        .bind(this),
+                        2000
+                    );
                 }
                 
             }
@@ -101,17 +111,17 @@ function LoginPage() {
                             </form>
                             <div
                                 onClick={handlerLogin}
-                                className="btn btn-blue fsubmit"
+                                className="button button-blue fsubmit"
                             >
                                 Login
                             </div>
 
 
-                            <Link className="" to="/register">
-                                <div className="register">
-                                    Belum memiliki akun? <span className="star">Daftar Disini</span>
-                                </div>
-                            </Link>
+                            
+                            <div className="register">
+                                <p>Belum memiliki akun? <span className="star"><Link className="" to="/register"> Daftar Disini </Link></span> </p>  
+                            </div>
+                            
 
 
                         </div>
@@ -119,16 +129,7 @@ function LoginPage() {
                 </div>
             </div>
 
-            {/* footer */}
-            {/* <div className="footer">
-                <div className="footer-menu">
-                    <Link className="footer-logo" to="/">
-                        <img src="/logo-navbar.png" width={60} alt="" />
-                    </Link>
-                    <p className="text-footer">BTA Group © 2022</p>
-                </div>
-
-            </div> */}
+            <Footer></Footer>
         </div>
     );
 }

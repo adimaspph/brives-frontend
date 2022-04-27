@@ -125,13 +125,6 @@ class ViewProfilePage extends Component {
 
                                         </div>
                                     ) : ("")}
-
-
-                                    <div className='center'>
-                                        <a className="btn btn-blue twobutton">
-                                            Edit
-                                        </a>
-                                    </div>
                                 </div>
                             </div>
                         </div>

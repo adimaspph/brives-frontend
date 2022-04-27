@@ -5,9 +5,7 @@ before_script:
 
 stages:
     - build
-    - deploy-heroku
-    - test
-    # - deploy-digitalocean
+    - deploy
 
 build:
     stage: build
@@ -15,12 +13,18 @@ build:
     script: 
         - echo "Start building App"
         - npm install
-        - npm build
+        - CI=false npm run build
         - echo "Build successfully!"
+    artifacts:
+        paths:
+            - build
+            - node_modules/
+    only:
+        - staging
 
 Deploy-to-heroku:
     image: ruby:2.7.1
-    stage: deploy-heroku
+    stage: deploy
     script:
         - apt-get update -qy
         - apt-get install -y ruby-dev
@@ -30,15 +34,40 @@ Deploy-to-heroku:
     only:
         - staging
 
-
-test:
-    stage: test
-    image: node
+Deploy-to-digitalocean:
+    stage: deploy
+    image: docker:latest
+    before_script:
+        - echo "deploying app"
     script:
-        - echo "Testing App"
-        - npm install
-        - CI=true npm test
-        - echo "Test successfully!"
+        - touch test.txt
+        - touch private.key
+        - echo "hello world" > test.txt
+
+        - apk add --no-cache bash
+        - mkdir -p ~/.ssh
+        - echo "$DIGITALOCEAN_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+        - chmod 700 ~/.ssh/id_rsa
+        - eval "$(ssh-agent -s)"
+        - ssh-add ~/.ssh/id_rsa
+        - ssh-keyscan -H 'gitlab.com' >> ~/.ssh/known_hosts
+        # - chmod +x ./deploy-staging.sh
+
+        # - echo "REPOSITORY_URL=\"$REPOSITORY_URL\"" | tr -d '\r' >> .env
+        # - echo "NODE_ENV=production" | tr -d '\r' >> .env
+        # - echo "PORT=8080" | tr -d '\r' >> .env
+        # - echo "AWS_ACCESS_KEY_ID=\"$AWS_ACCESS_KEY_ID\"" | tr -d '\r' >> .env
+        # - echo "AWS_DEFAULT_REGION=\"$AWS_DEFAULT_REGION\"" | tr -d '\r' >> .env
+        # - echo "AWS_SECRET_ACCESS_KEY=\"$AWS_SECRET_ACCESS_KEY\"" | tr -d '\r' >> .env
+
+        # - scp -o StrictHostKeyChecking=no test.txt root@$SSH_IP:/testscp
+        - ssh -o StrictHostKeyChecking=no root@$SSH_IP "rm -r /frontend/build"
+        - scp -o StrictHostKeyChecking=no -r ./build root@$SSH_IP:/frontend
+        - ssh -o StrictHostKeyChecking=no root@$SSH_IP "systemctl restart nginx"
+        # - scp -p22 test.txt root@$SSH_IP:/testscp
+        # - scp -p22 -r build/* root@$SSH_IP:/frontend
+    only:
+        - staging
 
 # install_dependencies:
 #     stage: build

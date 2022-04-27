@@ -131,11 +131,11 @@ class DetailPengguna extends Component {
                     <p>Apakah Anda yakin akan menghapus pengguna ini?</p>
                     <div className="modalButtonContainer">
 
-                        <div className="btn btn-outline" onClick={this.handleCancel}>
+                        <div className="button button-outline" onClick={this.handleCancel}>
                             Kembali
                         </div>
 
-                        <div className="btn btn-primary" onClick={this.hapusPengguna}>
+                        <div className="button button-primary" onClick={this.hapusPengguna}>
                             Hapus
                         </div>
                     </div>
@@ -218,10 +218,10 @@ class DetailPengguna extends Component {
                                     <hr />
 
                                     <div className='center'>
-                                        <a className="btn btn-outline twobutton" onClick={this.popup}>
+                                        <a className="button button-outline-blue twobutton" onClick={this.popup}>
                                             Hapus
                                         </a>
-                                        <a className="btn btn-blue twobutton" >
+                                        <a className="button button-blue twobutton" >
                                             Ubah
                                         </a>
                                     </div>

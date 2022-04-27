@@ -28,10 +28,10 @@ class DetailPesanan extends Component {
             namaPengajar: '',
             isClickedAddLink: false,
             isClickedUpdateLink: false,
-            isClickedTolakPesanan:false,
+            isClickedTolakPesanan: false,
             successAdd: false,
             successUpdate: false,
-            isTolak:false,
+            isTolak: false,
         }
 
         this.viewPesanan = this.viewPesanan.bind(this);
@@ -140,7 +140,7 @@ class DetailPesanan extends Component {
         PesananService.updateStatusPesanan(status, this.state.idPesanan).then(res => {
         });
 
-        this.demoTolak();
+        this.demoTolak(this.state.idJadwal);
 
     }
 
@@ -148,13 +148,15 @@ class DetailPesanan extends Component {
         event.preventDefault();
         let jadwal = { linkZoom: this.state.linkZoomBaru };
         PesananService.updateLinkZoomJadwal(jadwal, this.state.idJadwal).then(res => {
+            let status = { idStatusPesanan: 5, jenisStatus: "Dijadwalkan" }
+            PesananService.updateStatusPesanan(status, this.state.idPesanan).then(res => {
+                this.demoSave(this.state.idJadwal);
+            });
         });
 
-        let status = { idStatusPesanan: 5, jenisStatus: "Dijadwalkan" }
-        PesananService.updateStatusPesanan(status, this.state.idPesanan).then(res => {
-        });
 
-        this.demoSave();
+
+
 
     }
 
@@ -162,28 +164,36 @@ class DetailPesanan extends Component {
         event.preventDefault();
         let jadwal = { linkZoom: this.state.linkZoomBaru };
         PesananService.updateLinkZoomJadwal(jadwal, this.state.idJadwal).then(res => {
+            this.demoUpdate(this.state.idJadwal);
         });
 
-        this.demoUpdate();
+
 
     }
 
-    async demoSave() {
+    async demoSave(idPesanan) {
         this.setState({ successAdd: true });
         await this.sleep(1500);
         window.location.reload();
+        // this.props.history.push(generatePath("/pesanan/:idPesanan", { idPesanan }));
+
     }
 
-    async demoUpdate() {
+    async demoUpdate(idPesanan) {
         this.setState({ successUpdate: true });
         await this.sleep(1500);
         window.location.reload();
+        // this.props.history.push(generatePath("/pesanan/:idPesanan", { idPesanan }));
+
+
     }
 
-    async demoTolak() {
+    async demoTolak(idPesanan) {
         this.setState({ isTolak: true });
         await this.sleep(1500);
         window.location.reload();
+        // this.props.history.push(generatePath("/pesanan/:idPesanan", { idPesanan }));
+
     }
 
     sleep(ms) {
@@ -206,10 +216,10 @@ class DetailPesanan extends Component {
                                 value={this.state.linkZoomBaru} onChange={this.changeLinkZoomBaruHandler} required />
                         </div>
                         <div className='modalButtonContainer'>
-                            <div className="btn btn-outline-blue" onClick={() => this.handleCancelAddLink(this.state.idPesanan)}>
+                            <div className="button button-outline-blue" onClick={() => this.handleCancelAddLink(this.state.idPesanan)}>
                                 Kembali
                             </div>
-                            <button type="submit" className="btn btn-blue">Simpan</button>
+                            <button type="submit" className="button button-blue">Simpan</button>
                         </div>
                     </form>
                 </Modal>
@@ -225,10 +235,10 @@ class DetailPesanan extends Component {
                                 value={this.state.linkZoomBaru} onChange={this.changeLinkZoomBaruHandler} required />
                         </div>
                         <div className='modalButtonContainer'>
-                            <div className="btn btn-outline-blue" onClick={() => this.handleCancelUpdateLink(this.state.idPesanan)}>
+                            <div className="button button-outline-blue" onClick={() => this.handleCancelUpdateLink(this.state.idPesanan)}>
                                 Kembali
                             </div>
-                            <button type="submit" className="btn btn-blue">Simpan</button>
+                            <button type="submit" className="button button-blue">Simpan</button>
                         </div>
                     </form>
                 </Modal>
@@ -242,11 +252,11 @@ class DetailPesanan extends Component {
                     <p>Apakah Anda yakin akan menolak pesanan ini?</p>
                     <div className="modalButtonContainer">
 
-                        <div className="btn btn-outline" onClick={() => this.handleCancelTolak(this.state.idPesanan)}>
+                        <div className="button button-outline" onClick={() => this.handleCancelTolak(this.state.idPesanan)}>
                             Kembali
                         </div>
 
-                        <div className="btn btn-primary" onClick={this.tolakPesanan}>
+                        <div className="button button-primary" onClick={this.tolakPesanan}>
                             Tolak
                         </div>
                     </div>
@@ -303,8 +313,8 @@ class DetailPesanan extends Component {
                                 <tr >
                                     <td>Link Meeting</td>
                                     <div className=" flex-row">
-                                        {this.state.status === 'Terverifikasi' ? (<div><a className="btn btn-blue" onClick={this.addLink}>Tambah Link </a></div>) : (<td>{this.state.linkZoom}</td>)}
-                                        {this.state.status === 'Dijadwalkan' ? (<td><a className="btn btn-blue" onClick={this.updateLink}>Update Link </a></td>) : (<td>{this.state.linkZoom}</td>)}
+                                        {this.state.status === 'Terverifikasi' ? (<div><a className="button button-blue" onClick={this.addLink}>Tambah Link </a></div>) : (<td>{this.state.linkZoom}</td>)}
+                                        {this.state.status === 'Dijadwalkan' ? (<td><a className="button button-blue" onClick={this.updateLink}>Update Link </a></td>) : (<td>{this.state.linkZoom}</td>)}
                                     </div>
                                 </tr>
 
@@ -325,9 +335,9 @@ class DetailPesanan extends Component {
                             <hr />
 
                             {this.state.status === 'Belum Dibayar' ? (<div className='center'>
-                                    <button  onClick={this.clickedtTolakPesanan} type="submit" className="btn btn-primary twobutton">Tolak Pesanan</button>
+                                <button onClick={this.clickedtTolakPesanan} type="submit" className="button button-primary twobutton">Tolak Pesanan</button>
                             </div>) : ('')}
-                            
+
                         </div>
                     </div>
                 </div>

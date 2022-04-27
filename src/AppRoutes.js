@@ -30,6 +30,9 @@ import error403 from "./pages/error403";
 import ViewProfilePage from "./pages/ViewProfilePage/ViewProfilePage";
 import StaffRoute from "./StaffRoute";
 import PesanKelasPage from "./pages/PesanKelasPage/PesanKelasPage";
+import PilihJadwalPage from "./pages/PilihJadwalPage/PilihJadwalPage";
+import RiwayatPesanan from "./pages/Pesanan/RiwayatPesanan";
+import DetailRiwayatPesanan from "./pages/Pesanan/DetailRiwayatPesanan";
 
 
 function AppRoutes() {
@@ -41,11 +44,14 @@ function AppRoutes() {
 					<Route exact path="/login" component={LoginPage} />
 					<Route exact path="/register" component={RegisterPage} />
 					<Route exact path="/akun/profil" component={AkunPage} />
-					{/* <Route exact path="/akun/profil/edit" component={EditAkunPage} />
-					<Route exact path="/akun/profil/ganti-password" component={UbahPasswordPage} /> */}
+					<Route exact path="/akun/profil/edit" component={EditAkunPage} />
+					<Route exact path="/akun/profil/ganti-password" component={UbahPasswordPage} />
 					<Route exact path="/design" component={Design} />
 					<Route exact path="/403" component={error403} />
-					<Route exact path="/privat" component={PesanKelasPage} />
+					<Route exact path="/pesan-kelas" component={PesanKelasPage} />
+					<Route exact path="/pesan-kelas/:id" component={PilihJadwalPage} />
+					<Route exact path="/riwayat-pesanan" component={RiwayatPesanan} />
+					<Route exact path="/riwayat-pesanan/:idPesanan" component={DetailRiwayatPesanan} />
 					<Route exact path="/" component={Homepage} />
 					<Route path="/" component={StaffRoute} />
 					<Redirect from="*" to="/404" />

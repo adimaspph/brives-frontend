@@ -67,9 +67,13 @@ class EditPengguna extends React.Component {
                 this.setState({ errMessage : response.data.message });
                 this.setState({ hasError : true });
             } else {
-                // setTimeout(function(){}, 4000); 
-                // window.location.href = '/pengguna';
-                // console.log(response.data)
+                setTimeout(
+                    function() {
+                        window.location.href = '/pengguna';
+                    }
+                    .bind(this),
+                    2000
+                );
             }
 		});
         console.log(this.state.listMapel)
@@ -77,7 +81,7 @@ class EditPengguna extends React.Component {
 
 
     componentDidMount() {
-        // otentikasi
+        // authorization
         if (localStorage.getItem("user") != null) {
             if(!(JSON.parse(localStorage.getItem("user")).role === 'ADMIN')) {
                 window.location='/403';
@@ -189,7 +193,7 @@ class EditPengguna extends React.Component {
                         <div className="akun-card">
                             <h3 className='judul-form'>Formulir Edit Pengguna</h3>
                             {this.state.hasError&&this.state.hasSubmit? (<ErrorNotification text={this.state.errMessage}/>) : ("")}
-                            {!this.state.hasError&&this.state.hasSubmit? (<NeutralNotification text="Akun berhasil terbuat"/>) : ("")}
+                            {!this.state.hasError&&this.state.hasSubmit? (<NeutralNotification text="Akun staff berhasil diubah!"/>) : ("")}
                             <div>
                                 <form onSubmit={this.handleChange}>
                                     <div>
@@ -248,10 +252,10 @@ class EditPengguna extends React.Component {
                                         </div>
                                     </div>}
                                     <div className='box-right'>
-                                    <a className="btn btn-outline-blue twobutton" onClick={this.cancel}>
+                                    <a className="button button-outline-blue twobutton" onClick={this.cancel}>
                                                     Kembali
                                                 </a>
-                                        <button type="submit" className="twobutton btn btn-blue">Simpan</button>
+                                        <button type="submit" className="twobutton button button-blue">Simpan</button>
                                     </div>
     
                                     
