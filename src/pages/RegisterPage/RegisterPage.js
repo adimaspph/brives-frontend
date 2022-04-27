@@ -6,7 +6,7 @@ import ErrorNotification from "../../components/Notification/ErrorNotification";
 import NeutralNotification from '../../components/Notification/NeutralNotification';
 import APIConfig from "../../api/APIConfig";
 import "./RegisterPage.css";
-import { Link } from 'react-router-dom';
+import Footer from "../../components/Footer/Footer";
 
 function RegisterPage() {
     const [errMessage, setErrMessage] = useState("");
@@ -143,31 +143,17 @@ function RegisterPage() {
                                     <p className='pass-constraint'>Gunakan minimal 8 karakter dengan campuran huruf, angka dan satu buah huruf kapital</p>
                                 </div>
                                 <div className='box-right mt-4'>
-                                    <a className="btn btn-outline-blue twobutton" onClick={cancel}>Kembali</a>
-                                    <button type="submit" className="twobutton btn btn-blue">Register</button>
+                                    <a className="button button-outline-blue twobutton" onClick={cancel}>Kembali</a>
+                                    <button type="submit" className="twobutton button button-blue">Register</button>
                                 </div>
                                 
                             </form>
                             
-                        </div>
-
-                        
-                        
-                        
+                        </div>                     
                     </div>
-                    <div></div>
                 </div>
             </div>
-            {/* footer */}
-            {/* <div className="footer">
-                <div className="footer-menu">
-                    <Link className="footer-logo" to="/">
-                        <img src="/logo-navbar.png" width={60} alt="" />
-                    </Link>
-                    <p className="text-footer">BTA Group © 2022</p>
-                </div>
-
-            </div> */}
+            <Footer></Footer>
         </div>
     );
 }
