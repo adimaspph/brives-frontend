@@ -18,7 +18,7 @@ function PrivateRoute({ component: Component, ...rest }) {
 					if (window.location === "/register") {
 						return <Redirect to="/register" />;
 					}
-					return <Redirect to="/login" />;
+					return <Redirect to="/403" />;
 				}
 
 				// authorized so return component

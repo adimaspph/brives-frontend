@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../../components/Navbar/Navbar";
+import { Link } from "react-router-dom";
 import "./PesanKelasPage.css";
 import APIConfig from "../../api/APIConfig";
 
@@ -16,14 +17,25 @@ export default function PesanKelasPage() {
 	};
 
 	const getMapel = (idJenjang) => {
-		APIConfig.get("/mapel/jenjang/" + idJenjang)
+		if (idJenjang === "all") {
+			APIConfig.get("/mapel/")
+				.then((response) => {
+					// console.log(response.data.result);
+					setListMapel(response.data.result);
+				})
+				.catch((error) => {
+					console.log(error.response);
+				});
+		} else {
+			APIConfig.get("/mapel/jenjang/" + idJenjang)
 			.then((response) => {
-				console.log(response.data.result);
+				// console.log(response.data.result);
 				setListMapel(response.data.result);
 			})
 			.catch((error) => {
 				console.log(error.response);
 			});
+		}
 	};
 
 	const getJenjang = () => {
@@ -37,8 +49,13 @@ export default function PesanKelasPage() {
 			});
 	};
 
+	const handlePilih = (idMapel) => {
+		console.log(idMapel);
+	};
+
 	useEffect(() => {
 		getJenjang();
+		setJejang("all");
 	}, []);
 
 
@@ -76,15 +93,21 @@ export default function PesanKelasPage() {
 
 			<div className="container-mapel">
 				{listMapel.map((mapel, key) => (
-					<div className="mapel-card">
+					<div className="mapel-card" key={key}>
 						<span className="title-mapel">{mapel.namaMapel}</span>
 
 						<div className="jenjang-mapel">
 							{mapel.listJenjang.map((jenjang, key) => (
-								<span>{jenjang.namaJenjang}</span>
+								<span key={key}>{jenjang.namaJenjang}</span>
 							))}
 						</div>
-						<a className="btn btn-primary btn-mapel">Pilih</a>
+						<Link
+							className="button button-primary btn-mapel"
+							onClick={() => handlePilih(mapel.idMapel)}
+							to={`/pesan-kelas/` + mapel.idMapel}
+						>
+							Pilih
+						</Link>
 					</div>
 				))}
 				{/* <div className="mapel-card">
