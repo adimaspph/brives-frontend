@@ -103,7 +103,7 @@ class ListPesanan extends Component {
                                 <td> {SatuPesanan.jadwal.tanggal} {SatuPesanan.jadwal.waktuMulai} - {SatuPesanan.jadwal.waktuSelesai}  </td>
                                 <td> {SatuPesanan.status.jenisStatus} </td>
                                 <td>
-                                    <a className="btn btn-outline" onClick={() => this.viewPesanan(SatuPesanan.idPesanan)}>
+                                    <a className="button button-outline" onClick={() => this.viewPesanan(SatuPesanan.idPesanan)}>
                                         Lihat
                                     </a>
                                 </td>
