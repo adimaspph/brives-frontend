@@ -106,6 +106,7 @@ export default function PilihJadwalPage() {
 		getMapel(idMapel);
 		setHari();
 		getJadwal(day1);
+		setToday(new Date());
 	}, []);
 
 	const handlePilih = (event, key) => {
@@ -167,6 +168,40 @@ export default function PilihJadwalPage() {
 		} 
 	};
 
+	const nextWeek = () => {
+		setDay1(new Date(day1.setDate(day1.getDate() + 7)));
+		setDay2(new Date(day2.setDate(day2.getDate() + 7)));
+		setDay3(new Date(day3.setDate(day3.getDate() + 7)));
+		setDay4(new Date(day4.setDate(day4.getDate() + 7)));
+		setDay5(new Date(day5.setDate(day5.getDate() + 7)));
+		setDay6(new Date(day6.setDate(day6.getDate() + 7)));
+		setDay7(new Date(day7.setDate(day7.getDate() + 7)));
+		setHari();
+		setSelectedHari(day1);
+		getJadwal(day1);
+		setToday(new Date());
+	};
+
+	const prevWeek = () => {
+		setDay1(new Date(day1.setDate(day1.getDate() - 7)));
+		setDay2(new Date(day2.setDate(day2.getDate() - 7)));
+		setDay3(new Date(day3.setDate(day3.getDate() - 7)));
+		setDay4(new Date(day4.setDate(day4.getDate() - 7)));
+		setDay5(new Date(day5.setDate(day5.getDate() - 7)));
+		setDay6(new Date(day6.setDate(day6.getDate() - 7)));
+		setDay7(new Date(day7.setDate(day7.getDate() - 7)));
+		setHari();
+		setSelectedHari(day1);
+		getJadwal(day1);
+		setToday(new Date());
+	};
+
+	const compareDate = () => {
+		let tomorrow = new Date();
+		tomorrow.setDate(new Date().getDate() + 1);
+		return tomorrow.toISOString().split("T")[0];
+	}
+
 	return (
 		<div>
 			<Navbar />
@@ -178,9 +213,8 @@ export default function PilihJadwalPage() {
 					Ubah Mapel
 				</Link>
 			</div>
-
 			<div className="pilih-hari-container center">
-				<div className="button">
+				<div className={compareDate() === day1.toISOString().split('T')[0] ? "hidden" : "button"} onClick={prevWeek}>
 					<svg
 						width="24"
 						height="24"
@@ -219,8 +253,9 @@ export default function PilihJadwalPage() {
 					))}
 				</div>
 
-				<div className="button">
+				<div className="button" >
 					<svg
+						onClick={nextWeek}
 						width="24"
 						height="24"
 						viewBox="0 0 24 24"
