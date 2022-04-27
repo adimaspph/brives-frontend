@@ -79,18 +79,18 @@ class DetailPengguna extends Component {
     }
 
     handleCancel = (event) => {
-		event.preventDefault();
+        event.preventDefault();
         this.setState({ modal: false });
-	};
+    };
 
     popup = (event) => {
-		event.preventDefault();
+        event.preventDefault();
         this.setState({ modal: true });
-	};
+    };
 
     hapusPengguna = (event) => {
-		event.preventDefault();
-        
+        event.preventDefault();
+
         PenggunaService.hapusUser(this.state.idUser).then((res) => {
             let mapell = res.data;
 
@@ -99,12 +99,12 @@ class DetailPengguna extends Component {
 
                 this.setState({ statusNama: 400 });
             } else if (mapell.status === 200) {
-                
+
                 this.demo();
-                
+
             }
         });
-	};
+    };
 
     async demo() {
         this.setState({ successM: true });
@@ -131,11 +131,11 @@ class DetailPengguna extends Component {
                     <p>Apakah Anda yakin akan menghapus pengguna ini?</p>
                     <div className="modalButtonContainer">
 
-                        <div className="btn btn-outline" onClick={this.handleCancel}>
+                        <div className="button button-outline" onClick={this.handleCancel}>
                             Kembali
                         </div>
 
-                        <div className="btn btn-primary" onClick={this.hapusPengguna}>
+                        <div className="button button-primary" onClick={this.hapusPengguna}>
                             Hapus
                         </div>
                     </div>
@@ -151,48 +151,48 @@ class DetailPengguna extends Component {
 
                 <h2>Detail Pengguna </h2>
                 <div className='tes'>
-                    <div className='container'>
+                    <div className=''>
                         <div className='row'>
-                            <div className='card'>
+                            <div className='cardd'>
                                 <div className='card-body'>
 
-                                    <table>
+                                    <table className='table-none'>
                                         <tr>
-                                            <th>Id User</th>
+                                            <td>Id User</td>
                                             <td >{this.state.idUserReal}</td>
                                         </tr>
                                         <tr>
-                                            <th>Nama Lengkap</th>
+                                            <td>Nama Lengkap</td>
                                             <td>{this.state.namaLengkap}</td>
                                         </tr>
                                         <tr>
-                                            <th>Username</th>
+                                            <td>Username</td>
                                             <td>{this.state.username}</td>
                                         </tr>
                                         <tr>
-                                            <th>Email</th>
+                                            <td>Email</td>
                                             <td>{this.state.email}</td>
                                         </tr>
                                         <tr>
-                                            <th>Nomor Handphone</th>
+                                            <td>Nomor Handphone</td>
                                             <td>{this.state.noHP}</td>
                                         </tr>
                                         <tr>
-                                            <th>Id Staff</th>
+                                            <td>Id Staff</td>
                                             <td>{this.state.idStaff}</td>
                                         </tr>
                                         <tr>
-                                            <th>Nomor Pegawai</th>
+                                            <td>Nomor Pegawai</td>
                                             <td>{this.state.noPegawai}</td>
                                         </tr>
                                         <tr>
-                                            <th>Role</th>
+                                            <td>Role</td>
                                             <td>{this.state.namaRole}</td>
                                         </tr>
 
                                         {this.state.idRole === 2 ? (
                                             <tr>
-                                                <th>Tarif</th>
+                                                <td>Tarif</td>
                                                 <td>{this.state.tarif}</td>
                                             </tr>
 
@@ -201,7 +201,7 @@ class DetailPengguna extends Component {
 
                                         {this.state.idRole === 2 ? (
                                             <tr>
-                                                <th>List Mata Pelajaran</th>
+                                                <td>List Mata Pelajaran</td>
                                                 <td>{
                                                     this.state.listMapel.map(
                                                         satuJenjang =>
@@ -215,13 +215,13 @@ class DetailPengguna extends Component {
 
                                     </table>
 
-
+                                    <hr />
 
                                     <div className='center'>
-                                        <a className="btn btn-outline twobutton" onClick={this.popup}>
+                                        <a className="button button-outline-blue twobutton" onClick={this.popup}>
                                             Hapus
                                         </a>
-                                        <a className="btn btn-blue twobutton" >
+                                        <a className="button button-blue twobutton" >
                                             Ubah
                                         </a>
                                     </div>

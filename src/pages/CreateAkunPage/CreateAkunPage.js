@@ -5,6 +5,7 @@ import ErrorNotification from "../../components/Notification/ErrorNotification";
 import NeutralNotification from '../../components/Notification/NeutralNotification';
 import APIConfig from "../../api/APIConfig";
 import "./CreateAkunPage.css";
+import { Link } from 'react-router-dom';
 
 function CreateAkunPage() {
     const [errMessage, setErrMessage] = useState("");
@@ -40,8 +41,7 @@ function CreateAkunPage() {
         if (!(role === "PENGAJAR")) {
             setListMapel([]);
             setTarif(0);
-        } 
-        
+        }         
 
         APIConfig.post("/api/v1/user/create", {
 			username: username,
@@ -62,9 +62,14 @@ function CreateAkunPage() {
                 setErrMessage(response.data.message);
                 setHasError(true);
             } else {
-                setTimeout(function(){}, 4000); 
-                window.location.href = '/pengguna'; 
-                console.log(response)
+                setTimeout(
+                    function() {
+                        window.location.href = '/pengguna'; 
+                    }
+                    .bind(this),
+                    2000
+                );
+                
             }
 		});
     }
@@ -132,23 +137,27 @@ function CreateAkunPage() {
         setTarif(e.target.value);
     }
 
+    const cancel = (e) => {
+        window.location='/pengguna';
+    }
+
 	return (
-        <div className="akun-container">
+        <div className="akun-container outer">
             <div className="">
                 <ul className="breadcrumb">
-                    <li><a href="/pengguna">Daftar Pengguna</a></li>
+                    <li><Link to="/pengguna">Daftar Pengguna</Link></li>
                     <li className='bractive'>Tambah Pengguna</li>
                 </ul>
                 <div className="create-akun-content">
                     <div>
-                        <h2>Tambah Pengguna</h2>
+                        <h2 className='judul-form'>Tambah Pengguna</h2>
                     </div>
                     <div className="akun-card">
-                        <h3>Formulir Tambah Pengguna</h3>
+                        <h3 className='judul-form'>Formulir Tambah Pengguna</h3>
                         {hasError&&hasSubmit? (<ErrorNotification text={errMessage}/>) : ("")}
                         {!hasError&&hasSubmit? (<NeutralNotification text="Akun berhasil terbuat"/>) : ("")}
                         <div>
-                            <form>
+                            <form onSubmit={handleChange}>
                                 <div>
                                     <label htmlFor="">Role<span className='star'>*</span> </label>
                                     <select onChange={handleRoleChange} name="role" id="role">
@@ -183,14 +192,17 @@ function CreateAkunPage() {
                                 </div>
                                 <div>
                                     <label htmlFor="">Password<span className='star'>*</span> </label>
-                                    <input id="create-pass" onChange={handlePasswordChange} type={passwordShown ? "text" : "password"} name="password" className='form-control' required />
-                                    <i id="eyepas" onClick={togglePasswordVisiblity}>{eye}</i>
+                                    <div className='d-flex flex justify-content-between'>
+                                        <input id="create-pass" onChange={handlePasswordChange} type={passwordShown ? "text" : "password"} name="password" className='form-control' required />
+                                        <i id="eyepas" onClick={togglePasswordVisiblity}>{eye}</i>
+                                    </div>
+                                    
                                 </div>
                                 {pengajarShown && 
                                 <div>
                                     <div>
                                         <label htmlFor="">Tarif<span className='star'>*</span> </label>
-                                        <input onChange={handleTarifChange} type="text" name="tarif" className='form-control'  />
+                                        <input onChange={handleTarifChange} type="text" name="tarif" className='form-control' required />
                                     </div>
                                     <div>
                                         <label htmlFor="">Mata Pelajaran<span className='star'>*</span> </label>
@@ -213,10 +225,15 @@ function CreateAkunPage() {
                                         ))}
                                     </div>
                                 </div>}
+                                <div className='box-right'>
+                                <a className="button button-outline-blue twobutton" onClick={cancel}>
+                                                Kembali
+                                            </a>
+                                    <button type="submit" className="twobutton button button-blue">Simpan</button>
+                                </div>
+
+                                
                             </form>
-                            <div className='box-right'>
-                                <button onClick={handleChange} type="submit" className="twobutton btn btn-blue">Simpan</button>
-                            </div>
                         </div>
                     </div>
                 </div>

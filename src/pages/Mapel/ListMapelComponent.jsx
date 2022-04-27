@@ -33,24 +33,25 @@ export default function DetailMapelComponent(props) {
   };
 
   const addMapelHandler = () => {
-    props.history.push(`/atur-mapel/add`);
+    console.log("return to / add");
+    props.history.push(`/atur-mapel/${"add"}`);
   };
 
   const viewMapel = (idMapel) => {
-    props.history.push(`/atur-mapel/${idMapel}`);
+    props.history.push(`/atur-mapel/view/${idMapel}`);
   };
 
   return (
     <>
       <div className="outer">
         <h1>Daftar Mata Pelajaran</h1>
-        <a className="btn btn-blue" href={`/atur-mapel/add`} onClick={addMapelHandler}>
+        <a className="button button-blue" onClick={addMapelHandler}>
           + Tambah Mata Pelajaran
         </a>
         <br />
-        <div className="container">
-          <div className="row">
-            <table className="table-max table-none space">
+        <div className="">
+          <div className="">
+            <table className="table-max table-none">
               <tr>
                 <th scope="col">No</th>
                 <th scope="col">Nama Mapel</th>
@@ -70,8 +71,8 @@ export default function DetailMapelComponent(props) {
                   <td>{mapel.deskripsi}</td>
                   <td>
                     <a
-                      className="btn btn-outline"
-                      href={`/atur-mapel/${mapel.idMapel}`}
+                      className="button button-outline"
+                      // href={`/atur-mapel/${mapel.idMapel}`}
                       onClick={() => viewMapel(mapel.idMapel)}
                     >
                       lihat

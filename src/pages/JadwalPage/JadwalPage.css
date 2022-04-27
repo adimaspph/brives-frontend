@@ -5,8 +5,9 @@
     flex-direction: column;
     /* overflow-x: scroll; */
     /* margin: 0 1%; */
+    margin-top: 24px;
 }
 
 .waktu > select{
-    width: 90px;
+    width: 100px;
 }

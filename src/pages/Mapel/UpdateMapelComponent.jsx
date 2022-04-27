@@ -57,14 +57,14 @@ class UpdateMapelComponent extends Component {
     }
 
     editMapel(idMapel) {
-        this.props.history.push(generatePath("/atur-mapel/:idMapel", { idMapel }));
+        this.props.history.push(generatePath("/atur-mapel/view/:idMapel", { idMapel }));
 
     }
 
     async demo(idMapel) {
         this.setState({ successM: true });
         await this.sleep(2000);
-        this.props.history.push(generatePath("/atur-mapel/:idMapel", { idMapel }));
+        this.props.history.push(generatePath("/atur-mapel/view/:idMapel", { idMapel }));
         // this.props.history.push('/atur-mapel');
     }
 
@@ -169,7 +169,7 @@ class UpdateMapelComponent extends Component {
             <div className='outer'>
                 <ul class="breadcrumb">
                     <li><a href="/atur-mapel">Daftar Mata Pelajaran</a></li>
-                    <li><a onClick={() => this.editMapel(this.state.idMapel)}>Detail Mata Pelajaran</a></li>
+                    <li><a className='' onClick={() => this.editMapel(this.state.idMapel)} >Detail Mata Pelajaran</a></li>
                     <li className='bractive'>Ubah Mata Pelajaran</li>
                 </ul>
 
@@ -178,11 +178,11 @@ class UpdateMapelComponent extends Component {
 
                 <h2>Ubah Mata Pelajaran</h2>
                 <div className='tes'>
-                    <div className='container'>
-                        <div className='row'>
-                            <div className='card'>
+                    <div className=''>
+                        <div className=''>
+                            <div className='cardd'>
                                 <div className='card-body'>
-                                    <h4>Formulir Ubah Mata Pelajaran</h4>
+                                    <h4 className='judul-form'>Formulir Ubah Mata Pelajaran</h4>
                                     <form action="" onSubmit={this.updateMapel}>
                                         <div className='form-group'>
                                             <label htmlFor="">Id Mata Pelajaran  </label>
@@ -221,11 +221,11 @@ class UpdateMapelComponent extends Component {
 
                                         <div className='box-right'>
 
-                                            <a className="btn btn-outline-blue twobutton" onClick={() => this.editMapel(this.state.idMapel)}>
+                                            <a className="button button-outline-blue twobutton" onClick={() => this.editMapel(this.state.idMapel)}>
                                                 Kembali
                                             </a>
 
-                                            <button type="submit" className="btn btn-blue twobutton">Simpan</button>
+                                            <button type="submit" className="button button-blue twobutton">Simpan</button>
 
                                         </div>
 

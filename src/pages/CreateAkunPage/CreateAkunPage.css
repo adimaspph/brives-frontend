@@ -1,9 +1,11 @@
 .akun-container {
-    display: flex;
+    width: 100%;
+	margin-bottom: 2em;
 }
 
 #eyepas	 {
 	margin-left: 8px;
+	margin-top: 17px;
 }
 
 .checkbox-mapel {
@@ -15,7 +17,7 @@
     flex-direction: column;
     margin: auto;
     box-shadow: rgba(80, 80, 80, 0.2) -1px 2px 6px 1px;
-    width: 670px;
+    width: fit-content;
     border-radius: 16px;
     padding: 24px;
 }
@@ -40,7 +42,7 @@ input[type=text], select {
 }
 
 #create-pass, select {
-	width: 96%;
+	width: 95%;
 	padding: 12px 20px;
 	margin: 8px 0;
 	display: inline-block;

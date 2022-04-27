@@ -88,8 +88,8 @@ export default function DetailMapelComponent(props) {
                 <h5>Konfirmasi</h5>
                 <p>Apakah Anda yakin akan menghapus mata Pelajaran ini?</p>
                 <div className='center'>
-                    <button onClick={cancleHandler} type="submit" className="btn btn-outline-secondary twobutton">Kembali</button>
-                    <button onClick={deleteHandler} type="submit" className="btn btn-red twobutton">Hapus</button>
+                    <button onClick={cancleHandler} type="submit" className="button button-outline-secondary twobutton">Kembali</button>
+                    <button onClick={deleteHandler} type="submit" className="button button-primary twobutton">Hapus</button>
                 </div>
             </>
         )
@@ -115,8 +115,8 @@ export default function DetailMapelComponent(props) {
 
                 <h2>Detail Mata Pelajaran</h2>
 
-                <div className='container'>
-                    <div className='row'>
+                <div className=''>
+                    <div className=''>
                         <div className='card-max-width'>
                             <div className='card-content'>
                                 <table className='table-none'>
@@ -140,8 +140,8 @@ export default function DetailMapelComponent(props) {
 
                                 <hr />
                                 <div className='center'>
-                                    <button onClick={() => setIsModal(true)} type="submit" className="btn btn-outline-blue twobutton">Hapus</button>
-                                    <button onClick={editHandler} type="submit" className="btn btn-blue twobutton">Ubah</button>
+                                    <button onClick={() => setIsModal(true)} type="submit" className="button button-outline-blue twobutton">Hapus</button>
+                                    <button onClick={editHandler} type="submit" className="button button-blue twobutton">Ubah</button>
                                 </div>
                             </div>
                         </div>

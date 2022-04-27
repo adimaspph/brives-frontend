@@ -8,15 +8,8 @@ export default function Clock() {
 
 	useEffect(() => {
 		for (let i = 4; i < 24; i++) {
-			// const newList = list.concat({i});
-			// setList(newList);
 			setClock((clock) => [...clock, { jam: i, start: i}]);
-            // setCountStart(countStart + 5);
-			// setListZebra(listZebra.push(i));
-			// console.log(clock);
-			// i += 7;
 		}
-		console.log(clock);
         return ;
 	}, []);
 

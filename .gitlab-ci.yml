@@ -4,13 +4,27 @@ before_script:
     - apt-get update -qq && apt-get install
 
 stages:
-    # - build-staging
-    - deploy-heroku
-    - deploy-vercel
+    - build
+    - deploy
+
+build:
+    stage: build
+    image: node
+    script: 
+        - echo "Start building App"
+        - npm install
+        - CI=false npm run build
+        - echo "Build successfully!"
+    artifacts:
+        paths:
+            - build
+            - node_modules/
+    only:
+        - staging
 
 Deploy-to-heroku:
     image: ruby:2.7.1
-    stage: deploy-heroku
+    stage: deploy
     script:
         - apt-get update -qy
         - apt-get install -y ruby-dev
@@ -20,26 +34,70 @@ Deploy-to-heroku:
     only:
         - staging
 
-Deploy-to-vercel:
-    stage: deploy-vercel
-    image: node:14-alpine
-    variables:
-        PREVIEW_URL: $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG.$VERCEL_USER.vercel.app
-        VERCEL_ORG_ID: $VERCEL_ORG_ID
-        VERCEL_PROJECT_ID: $VERCEL_PROJECT_ID
-
-    rules:
-        - if: $CI_COMMIT_TAG
-        - if: $CI_COMMIT_BRANCH == 'main'
-
-    environment:
-        name: vercel/$CI_COMMIT_REF_NAME
-        url: https://$PREVIEW_URL
-
+Deploy-to-digitalocean:
+    stage: deploy
+    image: docker:latest
+    before_script:
+        - echo "deploying app"
     script:
-        - npm i -g vercel
-        - DEPLOYMENT_URL=$(VERCEL_ORG_ID=$VERCEL_ORG_ID VERCEL_PROJECT_ID=$VERCEL_PROJECT_ID vercel --confirm -t $VERCEL_TOKEN --scope $VERCEL_SCOPE)
-        - vercel alias set $DEPLOYMENT_URL $PREVIEW_URL -t $VERCEL_TOKEN --scope $VERCEL_SCOPE
+        - touch test.txt
+        - touch private.key
+        - echo "hello world" > test.txt
+
+        - apk add --no-cache bash
+        - mkdir -p ~/.ssh
+        - echo "$DIGITALOCEAN_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+        - chmod 700 ~/.ssh/id_rsa
+        - eval "$(ssh-agent -s)"
+        - ssh-add ~/.ssh/id_rsa
+        - ssh-keyscan -H 'gitlab.com' >> ~/.ssh/known_hosts
+        # - chmod +x ./deploy-staging.sh
+
+        # - echo "REPOSITORY_URL=\"$REPOSITORY_URL\"" | tr -d '\r' >> .env
+        # - echo "NODE_ENV=production" | tr -d '\r' >> .env
+        # - echo "PORT=8080" | tr -d '\r' >> .env
+        # - echo "AWS_ACCESS_KEY_ID=\"$AWS_ACCESS_KEY_ID\"" | tr -d '\r' >> .env
+        # - echo "AWS_DEFAULT_REGION=\"$AWS_DEFAULT_REGION\"" | tr -d '\r' >> .env
+        # - echo "AWS_SECRET_ACCESS_KEY=\"$AWS_SECRET_ACCESS_KEY\"" | tr -d '\r' >> .env
+
+        # - scp -o StrictHostKeyChecking=no test.txt root@$SSH_IP:/testscp
+        - ssh -o StrictHostKeyChecking=no root@$SSH_IP "rm -r /frontend/build"
+        - scp -o StrictHostKeyChecking=no -r ./build root@$SSH_IP:/frontend
+        - ssh -o StrictHostKeyChecking=no root@$SSH_IP "systemctl restart nginx"
+        # - scp -p22 test.txt root@$SSH_IP:/testscp
+        # - scp -p22 -r build/* root@$SSH_IP:/frontend
+    only:
+        - staging
+
+# install_dependencies:
+#     stage: build
+#     script:
+#         - npm install
+#     artifacts:
+#         paths:
+#             - node_modules/
+
+# Deploy-to-digitalocean:
+#     image: node:latest
+#     stage: deploy-digitalocean
+#     # environment:
+#     #     name: staging
+#     #     url: theknowledgeapp.com
+#     before_script:
+#         - apt-get update -qq
+#         - apt-get install -qq git
+#         # Setup SSH deploy keys
+#         - 'which ssh-agent || ( apt-get install -qq openssh-client )'
+#         - eval $(ssh-agent -s)
+#         - ssh-add <(echo "$SSH_PRIVATE_KEY")
+#         - mkdir -p ~/.ssh
+#         - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+#     script:
+#         - ssh -i ${} {$SSH_USERNAME}@{$SSH_IP} "cd /var/www/{path-to-project} && git checkout dev && git pull origin staging && npm run build && exit"
+#     only :
+#         - staging
+
+
 # Build to Staging:
 #   stage: build-staging
 #   environment:
