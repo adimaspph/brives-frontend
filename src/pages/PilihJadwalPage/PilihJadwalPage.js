@@ -9,6 +9,7 @@ import {
 import Navbar from "../../components/Navbar/Navbar";
 import "./PilihJadwalPage.css";
 import APIConfig from "../../api/APIConfig";
+import Modal from "../../components/Modal/Modal";
 
 export default function PilihJadwalPage() {
 	const [today, setToday] = useState(new Date());
@@ -24,6 +25,9 @@ export default function PilihJadwalPage() {
 	const [listHari, setlistHari] = useState([]);
 	const [selectedHari, setSelectedHari] = useState(day1);
 	const [listJadwal, setListJadwal] = useState([]);
+	const [modal, setModal] = useState(false);
+	const [selectedJadwal, setSelectedJadwal] = useState(null);
+	const [materi, setMateri] = useState("");
 	
 	const namaHari = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
 	const monthNames = [
@@ -48,7 +52,7 @@ export default function PilihJadwalPage() {
 			tahun: tanggal.getFullYear(),
 			idMapel: idMapel,
 		};
-		console.log(parameter);
+		// console.log(parameter);
 		APIConfig.get("/jadwal/mapel/", {
 			params: parameter,
 		})
@@ -103,6 +107,65 @@ export default function PilihJadwalPage() {
 		setHari();
 		getJadwal(day1);
 	}, []);
+
+	const handlePilih = (event, key) => {
+		if (localStorage.getItem("user") != null &&
+			JSON.parse(localStorage.getItem("user")).role === "PELAJAR") {
+			setSelectedJadwal(key)
+			event.preventDefault();
+			setModal(true);
+		} else {
+			window.location = "/login";
+		}
+	};
+
+	const handleCancel = (event) => {
+		event.preventDefault();
+		setModal(false);
+	};
+
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		const min = 1;
+		const max = 100;
+		const rand = min + Math.random() * (max - min);
+		const body = {
+			materi: materi,
+			nominal: listJadwal[selectedJadwal].tarif + rand,
+			idJadwal: listJadwal[selectedJadwal].jadwal.idJadwal,
+		};
+		APIConfig.post("/pesanan", body)
+			.then((response) => {
+				// console.log(response.data.result);
+				window.location = "/riwayat-pesanan";
+			})
+			.catch((error) => {
+				console.log(error.response);
+			});
+		setModal(false);
+	};
+
+	const getDesc = () => {
+		if (selectedJadwal != null) {
+			// console.log(selectedJadwal);
+			return (
+				<div>
+					<label>Mata Pelajaran :</label>
+					<p>{listJadwal[selectedJadwal].jadwal.mapel.namaMapel}</p>
+					<label>Pengajar :</label>
+					<p>{listJadwal[selectedJadwal].nama}</p>
+					<label>Harga :</label>
+					<p>{curConvert(listJadwal[selectedJadwal].tarif)}</p>
+					<label>Tanggal :</label>
+					<p>
+						{dateConvert(listJadwal[selectedJadwal].jadwal.tanggal)}
+					</p>
+					<label>Waktu :</label>
+					<p>{listJadwal[selectedJadwal].jadwal.waktuMulai} - {listJadwal[selectedJadwal].jadwal.waktuSelesai} WIB</p>
+				</div>
+			);
+		} 
+	};
 
 	return (
 		<div>
@@ -175,7 +238,11 @@ export default function PilihJadwalPage() {
 			<div className="jadwal-tersedia">
 				{/* {listJadwal.} */}
 				{listJadwal.map((jadwal, key) => (
-					<div className="jadwal-tersedia-container" key={key}>
+					<div
+						className="jadwal-tersedia-container"
+						key={key}
+						onClick={(e) => handlePilih(e, key)}
+					>
 						<div className="jadwal-tersedia-item">
 							<img
 								src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS24XFw4cHA5l7ego7xF2V5fIaUfLajZgZKSA&usqp=CAU"
@@ -204,26 +271,38 @@ export default function PilihJadwalPage() {
 					</div>
 				))}
 
-				{/* <div className="jadwal-tersedia-container">
-					<div className="jadwal-tersedia-item">
-						<img
-							src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS24XFw4cHA5l7ego7xF2V5fIaUfLajZgZKSA&usqp=CAU"
-							width={50}
-							height={50}
+				<Modal
+					show={modal}
+					handleCloseModal={handleCancel}
+					modalTitle="Tambah Jadwal"
+				>
+					<form onSubmit={handleSubmit}>
+						{getDesc()}
+						<label>Materi yang ingin diajarkan :</label>
+						<br />
+						<textarea
+							className="form-control"
+							type="textarea"
+							onChange={(e) => setMateri(e.target.value)}
+							value={materi}
+							required
 						/>
-						<div className="jadwal-tersedia-item-left">
-							<label>Nama Pengajar</label>
-							<span>Rp 90.000</span>
+						<div className="modalButtonContainer">
+							<div
+								className="button button-outline"
+								onClick={handleCancel}
+							>
+								Close
+							</div>
+							<button
+								type="submit"
+								className="button button-primary"
+							>
+								Pesan
+							</button>
 						</div>
-					</div>
-					<div className="jadwal-tersedia-item">
-						<div className="jadwal-tersedia-item-right">
-							<label>15.30 - 17.00</label>
-							<span>Senin, 23 Feb 2020</span>
-						</div>
-						<button className="button button-primary">Pesan</button>
-					</div>
-				</div> */}
+					</form>
+				</Modal>
 			</div>
 		</div>
 	);

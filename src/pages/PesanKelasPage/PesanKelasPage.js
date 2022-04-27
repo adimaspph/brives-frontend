@@ -48,10 +48,6 @@ export default function PesanKelasPage() {
 			});
 	};
 
-	const handlePilih = (idMapel) => {
-		console.log(idMapel);
-	};
-
 	useEffect(() => {
 		getJenjang();
 		setJejang("all");
@@ -102,7 +98,6 @@ export default function PesanKelasPage() {
 						</div>
 						<Link
 							className="button button-primary btn-mapel"
-							onClick={() => handlePilih(mapel.idMapel)}
 							to={`/pesan-kelas/` + mapel.idMapel}
 						>
 							Pilih
