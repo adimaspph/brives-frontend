@@ -81,7 +81,7 @@ class EditPengguna extends React.Component {
 
 
     componentDidMount() {
-        // otentikasi
+        // authorization
         if (localStorage.getItem("user") != null) {
             if(!(JSON.parse(localStorage.getItem("user")).role === 'ADMIN')) {
                 window.location='/403';
