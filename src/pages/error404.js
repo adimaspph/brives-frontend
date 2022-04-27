@@ -26,7 +26,11 @@ class error404 extends React.Component {
 					<Navbar />
 				) : ("")}
 
-
+				<br></br>
+				<br></br>
+				<br></br>
+				<br></br>
+				<br></br>
 
 
 				<div className="row d-flex justify-content-center ">
@@ -37,7 +41,7 @@ class error404 extends React.Component {
 
 					<div className="col-lg-4 d-flex justify-content-center">
 						<div className=" text-404">
-							<h2 className="text-404">Oops.. Halaman tidak dapat dapat ditemukan.</h2>
+							<h2 className="text-404">Oops.. Halaman ini tidak dapat ditemukan.</h2>
 							<div className='centerin'>
 								<button onClick={this.handlerBeranda} className="button button-blue ">Kembali Ke Beranda</button>
 							</div>
