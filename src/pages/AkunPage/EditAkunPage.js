@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye } from "@fortawesome/free-solid-svg-icons";
+import React from 'react';
 import Navbar from "../../components/Navbar/Navbar";
 import ErrorNotification from "../../components/Notification/ErrorNotification";
 import NeutralNotification from '../../components/Notification/NeutralNotification';
 import APIConfig from "../../api/APIConfig";
 import "./AkunPage.css";
-import { Link } from 'react-router-dom';
+import Footer from "../../components/Footer/Footer";
 
 class EditAkunPage extends React.Component {
     constructor(props) {
@@ -144,8 +142,8 @@ class EditAkunPage extends React.Component {
                                                 <input value={this.state.asalSekolah} onChange={this.handleAsalSekolahChange} type="text" name="asalSekolah" className='form-control' required />
                                             </div>
                                             <div className='box-right mt-4'>
-                                                <a className="btn btn-outline-blue twobutton" onClick={this.cancel}>Kembali</a>
-                                                <button type="submit" className="twobutton btn btn-blue">Update</button>
+                                                <a className="button button-outline-blue twobutton" onClick={this.cancel}>Kembali</a>
+                                                <button type="submit" className="twobutton button button-blue">Update</button>
                                             </div>
                                         
                                         </form>
@@ -157,6 +155,7 @@ class EditAkunPage extends React.Component {
                         </div>               
                     </div>
                 </div>
+                <Footer></Footer>
             </div>
         );
     }

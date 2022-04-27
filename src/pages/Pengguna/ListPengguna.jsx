@@ -95,7 +95,8 @@ class ListPengguna extends Component {
                         {/* <img src={searchIcon} className="search-logo" alt="searchIcon" /> */}
                         <input onKeyUp={this.myFunction} type="text" id="myInput" placeholder="Cari nama pengguna" />
                     </div>
-
+                    <div className='d-flex flex-row'>
+                    <p className="p-2 align-self-end">Pilih Role: </p>
                     <select onChange={this.handleRoleChange} name="role" id="role" className='twobutton'>
                         <option value="1">ADMIN</option>
                         <option value="2">PENGAJAR</option>
@@ -103,8 +104,9 @@ class ListPengguna extends Component {
                         <option value="4">STAF_OPERASIONAL</option>
                         <option value="5">MANAGER</option>
                     </select>
+                    </div>
                     <div className='mt-1 pt-1 twobutton'>
-                        <a className="btn btn-blue" onClick={this.addPengguna}>
+                        <a className="button button-blue" onClick={this.addPengguna}>
                             + Tambah Pengguna
                         </a>
                     </div>
@@ -138,13 +140,13 @@ class ListPengguna extends Component {
                                             <td>
                                                 <div className='col'>
                                                     <div className='my-2 d-flex flex justify-content-center'>
-                                                        <a className="btn btn-outline" onClick={() => this.lihatPengguna(satuMapel.username)}>
+                                                        <a className="button button-outline" onClick={() => this.lihatPengguna(satuMapel.username)}>
                                                             Lihat
                                                         </a>
                                                     </div>
                                                     
                                                     <div className='my-2 d-flex flex justify-content-center'>
-                                                        <a className="btn btn-outline" onClick={() => this.editPengguna(satuMapel.username)}>
+                                                        <a className="button button-outline" onClick={() => this.editPengguna(satuMapel.username)}>
                                                             Edit
                                                         </a>
                                                     </div>

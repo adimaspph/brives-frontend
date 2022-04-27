@@ -23,6 +23,7 @@
 	display: flex;
 	justify-content: center;	
 	margin-top: 24px;
+	color: black;
 }
 
 .error-message {
@@ -72,11 +73,13 @@ label {
 	font-weight: bold;
 }
 
-.star {
+.star a {
 	color: #FC182A;
 	margin-left: 4px;
 	
 }
+
+a { color: inherit; } 
 
 .tes {
 /* width: 100%; */
