@@ -38,6 +38,11 @@ class PesananService {
         return APIConfig.put("/pesanan/status/" + idPesanan, status);
     }
 
+    bayarPesanan(idPesanan, link) {
+        return APIConfig.post(`/pesanan/bayar/${idPesanan}?bukti=${link}` );
+
+    }
+
 }
 
 export default new PesananService()
