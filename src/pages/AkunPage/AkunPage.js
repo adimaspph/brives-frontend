@@ -93,7 +93,7 @@ class AkunPage extends React.Component {
                                         <hr />
                                         <div className='col'>
                                             <div className='d-flex flex justify-content-center my-3'>
-                                                <a className="twobutton btn btn-outline-red" onClick={this.redirectUbahProfilPage}>
+                                                <a className="twobutton button button-outline" onClick={this.redirectUbahProfilPage}>
                                                     Ubah Profil
                                                 </a>
                                             </div>

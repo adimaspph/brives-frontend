@@ -158,17 +158,20 @@ function JadwalPage() {
 					</div>
 
 					<div className="modalButtonContainer">
-						<div className="btn btn-outline" onClick={handleCancel}>
+						<div
+							className="button button-outline"
+							onClick={handleCancel}
+						>
 							Close
 						</div>
-						<button type="submit" className="btn btn-primary">
+						<button type="submit" className="button button-primary">
 							Simpan
 						</button>
 					</div>
 				</form>
 			</Modal>
 
-			<a className="btn btn-blue" onClick={handleTambahJadwal}>
+			<a className="button button-blue" onClick={handleTambahJadwal}>
 				+ Tambah Jadwal
 			</a>
 			<br />

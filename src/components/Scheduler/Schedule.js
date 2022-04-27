@@ -92,17 +92,29 @@ export default function Schedule({ date, hari }) {
 				modalTitle="Konfirmasi"
 			>
 				<p>Apakah Anda yakin akan menghapus jadwal berikut</p>
-				<p><b>Mapel : </b>{jadwal.mapel.namaMapel}</p>
-				<p><b>Tanggal : </b>{jadwal.tanggal}</p>
-				<p><b>Waktu : </b>{jadwal.waktuMulai} - {jadwal.waktuSelesai}</p>
+				<p>
+					<b>Mapel : </b>
+					{jadwal.mapel.namaMapel}
+				</p>
+				<p>
+					<b>Tanggal : </b>
+					{jadwal.tanggal}
+				</p>
+				<p>
+					<b>Waktu : </b>
+					{jadwal.waktuMulai} - {jadwal.waktuSelesai}
+				</p>
 
 				<div className="modalButtonContainer">
-					<div className="btn btn-outline" onClick={handleCancel}>
+					<div
+						className="button button-outline"
+						onClick={handleCancel}
+					>
 						Kembali
 					</div>
 
 					<div
-						className="btn btn-primary"
+						className="button button-primary"
 						onClick={handleDelete(jadwal.idJadwal)}
 					>
 						Hapus
@@ -129,7 +141,7 @@ export default function Schedule({ date, hari }) {
 					</div>
 
 					<div
-						className="btn btn-s btn-green"
+						className="button button-s button-green"
 						onClick={() => {
 							setModal(true);
 							setJadwal(jadwal);
