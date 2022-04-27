@@ -55,10 +55,12 @@ class RiwayatPesanan extends Component {
     
 
     handleStatusChange = (event) => {
-        PesananService.getPesananByIdStatus(event.target.value).then((res) => {
+        PesananService.getPesananByStatusSiswa(this.state.idSiswa, event.target.value).then((res) => {
             this.setState({ pesanan: res.data.result });
 
         });
+
+        
 
     };
 
