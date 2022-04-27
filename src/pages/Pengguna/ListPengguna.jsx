@@ -93,7 +93,7 @@ class ListPengguna extends Component {
                 <div className='space'>
                     <div className="searchbox">
                         {/* <img src={searchIcon} className="search-logo" alt="searchIcon" /> */}
-                        <input onKeyUp={this.myFunction} type="text" id="myInput" placeholder="Cari nama pengguna" />
+                        <input onKeyUp={this.myFunction} type="text" id="myInput" placeholder="Cari berdasarkan nama pengguna" />
                     </div>
 
                     <select onChange={this.handleRoleChange} name="role" id="role" className='twobutton'>
