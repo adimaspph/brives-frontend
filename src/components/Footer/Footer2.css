@@ -10,6 +10,12 @@
     color: white;
     text-align: center;
     width: 100%;
+    
+}
+
+.footer-bottom{
+    position: absolute;
+    bottom: 0;
 }
 
 .text-footer {

@@ -1,7 +1,7 @@
 .ubah-mapel-container {
     font-family: 'Ubuntu';
     font-style: normal;
-    font-weight: 300;
+    font-weight: 500;
     font-size: 24px;
     line-height: 37px;
     /* identical to box height */
@@ -15,4 +15,107 @@
     color: #000000;
 
     margin: 32px auto;
+}
+
+.pilih-hari-container{
+    margin: 32px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-hari{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.button-hari {
+    font-family: 'Ubuntu';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    /* or 171% */
+    text-align: center;
+    
+    display: flex;
+    flex-direction: column;
+
+    width: 87px;
+    background-color: white;
+    padding: 2px 20px;
+}
+
+.button-hari:hover{
+    cursor: pointer;
+    background: #ffcece;
+}
+
+.hari-selected{
+    color: white;
+    background: #B51D21;
+}
+
+.jadwal-tersedia {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    gap: 24px;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.jadwal-tersedia-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px;
+
+    background: #FFFFFF;
+    border: 1px solid #DADADA;
+    box-sizing: border-box;
+    border-radius: 10px;
+
+    width: 100%;
+    max-width: 600px;
+}
+
+.jadwal-tersedia-container:hover{
+    background: #ffcece;
+    cursor: pointer;
+}
+
+.jadwal-tersedia-item{
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.jadwal-tersedia-item-right > span {
+    font-size: 14px;
+}
+
+.jadwal-tersedia-item-left{
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+}
+
+.jadwal-tersedia-item-right{
+    display: flex;
+    flex-direction: column;
+    text-align: end;
+}
+
+.hidden{
+    display: none;
 }

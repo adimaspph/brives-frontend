@@ -3,6 +3,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import { Link } from "react-router-dom";
 import "./PesanKelasPage.css";
 import APIConfig from "../../api/APIConfig";
+import Footer from "../../components/Footer/Footer";
 
 export default function PesanKelasPage() {
 	const [listJenjang, setListJenjang] = useState([]);
@@ -11,8 +12,6 @@ export default function PesanKelasPage() {
 	
 	const setJejang = (idJenjang) => {
 		setSelectedJenjang(idJenjang);
-
-		// console.log(selectedJenjang + idJenjang.toString());
 		getMapel(idJenjang);
 	};
 
@@ -47,10 +46,6 @@ export default function PesanKelasPage() {
 			.catch((error) => {
 				console.log(error.response);
 			});
-	};
-
-	const handlePilih = (idMapel) => {
-		console.log(idMapel);
 	};
 
 	useEffect(() => {
@@ -103,7 +98,6 @@ export default function PesanKelasPage() {
 						</div>
 						<Link
 							className="button button-primary btn-mapel"
-							onClick={() => handlePilih(mapel.idMapel)}
 							to={`/pesan-kelas/` + mapel.idMapel}
 						>
 							Pilih
@@ -120,6 +114,7 @@ export default function PesanKelasPage() {
 					<a className="btn btn-primary btn-mapel">Pilih</a>
 				</div> */}
 			</div>
+			{/* <Footer/> */}
 		</div>
 	);
 }
