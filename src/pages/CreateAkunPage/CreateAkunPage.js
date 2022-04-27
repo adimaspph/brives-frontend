@@ -192,8 +192,11 @@ function CreateAkunPage() {
                                 </div>
                                 <div>
                                     <label htmlFor="">Password<span className='star'>*</span> </label>
-                                    <input id="create-pass" onChange={handlePasswordChange} type={passwordShown ? "text" : "password"} name="password" className='form-control' required />
-                                    <i id="eyepas" onClick={togglePasswordVisiblity}>{eye}</i>
+                                    <div className='d-flex flex justify-content-between'>
+                                        <input id="create-pass" onChange={handlePasswordChange} type={passwordShown ? "text" : "password"} name="password" className='form-control' required />
+                                        <i id="eyepas" onClick={togglePasswordVisiblity}>{eye}</i>
+                                    </div>
+                                    
                                 </div>
                                 {pengajarShown && 
                                 <div>

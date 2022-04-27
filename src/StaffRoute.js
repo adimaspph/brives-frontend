@@ -14,6 +14,7 @@ import CreateMapelComponent from "./pages/Mapel/CreateMapelComponent";
 import UpdateMapelComponent from "./pages/Mapel/UpdateMapelComponent";
 import DetailMapelComponent from "./pages/Mapel/DetailMapelComponent";
 import DetailPesanan from "./pages/Pesanan/DetailPesanan";
+import DetailRiwayatPesanan from "./pages/Pesanan/DetailRiwayatPesanan";
 import ListPengguna from "./pages/Pengguna/ListPengguna";
 import ListPesanan from "./pages/Pesanan/ListPesanan";
 import DetailPengguna from "./pages/Pengguna/DetailPengguna";
@@ -43,6 +44,7 @@ export default function StaffRoute() {
                         <PrivateRoute exact path="/pengguna/:idUser" component={DetailPengguna} />
                         <PrivateRoute exact path="/pengguna/edit/:idUser" component={EditPengguna} />
                         <PrivateRoute exact path="/profil-saya" component={ViewProfilePage} />
+                        
 
                         <Route exact path="/403" component={error403} />
                         <Route path='*' component={error404} />

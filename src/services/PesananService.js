@@ -26,6 +26,10 @@ class PesananService {
         return APIConfig.get("/pesanan/status/" + idStatus);
     }
 
+    getPesananByIdSiswa(idSiswa){
+        return APIConfig.get("/pesanan/siswa/" + idSiswa);
+    }
+
     updateLinkZoomJadwal(jadwal, idJadwal){
         return APIConfig.put("/jadwal/addLink/" + idJadwal, jadwal);
     }

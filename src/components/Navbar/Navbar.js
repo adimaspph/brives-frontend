@@ -33,43 +33,73 @@ export default function Navbar(props) {
 	return (
 		<div>
 			<nav className="navbar navbar-expand-lg navbar-dark">
-				
+
 				<div className="navbar-menu">
 					<Link className="navbar-logo" to="/">
 						<img src="/logo-navbar.png" width={60} alt="" />
 					</Link>
-					<Link className="navbar-menu-btn" to="/">
-						<div className="navbar-text">
-							Beranda
+
+					<div className='navbar-menu-btn'>
+						<div className='navbar-text'>
+							<a className="" href="/">
+								Beranda
+							</a>
 						</div>
-					</Link>
-					<Link className="navbar-menu-btn" to="/pesan-kelas">
-						<div className="navbar-text">
-							Kelas Privat
+					</div>
+
+					<div className='navbar-menu-btn'>
+						<div className='navbar-text'>
+							<a className="" href="/pesan-kelas">
+								Kelas Privat
+							</a>
 						</div>
-					</Link>
+					</div>
 
 					{localStorage.getItem("user") != null && JSON.parse(localStorage.getItem("user")).role === 'PELAJAR' ? (
-						<Link className="navbar-menu-btn" to="/riwayat-pesanan">
-							<div className="navbar-text">
-								Riwayat Pesanan
+						// <Link className="navbar-menu-btn" to="/riwayat-pesanan">
+						// 	<div className="navbar-text">
+						// 		Riwayat Pesanan
+						// 	</div>
+						// </Link>
+
+						<div className='navbar-menu-btn'>
+							<div className='navbar-text'>
+								<a className="" href="/riwayat-pesanan">
+									Riwayat Pesanan
+								</a>
 							</div>
-						</Link>
+						</div>
+
 					) : ("")}
 					{localStorage.getItem("user") != null && JSON.parse(localStorage.getItem("user")).role === 'PELAJAR' ? (
-						<Link className="navbar-menu-btn" to="/akun/profil">
-							<div className="navbar-text">
-								Profil
+						// <Link className="navbar-menu-btn" to="/akun/profil">
+						// 	<div className="navbar-text">
+						// 		Profil
+						// 	</div>
+						// </Link>
+						<div className='navbar-menu-btn'>
+							<div className='navbar-text'>
+								<a className="" href="/akun/profil">
+									Profil
+								</a>
 							</div>
-						</Link>
+						</div>
+
 					) : ("")}
-					
+
 					{localStorage.getItem("user") === null ? (
-						<Link className="navbar-menu-btn" to="/login">
-							<div className="navbar-text">
-								Login
+						// <Link className="navbar-menu-btn" to="/login">
+						// 	<div className="navbar-text">
+						// 		Login
+						// 	</div>
+						// </Link>
+						<div className='navbar-menu-btn'>
+							<div className='navbar-text'>
+								<a className="" href="/login">
+									Login
+								</a>
 							</div>
-						</Link>
+						</div>
 					) : ("")}
 
 					{localStorage.getItem("user") != null && JSON.parse(localStorage.getItem("user")).role === 'PELAJAR' ? (
@@ -82,7 +112,7 @@ export default function Navbar(props) {
 						</div>
 					) : ("")}
 
-					
+
 
 
 
