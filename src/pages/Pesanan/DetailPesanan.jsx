@@ -140,7 +140,7 @@ class DetailPesanan extends Component {
         PesananService.updateStatusPesanan(status, this.state.idPesanan).then(res => {
         });
 
-        this.demoTolak();
+        this.demoTolak(this.state.idJadwal);
 
     }
 
@@ -150,7 +150,7 @@ class DetailPesanan extends Component {
         PesananService.updateLinkZoomJadwal(jadwal, this.state.idJadwal).then(res => {
             let status = { idStatusPesanan: 5, jenisStatus: "Dijadwalkan" }
             PesananService.updateStatusPesanan(status, this.state.idPesanan).then(res => {
-                this.demoSave();
+                this.demoSave(this.state.idJadwal);
             });
         });
 
@@ -164,33 +164,36 @@ class DetailPesanan extends Component {
         event.preventDefault();
         let jadwal = { linkZoom: this.state.linkZoomBaru };
         PesananService.updateLinkZoomJadwal(jadwal, this.state.idJadwal).then(res => {
-            this.demoUpdate();
+            this.demoUpdate(this.state.idJadwal);
         });
 
 
 
     }
 
-    async demoSave() {
+    async demoSave(idPesanan) {
         this.setState({ successAdd: true });
         await this.sleep(1500);
-        // window.location.reload();
-        this.props.history.push(generatePath("/pesanan"));
+        window.location.reload();
+        // this.props.history.push(generatePath("/pesanan/:idPesanan", { idPesanan }));
+
     }
 
-    async demoUpdate() {
+    async demoUpdate(idPesanan) {
         this.setState({ successUpdate: true });
         await this.sleep(1500);
-        // window.location.reload();
-        this.props.history.push(generatePath("/pesanan"));
+        window.location.reload();
+        // this.props.history.push(generatePath("/pesanan/:idPesanan", { idPesanan }));
+
 
     }
 
-    async demoTolak() {
+    async demoTolak(idPesanan) {
         this.setState({ isTolak: true });
         await this.sleep(1500);
-        // window.location.reload();
-        this.props.history.push(generatePath("/pesanan"));
+        window.location.reload();
+        // this.props.history.push(generatePath("/pesanan/:idPesanan", { idPesanan }));
+
     }
 
     sleep(ms) {
