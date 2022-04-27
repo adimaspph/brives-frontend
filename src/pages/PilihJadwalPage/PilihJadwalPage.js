@@ -23,6 +23,7 @@ export default function PilihJadwalPage() {
 	const [day7, setDay7] = useState(new Date(today.setDate(today.getDate() + 1)));
 	const [listHari, setlistHari] = useState([]);
 	const [selectedHari, setSelectedHari] = useState(day1);
+	const [listJadwal, setListJadwal] = useState([]);
 	
 	const namaHari = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
 	const monthNames = [
@@ -40,14 +41,51 @@ export default function PilihJadwalPage() {
 		"Dec",
 	];
 
+	const getJadwal = (tanggal) => {
+		const parameter = {
+			tanggal: tanggal.getDate(),
+			bulan: tanggal.getMonth() + 1,
+			tahun: tanggal.getFullYear(),
+			idMapel: idMapel,
+		};
+		console.log(parameter);
+		APIConfig.get("/jadwal/mapel/", {
+			params: parameter,
+		})
+			.then((response) => {
+				// console.log(response.data.result);
+				setListJadwal(response.data.result);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	};
+
 	const handleSelectHari = (tanggal) => {
+		// console.log(tanggal.toString());
 		setSelectedHari(tanggal);
-		console.log(tanggal.toString());
+		// console.log(selectedHari);
+		getJadwal(tanggal);
 	};
 
 	const setHari = () => {
 		const temp = [day1, day2, day3, day4, day5, day6, day7]
 		setlistHari(temp);
+	};
+
+	const dateConvert = (tanggal) => {
+		const date = new Date(tanggal);
+		let result = namaHari[date.getDay()] + ", " + date.getDate() + " " + monthNames[date.getMonth()] + " " + date.getFullYear()
+		// console.log(result);
+		return result;
+	};
+
+	const curConvert = (tarif) => {
+		return new Intl.NumberFormat("id-ID", {
+			style: "currency",
+			currency: "IDR",
+			minimumFractionDigits: 0,
+		}).format(tarif);
 	};
 
     const getMapel = (idMapel) => {
@@ -63,6 +101,7 @@ export default function PilihJadwalPage() {
     useEffect(() => {
 		getMapel(idMapel);
 		setHari();
+		getJadwal(day1);
 	}, []);
 
 	return (
@@ -134,28 +173,38 @@ export default function PilihJadwalPage() {
 			</div>
 
 			<div className="jadwal-tersedia">
-				<div className="jadwal-tersedia-container">
-					<div className="jadwal-tersedia-item">
-						<img
-							src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS24XFw4cHA5l7ego7xF2V5fIaUfLajZgZKSA&usqp=CAU"
-							width={50}
-							height={50}
-						/>
-						<div className="jadwal-tersedia-item-left">
-							<label>Nama Pengajar</label>
-							<span>Rp 90.000</span>
+				{/* {listJadwal.} */}
+				{listJadwal.map((jadwal, key) => (
+					<div className="jadwal-tersedia-container" key={key}>
+						<div className="jadwal-tersedia-item">
+							<img
+								src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS24XFw4cHA5l7ego7xF2V5fIaUfLajZgZKSA&usqp=CAU"
+								width={50}
+								height={50}
+							/>
+							<div className="jadwal-tersedia-item-left">
+								<label>{jadwal.nama}</label>
+								<span>{curConvert(jadwal.tarif)}</span>
+							</div>
+						</div>
+						<div className="jadwal-tersedia-item">
+							<div className="jadwal-tersedia-item-right">
+								<label>
+									{jadwal.jadwal.waktuMulai} -{" "}
+									{jadwal.jadwal.waktuSelesai}
+								</label>
+								<span>
+									{dateConvert(jadwal.jadwal.tanggal)}
+								</span>
+							</div>
+							{/* <button className="button button-primary">
+								Pesan
+							</button> */}
 						</div>
 					</div>
-					<div className="jadwal-tersedia-item">
-						<div className="jadwal-tersedia-item-right">
-							<label>15.30 - 17.00</label>
-							<span>Senin, 23 Feb 2020</span>
-						</div>
-						<button className="button button-primary">Pesan</button>
-					</div>
-				</div>
+				))}
 
-				<div className="jadwal-tersedia-container">
+				{/* <div className="jadwal-tersedia-container">
 					<div className="jadwal-tersedia-item">
 						<img
 							src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS24XFw4cHA5l7ego7xF2V5fIaUfLajZgZKSA&usqp=CAU"
@@ -174,7 +223,7 @@ export default function PilihJadwalPage() {
 						</div>
 						<button className="button button-primary">Pesan</button>
 					</div>
-				</div>
+				</div> */}
 			</div>
 		</div>
 	);

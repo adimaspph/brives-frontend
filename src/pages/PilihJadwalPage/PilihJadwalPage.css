@@ -52,7 +52,7 @@
 
 .button-hari:hover{
     cursor: pointer;
-    background: #FF9494;
+    background: #ffcece;
 }
 
 .hari-selected{
@@ -84,7 +84,11 @@
 
     width: 100%;
     max-width: 600px;
+}
 
+.jadwal-tersedia-container:hover{
+    background: #ffcece;
+    cursor: pointer;
 }
 
 .jadwal-tersedia-item{
@@ -96,7 +100,7 @@
     align-items: center;
 }
 
-.jadwal-tersedia-item > span{
+.jadwal-tersedia-item-right > span {
     font-size: 14px;
 }
 
