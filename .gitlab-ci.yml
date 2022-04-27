@@ -5,8 +5,7 @@ before_script:
 
 stages:
     - build
-    - deploy-heroku
-    - deploy-digitalocean
+    - deploy
 
 build:
     stage: build
@@ -25,7 +24,7 @@ build:
 
 Deploy-to-heroku:
     image: ruby:2.7.1
-    stage: deploy-heroku
+    stage: deploy
     script:
         - apt-get update -qy
         - apt-get install -y ruby-dev
@@ -36,7 +35,7 @@ Deploy-to-heroku:
         - staging
 
 Deploy-to-digitalocean:
-    stage: deploy-digitalocean
+    stage: deploy
     image: docker:latest
     before_script:
         - echo "deploying app"
