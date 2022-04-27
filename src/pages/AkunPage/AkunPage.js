@@ -1,12 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye } from "@fortawesome/free-solid-svg-icons";
+import React from 'react';
 import Navbar from "../../components/Navbar/Navbar";
-import ErrorNotification from "../../components/Notification/ErrorNotification";
-import NeutralNotification from '../../components/Notification/NeutralNotification';
 import APIConfig from "../../api/APIConfig";
 import "./AkunPage.css";
-import { Link } from 'react-router-dom';
+import Footer from "../../components/Footer/Footer";
 
 class AkunPage extends React.Component {
     constructor(props) {
@@ -109,6 +105,7 @@ class AkunPage extends React.Component {
                         </div>
                     </div>
                 </div>
+                <Footer></Footer>
             </div>
         );
     }

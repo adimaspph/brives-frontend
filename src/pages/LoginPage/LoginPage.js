@@ -111,17 +111,17 @@ function LoginPage() {
                             </form>
                             <div
                                 onClick={handlerLogin}
-                                className="btn btn-blue fsubmit"
+                                className="button button-blue fsubmit"
                             >
                                 Login
                             </div>
 
 
-                            <Link className="" to="/register">
-                                <div className="register">
-                                    Belum memiliki akun? <span className="star">Daftar Disini</span>
-                                </div>
-                            </Link>
+                            
+                            <div className="register">
+                                <p>Belum memiliki akun? <span className="star"><Link className="" to="/register"> Daftar Disini </Link></span> </p>  
+                            </div>
+                            
 
 
                         </div>
