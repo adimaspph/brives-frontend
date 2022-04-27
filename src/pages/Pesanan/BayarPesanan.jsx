@@ -33,7 +33,7 @@ export default function BayarPesananComponent(props) {
       console.log(err);
     }
 
-    props.history.push(`/detail-pesanan/${props.match.params.idPesanan}`);
+    props.history.push(`/detail-pembayaran/${props.match.params.idPesanan}`);
 
   };
 

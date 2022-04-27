@@ -34,6 +34,7 @@ import PilihJadwalPage from "./pages/PilihJadwalPage/PilihJadwalPage";
 import RiwayatPesanan from "./pages/Pesanan/RiwayatPesanan";
 import DetailRiwayatPesanan from "./pages/Pesanan/DetailRiwayatPesanan";
 import BayarPesanan from "./pages/Pesanan/BayarPesanan";
+import DetailPembayaran from "./pages/Pesanan/DetailPembayaran";
 
 
 function AppRoutes() {
@@ -54,6 +55,7 @@ function AppRoutes() {
 					<Route exact path="/riwayat-pesanan" component={RiwayatPesanan} />
 					<Route exact path="/riwayat-pesanan/:idPesanan" component={DetailRiwayatPesanan} />
 					<Route exact path="/bayar-pesanan/:idPesanan" component={BayarPesanan} />
+					<Route exact path="/detail-pembayaran/:idPesanan" component={DetailPembayaran} />
 					<Route exact path="/" component={Homepage} />
 					<Route path="/" component={StaffRoute} />
 					<Redirect from="*" to="/404" />
