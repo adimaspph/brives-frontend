@@ -31,7 +31,7 @@ class Homepage extends Component {
 
 	render() {
 		return (
-			<div>
+			<div className="page-container">
 				<Navbar></Navbar>
 				<div class="jumbotronn row d-flex justify-content-center">
 					<div className="col-lg-6 justify-content-center ">
