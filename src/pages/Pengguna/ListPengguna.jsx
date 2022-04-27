@@ -115,7 +115,6 @@ class ListPengguna extends Component {
                     <table className='table-max table-none' id='myTable'>
                         <thead>
                             <tr className=''>
-                                <th className='text-center' scope='col'>Id User</th>
                                 <th className='text-center' scope='col'>Nama Lengkap</th>
                                 <th className='text-center' scope='col'>Username</th>
                                 <th className='text-center' scope='col'>Email</th>
@@ -131,7 +130,6 @@ class ListPengguna extends Component {
                                 this.state.pengguna.map(
                                     satuMapel =>
                                         <tr key={satuMapel.idUser}>
-                                            <td scope='row'> {satuMapel.idUser} </td>
                                             <td> {satuMapel.namaLengkap} </td>
                                             <td> {satuMapel.username} </td>
                                             <td> {satuMapel.email} </td>

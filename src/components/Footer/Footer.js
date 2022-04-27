@@ -35,8 +35,8 @@ export default function Footer(props) {
 
 	return (
 
-		<div>
-			<footer class="footer row d-flex justify-content-center">
+		<div className='mt-auto'>
+			<footer class="footer  d-flex justify-content-center">
 				<div className="col-lg-10 row d-flex justify-content-center ">
 					<div className="logo-footer ">
 						<Link className="footer-logo" to="/">
