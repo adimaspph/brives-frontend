@@ -252,10 +252,10 @@ class EditPengguna extends React.Component {
                                         </div>
                                     </div>}
                                     <div className='box-right'>
-                                    <a className="btn btn-outline-blue twobutton" onClick={this.cancel}>
+                                    <a className="button button-outline-blue twobutton" onClick={this.cancel}>
                                                     Kembali
                                                 </a>
-                                        <button type="submit" className="twobutton btn btn-blue">Simpan</button>
+                                        <button type="submit" className="twobutton button button-blue">Simpan</button>
                                     </div>
     
                                     

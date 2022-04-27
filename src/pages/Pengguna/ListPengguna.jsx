@@ -104,7 +104,7 @@ class ListPengguna extends Component {
                         <option value="5">MANAGER</option>
                     </select>
                     <div className='mt-1 pt-1 twobutton'>
-                        <a className="btn btn-blue" onClick={this.addPengguna}>
+                        <a className="button button-blue" onClick={this.addPengguna}>
                             + Tambah Pengguna
                         </a>
                     </div>
@@ -138,13 +138,13 @@ class ListPengguna extends Component {
                                             <td>
                                                 <div className='col'>
                                                     <div className='my-2 d-flex flex justify-content-center'>
-                                                        <a className="btn btn-outline" onClick={() => this.lihatPengguna(satuMapel.username)}>
+                                                        <a className="button button-outline" onClick={() => this.lihatPengguna(satuMapel.username)}>
                                                             Lihat
                                                         </a>
                                                     </div>
                                                     
                                                     <div className='my-2 d-flex flex justify-content-center'>
-                                                        <a className="btn btn-outline" onClick={() => this.editPengguna(satuMapel.username)}>
+                                                        <a className="button button-outline" onClick={() => this.editPengguna(satuMapel.username)}>
                                                             Edit
                                                         </a>
                                                     </div>
