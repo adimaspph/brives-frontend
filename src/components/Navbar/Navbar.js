@@ -39,12 +39,6 @@ export default function Navbar(props) {
 						<img src="/logo-navbar.png" width={60} alt="" />
 					</Link>
 
-					{/* <Link className="navbar-menu-btn" to="/">
-						<div className="navbar-text">
-							Beranda
-						</div>
-					</Link> */}
-
 					<div className='navbar-menu-btn'>
 						<div className='navbar-text'>
 							<a className="" href="/">
@@ -53,16 +47,9 @@ export default function Navbar(props) {
 						</div>
 					</div>
 
-
-					{/* <Link className="navbar-menu-btn" to="/privat">
-						<div className="navbar-text">
-							Kelas Privat
-						</div>
-					</Link> */}
-
 					<div className='navbar-menu-btn'>
 						<div className='navbar-text'>
-							<a className="" href="/privat">
+							<a className="" href="/pesan-kelas">
 								Kelas Privat
 							</a>
 						</div>
