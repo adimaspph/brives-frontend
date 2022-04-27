@@ -221,11 +221,11 @@ class UpdateMapelComponent extends Component {
 
                                         <div className='box-right'>
 
-                                            <a className="btn btn-outline-blue twobutton" onClick={() => this.editMapel(this.state.idMapel)}>
+                                            <a className="button button-outline-blue twobutton" onClick={() => this.editMapel(this.state.idMapel)}>
                                                 Kembali
                                             </a>
 
-                                            <button type="submit" className="btn btn-blue twobutton">Simpan</button>
+                                            <button type="submit" className="button button-blue twobutton">Simpan</button>
 
                                         </div>
 

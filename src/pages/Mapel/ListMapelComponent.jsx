@@ -45,7 +45,7 @@ export default function DetailMapelComponent(props) {
     <>
       <div className="outer">
         <h1>Daftar Mata Pelajaran</h1>
-        <a className="btn btn-blue" onClick={addMapelHandler}>
+        <a className="button button-blue" onClick={addMapelHandler}>
           + Tambah Mata Pelajaran
         </a>
         <br />
@@ -71,7 +71,7 @@ export default function DetailMapelComponent(props) {
                   <td>{mapel.deskripsi}</td>
                   <td>
                     <a
-                      className="btn btn-outline"
+                      className="button button-outline"
                       // href={`/atur-mapel/${mapel.idMapel}`}
                       onClick={() => viewMapel(mapel.idMapel)}
                     >

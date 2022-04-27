@@ -189,10 +189,10 @@ class CreateMapelComponent extends Component {
 
                                         <div className='box-right'>
 
-                                            <a className="btn btn-outline-blue twobutton" onClick={this.cancel}>
+                                            <a className="button button-outline-blue twobutton" onClick={this.cancel}>
                                                 Kembali
                                             </a>
-                                            <button type="submit" className="btn btn-blue twobutton">Simpan</button>
+                                            <button type="submit" className="button button-blue twobutton">Simpan</button>
 
                                         </div>
 

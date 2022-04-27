@@ -37,7 +37,7 @@ class Homepage extends Component {
 					<div className="col-lg-6 justify-content-center ">
 						<h1>Bimbingan Belajar Privat</h1>
 						<p>Sedang mencari bimbel privat harian untuk persiapan ujian? Segera pesan disini!</p>
-						<a className="btn btn-primary button-pesan" onClick={this.clickPesan}>
+						<a className="button button-primary button-pesan" onClick={this.clickPesan}>
 								Pesan Kelas
 						</a>
 					</div>
