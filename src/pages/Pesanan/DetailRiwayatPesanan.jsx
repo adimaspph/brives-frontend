@@ -142,11 +142,11 @@ class DetailRiwayatPesanan extends Component {
                         <p>Apakah Anda yakin akan membatalkan pesanan ini?</p>
                         <div className="modalButtonContainer">
 
-                            <div className="btn btn-outline" onClick={() => this.handleCancelTolak(this.state.idPesanan)}>
+                            <div className="button button-outline" onClick={() => this.handleCancelTolak(this.state.idPesanan)}>
                                 Kembali
                             </div>
 
-                            <div className="btn btn-primary" onClick={this.tolakPesanan}>
+                            <div className="button button-primary" onClick={this.tolakPesanan}>
                                 Batalkan
                             </div>
                         </div>
@@ -226,8 +226,8 @@ class DetailRiwayatPesanan extends Component {
 
                                 {this.state.status === 'Belum Dibayar' ? (
                                     <div className='center'>
-                                        <button onClick={this.clickedtTolakPesanan} type="submit" className="btn btn-outline-secondary twobutton">Batalkan Pesanan</button>
-                                        <button onClick={this.ClickedBayar} type="submit" className="btn btn-red  twobutton">Bayar</button>
+                                        <button onClick={this.clickedtTolakPesanan} type="submit" className="button button-outline-blue twobutton">Batalkan Pesanan</button>
+                                        <button onClick={this.ClickedBayar} type="submit" className="button button-blue  twobutton">Bayar</button>
                                     </div>
                                 ) : ('')}
 
