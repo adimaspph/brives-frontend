@@ -10,6 +10,8 @@ import Navbar from "../../components/Navbar/Navbar";
 import "./PilihJadwalPage.css";
 import APIConfig from "../../api/APIConfig";
 import Modal from "../../components/Modal/Modal";
+import NeutralNotification from "../../components/Notification/NeutralNotification";
+import ErrorNotification from "../../components/Notification/ErrorNotification";
 
 export default function PilihJadwalPage() {
 	const [today, setToday] = useState(new Date());
@@ -28,6 +30,8 @@ export default function PilihJadwalPage() {
 	const [modal, setModal] = useState(false);
 	const [selectedJadwal, setSelectedJadwal] = useState(null);
 	const [materi, setMateri] = useState("");
+	const [successNotif, setSuccessNotif] = useState(false);
+	const [hasError, setHasError] = useState(false);
 	
 	const namaHari = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
 	const monthNames = [
@@ -125,7 +129,7 @@ export default function PilihJadwalPage() {
 		setModal(false);
 	};
 
-	const handleSubmit = (event) => {
+	const handleSubmit = async (event) => {
 		event.preventDefault();
 		const min = 1;
 		const max = 100;
@@ -135,15 +139,27 @@ export default function PilihJadwalPage() {
 			nominal: listJadwal[selectedJadwal].tarif + rand,
 			idJadwal: listJadwal[selectedJadwal].jadwal.idJadwal,
 		};
+		setHasError(false);
+		setSuccessNotif(false);
 		APIConfig.post("/pesanan", body)
 			.then((response) => {
 				// console.log(response.data.result);
-				window.location = "/riwayat-pesanan";
+				setModal(false);
+				setSuccessNotif(true);
+				const timer = setTimeout(() => {
+					window.location = "/riwayat-pesanan";
+				}, 2000);
+				
 			})
 			.catch((error) => {
 				console.log(error.response);
+				setHasError(true);
 			});
 		setModal(false);
+	};
+
+	const sleep = (milliseconds) => {
+		return new Promise((resolve) => setTimeout(resolve, milliseconds));
 	};
 
 	const getDesc = () => {
@@ -205,6 +221,13 @@ export default function PilihJadwalPage() {
 	return (
 		<div>
 			<Navbar />
+			
+			{hasError ? <ErrorNotification text="Kelas gagal dipesan" /> : ""}
+			{successNotif ? (
+				<NeutralNotification text="Kelas berhasil dipesan" />
+			) : (
+				""
+			)}
 			<h1 className="title text-center">Pilih Jadwal</h1>
 
 			<div className="center ubah-mapel-container">

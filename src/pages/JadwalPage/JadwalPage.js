@@ -100,7 +100,7 @@ function JadwalPage() {
 				""
 			)}
 
-			<h1>Atur Jadwal</h1>
+			<h1 className="">Atur Jadwal</h1>
 
 			<Modal
 				show={modal}

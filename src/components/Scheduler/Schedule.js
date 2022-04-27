@@ -6,6 +6,9 @@ import Modal from "../../components/Modal/Modal";
 
 export default function Schedule({ date, hari }) {
 	const [modal, setModal] = useState(false);
+	const [modalView, setModalView] = useState(false);
+	const [selectedJadwal, setSelectedJadwal] = useState();
+	const [linkZoom, setLinkZoom] = useState("");
 	const [jadwal, setJadwal] = useState({
 		idJadwal: null,
 		waktuMulai: null,
@@ -40,6 +43,7 @@ export default function Schedule({ date, hari }) {
 			params: parameter,
 		})
 			.then((response) => {
+				// console.log(response.data);
 				setListJadwal(response.data.result);
 			})
 			.catch((error) => {
@@ -76,6 +80,55 @@ export default function Schedule({ date, hari }) {
 				console.log(error);
 			});
 	};
+
+	const addLink = (event) => {
+		event.preventDefault();
+		let jadwal = { linkZoom: linkZoom };
+		console.log(selectedJadwal.idJadwal);
+		APIConfig.put("/jadwal/addLink/" + selectedJadwal.idJadwal, jadwal)
+			.then((response) => {
+				console.log(response.data.result);
+				setModalView(false);
+				window.location = "/atur-jadwal";
+			})
+			.catch((error) => {
+				console.log(error.response);
+			});
+		
+	};
+
+	const dateConvert = (tanggal) => {
+		const date = new Date(tanggal);
+		const namaHari = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+		const monthNames = ["January", "February", "March", "April", "May", "June",
+		"July", "August", "September", "October", "November", "December"
+		];
+		
+		let result = namaHari[date.getDay()] + ", " + date.getDate() + " " + monthNames[date.getMonth()] + " " + date.getFullYear()
+		// console.log(result);
+		return result;
+	};
+
+	const getDesc = () => {
+		if (selectedJadwal != null) {
+			return (
+				<div>
+					<label>Mata Pelajaran :</label>
+					<p>{selectedJadwal.mapel.namaMapel}</p>
+					<label>Jenis Kelas :</label>
+					<p>{selectedJadwal.jenisKelas}</p>
+					<label>Tanggal :</label>
+					<p>{dateConvert(selectedJadwal.tanggal)}</p>
+					<label>Waktu :</label>
+					<p>
+						{selectedJadwal.waktuMulai} -{" "}
+						{selectedJadwal.waktuSelesai} WIB
+					</p>
+				</div>
+			);
+		}
+	};
+
 
 	return (
 		<React.Fragment>
@@ -121,6 +174,34 @@ export default function Schedule({ date, hari }) {
 					</div>
 				</div>
 			</Modal>
+			<Modal show={modalView} modalTitle="Detail Jadwal">
+				<form action="" onSubmit={addLink}>
+					{getDesc()}
+					<div className="form-group">
+						<label> Link Zoom </label>
+						<input
+							type="text"
+							className="form-control"
+							value={linkZoom}
+							onChange={(e) => setLinkZoom(e.target.value)}
+							required
+						/>
+					</div>
+
+					<div className="modalButtonContainer">
+						<div
+							className="button button-outline"
+							onClick={() => setModalView(false)}
+						>
+							Kembali
+						</div>
+						<button type="submit" className="button button-primary">
+							Simpan
+						</button>
+					</div>
+				</form>
+			</Modal>
+
 			{listJadwal.map((jadwal, key) => (
 				<div
 					key={key}
@@ -134,7 +215,6 @@ export default function Schedule({ date, hari }) {
 					<div>
 						<div>
 							<b>{jadwal.mapel.namaMapel}</b>
-							<br />
 						</div>
 						<br />
 						<span>{`${jadwal.waktuMulai} - ${jadwal.waktuSelesai}`}</span>
@@ -142,6 +222,16 @@ export default function Schedule({ date, hari }) {
 
 					<div
 						className="button button-s button-green"
+						onClick={() => {
+							setModalView(true);
+							setSelectedJadwal(jadwal);
+							setLinkZoom(jadwal.linkZoom)
+						}}
+					>
+						Detail
+					</div>
+					<div
+						className="button button-s button-primary"
 						onClick={() => {
 							setModal(true);
 							setJadwal(jadwal);
