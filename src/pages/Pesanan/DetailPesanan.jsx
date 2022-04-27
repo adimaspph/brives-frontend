@@ -28,10 +28,10 @@ class DetailPesanan extends Component {
             namaPengajar: '',
             isClickedAddLink: false,
             isClickedUpdateLink: false,
-            isClickedTolakPesanan:false,
+            isClickedTolakPesanan: false,
             successAdd: false,
             successUpdate: false,
-            isTolak:false,
+            isTolak: false,
         }
 
         this.viewPesanan = this.viewPesanan.bind(this);
@@ -148,13 +148,15 @@ class DetailPesanan extends Component {
         event.preventDefault();
         let jadwal = { linkZoom: this.state.linkZoomBaru };
         PesananService.updateLinkZoomJadwal(jadwal, this.state.idJadwal).then(res => {
+            let status = { idStatusPesanan: 5, jenisStatus: "Dijadwalkan" }
+            PesananService.updateStatusPesanan(status, this.state.idPesanan).then(res => {
+                this.demoSave();
+            });
         });
 
-        let status = { idStatusPesanan: 5, jenisStatus: "Dijadwalkan" }
-        PesananService.updateStatusPesanan(status, this.state.idPesanan).then(res => {
-        });
 
-        this.demoSave();
+
+
 
     }
 
@@ -162,28 +164,33 @@ class DetailPesanan extends Component {
         event.preventDefault();
         let jadwal = { linkZoom: this.state.linkZoomBaru };
         PesananService.updateLinkZoomJadwal(jadwal, this.state.idJadwal).then(res => {
+            this.demoUpdate();
         });
 
-        this.demoUpdate();
+
 
     }
 
     async demoSave() {
         this.setState({ successAdd: true });
         await this.sleep(1500);
-        window.location.reload();
+        // window.location.reload();
+        this.props.history.push(generatePath("/pesanan"));
     }
 
     async demoUpdate() {
         this.setState({ successUpdate: true });
         await this.sleep(1500);
-        window.location.reload();
+        // window.location.reload();
+        this.props.history.push(generatePath("/pesanan"));
+
     }
 
     async demoTolak() {
         this.setState({ isTolak: true });
         await this.sleep(1500);
-        window.location.reload();
+        // window.location.reload();
+        this.props.history.push(generatePath("/pesanan"));
     }
 
     sleep(ms) {
@@ -325,9 +332,9 @@ class DetailPesanan extends Component {
                             <hr />
 
                             {this.state.status === 'Belum Dibayar' ? (<div className='center'>
-                                    <button  onClick={this.clickedtTolakPesanan} type="submit" className="btn btn-primary twobutton">Tolak Pesanan</button>
+                                <button onClick={this.clickedtTolakPesanan} type="submit" className="btn btn-primary twobutton">Tolak Pesanan</button>
                             </div>) : ('')}
-                            
+
                         </div>
                     </div>
                 </div>
