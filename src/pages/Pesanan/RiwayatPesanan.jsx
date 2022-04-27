@@ -42,7 +42,9 @@ class RiwayatPesanan extends Component {
             this.setState({ idSiswa: response.data.result.siswa.idSiswa })
 
             PesananService.getPesananByIdSiswa(this.state.idSiswa).then((res) => {
-                this.setState({ pesanan: res.data.result });
+                this.setState({
+                    pesanan: res.data.result
+                });
             });
         })
 
@@ -56,7 +58,17 @@ class RiwayatPesanan extends Component {
 
     handleStatusChange = (event) => {
         PesananService.getPesananByIdStatus(event.target.value).then((res) => {
-            this.setState({ pesanan: res.data.result });
+            this.setState({
+                pesanan: res.data.result,
+                mapel: res.data.result.jadwal.mapel.namaMapel,
+            });
+
+            PesananService.getUserByIdStaff(this.state.idStaff).then((res) => {
+                this.setState({
+                    namaPengajar: res.data.result[0].namaLengkap,
+
+                });
+            });
 
         });
 
@@ -88,9 +100,11 @@ class RiwayatPesanan extends Component {
                             <tr>
                                 <th scope="col">No</th>
                                 <th scope="col">Tanggal Dibuat</th>
-                                <th scope="col">Nomor Pesanan</th>
-                                <th scope="col">Total Pesanan</th>
+                                <th scope="col">Mata Pelajaran</th>
+                                <th scope="col">Nama Pengajar</th>
                                 <th scope="col">Tanggal Bimbel</th>
+                                <th scope="col">Jam</th>
+                                <th scope="col">Total Pesanan</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Action</th>
                             </tr>
@@ -101,13 +115,15 @@ class RiwayatPesanan extends Component {
                                 <tr key={SatuPesanan.idPesanan}>
                                     <td>{index + 1}</td>
                                     <td> {SatuPesanan.waktuDibuat} </td>
-                                    <td scope='row'> {SatuPesanan.idPesanan} </td>
-                                    <td> Rp {SatuPesanan.nominal} </td>
+                                    <td> //mata pelajaran </td>
+                                    <td> //nama pengajar </td>
                                     <td> {SatuPesanan.jadwal.tanggal} {SatuPesanan.jadwal.waktuMulai} - {SatuPesanan.jadwal.waktuSelesai}  </td>
+                                    <td> //jam </td>
+                                    <td> Rp {SatuPesanan.nominal} </td>
                                     <td> {SatuPesanan.status.jenisStatus} </td>
                                     <td>
                                         <a className="button button-outline" onClick={() => this.viewPesanan(SatuPesanan.idPesanan)}>
-                                            Lihat
+                                            Lihat Detail
                                         </a>
                                     </td>
                                 </tr>
