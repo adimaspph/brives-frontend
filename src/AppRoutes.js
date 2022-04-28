@@ -35,6 +35,8 @@ import RiwayatPesanan from "./pages/Pesanan/RiwayatPesanan";
 import DetailRiwayatPesanan from "./pages/Pesanan/DetailRiwayatPesanan";
 import BayarPesanan from "./pages/Pesanan/BayarPesanan";
 import DetailPembayaran from "./pages/Pesanan/DetailPembayaran";
+import DaftarPembayaran from "./pages/Pesanan/DaftarPembayaran";
+import DetailPembayaranStaff from "./pages/Pesanan/DetailPembayaranStaff";
 
 
 function AppRoutes() {
@@ -56,6 +58,8 @@ function AppRoutes() {
 					<Route exact path="/riwayat-pesanan/:idPesanan" component={DetailRiwayatPesanan} />
 					<Route exact path="/bayar-pesanan/:idPesanan" component={BayarPesanan} />
 					<Route exact path="/detail-pembayaran/:idPesanan" component={DetailPembayaran} />
+					<Route exact path="/detail-pembayaran-staff/:idPesanan" component={DetailPembayaranStaff} />
+					<Route exact path="/daftar-pembayaran" component={DaftarPembayaran} />
 					<Route exact path="/" component={Homepage} />
 					<Route path="/" component={StaffRoute} />
 					<Redirect from="*" to="/404" />
