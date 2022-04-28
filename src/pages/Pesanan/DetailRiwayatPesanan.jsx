@@ -97,7 +97,7 @@ class DetailRiwayatPesanan extends Component {
     };
 
     ClickedBayar = (event) => {
-        this.props.history.push(generatePath("/riwayat-pesanan/"));
+        this.props.history.push(generatePath("/bayar-pesanan/:idPesanan", { idPesanan: this.state.idPesanan }));
 
     };
 
