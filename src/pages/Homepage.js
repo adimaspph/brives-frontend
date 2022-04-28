@@ -34,8 +34,8 @@ class Homepage extends Component {
 			<div className="">
 				<Navbar />
 				<div className="page-container">
-					<div class="jumbotronn row d-flex justify-content-center">
-						<div className="col-lg-6 justify-content-center ">
+					<div class="jumbotronn home-container">
+						<div className="">
 							<h1>Bimbingan Belajar Privat</h1>
 							<p>
 								Sedang mencari bimbel privat harian untuk
@@ -48,12 +48,12 @@ class Homepage extends Component {
 								Pesan Kelas
 							</a>
 						</div>
-						<div className="col-4 d-flex justify-content-center logo-bta-col d-none  ">
+						<div className="logo-bta">
 							<img className="logo-bta" src="/logo-bta.png" />
 						</div>
 					</div>
 
-					<div className="row d-flex justify-content-center ">
+					<div className="home-container">
 						<div class="col-lg-4 d-flex justify-content-center">
 							<img
 								className="gambar-privat"
@@ -63,26 +63,22 @@ class Homepage extends Component {
 							/>
 						</div>
 
-						<div className="col-lg-5 d-flex justify-content-center">
-							<div className="mt-5 mb-5 benefit">
-								<h2>Manfaat Mengikuti Kelas Privat di BTA</h2>
-								<p>
-									1. Tanpa mengikuti bimbel tahunan, kamu bisa
-									memesan kelas bimbel harian
-								</p>
-								<p>
-									2. Kamu akan diajar oleh pengajar terbaik
-									BTA
-								</p>
-								<p>
-									3. Kamu bebas memilih materi yang ingin
-									diajarkan
-								</p>
-								<p>4. Harga kelas terjangkau</p>
-								{/* <a className="btn btn-primary button-pesan" onClick={this.clickPesan}>
-								Pesan Kelas
-							</a> */}
-							</div>
+					
+						<div className="benefit">
+							<h2>Manfaat Mengikuti Kelas Privat di BTA</h2>
+							<p>
+								1. Tanpa mengikuti bimbel tahunan, kamu bisa
+								memesan kelas bimbel harian
+							</p>
+							<p>
+								2. Kamu akan diajar oleh pengajar terbaik
+								BTA
+							</p>
+							<p>
+								3. Kamu bebas memilih materi yang ingin
+								diajarkan
+							</p>
+							<p>4. Harga kelas terjangkau</p>
 						</div>
 					</div>
 				</div>
