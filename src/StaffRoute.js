@@ -47,7 +47,7 @@ export default function StaffRoute() {
                         
 
                         <Route exact path="/403" component={error403} />
-                        <Route path='*' component={error404} />
+                        <Route path="/" component={() => (window.location = "/404")} />
 
                     </Switch>
                 </div>

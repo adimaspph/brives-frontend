@@ -26,7 +26,7 @@ class Homepage extends Component {
 	}
 
 	clickPesan = () => {
-		window.location = "/privat";
+		window.location = "/pesan-kelas";
 	};
 
 	render() {
