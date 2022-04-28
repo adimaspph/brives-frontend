@@ -33,11 +33,11 @@ import PesanKelasPage from "./pages/PesanKelasPage/PesanKelasPage";
 import PilihJadwalPage from "./pages/PilihJadwalPage/PilihJadwalPage";
 import RiwayatPesanan from "./pages/Pesanan/RiwayatPesanan";
 import DetailRiwayatPesanan from "./pages/Pesanan/DetailRiwayatPesanan";
+import error404 from "./pages/error404";
 import BayarPesanan from "./pages/Pesanan/BayarPesanan";
 import DetailPembayaran from "./pages/Pesanan/DetailPembayaran";
 import DaftarPembayaran from "./pages/Pesanan/DaftarPembayaran";
 import DetailPembayaranStaff from "./pages/Pesanan/DetailPembayaranStaff";
-
 
 function AppRoutes() {
 
@@ -52,6 +52,7 @@ function AppRoutes() {
 					<Route exact path="/akun/profil/ganti-password" component={UbahPasswordPage} />
 					<Route exact path="/design" component={Design} />
 					<Route exact path="/403" component={error403} />
+					<Route exact path="/404" component={error404} />
 					<Route exact path="/pesan-kelas" component={PesanKelasPage} />
 					<Route exact path="/pesan-kelas/:id" component={PilihJadwalPage} />
 					<Route exact path="/riwayat-pesanan" component={RiwayatPesanan} />
