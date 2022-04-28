@@ -370,14 +370,6 @@ class DetailPesanan extends Component {
                         </div>
                     </div>
                 </div>
-
-
-
-
-
-
-
-
             </div>
         );
     }

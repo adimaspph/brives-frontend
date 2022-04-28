@@ -66,64 +66,63 @@ class RiwayatPesanan extends Component {
 
     render() {
         return (
-            <div className="d-flex flex-column min-vh-100">
-                <Navbar />
-                <h1 className="text-center title-riwayat">Riwayat Pesanan</h1>
-                <div className="outer-pelajar">
-                    <div className='d-flex flex-row'>
-                        <p className="p-2 align-self-end">Pilih Status: </p>
-                        <select onChange={this.handleStatusChange} name="role" id="role" className='twobutton p-2'>
-                            <option value="0">Semua</option>
-                            <option value="1">Belum Dibayar</option>
-                            <option value="2">Menunggu Verifikasi</option>
-                            <option value="3">Terverifikasi</option>
-                            <option value="4">Pembayaran Ditolak</option>
-                            <option value="5">Dijadwalkan</option>
-                            <option value="6">Selesai</option>
-                            <option value="7">Dibatalkan</option>
-                        </select>
+            <div className="">
+                <div className="d-flex flex-column page-container">
+                    <Navbar />
+                    <h1 className="text-center title-riwayat">Riwayat Pesanan</h1>
+                    <div className="outer-pelajar">
+                        <div className='d-flex flex-row'>
+                            <p className="p-2 align-self-end">Pilih Status: </p>
+                            <select onChange={this.handleStatusChange} name="role" id="role" className='twobutton p-2'>
+                                <option value="0">Semua</option>
+                                <option value="1">Belum Dibayar</option>
+                                <option value="2">Menunggu Verifikasi</option>
+                                <option value="3">Terverifikasi</option>
+                                <option value="4">Pembayaran Ditolak</option>
+                                <option value="5">Dijadwalkan</option>
+                                <option value="6">Selesai</option>
+                                <option value="7">Dibatalkan</option>
+                            </select>
 
-                    </div>
+                        </div>
 
-                    <table className="table-max table-none">
-                        <thead>
-                            <tr>
-                                <th scope="col">No</th>
-                                <th scope="col">Tanggal Dibuat</th>
-                                <th scope="col">Nomor Pesanan</th>
-                                <th scope="col">Total Pesanan</th>
-                                <th scope="col">Tanggal Bimbel</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">Action</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            {this.state.pesanan.map((SatuPesanan, index) => (
-                                <tr key={SatuPesanan.idPesanan}>
-                                    <td>{index + 1}</td>
-                                    <td> {SatuPesanan.waktuDibuat} </td>
-                                    <td scope='row'> {SatuPesanan.idPesanan} </td>
-                                    <td> Rp {SatuPesanan.nominal} </td>
-                                    <td> {SatuPesanan.jadwal.tanggal} {SatuPesanan.jadwal.waktuMulai} - {SatuPesanan.jadwal.waktuSelesai}  </td>
-                                    <td> {SatuPesanan.status.jenisStatus} </td>
-                                    <td>
-                                        <a className="button button-outline" onClick={() => this.viewPesanan(SatuPesanan.idPesanan)}>
-                                            Lihat
-                                        </a>
-                                    </td>
+                        <table className="table-max table-none">
+                            <thead>
+                                <tr>
+                                    <th scope="col">No</th>
+                                    <th scope="col">Tanggal Dibuat</th>
+                                    <th scope="col">Nomor Pesanan</th>
+                                    <th scope="col">Total Pesanan</th>
+                                    <th scope="col">Tanggal Bimbel</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Action</th>
                                 </tr>
-                            ))}
+                            </thead>
 
-
-
-                        </tbody>
-
-                    </table>
+                            <tbody>
+                                {this.state.pesanan.map((SatuPesanan, index) => (
+                                    <tr key={SatuPesanan.idPesanan}>
+                                        <td>{index + 1}</td>
+                                        <td> {SatuPesanan.waktuDibuat} </td>
+                                        <td scope='row'> {SatuPesanan.idPesanan} </td>
+                                        <td> Rp {SatuPesanan.nominal} </td>
+                                        <td> {SatuPesanan.jadwal.tanggal} {SatuPesanan.jadwal.waktuMulai} - {SatuPesanan.jadwal.waktuSelesai}  </td>
+                                        <td> {SatuPesanan.status.jenisStatus} </td>
+                                        <td>
+                                            <a className="button button-outline" onClick={() => this.viewPesanan(SatuPesanan.idPesanan)}>
+                                                Lihat
+                                            </a>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <Footer />
-
             </div>
+            
+            
         );
     }
 }
