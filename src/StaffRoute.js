@@ -23,6 +23,10 @@ import { PrivateRoute } from "./PrivateRoute";
 import error403 from "./pages/error403";
 import error404 from "./pages/error404";
 import ViewProfilePage from "./pages/ViewProfilePage/ViewProfilePage";
+import BayarPesanan from "./pages/Pesanan/BayarPesanan";
+import DetailPembayaran from "./pages/Pesanan/DetailPembayaran";
+import DaftarPembayaran from "./pages/Pesanan/DaftarPembayaran";
+import DetailPembayaranStaff from "./pages/Pesanan/DetailPembayaranStaff";
 
 export default function StaffRoute() {
     return (
@@ -44,10 +48,14 @@ export default function StaffRoute() {
                         <PrivateRoute exact path="/pengguna/:idUser" component={DetailPengguna} />
                         <PrivateRoute exact path="/pengguna/edit/:idUser" component={EditPengguna} />
                         <PrivateRoute exact path="/profil-saya" component={ViewProfilePage} />
-                        
-
+                        <PrivateRoute exact path="/detail-pembayaran/:idPesanan" component={DetailPembayaran} />
+                        <PrivateRoute exact path="/detail-pembayaran-staff/:idPesanan" component={DetailPembayaranStaff} />
+                        <PrivateRoute exact path="/daftar-pembayaran" component={DaftarPembayaran} />
+                        <Route exact path="/404" component={error404} />
                         <Route exact path="/403" component={error403} />
-                        <Route path="/" component={() => (window.location = "/404")} />
+                        <Redirect from="*" to="/404" />
+                        
+                        {/* <Route path="/" component={() => (window.location = "/404")} /> */}
 
                     </Switch>
                 </div>

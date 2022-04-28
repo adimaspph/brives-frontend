@@ -27,6 +27,7 @@ class DetailRiwayatPesanan extends Component {
             idJadwal: 0,
             idStaff: 0,
             namaPengajar: '',
+            alasanPenolakan: '',
             isClickedTolakPesanan: false,
             isTolak: false,
         }
@@ -58,7 +59,8 @@ class DetailRiwayatPesanan extends Component {
                 mapel: res.data.result.jadwal.mapel.namaMapel,
                 status: res.data.result.status.jenisStatus,
                 idSiswa: res.data.result.siswa.idSiswa,
-                idJadwal: res.data.result.jadwal.idJadwal
+                idJadwal: res.data.result.jadwal.idJadwal,
+                alasanPenolakan: res.data.result.alasan,
             });
 
             PesananService.getStaffByIdJadwal(this.state.idJadwal).then((res) => {
@@ -198,6 +200,13 @@ class DetailRiwayatPesanan extends Component {
                                         <td>Status Pesanan</td>
                                         <td>{this.state.status}</td>
                                     </tr>
+                                    {this.state.status === 'Pembayaran Ditolak' ? (
+                                    <tr>
+                                    <td>Alasan Penolakan</td>
+                                    <td>{this.state.alasanPenolakan}</td>
+                                </tr>
+                                ) : ('')}
+
                                     <tr>
                                         <td>Materi</td>
                                         <td>{this.state.pesanan.materi}</td>
