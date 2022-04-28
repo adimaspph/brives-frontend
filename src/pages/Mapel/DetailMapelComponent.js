@@ -13,6 +13,7 @@ export default function DetailMapelComponent(props) {
     const [pengajar, setPengajar] = useState([])
     const [idMapel,] = useState(parseInt(props.match.params.idMapel))
     const [error, setError] = useState("")
+    const [success, setSuccess] = useState("")
     const [isModal, setIsModal] = useState(false);
 
     useEffect(async () => {
@@ -59,10 +60,13 @@ export default function DetailMapelComponent(props) {
     const deleteHandler = async () => {
         try {
             await MapelService.deleteMapel(idMapel)
+            setSuccess('Mapel berhasil dihapus')
+            setIsModal(false)
+            await sleep(3000)
             props.history.push('/atur-mapel')
         } catch (err) {
-            setError(err.message)
-            props.history.push('/atur-mapel')
+            setError('Mapel gagal dihapus')
+            setIsModal(false)
         }
     }
 
@@ -72,6 +76,10 @@ export default function DetailMapelComponent(props) {
 
     const editHandler = () => {
         props.history.push(`/atur-mapel/${idMapel}/update`);
+    }
+
+    const sleep = (ms) => {
+        return new Promise(resolve => setTimeout(resolve, ms))
     }
 
     const DeleteModalComponent = () => {
@@ -90,6 +98,7 @@ export default function DetailMapelComponent(props) {
     return (
         <>
             {error ? <ErrorNotification text={error} /> : <></>}
+            {success ? <NeutralNotification text={success} /> : <></>}
 
             <Modal
                 show={isModal}
