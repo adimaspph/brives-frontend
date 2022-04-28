@@ -18,7 +18,13 @@ class error404 extends React.Component {
 	render() {
 		return (
 			<React.Fragment>
-				<Navbar/>
+				{localStorage.getItem("user") != null && JSON.parse(localStorage.getItem("user")).role === 'PELAJAR' ? (
+					<Navbar />
+				) : ("")}
+
+				{localStorage.getItem("user") === null ? (
+					<Navbar />
+				) : ("")}
 				<div className="d-flex justify-content-center page-container">
 					<div class="col-lg-4 d-flex justify-content-center">
 						<img className="gambar-404" src="/gambar-404.png" />
@@ -32,7 +38,13 @@ class error404 extends React.Component {
 						</div>
 					</div>
 				</div>
-				<Footer/>
+				{localStorage.getItem("user") != null && JSON.parse(localStorage.getItem("user")).role === 'PELAJAR' ? (
+					<Footer />
+				) : ("")}
+
+				{localStorage.getItem("user") === null ? (
+					<Footer />
+				) : ("")}
 			</React.Fragment>
 		);
 	}

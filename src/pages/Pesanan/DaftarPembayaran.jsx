@@ -16,8 +16,7 @@ export default function DaftarPembayaranComponent(props) {
 
   const getListPesanan = async () => {
     try {
-      const { data } = await PesananService.getPesanan();
-      console.log(data.result);
+      const { data } = await PesananService.getPesananByIdStatus(2);
       setPesanan(data.result);
     } catch (err) {
       console.log(err);
@@ -30,25 +29,26 @@ export default function DaftarPembayaranComponent(props) {
 
   };
 
-  const handleStatusChange = () => {};
+  const handleStatusChange = () => { 
+    const select = document.getElementById('status');
+    PesananService.getPesananByIdStatus(select.value).then((res) => {
+      setPesanan(res.data.result)
+
+  });
+  };
 
   return (
     <>
-      <div className="d-flex flex-column min-vh-100">
-        <Navbar />
-        <h1 className="text-center title-riwayat">Riwayat Pesanan</h1>
-        <div className="outer-pelajar">
+      <div className='outer'>
+
+        <h1 className=''>Daftar Pembayaran</h1>
+
           <div className="d-flex flex-row">
             <p className="p-2 align-self-end">Pilih Status: </p>
-            <select onChange={handleStatusChange} name="role" id="role" className="twobutton p-2">
-              <option value="0">Semua</option>
-              <option value="1">Belum Dibayar</option>
+            <select onChange={handleStatusChange} name="role" id="status" className="twobutton p-2">
               <option value="2">Menunggu Verifikasi</option>
               <option value="3">Terverifikasi</option>
               <option value="4">Pembayaran Ditolak</option>
-              <option value="5">Dijadwalkan</option>
-              <option value="6">Selesai</option>
-              <option value="7">Dibatalkan</option>
             </select>
           </div>
 
@@ -60,9 +60,9 @@ export default function DaftarPembayaranComponent(props) {
                 <th scope="col">Nomor Pesanan</th>
                 <th scope="col">Id Pemesan</th>
                 <th scope="col">Total Pesanan</th>
+                <th scope="col">Metode Pembayaran</th>
                 <th scope="col">Tanggal Bimbel</th>
                 <th scope="col">Status</th>
-                <th scope="col">Bukti</th>
                 <th scope="col">Action</th>
               </tr>
             </thead>
@@ -75,13 +75,13 @@ export default function DaftarPembayaranComponent(props) {
                   <td scope="row"> {SatuPesanan.idPesanan} </td>
                   <td> {SatuPesanan?.siswa?.idSiswa} </td>
                   <td> Rp {SatuPesanan.nominal} </td>
+                  <td> {SatuPesanan.metodePembayaran} </td>
                   <td>
                     {" "}
                     {SatuPesanan.jadwal.tanggal} {SatuPesanan.jadwal.waktuMulai} -{" "}
                     {SatuPesanan.jadwal.waktuSelesai}{" "}
                   </td>
                   <td> {SatuPesanan.status.jenisStatus} </td>
-                  <td> <a target="_blank" href={SatuPesanan?.buktiBayar}> {SatuPesanan?.buktiBayar} </a> </td>
                   <td>
                     <a
                       className="button button-outline"
@@ -94,8 +94,8 @@ export default function DaftarPembayaranComponent(props) {
               ))}
             </tbody>
           </table>
-        </div>
-        <Footer />
+        
+
       </div>
     </>
   );

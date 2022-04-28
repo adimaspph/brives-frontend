@@ -33,11 +33,8 @@ import PesanKelasPage from "./pages/PesanKelasPage/PesanKelasPage";
 import PilihJadwalPage from "./pages/PilihJadwalPage/PilihJadwalPage";
 import RiwayatPesanan from "./pages/Pesanan/RiwayatPesanan";
 import DetailRiwayatPesanan from "./pages/Pesanan/DetailRiwayatPesanan";
-import error404 from "./pages/error404";
 import BayarPesanan from "./pages/Pesanan/BayarPesanan";
-import DetailPembayaran from "./pages/Pesanan/DetailPembayaran";
-import DaftarPembayaran from "./pages/Pesanan/DaftarPembayaran";
-import DetailPembayaranStaff from "./pages/Pesanan/DetailPembayaranStaff";
+import error404 from "./pages/error404";
 
 function AppRoutes() {
 
@@ -55,12 +52,10 @@ function AppRoutes() {
 					<Route exact path="/404" component={error404} />
 					<Route exact path="/pesan-kelas" component={PesanKelasPage} />
 					<Route exact path="/pesan-kelas/:id" component={PilihJadwalPage} />
+					<PrivateRoute exact path="/bayar-pesanan/:idPesanan" component={BayarPesanan} />
 					<Route exact path="/riwayat-pesanan" component={RiwayatPesanan} />
 					<Route exact path="/riwayat-pesanan/:idPesanan" component={DetailRiwayatPesanan} />
-					<Route exact path="/bayar-pesanan/:idPesanan" component={BayarPesanan} />
-					<Route exact path="/detail-pembayaran/:idPesanan" component={DetailPembayaran} />
-					<Route exact path="/detail-pembayaran-staff/:idPesanan" component={DetailPembayaranStaff} />
-					<Route exact path="/daftar-pembayaran" component={DaftarPembayaran} />
+					
 					<Route exact path="/" component={Homepage} />
 					<Route path="/" component={StaffRoute} />
 					<Redirect from="*" to="/404" />
