@@ -132,8 +132,6 @@ class DetailRiwayatPesanan extends Component {
         return (
             <div>
                 <Navbar />
-                <div className='outer-pelajar'>
-
                     <Modal
                         show={this.state.isClickedTolakPesanan}
                         handleCloseModal={this.handleCancel}
@@ -150,29 +148,17 @@ class DetailRiwayatPesanan extends Component {
                                 Batalkan
                             </div>
                         </div>
-
-
                     </Modal>
-
+                <div className='outer-pelajar page-container'>
                     {this.state.isTolak ? (<NeutralNotification text="Pesanan Berhasil Dibatalkan!" />) : ("")}
-
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-
                     <ul class="breadcrumb">
                         <li><a href="/riwayat-pesanan">Riwayat Pesanan</a></li>
                         <li className='bractive'>Detail Pesanan</li>
                     </ul>
-
                     <h2>Detail Pesanan</h2>
-
                     <div className=''>
                         <div className='card-max-width'>
                             <div className='card-content'>
-
                                 <table className='table-none'>
                                     <tr>
                                         <td>Nomor Pesanan</td>
@@ -221,22 +207,16 @@ class DetailRiwayatPesanan extends Component {
                                         <td>{this.state.pesanan.buktiBayar}</td>
                                     </tr>
                                 </table>
-
                                 <hr />
-
                                 {this.state.status === 'Belum Dibayar' ? (
                                     <div className='center'>
                                         <button onClick={this.clickedtTolakPesanan} type="submit" className="button button-outline-blue twobutton">Batalkan Pesanan</button>
                                         <button onClick={this.ClickedBayar} type="submit" className="button button-blue  twobutton">Bayar</button>
                                     </div>
                                 ) : ('')}
-
-
-
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <Footer />
             </div>

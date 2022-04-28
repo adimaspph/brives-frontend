@@ -270,6 +270,13 @@ input[type="reset"] {
 	position: relative;
 }
 
+.page-container{
+	position: relative;
+	min-height: calc(100vh - 277px);
+	box-sizing: border-box;
+	margin-top: 120px;
+}
+
 @media (max-width: 570px) {
 
 	.text-404 {
