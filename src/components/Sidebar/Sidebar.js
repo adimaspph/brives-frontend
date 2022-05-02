@@ -39,7 +39,7 @@ export default function Sidebar(props) {
 							) : ('')}
 
 							{JSON.parse(localStorage.getItem("user")).role === 'STAF_KEUANGAN' ? (
-								<Link className="sidebar-menu-btn" to="/pembayaran">
+								<Link className="sidebar-menu-btn" to="/daftar-pembayaran">
 									<img src="/assets/checkout.svg" alt="" />
 									Pembayaran
 								</Link>
