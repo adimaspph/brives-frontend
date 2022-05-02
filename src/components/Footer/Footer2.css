@@ -10,11 +10,11 @@
     color: white;
     text-align: center;
     width: 100%;
-    
+    height: fit-content; 
+    box-sizing: border-box;
 }
 
 .footer-bottom{
-    position: absolute;
     bottom: 0;
 }
 

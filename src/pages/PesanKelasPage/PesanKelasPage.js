@@ -55,66 +55,69 @@ export default function PesanKelasPage() {
 
 
 	return (
-		<div>
+		<React.Fragment>
 			<Navbar />
+			<div className="page-container">
+				<h1 className="text-center title">Pilih Mata Pelajaran</h1>
 
-			<h1 className="text-center title">Pilih Mata Pelajaran</h1>
-
-			<div className="jenjang-select">
-				<span
-					className={
-						selectedJenjang === "all"
-							? "jenjang-btn jenjang-selected"
-							: "jenjang-btn"
-					}
-					onClick={() => setJejang("all")}
-				>
-					Semua
-				</span>
-				{listJenjang.map((jenjang, key) => (
+				<div className="jenjang-select">
 					<span
-						key={key}
 						className={
-							selectedJenjang === jenjang.idJenjang
+							selectedJenjang === "all"
 								? "jenjang-btn jenjang-selected"
 								: "jenjang-btn"
 						}
-						onClick={() => setJejang(jenjang.idJenjang)}
+						onClick={() => setJejang("all")}
 					>
-						{jenjang.namaJenjang}
+						Semua
 					</span>
-				))}
-			</div>
-
-			<div className="container-mapel">
-				{listMapel.map((mapel, key) => (
-					<div className="mapel-card" key={key}>
-						<span className="title-mapel">{mapel.namaMapel}</span>
-
-						<div className="jenjang-mapel">
-							{mapel.listJenjang.map((jenjang, key) => (
-								<span key={key}>{jenjang.namaJenjang}</span>
-							))}
-						</div>
-						<Link
-							className="button button-primary btn-mapel"
-							to={`/pesan-kelas/` + mapel.idMapel}
+					{listJenjang.map((jenjang, key) => (
+						<span
+							key={key}
+							className={
+								selectedJenjang === jenjang.idJenjang
+									? "jenjang-btn jenjang-selected"
+									: "jenjang-btn"
+							}
+							onClick={() => setJejang(jenjang.idJenjang)}
 						>
-							Pilih
-						</Link>
-					</div>
-				))}
-				{/* <div className="mapel-card">
-					<span className="title-mapel">Nama Mapel</span>
-					<div className="jenjang-mapel">
-						<span>Kelas 10</span>
-						<span>Kelas 11</span>
-						<span>Kelas 12</span>
-					</div>
-					<a className="btn btn-primary btn-mapel">Pilih</a>
-				</div> */}
+							{jenjang.namaJenjang}
+						</span>
+					))}
+				</div>
+
+				<div className="container-mapel">
+					{listMapel.map((mapel, key) => (
+						<div className="mapel-card" key={key}>
+							<span className="title-mapel">
+								{mapel.namaMapel}
+							</span>
+
+							<div className="jenjang-mapel">
+								{mapel.listJenjang.map((jenjang, key) => (
+									<span key={key}>{jenjang.namaJenjang}</span>
+								))}
+							</div>
+							<Link
+								className="button button-primary btn-mapel"
+								to={`/pesan-kelas/` + mapel.idMapel}
+							>
+								Pilih
+							</Link>
+						</div>
+					))}
+					{/* <div className="mapel-card">
+						<span className="title-mapel">Nama Mapel</span>
+						<div className="jenjang-mapel">
+							<span>Kelas 10</span>
+							<span>Kelas 11</span>
+							<span>Kelas 12</span>
+						</div>
+						<a className="btn btn-primary btn-mapel">Pilih</a>
+					</div> */}
+				</div>
 			</div>
-			{/* <Footer/> */}
-		</div>
+			<Footer />
+		</React.Fragment>
 	);
 }

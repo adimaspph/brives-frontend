@@ -42,7 +42,7 @@ function LoginPage() {
                 } else {
                     setTimeout(
                         function() {
-                            window.location = "/profil-saya";
+                            window.location = "/beranda";
                         }
                         .bind(this),
                         2000
@@ -63,7 +63,7 @@ function LoginPage() {
             <Navbar></Navbar>
             {hasError && hasSubmit ? (<ErrorNotification text="Akun tidak terverifikasi, silahkan coba lagi" />) : ("")}
             {!hasError && hasSubmit ? (<NeutralNotification text="Akun terverifikasi, berhasil login" />) : ("")}
-            <div className="jumbotron-akun">
+            <div className="page-container">
                 <div className="">
                     <div className="">
                         <h2 className="page-title">BTA GROUP</h2>

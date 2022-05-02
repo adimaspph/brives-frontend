@@ -50,7 +50,7 @@ export default function Navbar(props) {
 					<div className='navbar-menu-btn'>
 						<div className='navbar-text'>
 							<a className="" href="/pesan-kelas">
-								Kelas Privat
+								Pesan Kelas Privat
 							</a>
 						</div>
 					</div>

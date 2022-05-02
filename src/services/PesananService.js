@@ -38,8 +38,16 @@ class PesananService {
         return APIConfig.put("/jadwal/addLink/" + idJadwal, jadwal);
     }
 
+    updateAlasanPenolakan(pesanan, idPesanan){
+        return APIConfig.put("/pesanan/addAlasan/" + idPesanan, pesanan);
+    }
+
     updateStatusPesanan(status, idPesanan){
         return APIConfig.put("/pesanan/status/" + idPesanan, status);
+    }
+
+    addPembayaran(pesanan, idPesanan){
+        return APIConfig.put("/pesanan/bayar/" + idPesanan, pesanan);
     }
 
     bayarPesanan(idPesanan, link) {

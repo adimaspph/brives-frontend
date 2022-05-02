@@ -26,16 +26,9 @@ class error403 extends React.Component {
 					<Navbar />
 				) : ("")}
 
-				<br></br>
-				<br></br>
-				<br></br>
-				<br></br>
-				<br></br>
-				<br></br>
+				<div className="d-flex justify-content-center page-container">
 
-				<div className="row d-flex justify-content-center ">
-
-					<div class="col-lg-4 d-flex justify-content-center">
+					<div class="">
 						<img className="gambar-403" src="/gambar-403.png" />
 					</div>
 
@@ -47,9 +40,6 @@ class error403 extends React.Component {
 							</div>
 						</div>
 					</div>
-
-
-
 				</div>
 
 				{localStorage.getItem("user") != null && JSON.parse(localStorage.getItem("user")).role === 'PELAJAR' ? (

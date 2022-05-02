@@ -34,7 +34,7 @@ import PilihJadwalPage from "./pages/PilihJadwalPage/PilihJadwalPage";
 import RiwayatPesanan from "./pages/Pesanan/RiwayatPesanan";
 import DetailRiwayatPesanan from "./pages/Pesanan/DetailRiwayatPesanan";
 import BayarPesanan from "./pages/Pesanan/BayarPesanan";
-
+import error404 from "./pages/error404";
 
 function AppRoutes() {
 
@@ -49,11 +49,12 @@ function AppRoutes() {
 					<Route exact path="/akun/profil/ganti-password" component={UbahPasswordPage} />
 					<Route exact path="/design" component={Design} />
 					<Route exact path="/403" component={error403} />
+					<Route exact path="/404" component={error404} />
 					<Route exact path="/pesan-kelas" component={PesanKelasPage} />
 					<Route exact path="/pesan-kelas/:id" component={PilihJadwalPage} />
+					<PrivateRoute exact path="/bayar-pesanan/:idPesanan" component={BayarPesanan} />
 					<Route exact path="/riwayat-pesanan" component={RiwayatPesanan} />
 					<Route exact path="/riwayat-pesanan/:idPesanan" component={DetailRiwayatPesanan} />
-					<Route exact path="/bayar-pesanan/:idPesanan" component={BayarPesanan} />
 					
 					<Route exact path="/" component={Homepage} />
 					<Route path="/" component={StaffRoute} />
