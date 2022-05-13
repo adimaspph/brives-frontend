@@ -61,7 +61,7 @@ function LoginPage() {
     return (
         <div className="">
             <Navbar></Navbar>
-            {hasError && hasSubmit ? (<ErrorNotification text="Akun tidak terverifikasi, silahkan coba lagi" />) : ("")}
+            {hasError && hasSubmit ? (<ErrorNotification text="Akun tidak terverifikasi. Apabila anda belum memiliki akun, silahkan melakukan Registrasi terlebih dahulu" />) : ("")}
             {!hasError && hasSubmit ? (<NeutralNotification text="Akun terverifikasi, berhasil login" />) : ("")}
             <div className="page-container">
                 <div className="">
@@ -115,15 +115,9 @@ function LoginPage() {
                             >
                                 Login
                             </div>
-
-
-                            
                             <div className="register">
-                                <p>Belum memiliki akun? <span className="star"><Link className="" to="/register"> Daftar Disini </Link></span> </p>  
+                                <p>Belum memiliki akun? <span className="star"><b><Link className="" to="/register"> Daftar Disini!</Link></b></span> </p>  
                             </div>
-                            
-
-
                         </div>
                     </div>
                 </div>
