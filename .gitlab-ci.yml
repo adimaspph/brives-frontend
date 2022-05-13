@@ -69,6 +69,27 @@ Deploy-to-digitalocean:
     only:
         - staging
 
+# Deploy-to-digitalocean-docker:
+#     stage: deploy
+#     image: docker:latest
+#     before_script:
+#         - echo "deploying app"
+#     script:
+#         - apk add --no-cache bash
+#         - mkdir -p ~/.ssh
+#         - echo "$DIGITALOCEAN_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+#         - chmod 700 ~/.ssh/id_rsa
+#         - eval "$(ssh-agent -s)"
+#         - ssh-add ~/.ssh/id_rsa
+#         - ssh-keyscan -H 'gitlab.com' >> ~/.ssh/known_hosts
+        
+#         - ssh -o StrictHostKeyChecking=no root@$SSH_IP "rm -r /frontend/build"
+#         - scp -o StrictHostKeyChecking=no -r ./build root@$SSH_IP:/frontend
+#         - ssh -o StrictHostKeyChecking=no root@$SSH_IP "systemctl restart nginx"
+        
+#     only:
+#         - adimas
+
 # install_dependencies:
 #     stage: build
 #     script:
@@ -98,26 +119,3 @@ Deploy-to-digitalocean:
 #         - staging
 
 
-# Build to Staging:
-#   stage: build-staging
-#   environment:
-#     name: development
-#   before_script:
-#     - yarn
-#   script:
-#     - npx netlify-cli build
-#   only:
-#     - staging
-
-# Deploy to Staging:
-#   stage: deploy-staging
-#   environment:
-#     name: development
-#     url: https://brives-staging.netlify.app
-#   only:
-#     - staging
-#   before_script:
-#     - yarn
-#   script:
-#     - yarn run build
-#     - npx netlify-cli deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --prod
