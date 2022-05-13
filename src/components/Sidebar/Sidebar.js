@@ -50,7 +50,7 @@ export default function Sidebar(props) {
 							{JSON.parse(localStorage.getItem("user")).role === 'STAF_OPERASIONAL' ? (
 								<Link className="sidebar-menu-btn" to="/atur-mapel">
 									<img src="/assets/book.svg" alt="" />
-									Atur Mata Pelajaran
+									Mata Pelajaran
 								</Link>
 							) : ('')}
 
@@ -61,15 +61,32 @@ export default function Sidebar(props) {
 								</Link>
 							) : ('')}
 
-							<Link className="sidebar-menu-btn" to="/log">
-								<img src="/assets/log.svg" alt="" />
-								Log
-							</Link>
+							{JSON.parse(localStorage.getItem("user")).role === 'STAF_OPERASIONAL' ? (
+								<Link className="sidebar-menu-btn" to="/jadwal-pengajar">
+									<img src="/assets/schedule.svg" alt="" />
+									Jadwal Pengajar
+								</Link>
+							) : ('')}
 
-							<Link className="sidebar-menu-btn" to="/kelas-tambahan">
+							{JSON.parse(localStorage.getItem("user")).role === 'STAF_OPERASIONAL' ? (
+								<Link className="sidebar-menu-btn" to="/log-pengajar">
+									<img src="/assets/log.svg" alt="" />
+									Log Pengajar
+								</Link>
+							) : ('')}
+
+							{JSON.parse(localStorage.getItem("user")).role === 'PENGAJAR' ? (
+								<Link className="sidebar-menu-btn" to="/log">
+									<img src="/assets/log.svg" alt="" />
+									Log
+								</Link>
+							) : ('')}
+
+							{/* <Link className="sidebar-menu-btn" to="/kelas-pengajar">
 								<img src="/assets/plus.svg" alt="" />
-								Kelas Tambahan
-							</Link>
+								Kelas Pengajar
+							</Link> */}
+
 							<Link className="sidebar-menu-btn" to="/profil-saya">
 								<img src="/assets/profil-saya.svg" alt="" />
 								Profil Saya

@@ -1,0 +1,7 @@
+.space {
+    margin-bottom: 0px;
+    margin-top: 3vw;
+    display: flex;
+    justify-content: space-between;
+}
+
