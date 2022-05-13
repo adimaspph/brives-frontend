@@ -115,7 +115,7 @@ class EditAkunPage extends React.Component {
                 {this.state.hasError&&this.state.hasSubmit? (<ErrorNotification text="Akun gagal diubah, silahkan coba lagi!"/>) : ("")}
                 {!this.state.hasError&&this.state.hasSubmit? (<NeutralNotification text="Akun Anda berhasil diubah!"/>) : ("")}
                 <Navbar></Navbar>
-                <div className="jumbotron-akun">
+                <div className="page-container">
                     <div className='d-flex flex justify-content-center'>
                         <h1>Edit Profil Saya</h1>
                     </div>

@@ -106,7 +106,7 @@ function RegisterPage() {
             <Navbar></Navbar>
             {hasError&&hasSubmit? (<ErrorNotification text={errMessage}/>) : ("")}
             {!hasError&&hasSubmit? (<NeutralNotification text="Akun berhasil terbuat"/>) : ("")}
-            <div className="jumbotron-akun">
+            <div className="page-container">
                 <div className='d-flex flex justify-content-center my-3'>
                     <h1>Register</h1>
                 </div>
