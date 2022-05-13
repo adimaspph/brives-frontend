@@ -146,17 +146,18 @@ class DetailPesanan extends Component {
 
     saveAddLink = (event) => {
         event.preventDefault();
-        let jadwal = { linkZoom: this.state.linkZoomBaru };
-        PesananService.updateLinkZoomJadwal(jadwal, this.state.idJadwal).then(res => {
-            let status = { idStatusPesanan: 5, jenisStatus: "Dijadwalkan" }
-            PesananService.updateStatusPesanan(status, this.state.idPesanan).then(res => {
-                this.demoSave(this.state.idJadwal);
+
+        PesananService.getStaffByIdJadwal(this.state.idJadwal).then((res) => {
+            console.log(res.data.result[0])
+            let jadwal = { linkZoom: this.state.linkZoomBaru, staff: res.data.result[0] };
+            PesananService.updateLinkZoomJadwal(jadwal, this.state.idJadwal).then(res => {
+                let status = { idStatusPesanan: 5, jenisStatus: "Dijadwalkan" }
+                PesananService.updateStatusPesanan(status, this.state.idPesanan).then(res => {
+                    this.demoSave(this.state.idJadwal);
+                });
             });
+
         });
-
-
-
-
 
     }
 
