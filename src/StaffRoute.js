@@ -27,6 +27,11 @@ import BayarPesanan from "./pages/Pesanan/BayarPesanan";
 import DetailPembayaran from "./pages/Pesanan/DetailPembayaran";
 import DaftarPembayaran from "./pages/Pesanan/DaftarPembayaran";
 import DetailPembayaranStaff from "./pages/Pesanan/DetailPembayaranStaff";
+import ListLogPengajarTerpilih from "./pages/Log/ListLogPengajarTerpilih";
+import ListLogSatuPengajar from "./pages/Log/ListLogSatuPengajar";
+import ListPengajar from "./pages/Log/ListPengajar";
+import DetailLog from "./pages/Log/DetailLog";
+
 
 export default function StaffRoute() {
     return (
@@ -51,6 +56,10 @@ export default function StaffRoute() {
                         <PrivateRoute exact path="/detail-pembayaran/:idPesanan" component={DetailPembayaran} />
                         <PrivateRoute exact path="/detail-pembayaran-staff/:idPesanan" component={DetailPembayaranStaff} />
                         <PrivateRoute exact path="/daftar-pembayaran" component={DaftarPembayaran} />
+                        <PrivateRoute exact path="/log" component={ListLogSatuPengajar} />
+                        <PrivateRoute exact path="/log-pengajar/:idStaff" component={ListLogPengajarTerpilih} />
+                        <PrivateRoute exact path="/log-pengajar" component={ListPengajar} />
+                        <PrivateRoute exact path="/log/:idLog" component={DetailLog} />
                         <Route exact path="/404" component={error404} />
                         <Route exact path="/403" component={error403} />
                         <Redirect from="*" to="/404" />
