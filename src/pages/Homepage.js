@@ -18,9 +18,7 @@ class Homepage extends Component {
 
 	componentDidMount() {
 		const userRaw = JSON.parse(localStorage.getItem("user"));
-		console.log(userRaw);
 		if (userRaw != null && userRaw.role != "PELAJAR") {
-			console.log(userRaw.role);
 			this.props.history.push("/beranda");
 		}
 	}

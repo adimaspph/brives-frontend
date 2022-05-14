@@ -30,9 +30,7 @@ class CreateMapelComponent extends Component {
 
     componentDidMount() {
         if (localStorage.getItem("user") != null) {
-            console.log(JSON.parse(localStorage.getItem("user")).role);
             if( JSON.parse(localStorage.getItem("user")).role === 'STAF_OPERASIONAL') {
-                console.log('staf op');
             } else {
                 this.props.history.push('/403');
             }
@@ -58,7 +56,7 @@ class CreateMapelComponent extends Component {
     saveMapel = (e) => {
         e.preventDefault();
         let mapel = { namaMapel: this.state.namaMapel.toUpperCase(), deskripsi: this.state.deskripsi, listJenjang: this.state.jenjangTerpilih };
-        console.log('mapel => ' + JSON.stringify(mapel));
+        
 
         this.setState({ errorM: false });
         this.setState({ successM: false });
@@ -68,7 +66,7 @@ class CreateMapelComponent extends Component {
 
             if (mapell.status === 400) {
                 this.setState({ errorM: true });
-                console.log(this.state.errorM);
+                
                 // alert("Mata pelajaran ini telah dibuat sebelumnya. Silakan buat mata pelajaran baru!");
 
                 this.setState({ statusNama: 400 });
@@ -107,7 +105,7 @@ class CreateMapelComponent extends Component {
     }
 
     changeListJenjangHandler = (event) => {
-        console.log('mapel => ' + JSON.stringify(event.target.value));
+        
         this.setState({ listJenjang: event.target.value });
     }
 
@@ -119,23 +117,19 @@ class CreateMapelComponent extends Component {
         let state = this.state;
         state.jenjang[event.target.value] = event.target.checked;
         this.setState(state);
-        console.log(this.state.jenjang);
-        // console.log(this.state.listJenjang[(event.target.value)-1]);
     };
 
     submitJenjang = () => {
         for (var i = 0; i < 6; i++) {
             if (this.state.jenjang[i]) {
-                // console.log(this.state.listJenjang[(i)-1])
+                
                 this.state.jenjangTerpilih.push(this.state.listJenjang[(i) - 1])
-                console.log(this.state.jenjangTerpilih)
+                
             }
         }
     }
 
-    tes = (event) => {
-        console.log("berhasil")
-    }
+    
 
 
 

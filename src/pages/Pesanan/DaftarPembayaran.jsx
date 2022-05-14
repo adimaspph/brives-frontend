@@ -19,7 +19,6 @@ export default function DaftarPembayaranComponent(props) {
       const { data } = await PesananService.getPesananByIdStatus(2);
       setPesanan(data.result);
     } catch (err) {
-      console.log(err);
       props.history.push("/riwayat-pesanan");
     }
   };

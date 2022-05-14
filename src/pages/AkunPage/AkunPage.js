@@ -20,7 +20,6 @@ class AkunPage extends React.Component {
     
     redirectUbahProfilPage = (e) => {
         e.preventDefault();
-        console.log("ke klik kok bang")
         this.props.history.push("/akun/profil/edit");
     }
     redirectUbahPasswordPage = (e) => {

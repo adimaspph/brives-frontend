@@ -24,7 +24,6 @@ export default function DetailPembayaranComponent(props) {
       data.result.waktuDibuat = date.toLocaleString();
 
       setPesanan(data.result);
-      console.log(data.result)
 
         const res2 =  await PesananService.getStaffByIdJadwal(data.result.jadwal.idJadwal)
         // console.log(res2)
@@ -34,7 +33,6 @@ export default function DetailPembayaranComponent(props) {
 
         setPengajar(res3.data.result[0])
     } catch (err) {
-        console.log(err)
       props.history.push(`/riwayat-pesanan/${props.match.params.idPesanan}`);
     }
   };

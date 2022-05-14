@@ -30,7 +30,6 @@ class EditAkunPage extends React.Component {
     
     redirectUbahProfilPage() {
         window.location="/akun/profil/edit";
-        console.log("guemasuk")
     }
     redirectUbahPasswordPage () {
         this.props.history.push("/akun/profil/ganti-password");
