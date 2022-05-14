@@ -60,7 +60,7 @@ class ListPengajar extends Component {
         return (
             <div className='outer'>
 
-                <h1 className=''>Daftar Log</h1>
+                <h1 className=''>Log Pengajar</h1>
 
 
                 <div className='space'>
