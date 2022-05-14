@@ -47,14 +47,16 @@ class DetailLog extends Component {
     componentDidMount() {
         if (localStorage.getItem("user") != null) {
             if (JSON.parse(localStorage.getItem("user")).role === 'STAF_OPERASIONAL') {
-            } else {
+            } else if (JSON.parse(localStorage.getItem("user")).role === 'PENGAJAR') {
+
+            }
+            else {
                 this.props.history.push('/403');
             }
         } else {
             this.props.history.push('/login');
         }
         LogService.getLogByIdLog(this.state.idLog).then((res) => {
-            console.log(res.data.result.catatan)
             this.setState({
                 log: res.data.result,
                 catatan: res.data.result.catatan,
@@ -110,7 +112,6 @@ class DetailLog extends Component {
 
     saveHadir = (event) => {
         event.preventDefault();
-        // console.log(this.state.catatanBaru)
         let log = { catatan: this.state.catatanBaru, statusKehadiran: 'HADIR' };
         LogService.updateKehadiran(log, this.state.idLog).then(res => {
             this.demoHadir(this.state.idLog);
@@ -119,7 +120,6 @@ class DetailLog extends Component {
 
     saveTidakHadir = (event) => {
         event.preventDefault();
-        // console.log(this.state.catatanBaru)
         let log = { catatan: this.state.catatanBaru, statusKehadiran: 'TIDAK_HADIR' };
         LogService.updateKehadiran(log, this.state.idLog).then(res => {
             this.demoTidakHadir(this.state.idLog);
@@ -198,15 +198,27 @@ class DetailLog extends Component {
                 {this.state.successHadir ? (<NeutralNotification text="Berhasil Memverifikasi Kehadiran!" />) : ("")}
                 {this.state.successTidakHadir ? (<NeutralNotification text="Berhasil Memverifikasi Ketidakhadiran" />) : ("")}
 
-                <ul class="breadcrumb">
-                    <li>
-                        <a href="/log-pengajar">Pilih Pengajar</a>
-                    </li>
-                    <li>
-                        <a className='' onClick={() => this.pengajarTerpilih(this.state.idStaff)} >Log Pengajar</a>
-                    </li>
-                    <li className="bractive">Detail Log</li>
-                </ul>
+                {JSON.parse(localStorage.getItem("user")).role === 'STAF_OPERASIONAL' ? (
+                    <ul class="breadcrumb">
+                        <li>
+                            <a href="/log-pengajar">Pilih Pengajar</a>
+                        </li>
+                        <li>
+                            <a className='' onClick={() => this.pengajarTerpilih(this.state.idStaff)} >Log Pengajar</a>
+                        </li>
+                        <li className="bractive">Detail Log</li>
+                    </ul>
+                ) : ('')}
+
+                {JSON.parse(localStorage.getItem("user")).role === 'PENGAJAR' ? (
+                    <ul class="breadcrumb">
+                        <li>
+                            <a href="/log">Daftar Log</a>
+                        </li>
+                        <li className="bractive">Detail Log</li>
+                    </ul>
+                ) : ('')}
+
 
                 <h2>Detail Log</h2>
 
