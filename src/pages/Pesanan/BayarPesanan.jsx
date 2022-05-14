@@ -49,7 +49,6 @@ export default function BayarPesananComponent(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(idPesanan)
     let updateMapel = { buktiBayar: link, metodePembayaran: metode }
     PesananService.addPembayaran(updateMapel, idPesanan).then(res => {
       let updateStatus = { idStatusPesanan: 2, jenisStatus: "Menunggu Verifikasi" }

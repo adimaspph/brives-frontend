@@ -76,7 +76,6 @@ class EditPengguna extends React.Component {
                 );
             }
 		});
-        console.log(this.state.listMapel)
     }
 
 
@@ -111,7 +110,6 @@ class EditPengguna extends React.Component {
                 })
             });
 
-            console.log(this.state.listMapel);
            
         });
 
@@ -152,7 +150,6 @@ class EditPengguna extends React.Component {
             listMapel: this.state.listMapel.filter(mapel => mapel!==name)
         })
 
-        console.log(this.state.listMapel)
     }
 
     handleEmailChange = (e) => {

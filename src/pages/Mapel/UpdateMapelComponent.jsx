@@ -32,9 +32,7 @@ class UpdateMapelComponent extends Component {
     componentDidMount() {
 
         if (localStorage.getItem("user") != null) {
-            console.log(JSON.parse(localStorage.getItem("user")).role);
             if( JSON.parse(localStorage.getItem("user")).role === 'STAF_OPERASIONAL') {
-                console.log('staf op');
             } else {
                 this.props.history.push('/403');
             }
@@ -90,14 +88,12 @@ class UpdateMapelComponent extends Component {
                 MapelService.getMapelById(this.state.idMapel).then((res) => {
                     let mapel = res.data.result.namaMapel;
                     if (mapel === this.state.namaMapel.toUpperCase()) {
-                        console.log("Mata Pelajaran Tidak Berubah")
                         let mapel = { namaMapel: this.state.namaMapel.toUpperCase(), deskripsi: this.state.deskripsi, listJenjang: this.state.jenjangTerpilih };
-                        console.log('mapel => ' + JSON.stringify(mapel));
+                        
 
                         this.submitJenjang();
 
                         MapelService.updateMapel(mapel, this.state.idMapel).then(res => {
-                            console.log('mapel => ' + JSON.stringify(mapel));
 
                             this.demo(this.state.idMapel);
 
@@ -114,7 +110,6 @@ class UpdateMapelComponent extends Component {
             } else {
                 this.submitJenjang();
                 MapelService.updateMapel(mapel, this.state.idMapel).then(res => {
-                    console.log('mapel => ' + JSON.stringify(mapel));
 
                     this.demo(this.state.idMapel);
                     // this.props.history.push('/atur-mapel');
@@ -130,7 +125,6 @@ class UpdateMapelComponent extends Component {
             if (this.state.jenjang[i]) {
                 this.state.jenjangTerpilih.push(this.state.listJenjang[(i) - 1])
 
-                console.log(this.state.jenjangTerpilih)
             }
         }
     }
@@ -139,8 +133,6 @@ class UpdateMapelComponent extends Component {
         let state = this.state;
         state.jenjang[event.target.value] = event.target.checked;
         this.setState(state);
-        console.log(this.state.jenjang);
-        // console.log(this.state.listJenjang[(event.target.value)-1]);
     };
 
     changeNamaMapelHandler = (event) => {
@@ -152,7 +144,7 @@ class UpdateMapelComponent extends Component {
     }
 
     changeListJenjangHandler = (event) => {
-        console.log('mapel => ' + JSON.stringify(event.target.value));
+        
         this.setState({ listJenjang: event.target.value });
     }
 

@@ -35,7 +35,6 @@ class ListLogPengajarTerpilih extends Component {
             });
 
             PesananService.getUserByIdStaff(this.state.idStaff).then((res) => {
-                console.log(res.data)
                 this.setState({
                     namaPengajar: res.data.result[0].namaLengkap,
                 });
@@ -54,7 +53,6 @@ class ListLogPengajarTerpilih extends Component {
             this.setState({ log: res.data.result });
 
         });
-        console.log(this.state.status);
     };
 
     lihatLog(idLog) {

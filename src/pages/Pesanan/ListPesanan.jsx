@@ -33,7 +33,6 @@ class ListPesanan extends Component {
         }
         PesananService.getPesanan().then((res) => {
             this.setState({ pesanan: res.data.result });
-            console.log(res.data.result);
         });
     }
 
@@ -43,7 +42,6 @@ class ListPesanan extends Component {
         PesananService.getUserByIdSiswa(idSiswa)
             .then((res) => {
                 this.setState({ siswa: res.data.result });
-                console.log(this.state.siswa)
             })
         
         // return x;
