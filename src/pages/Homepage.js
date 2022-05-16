@@ -18,63 +18,70 @@ class Homepage extends Component {
 
 	componentDidMount() {
 		const userRaw = JSON.parse(localStorage.getItem("user"));
-		console.log(userRaw);
 		if (userRaw != null && userRaw.role != "PELAJAR") {
-			console.log(userRaw.role);
 			this.props.history.push("/beranda");
 		}
 	}
 
 	clickPesan = () => {
-		window.location = "/privat";
+		window.location = "/pesan-kelas";
 	};
 
 	render() {
 		return (
-			<div>
-				<Navbar></Navbar>
-				<div class="jumbotronn row d-flex justify-content-center">
-					<div className="col-lg-6 justify-content-center ">
-						<h1>Bimbingan Belajar Privat</h1>
-						<p>Sedang mencari bimbel privat harian untuk persiapan ujian? Segera pesan disini!</p>
-						<a className="button button-primary button-pesan" onClick={this.clickPesan}>
+			<div className="">
+				<Navbar />
+				<div className="page-container">
+					<div class="jumbotronn home-container">
+						<div className="">
+							<h1>Bimbingan Belajar Privat</h1>
+							<p>
+								Sedang mencari bimbel privat harian untuk
+								persiapan ujian? Segera pesan disini!
+							</p>
+							<a
+								className="button button-primary button-pesan"
+								onClick={this.clickPesan}
+							>
 								Pesan Kelas
-						</a>
-					</div>
-					<div className="col-4 d-flex justify-content-center logo-bta-col d-none  ">
-						<img className="logo-bta" src="/logo-bta.png" />
-					</div>
-
-				</div>
-
-				<div className="row d-flex justify-content-center ">
-
-					<div class="col-lg-4 d-flex justify-content-center">
-						<img className="gambar-privat" src="/gambar-privat.png" width={350} height={350} />
-					</div>
-
-					<div className="col-lg-5 d-flex justify-content-center">
-						<div className="mt-5 mb-5 benefit">
-							<h2>Manfaat Mengikuti Kelas Privat di BTA</h2>
-							<p>1. Tanpa mengikuti bimbel tahunan, kamu bisa memesan kelas bimbel harian</p>
-							<p>2. Kamu akan diajar oleh pengajar terbaik BTA</p>
-							<p>3. Kamu bebas memilih materi yang ingin diajarkan</p>
-							<p>4. Harga kelas terjangkau</p>
-							{/* <a className="btn btn-primary button-pesan" onClick={this.clickPesan}>
-								Pesan Kelas
-							</a> */}
+							</a>
+						</div>
+						<div className="logo-bta">
+							<img className="logo-bta" src="/logo-bta.png" />
 						</div>
 					</div>
 
+					<div className="home-container">
+						<div class="col-lg-4 d-flex justify-content-center">
+							<img
+								className="gambar-privat"
+								src="/gambar-privat.png"
+								width={350}
+								height={350}
+							/>
+						</div>
 
-
+					
+						<div className="benefit">
+							<h2>Manfaat Mengikuti Kelas Privat di BTA</h2>
+							<p>
+								1. Tanpa mengikuti bimbel tahunan, kamu bisa
+								memesan kelas bimbel harian
+							</p>
+							<p>
+								2. Kamu akan diajar oleh pengajar terbaik
+								BTA
+							</p>
+							<p>
+								3. Kamu bebas memilih materi yang ingin
+								diajarkan
+							</p>
+							<p>4. Harga kelas terjangkau</p>
+						</div>
+					</div>
 				</div>
+
 				<Footer></Footer>
-
-
-
-
-
 			</div>
 		);
 	}

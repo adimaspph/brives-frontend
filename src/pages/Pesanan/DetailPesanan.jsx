@@ -68,14 +68,12 @@ class DetailPesanan extends Component {
             });
 
             PesananService.getStaffByIdJadwal(this.state.idJadwal).then((res) => {
-                console.log(res.data)
                 this.setState({
                     idStaff: res.data.result[0].idStaff,
 
                 });
                 // console.log(this.state.idStaff);
                 PesananService.getUserByIdStaff(this.state.idStaff).then((res) => {
-                    console.log(res.data)
                     this.setState({
                         namaPengajar: res.data.result[0].namaLengkap,
 
@@ -146,17 +144,17 @@ class DetailPesanan extends Component {
 
     saveAddLink = (event) => {
         event.preventDefault();
-        let jadwal = { linkZoom: this.state.linkZoomBaru };
-        PesananService.updateLinkZoomJadwal(jadwal, this.state.idJadwal).then(res => {
-            let status = { idStatusPesanan: 5, jenisStatus: "Dijadwalkan" }
-            PesananService.updateStatusPesanan(status, this.state.idPesanan).then(res => {
-                this.demoSave(this.state.idJadwal);
+
+        PesananService.getStaffByIdJadwal(this.state.idJadwal).then((res) => {
+            let jadwal = { linkZoom: this.state.linkZoomBaru, staff: res.data.result[0] };
+            PesananService.updateLinkZoomJadwal(jadwal, this.state.idJadwal).then(res => {
+                let status = { idStatusPesanan: 5, jenisStatus: "Dijadwalkan" }
+                PesananService.updateStatusPesanan(status, this.state.idPesanan).then(res => {
+                    this.demoSave(this.state.idJadwal);
+                });
             });
+
         });
-
-
-
-
 
     }
 
@@ -370,14 +368,6 @@ class DetailPesanan extends Component {
                         </div>
                     </div>
                 </div>
-
-
-
-
-
-
-
-
             </div>
         );
     }

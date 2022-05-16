@@ -7,6 +7,7 @@ import Homepage from "./pages/Homepage";
 import Design from "./pages/Design";
 import JadwalPage from "./pages/JadwalPage/JadwalPage";
 import CreateAkunPage from "./pages/CreateAkunPage/CreateAkunPage";
+import DashboardPage from "./pages/DashboardPage/DashboardPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import TestForm from "./pages/TestForm";
 import ListMapelComponent from "./pages/Mapel/ListMapelComponent";
@@ -23,6 +24,15 @@ import { PrivateRoute } from "./PrivateRoute";
 import error403 from "./pages/error403";
 import error404 from "./pages/error404";
 import ViewProfilePage from "./pages/ViewProfilePage/ViewProfilePage";
+import BayarPesanan from "./pages/Pesanan/BayarPesanan";
+import DetailPembayaran from "./pages/Pesanan/DetailPembayaran";
+import DaftarPembayaran from "./pages/Pesanan/DaftarPembayaran";
+import DetailPembayaranStaff from "./pages/Pesanan/DetailPembayaranStaff";
+import ListLogPengajarTerpilih from "./pages/Log/ListLogPengajarTerpilih";
+import ListLogSatuPengajar from "./pages/Log/ListLogSatuPengajar";
+import ListPengajar from "./pages/Log/ListPengajar";
+import DetailLog from "./pages/Log/DetailLog";
+
 
 export default function StaffRoute() {
     return (
@@ -35,6 +45,7 @@ export default function StaffRoute() {
                         <PrivateRoute exact path="/akun/create" component={CreateAkunPage} />
                         <PrivateRoute exact path="/atur-jadwal" component={JadwalPage} />
                         <PrivateRoute exact path="/atur-mapel" component={ListMapelComponent} />
+                        <PrivateRoute exact path="/dashboard" component={DashboardPage} />
                         <PrivateRoute exact path="/atur-mapel/add" component={CreateMapelComponent} />
                         <PrivateRoute exact path="/atur-mapel/view/:idMapel" component={DetailMapelComponent} />
                         <PrivateRoute exact path="/atur-mapel/:idMapel/update" component={UpdateMapelComponent} />
@@ -44,10 +55,18 @@ export default function StaffRoute() {
                         <PrivateRoute exact path="/pengguna/:idUser" component={DetailPengguna} />
                         <PrivateRoute exact path="/pengguna/edit/:idUser" component={EditPengguna} />
                         <PrivateRoute exact path="/profil-saya" component={ViewProfilePage} />
-                        
-
+                        <PrivateRoute exact path="/detail-pembayaran/:idPesanan" component={DetailPembayaran} />
+                        <PrivateRoute exact path="/detail-pembayaran-staff/:idPesanan" component={DetailPembayaranStaff} />
+                        <PrivateRoute exact path="/daftar-pembayaran" component={DaftarPembayaran} />
+                        <PrivateRoute exact path="/log" component={ListLogSatuPengajar} />
+                        <PrivateRoute exact path="/log-pengajar/:idStaff" component={ListLogPengajarTerpilih} />
+                        <PrivateRoute exact path="/log-pengajar" component={ListPengajar} />
+                        <PrivateRoute exact path="/log/:idLog" component={DetailLog} />
+                        <Route exact path="/404" component={error404} />
                         <Route exact path="/403" component={error403} />
-                        <Route path='*' component={error404} />
+                        <Redirect from="*" to="/404" />
+                        
+                        {/* <Route path="/" component={() => (window.location = "/404")} /> */}
 
                     </Switch>
                 </div>

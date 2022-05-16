@@ -1,26 +1,43 @@
 .benefit {
-    padding-top: 2%;
-    padding-left: 3vw;
-    
+    display: flex;
+
+    align-items: start;
+    flex-direction: column;
+    justify-content: center;
+
+    max-width: 450px;
 }
 
 .jumbotronn {
-    background-color: #d9ffdb;
-    margin-top: 30px;
-    z-index: -3;
+    /* background-color: #d9ffdb; */
+    margin-top: 0px;
+    z-index: 3;
     position: relative;
+    /* width: max-content; */
     height: fit-content;
-    padding-top: 6vw;
+    padding-top: 0vw;
     padding-bottom: 3vw;
-    padding-left: 3vw;
+    padding-left: 0vw;
 }
 
+.home-container{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    gap: 24px; 
+
+    flex-wrap: wrap;
+    margin: 44px auto;
+    max-width: 1500px;
+    padding: 0 32px;
+
+    box-sizing: border-box;
+}
 
 .logo-bta {
     z-index: -1;
     position: relative;
-    padding-left: 3vw;
-    
+    padding-left: 0vw;
 }
 
 .gambar-privat {
@@ -31,11 +48,15 @@
     
 }
 
+.page-container{
+    position: relative;
+    min-height: 100vh;
+}
 
 
-@media (max-width: 570px) {
+@media (max-width: 894px) {
     .jumbotronn {
-        padding-top: 12vw;
+        /* padding-top: 12vw; */
     }
 
     .benefit {

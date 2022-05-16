@@ -12,6 +12,7 @@ class AkunPage extends React.Component {
             namaLengkap:"",
             asalSekolah:"",
             noHP:"",
+            jenjang:"",
             email:""
         }
         this.redirectUbahProfilPage = this.redirectUbahProfilPage.bind(this);
@@ -20,7 +21,6 @@ class AkunPage extends React.Component {
     
     redirectUbahProfilPage = (e) => {
         e.preventDefault();
-        console.log("ke klik kok bang")
         this.props.history.push("/akun/profil/edit");
     }
     redirectUbahPasswordPage = (e) => {
@@ -42,6 +42,7 @@ class AkunPage extends React.Component {
             this.setState({ noHP: response.data.result.noHP })
             this.setState({ email: response.data.result.email })
             this.setState({ asalSekolah: response.data.result.siswa.asalSekolah })
+            this.setState({ jenjang: response.data.result.siswa.jenjang.namaJenjang })
         })
     };
 
@@ -49,7 +50,7 @@ class AkunPage extends React.Component {
         return (
             <div className="">
                 <Navbar></Navbar>
-                <div className=" jumbotron-akun">
+                <div className="page-container">
                     <div className='d-flex flex justify-content-center'>
                         <h1>Profil Saya</h1>
                     </div>
@@ -69,7 +70,11 @@ class AkunPage extends React.Component {
                                                 <td></td>
                                                 <td>{this.state.namaLengkap}</td>
                                             </tr>
-                                            
+                                            <tr>
+                                                <td><b>Jenjang</b></td>
+                                                <td></td>
+                                                <td>{this.state.jenjang}</td>
+                                            </tr>
                                             <tr>
                                                 <td><b>Email</b></td>
                                                 <td></td>

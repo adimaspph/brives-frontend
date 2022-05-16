@@ -27,6 +27,7 @@ class DetailRiwayatPesanan extends Component {
             idJadwal: 0,
             idStaff: 0,
             namaPengajar: '',
+            alasanPenolakan: '',
             isClickedTolakPesanan: false,
             isTolak: false,
         }
@@ -58,7 +59,8 @@ class DetailRiwayatPesanan extends Component {
                 mapel: res.data.result.jadwal.mapel.namaMapel,
                 status: res.data.result.status.jenisStatus,
                 idSiswa: res.data.result.siswa.idSiswa,
-                idJadwal: res.data.result.jadwal.idJadwal
+                idJadwal: res.data.result.jadwal.idJadwal,
+                alasanPenolakan: res.data.result.alasan,
             });
 
             PesananService.getStaffByIdJadwal(this.state.idJadwal).then((res) => {
@@ -97,7 +99,7 @@ class DetailRiwayatPesanan extends Component {
     };
 
     ClickedBayar = (event) => {
-        this.props.history.push(generatePath("/riwayat-pesanan/"));
+        this.props.history.push(generatePath("/bayar-pesanan/:idPesanan", { idPesanan: this.state.idPesanan }));
 
     };
 
@@ -132,8 +134,6 @@ class DetailRiwayatPesanan extends Component {
         return (
             <div>
                 <Navbar />
-                <div className='outer-pelajar'>
-
                     <Modal
                         show={this.state.isClickedTolakPesanan}
                         handleCloseModal={this.handleCancel}
@@ -150,29 +150,17 @@ class DetailRiwayatPesanan extends Component {
                                 Batalkan
                             </div>
                         </div>
-
-
                     </Modal>
-
+                <div className='outer-pelajar page-container'>
                     {this.state.isTolak ? (<NeutralNotification text="Pesanan Berhasil Dibatalkan!" />) : ("")}
-
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-
                     <ul class="breadcrumb">
                         <li><a href="/riwayat-pesanan">Riwayat Pesanan</a></li>
                         <li className='bractive'>Detail Pesanan</li>
                     </ul>
-
                     <h2>Detail Pesanan</h2>
-
                     <div className=''>
                         <div className='card-max-width'>
                             <div className='card-content'>
-
                                 <table className='table-none'>
                                     <tr>
                                         <td>Nomor Pesanan</td>
@@ -212,6 +200,13 @@ class DetailRiwayatPesanan extends Component {
                                         <td>Status Pesanan</td>
                                         <td>{this.state.status}</td>
                                     </tr>
+                                    {this.state.status === 'Pembayaran Ditolak' ? (
+                                    <tr>
+                                    <td>Alasan Penolakan</td>
+                                    <td>{this.state.alasanPenolakan}</td>
+                                </tr>
+                                ) : ('')}
+
                                     <tr>
                                         <td>Materi</td>
                                         <td>{this.state.pesanan.materi}</td>
@@ -221,22 +216,16 @@ class DetailRiwayatPesanan extends Component {
                                         <td>{this.state.pesanan.buktiBayar}</td>
                                     </tr>
                                 </table>
-
                                 <hr />
-
                                 {this.state.status === 'Belum Dibayar' ? (
                                     <div className='center'>
                                         <button onClick={this.clickedtTolakPesanan} type="submit" className="button button-outline-blue twobutton">Batalkan Pesanan</button>
                                         <button onClick={this.ClickedBayar} type="submit" className="button button-blue  twobutton">Bayar</button>
                                     </div>
                                 ) : ('')}
-
-
-
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <Footer />
             </div>
