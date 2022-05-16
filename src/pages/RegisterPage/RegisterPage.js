@@ -20,6 +20,8 @@ function RegisterPage() {
     const [asalSekolah, setAsalSekolah] = useState("");
     const [noHP, setNoHP] = useState("");
     const [email, setEmail] = useState("");
+    const [listJenjang, setListJenjang] = useState([]);
+    const [jenjang, setJenjang] = useState("8 SMP");
     const [data, setAllMapel] = useState({
         status: 0,
         message: "",
@@ -31,6 +33,10 @@ function RegisterPage() {
     const togglePasswordVisiblity = () => {
         setPasswordShown(passwordShown ? false : true);
     };
+    const handleJenjangChange = (e) => {
+        e.preventDefault();
+        setJenjang(e.target.value);
+    }
 
     const handleUsernameChange = (e) => {
         e.preventDefault();
@@ -69,13 +75,18 @@ function RegisterPage() {
     }
 
     useEffect(() => {
-
+        APIConfig.get("/jenjang/").then((res) => {
+            setListJenjang(res.data.result);
+        });
     });
 
     const handleChange = async (e) => {
         e.preventDefault();
+
+        console.log(jenjang);
         APIConfig.post("/api/v1/user/create/akun", {
 			username: username,
+			jenjang: jenjang,
 			namaLengkap: namaLengkap,
             email: email,
             password: password,
@@ -92,7 +103,7 @@ function RegisterPage() {
             } else {
                 setTimeout(
                     function() {
-                        window.location.href = '/login';
+                        // window.location.href = '/login';
                     }
                     .bind(this),
                     2000
@@ -106,7 +117,7 @@ function RegisterPage() {
             <Navbar></Navbar>
             {hasError&&hasSubmit? (<ErrorNotification text={errMessage}/>) : ("")}
             {!hasError&&hasSubmit? (<NeutralNotification text="Akun berhasil terbuat"/>) : ("")}
-            <div className="jumbotron-akun">
+            <div className="page-container">
                 <div className='d-flex flex justify-content-center my-3'>
                     <h1>Register</h1>
                 </div>
@@ -121,6 +132,18 @@ function RegisterPage() {
                                 <div>
                                     <label htmlFor="">Username<span className='star'>*</span> </label>
                                     <input onChange={handleUsernameChange} type="text" name="username" className='form-control' required />
+                                </div>
+                                <div>
+                                    <label htmlFor="">Jenjang<span className='star'>*</span> </label>
+                                    <select onChange={handleJenjangChange} name="jenjang" id="jenjang">
+                                        {
+                                            listJenjang.map(
+                                                satuJenjang =>
+                                                    <option value={satuJenjang.id}>{satuJenjang.namaJenjang}</option>
+                                            )
+                                        }
+
+                                    </select>
                                 </div>
                                 <div>
                                     <label htmlFor="">Email<span className='star'>*</span> </label>

@@ -7,6 +7,7 @@ import Homepage from "./pages/Homepage";
 import Design from "./pages/Design";
 import JadwalPage from "./pages/JadwalPage/JadwalPage";
 import CreateAkunPage from "./pages/CreateAkunPage/CreateAkunPage";
+import DashboardPage from "./pages/DashboardPage/DashboardPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import TestForm from "./pages/TestForm";
 import ListMapelComponent from "./pages/Mapel/ListMapelComponent";
@@ -44,6 +45,7 @@ export default function StaffRoute() {
                         <PrivateRoute exact path="/akun/create" component={CreateAkunPage} />
                         <PrivateRoute exact path="/atur-jadwal" component={JadwalPage} />
                         <PrivateRoute exact path="/atur-mapel" component={ListMapelComponent} />
+                        <PrivateRoute exact path="/dashboard" component={DashboardPage} />
                         <PrivateRoute exact path="/atur-mapel/add" component={CreateMapelComponent} />
                         <PrivateRoute exact path="/atur-mapel/view/:idMapel" component={DetailMapelComponent} />
                         <PrivateRoute exact path="/atur-mapel/:idMapel/update" component={UpdateMapelComponent} />

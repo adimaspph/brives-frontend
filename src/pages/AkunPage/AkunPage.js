@@ -12,6 +12,7 @@ class AkunPage extends React.Component {
             namaLengkap:"",
             asalSekolah:"",
             noHP:"",
+            jenjang:"",
             email:""
         }
         this.redirectUbahProfilPage = this.redirectUbahProfilPage.bind(this);
@@ -41,6 +42,7 @@ class AkunPage extends React.Component {
             this.setState({ noHP: response.data.result.noHP })
             this.setState({ email: response.data.result.email })
             this.setState({ asalSekolah: response.data.result.siswa.asalSekolah })
+            this.setState({ jenjang: response.data.result.siswa.jenjang.namaJenjang })
         })
     };
 
@@ -68,7 +70,11 @@ class AkunPage extends React.Component {
                                                 <td></td>
                                                 <td>{this.state.namaLengkap}</td>
                                             </tr>
-                                            
+                                            <tr>
+                                                <td><b>Jenjang</b></td>
+                                                <td></td>
+                                                <td>{this.state.jenjang}</td>
+                                            </tr>
                                             <tr>
                                                 <td><b>Email</b></td>
                                                 <td></td>

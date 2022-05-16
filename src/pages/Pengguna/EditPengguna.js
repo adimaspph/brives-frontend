@@ -149,7 +149,6 @@ class EditPengguna extends React.Component {
         this.setState({
             listMapel: this.state.listMapel.filter(mapel => mapel!==name)
         })
-
     }
 
     handleEmailChange = (e) => {

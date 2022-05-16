@@ -11,28 +11,28 @@ class EditAkunPage extends React.Component {
         super(props)
         this.state = {
             username:"",
+            jenjang:"8 SMP",
             namaLengkap:"",
             asalSekolah:"",
             noHP:"",
             email:"",
             errMessage: "",
+            listJenjang: [],
             passwordShown: false,
             pengajarShown: false,
             hasError: false,
             hasSubmit: false,
         }
-        this.redirectUbahProfilPage = this.redirectUbahProfilPage.bind(this);
-        this.redirectUbahPasswordPage = this.redirectUbahPasswordPage.bind(this);
+        this.handleJenjangChange = this.handleJenjangChange.bind(this);
         this.handleNamaLengkapChange = this.handleNamaLengkapChange.bind(this);
         this.handleNoHPChange = this.handleNoHPChange.bind(this);
         this.handleAsalSekolahChange = this.handleAsalSekolahChange.bind(this);
     }
     
-    redirectUbahProfilPage() {
-        window.location="/akun/profil/edit";
-    }
-    redirectUbahPasswordPage () {
-        this.props.history.push("/akun/profil/ganti-password");
+
+    handleJenjangChange = (e) => {
+        e.preventDefault();
+        this.setState({ jenjang : e.target.value });
     }
     componentDidMount() {
         // authorization
@@ -48,8 +48,9 @@ class EditAkunPage extends React.Component {
             this.setState({ namaLengkap: response.data.result.namaLengkap })
             this.setState({ noHP: response.data.result.noHP })
             this.setState({ email: response.data.result.email })
-            this.setState({ asalSekolah: response.data.result.siswa.asalSekolah })
-        })
+            this.setState({ jenjang: response.data.result.siswa.jenjang.namaJenjang })
+            this.setState({ asalSekolah: response.data.result.siswa.asalSekolah });
+        })    
     };
 
     handleNamaLengkapChange = (e) => {
@@ -80,6 +81,7 @@ class EditAkunPage extends React.Component {
         this.setState({ hasSubmit: true })
         APIConfig.post("/api/v1/user/update/"+this.state.username, {
             username: this.state.username,
+			jenjang: this.state.jenjang,
 			namaLengkap: this.state.namaLengkap,
             email: this.state.email,
             password: "",
@@ -88,10 +90,13 @@ class EditAkunPage extends React.Component {
         })
         .then((response) => {
             this.setState({ username: response.data.result.username })
+            this.setState({ jenjang: response.data.result.siswa.jenjang.namaJenjang })
             this.setState({ namaLengkap: response.data.result.namaLengkap })
             this.setState({ noHP: response.data.result.noHP })
             this.setState({ email: response.data.result.email })
             this.setState({ asalSekolah: response.data.result.siswa.asalSekolah })
+            this.setState({ hasError: true })
+            this.setState({ hasError: false })
 
             setTimeout(
                 function() {
@@ -114,7 +119,7 @@ class EditAkunPage extends React.Component {
                 {this.state.hasError&&this.state.hasSubmit? (<ErrorNotification text="Akun gagal diubah, silahkan coba lagi!"/>) : ("")}
                 {!this.state.hasError&&this.state.hasSubmit? (<NeutralNotification text="Akun Anda berhasil diubah!"/>) : ("")}
                 <Navbar></Navbar>
-                <div className="jumbotron-akun">
+                <div className="page-container">
                     <div className='d-flex flex justify-content-center'>
                         <h1>Edit Profil Saya</h1>
                     </div>
@@ -127,6 +132,17 @@ class EditAkunPage extends React.Component {
                                             <div>
                                                 <label htmlFor="">Username<span className='star'>*</span> </label>
                                                 <input readOnly disabled value={this.state.username} onChange={this.handleUsernameChange} type="text" name="username" className='form-control' required />
+                                            </div>
+                                            <div>
+                                                <label htmlFor="">Jenjang<span className='star'>*</span> </label>
+                                                
+                                                <select onChange={this.handleJenjangChange} name="jenjang" id="jenjang">
+                                                    {(this.state.jenjang==="8 SMP" ? <option value="8 SMP" selected>8 SMP</option> : <option value="8 SMP">8 SMP</option>)}
+                                                    {(this.state.jenjang==="9 SMP" ? <option value="9 SMP" selected>9 SMP</option> : <option value="9 SMP">9 SMP</option>)}
+                                                    {(this.state.jenjang==="10 SMA" ? <option value="10 SMA" selected>10 SMA</option> : <option value="10 SMA">10 SMA</option>)}
+                                                    {(this.state.jenjang==="11 SMA" ? <option value="11 SMA" selected>11 SMA</option> : <option value="11 SMA">11 SMA</option>)}
+                                                    {(this.state.jenjang==="12 SMA" ? <option value="12 SMA" selected>12 SMA</option> : <option value="12 SMA">12 SMA</option>)}
+                                                </select>
                                             </div>
                                             <div>
                                                 <label htmlFor="">Nama Lengkap<span className='star'>*</span> </label>
