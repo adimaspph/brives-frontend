@@ -49,7 +49,6 @@ export default function DetailMapelComponent(props) {
     const getPengajar = async () => {
         try {
             const { data } = await MapelService.getPengajarByMapelId(idMapel)
-            console.log('pengajar', data.result)
             setPengajar(data.result)
         } catch (err) {
             props.history.push('/atur-mapel');

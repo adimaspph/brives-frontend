@@ -33,7 +33,6 @@ export default function DetailMapelComponent(props) {
   };
 
   const addMapelHandler = () => {
-    console.log("return to / add");
     props.history.push(`/atur-mapel/${"add"}`);
   };
 

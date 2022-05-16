@@ -33,9 +33,7 @@ class DetailPengguna extends Component {
 
     componentDidMount() {
         if (localStorage.getItem("user") != null) {
-            console.log(JSON.parse(localStorage.getItem("user")).role);
             if (JSON.parse(localStorage.getItem("user")).role === 'ADMIN') {
-                console.log('admin');
             } else {
                 this.props.history.push('/403');
             }

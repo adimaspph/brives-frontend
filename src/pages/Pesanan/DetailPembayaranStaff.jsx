@@ -51,7 +51,7 @@ export default function DetailPembayaranStaffComponent(props) {
       // console.log(res4.data.result[0]);
       setSiswa(res4.data.result[0]);
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       props.history.push(`/riwayat-pesanan/${props.match.params.idPesanan}`);
     }
   };
@@ -63,7 +63,6 @@ export default function DetailPembayaranStaffComponent(props) {
 
   const terimaHandler = (event) => {
     event.preventDefault();
-    console.log(status)
     let updateStatus = { idStatusPesanan: 3, jenisStatus: "Terverifikasi" }
     PesananService.updateStatusPesanan(updateStatus, idPesanan).then(res => {
       demoTerima();
@@ -106,7 +105,6 @@ export default function DetailPembayaranStaffComponent(props) {
 
   const tolakModalHandler = (event) => {
     event.preventDefault();
-    console.log(alasanPenolakan);
 
     let pesanan = { alasan: alasanPenolakan };
     PesananService.updateAlasanPenolakan(pesanan, idPesanan).then(res => {
