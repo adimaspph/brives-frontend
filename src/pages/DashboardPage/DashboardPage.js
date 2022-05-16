@@ -16,51 +16,51 @@ class DashboardPage extends React.Component {
             dataPendapatan: [
                 {
                     name: 'Jan',
-                    pendapatan: 0,
+                    pendapatan: 10020,
                 },
                 {
                     name: 'Feb',
-                    pendapatan: 0,
+                    pendapatan: 10020,
                 },
                 {
                     name: 'Mar',
-                    pendapatan: 0,
+                    pendapatan: 10020,
                 },
                 {
                     name: 'Apr',
-                    pendapatan: 0,
+                    pendapatan: 10020,
                 },
                 {
                     name: 'May',
-                    pendapatan: 0,
+                    pendapatan: 30020,
                 },
                 {
                     name: 'Jun',
-                    pendapatan: 0,
+                    pendapatan: 10020,
                 },
                 {
                     name: 'Jul',
-                    pendapatan: 0,
+                    pendapatan: 70020,
                 },
                 {
                     name: 'Aug',
-                    pendapatan: 0,
+                    pendapatan: 45020,
                 },
                 {
                     name: 'Sep',
-                    pendapatan: 0,
+                    pendapatan: 13220,
                 },
                 {
                     name: 'Oct',
-                    pendapatan: 0,
+                    pendapatan: 20020,
                 },
                 {
                     name: 'Nov',
-                    pendapatan: 0,
+                    pendapatan: 10020,
                 },
                 {
                     name: 'Des',
-                    pendapatan: 0,
+                    pendapatan: 10020,
                 },
             ],
 
@@ -117,19 +117,19 @@ class DashboardPage extends React.Component {
             dataKelasPrivat: [
                 {
                     name: 'Jan',
-                    kelasPrivat: 0,
+                    kelasPrivat: 3,
                 },
                 {
                     name: 'Feb',
-                    kelasPrivat: 0,
+                    kelasPrivat: 4,
                 },
                 {
                     name: 'Mar',
-                    kelasPrivat: 0,
+                    kelasPrivat: 6,
                 },
                 {
                     name: 'Apr',
-                    kelasPrivat: 0,
+                    kelasPrivat: 1,
                 },
                 {
                     name: 'May',
@@ -137,15 +137,15 @@ class DashboardPage extends React.Component {
                 },
                 {
                     name: 'Jun',
-                    kelasPrivat: 0,
+                    kelasPrivat: 9,
                 },
                 {
                     name: 'Jul',
-                    kelasPrivat: 0,
+                    kelasPrivat: 20,
                 },
                 {
                     name: 'Aug',
-                    kelasPrivat: 0,
+                    kelasPrivat: 21,
                 },
                 {
                     name: 'Sep',
@@ -184,13 +184,13 @@ class DashboardPage extends React.Component {
 
     handleKelasTambahanYear = async(e) => {
         e.preventDefault();
-        this.setState({ kelasTambahanYear: e.target.value });
+        this.setState({ tambahanYear: e.target.value });
         this.hitKelasTambahan();
     }
 
     handleKelasPrivatYear = async(e) => {
         e.preventDefault();
-        this.setState({ kelasPrivatYear: e.target.value });
+        this.setState({ privatYear: e.target.value });
         this.hitKelasPrivat();
     }
 
@@ -202,14 +202,14 @@ class DashboardPage extends React.Component {
     }
 
     hitAPIKelasTambahan = async(e) => {
-        APIConfig.get("/pesanan/allTambahan/"+this.state.kelasTambahanYear)
+        APIConfig.get("/pesanan/allTambahan/"+this.state.tambahanYear)
         .then((response) => {
             this.setState({ dataKelasTambahan: response.data.result });
 		});
     }
 
     hitAPIKelasPrivat = async(e) => {
-        APIConfig.get("/pesanan/allPrivat/"+this.state.kelasPrivatYear)
+        APIConfig.get("/pesanan/allPrivat/"+this.state.privatYear)
         .then((response) => {
             this.setState({ dataKelasPrivat: response.data.result });
 		});

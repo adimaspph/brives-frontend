@@ -23,19 +23,12 @@ class EditAkunPage extends React.Component {
             hasError: false,
             hasSubmit: false,
         }
-        this.redirectUbahProfilPage = this.redirectUbahProfilPage.bind(this);
         this.handleJenjangChange = this.handleJenjangChange.bind(this);
         this.handleNamaLengkapChange = this.handleNamaLengkapChange.bind(this);
         this.handleNoHPChange = this.handleNoHPChange.bind(this);
         this.handleAsalSekolahChange = this.handleAsalSekolahChange.bind(this);
     }
     
-    redirectUbahProfilPage() {
-        window.location="/akun/profil/edit";
-    }
-    redirectUbahPasswordPage () {
-        this.props.history.push("/akun/profil/ganti-password");
-    }
 
     handleJenjangChange = (e) => {
         e.preventDefault();
