@@ -19,6 +19,7 @@ build:
         paths:
             - build
             - node_modules/
+        expire_in: 120 seconds
     only:
         - staging
 
