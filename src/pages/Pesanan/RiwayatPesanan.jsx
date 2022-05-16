@@ -38,106 +38,91 @@ class RiwayatPesanan extends Component {
         }
 
         APIConfig.get("/api/v1/user/auth/")
-        .then((response) => {
-            this.setState({ idSiswa: response.data.result.siswa.idSiswa })
+            .then((response) => {
+                this.setState({ idSiswa: response.data.result.siswa.idSiswa })
 
-            PesananService.getPesananByIdSiswa(this.state.idSiswa).then((res) => {
-                this.setState({
-                    pesanan: res.data.result
+                PesananService.getPesananByIdSiswa(this.state.idSiswa).then((res) => {
+                    this.setState({ pesanan: res.data.result });
                 });
-            });
-        })
+            })
 
-        
 
-        
+
+
     }
 
 
-    
+
 
     handleStatusChange = (event) => {
-        PesananService.getPesananByIdStatus(event.target.value).then((res) => {
-            this.setState({
-                pesanan: res.data.result,
-                mapel: res.data.result.jadwal.mapel.namaMapel,
-            });
-
-            PesananService.getUserByIdStaff(this.state.idStaff).then((res) => {
-                this.setState({
-                    namaPengajar: res.data.result[0].namaLengkap,
-
-                });
-            });
+        PesananService.getPesananByStatusSiswa(this.state.idSiswa, event.target.value).then((res) => {
+            this.setState({ pesanan: res.data.result });
 
         });
+
+
 
     };
 
     render() {
         return (
-            <div className="d-flex flex-column min-vh-100">
-                <Navbar />
-                <h1 className="text-center title-riwayat">Riwayat Pesanan</h1>
-                <div className="outer-pelajar">
-                    <div className='d-flex flex-row'>
-                        <p className="p-2 align-self-end">Pilih Status: </p>
-                        <select onChange={this.handleStatusChange} name="role" id="role" className='twobutton p-2'>
-                            <option value="0">Semua</option>
-                            <option value="1">Belum Dibayar</option>
-                            <option value="2">Menunggu Verifikasi</option>
-                            <option value="3">Terverifikasi</option>
-                            <option value="4">Pembayaran Ditolak</option>
-                            <option value="5">Dijadwalkan</option>
-                            <option value="6">Selesai</option>
-                            <option value="7">Dibatalkan</option>
-                        </select>
+            <div className="">
+                <div className="d-flex flex-column page-container">
+                    <Navbar />
+                    <h1 className="text-center title-riwayat">Riwayat Pesanan</h1>
+                    <div className="outer-pelajar">
+                        <div className='d-flex flex-row'>
+                            <p className="p-2 align-self-end">Pilih Status: </p>
+                            <select onChange={this.handleStatusChange} name="role" id="role" className='twobutton p-2'>
+                                <option value="0">Semua</option>
+                                <option value="1">Belum Dibayar</option>
+                                <option value="2">Menunggu Verifikasi</option>
+                                <option value="3">Terverifikasi</option>
+                                <option value="4">Pembayaran Ditolak</option>
+                                <option value="5">Dijadwalkan</option>
+                                <option value="6">Selesai</option>
+                                <option value="7">Dibatalkan</option>
+                            </select>
 
-                    </div>
+                        </div>
 
-                    <table className="table-max table-none">
-                        <thead>
+                        <table className="table-max table-none">
+                            <thead>
                             <tr>
                                 <th scope="col">No</th>
                                 <th scope="col">Tanggal Dibuat</th>
-                                <th scope="col">Mata Pelajaran</th>
-                                <th scope="col">Nama Pengajar</th>
-                                <th scope="col">Tanggal Bimbel</th>
-                                <th scope="col">Jam</th>
+                                <th scope="col">Nomor Pesanan</th>
                                 <th scope="col">Total Pesanan</th>
+                                <th scope="col">Tanggal Bimbel</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Action</th>
                             </tr>
-                        </thead>
+                            </thead>
 
-                        <tbody>
+                            <tbody>
                             {this.state.pesanan.map((SatuPesanan, index) => (
                                 <tr key={SatuPesanan.idPesanan}>
                                     <td>{index + 1}</td>
                                     <td> {SatuPesanan.waktuDibuat} </td>
-                                    <td> //mata pelajaran </td>
-                                    <td> //nama pengajar </td>
-                                    <td> {SatuPesanan.jadwal.tanggal} {SatuPesanan.jadwal.waktuMulai} - {SatuPesanan.jadwal.waktuSelesai}  </td>
-                                    <td> //jam </td>
+                                    <td scope='row'> {SatuPesanan.idPesanan} </td>
                                     <td> Rp {SatuPesanan.nominal} </td>
+                                    <td> {SatuPesanan.jadwal.tanggal} {SatuPesanan.jadwal.waktuMulai} - {SatuPesanan.jadwal.waktuSelesai}  </td>
                                     <td> {SatuPesanan.status.jenisStatus} </td>
                                     <td>
                                         <a className="button button-outline" onClick={() => this.viewPesanan(SatuPesanan.idPesanan)}>
-                                            Lihat Detail
+                                            Lihat
                                         </a>
                                     </td>
                                 </tr>
                             ))}
-
-
-
-                        </tbody>
-
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <Footer />
-
             </div>
+
+
         );
     }
 }
