@@ -148,7 +148,7 @@ export default function PilihJadwalPage() {
 				setSuccessNotif(true);
 				const timer = setTimeout(() => {
 					window.location = "/riwayat-pesanan";
-				}, 2000);
+				}, 1000);
 				
 			})
 			.catch((error) => {
