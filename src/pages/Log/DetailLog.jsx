@@ -69,7 +69,6 @@ class DetailLog extends Component {
                 namaMapel: res.data.result.jadwal.mapel.namaMapel,
                 idJadwal: res.data.result.jadwal.idJadwal,
                 jenisKelas: res.data.result.jadwal.jenisKelas,
-
             });
 
             PesananService.getStaffByIdJadwal(this.state.idJadwal).then((res) => {
