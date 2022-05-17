@@ -96,12 +96,6 @@ class ListLogPengajarTerpilih extends Component {
                                 <th className='text-center' scope='col'>Tanggal Kelas</th>
                                 <th className='text-center' scope='col'>Waktu</th>
                                 <th className='text-center' scope='col'>Jenis Kelas</th>
-                                {this.state.status === 'KOSONG' ? (
-                                    <th className='text-center' scope='col'>Hadir</th>
-                                ) : ('')}
-                                {this.state.status === 'KOSONG' ? (
-                                    <th className='text-center' scope='col'>Tidak Hadir</th>
-                                ) : ('')}
                                 <th className='text-center' scope='col'>Action</th>
                             </tr>
                         </thead>
@@ -117,29 +111,6 @@ class ListLogPengajarTerpilih extends Component {
                                     <td>{satuMapel.jadwal.waktuMulai} - {satuMapel.jadwal.waktuSelesai} </td>
                                     <td>{satuMapel.jadwal.jenisKelas} </td>
 
-                                    {this.state.status === 'KOSONG' ? (
-                                        <td>
-                                            <div className='col'>
-                                                <div className='my-2 d-flex flex justify-content-center'>
-                                                    <button type="button" class="btn btn-success px-3">
-                                                        <i class="fa fa-check" aria-hidden="true"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    ) :('')}
-
-                                    {this.state.status === 'KOSONG' ? (
-                                        <td>
-                                            <div className='col'>
-                                                <div className='my-2 d-flex flex justify-content-center'>
-                                                    <button type="button" class="btn btn-danger px-3">
-                                                        <i class="fa fa-times" aria-hidden="true"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    ) :('')}
 
                                     <td>
                                         <div className='col'>
