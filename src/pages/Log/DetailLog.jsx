@@ -179,6 +179,18 @@ class DetailLog extends Component {
                     show={this.state.isClickedHadir}
                     modalTitle="Verifikasi Kehadiran"
                 >
+                    <p>
+                        <b>Mata Pelajaran : </b>
+                        {this.state.namaMapel}
+                    </p>
+                    <p>
+                        <b>Tanggal : </b>
+                        {this.state.tanggal}
+                    </p>
+                    <p>
+                        <b>Waktu : </b>
+                        {this.state.waktuMulai} - {this.state.waktuSelesai} WIB
+                    </p>
                     <form action="" onSubmit={this.saveHadir}>
                         <div className='form-group'>
                             <label htmlFor="">Catatan (Opsional) </label>
@@ -198,6 +210,18 @@ class DetailLog extends Component {
                     show={this.state.isClickedTidakHadir}
                     modalTitle="Verifikasi Ketidakhadiran"
                 >
+                    <p>
+                        <b>Mata Pelajaran : </b>
+                        {this.state.namaMapel}
+                    </p>
+                    <p>
+                        <b>Tanggal : </b>
+                        {this.state.tanggal}
+                    </p>
+                    <p>
+                        <b>Waktu : </b>
+                        {this.state.waktuMulai} - {this.state.waktuSelesai} WIB
+                    </p>
                     <form action="" onSubmit={this.saveTidakHadir}>
                         <div className='form-group'>
 
