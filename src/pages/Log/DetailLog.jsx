@@ -12,6 +12,7 @@ class DetailLog extends Component {
         super(props)
         this.state = {
             log: [],
+            pesanan: [],
             idLog: this.props.match.params.idLog,
             catatan: '',
             catatanBaru: '',
@@ -29,6 +30,7 @@ class DetailLog extends Component {
             isClickedTidakHadir: false,
             successHadir: false,
             successTidakHadir: false,
+            idPesanan: 0,
 
         }
 
@@ -109,20 +111,37 @@ class DetailLog extends Component {
 
     }
 
-
     saveHadir = (event) => {
         event.preventDefault();
         let log = { catatan: this.state.catatanBaru, statusKehadiran: 'HADIR' };
         LogService.updateKehadiran(log, this.state.idLog).then(res => {
-            this.demoHadir(this.state.idLog);
+
+            LogService.getJadwalStatusUnique(this.state.idJadwal, 5).then(res => {
+                this.setState({
+                    log: res.data.result,
+                    idPesanan: res.data.result.idPesanan
+                });
+                let status = { idStatusPesanan: 6, jenisStatus: "Selesai" }
+                PesananService.updateStatusPesanan(status, this.state.idPesanan).then(res => {
+                    this.demoHadir(this.state.idLog);
+                });
+            });
         });
     }
 
     saveTidakHadir = (event) => {
-        event.preventDefault();
         let log = { catatan: this.state.catatanBaru, statusKehadiran: 'TIDAK_HADIR' };
         LogService.updateKehadiran(log, this.state.idLog).then(res => {
-            this.demoTidakHadir(this.state.idLog);
+            LogService.getJadwalStatusUnique(this.state.idJadwal, 5).then(res => {
+                this.setState({
+                    log: res.data.result,
+                    idPesanan: res.data.result.idPesanan
+                });
+                let status = { idStatusPesanan: 6, jenisStatus: "Selesai" }
+                PesananService.updateStatusPesanan(status, this.state.idPesanan).then(res => {
+                    this.demoTidakHadir(this.state.idLog);
+                });
+            });
         });
     }
 

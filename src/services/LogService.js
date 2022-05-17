@@ -22,6 +22,9 @@ class LogService {
         return APIConfig.put("/log/updateKehadiran/" + idLog, log);
     }
     
+    getJadwalStatusUnique(idJadwal, idStatus) {
+        return APIConfig.get("/pesanan/jadwal/" + idJadwal + "/status/" + idStatus);
+    }
 
 }
 
