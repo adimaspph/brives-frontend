@@ -75,12 +75,16 @@ class ListLogPengajarTerpilih extends Component {
 
     }
 
-    clickedHadirHandler = (event) => {
+    clickedHadirHandler = (idLog) => {
         this.setState({ isClickedHadir: true });
+        LogService.getLogByIdLog(idLog);
+        // console.log(idLog);
     };
 
-    clickedTidakHadirHandler = (event) => {
+    clickedTidakHadirHandler = (idLog) => {
         this.setState({ isClickedTidakHadir: true });
+        LogService.getLogByIdLog(idLog);
+        // console.log(idLog);
     };
 
 
@@ -216,7 +220,7 @@ class ListLogPengajarTerpilih extends Component {
                                         <td>
                                             <div className='col'>
                                                 <div className='my-2 d-flex flex justify-content-center'>
-                                                    <button type="submit" class="btn btn-success px-3" onClick={this.clickedHadirHandler}>
+                                                    <button type="submit" class="btn btn-success px-3" onClick={() => this.clickedHadirHandler(satuMapel.idLog)}>
                                                         <i class="fa fa-check" aria-hidden="true"></i>
                                                     </button>
                                                 </div>
@@ -228,7 +232,7 @@ class ListLogPengajarTerpilih extends Component {
                                         <td>
                                             <div className='col'>
                                                 <div className='my-2 d-flex flex justify-content-center'>
-                                                    <button type="submit" class="btn btn-danger px-3" onClick={this.clickedTidakHadirHandler}>
+                                                    <button type="submit" class="btn btn-danger px-3" onClick={() => this.clickedTidakHadirHandler(satuMapel.idLog)}>
                                                         <i class="fa fa-times" aria-hidden="true"></i>
                                                     </button>
                                                 </div>
