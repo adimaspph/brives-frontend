@@ -75,9 +75,10 @@ class ListLogPengajarTerpilih extends Component {
 
     }
 
-    clickedHadirHandler = (idLog) => {
-        this.setState({ isClickedHadir: true });
-        LogService.getLogByIdLog(idLog);
+    clickedHadirHandler = (log) => {
+        console.log('ini click hadir', log.jadwal)
+        this.setState({ isClickedHadir: true, namaMapel: log.jadwal.mapel.namaMapel  });
+        // LogService.getLogByIdLog(idLog);
         // console.log(idLog);
     };
 
@@ -208,7 +209,9 @@ class ListLogPengajarTerpilih extends Component {
                         <tbody>
                             {this.state.log.map((satuMapel, index) => (
                                 // <tr key={satuMapel.idUser}>
+                                
                                 <tr>
+                                    {  console.log('ini satu mapel', satuMapel)}
                                     <td>{index + 1}</td>
                                     <td> {satuMapel.idLog} </td>
                                     <td>{satuMapel.jadwal.mapel.namaMapel} </td>
@@ -220,7 +223,7 @@ class ListLogPengajarTerpilih extends Component {
                                         <td>
                                             <div className='col'>
                                                 <div className='my-2 d-flex flex justify-content-center'>
-                                                    <button type="submit" class="btn btn-success px-3" onClick={() => this.clickedHadirHandler(satuMapel.idLog)}>
+                                                    <button type="submit" class="btn btn-success px-3" onClick={()=> this.clickedHadirHandler(satuMapel) }>
                                                         <i class="fa fa-check" aria-hidden="true"></i>
                                                     </button>
                                                 </div>
