@@ -1,97 +1,163 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import APIConfig from "../../api/APIConfig";
 import "./Sidebar.css";
 
 export default function Sidebar(props) {
+	const [username, setUsername] = useState("");
 	const handlerLogout = () => {
 		localStorage.removeItem("user");
 	};
 
+	const getUser = () => {
+		APIConfig.get("/api/v1/user/auth")
+			.then((response) => {
+				// console.log(response.data.result);
+				setUsername(response.data.result.username);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+		// console.log(username);
+	};
+
+	useEffect(() => {
+		getUser();
+	}, []);
+
 	return (
 		<div>
-			{localStorage.getItem("user") != null && JSON.parse(localStorage.getItem("user")).role != 'PELAJAR' ? (
+			{localStorage.getItem("user") != null &&
+			JSON.parse(localStorage.getItem("user")).role != "PELAJAR" ? (
 				<nav className="sidebar">
-
 					<div>
 						<Link className="sidebar-logo" to="/beranda">
 							<img src="/logo-bta.png" width={132} alt="" />
 						</Link>
 						<div className="sidebar-menu">
-
-							{JSON.parse(localStorage.getItem("user")).role === 'ADMIN' ? (
-								<Link className="sidebar-menu-btn" to="/pengguna">
+							{JSON.parse(localStorage.getItem("user")).role ===
+							"ADMIN" ? (
+								<Link
+									className="sidebar-menu-btn"
+									to="/pengguna"
+								>
 									<img src="/assets/account.svg" alt="" />
 									Pengguna
 								</Link>
-							) : ('')}
-
+							) : (
+								""
+							)}
 
 							<Link className="sidebar-menu-btn" to="/dashboard">
 								<img src="/assets/dashboard.svg" alt="" />
 								Dashboard
 							</Link>
 
-							{JSON.parse(localStorage.getItem("user")).role === 'STAF_OPERASIONAL' ? (
-								<Link className="sidebar-menu-btn" to="/pesanan">
+							{JSON.parse(localStorage.getItem("user")).role ===
+							"STAF_OPERASIONAL" ? (
+								<Link
+									className="sidebar-menu-btn"
+									to="/pesanan"
+								>
 									<img src="/assets/checkout.svg" alt="" />
 									Pesanan
 								</Link>
-							) : ('')}
+							) : (
+								""
+							)}
 
-							{JSON.parse(localStorage.getItem("user")).role === 'STAF_KEUANGAN' ? (
-								<Link className="sidebar-menu-btn" to="/daftar-pembayaran">
+							{JSON.parse(localStorage.getItem("user")).role ===
+							"STAF_KEUANGAN" ? (
+								<Link
+									className="sidebar-menu-btn"
+									to="/daftar-pembayaran"
+								>
 									<img src="/assets/checkout.svg" alt="" />
 									Pembayaran
 								</Link>
-							) : ('')}
+							) : (
+								""
+							)}
 
-
-
-							{JSON.parse(localStorage.getItem("user")).role === 'STAF_OPERASIONAL' ? (
-								<Link className="sidebar-menu-btn" to="/atur-mapel">
+							{JSON.parse(localStorage.getItem("user")).role ===
+							"STAF_OPERASIONAL" ? (
+								<Link
+									className="sidebar-menu-btn"
+									to="/atur-mapel"
+								>
 									<img src="/assets/book.svg" alt="" />
 									Mata Pelajaran
 								</Link>
-							) : ('')}
+							) : (
+								""
+							)}
 
-							{JSON.parse(localStorage.getItem("user")).role === 'PENGAJAR' ? (
-								<Link className="sidebar-menu-btn" to="/atur-jadwal">
+							{JSON.parse(localStorage.getItem("user")).role ===
+							"PENGAJAR" ? (
+								<Link
+									className="sidebar-menu-btn"
+									to={"/atur-jadwal/" + username}
+								>
 									<img src="/assets/schedule.svg" alt="" />
 									Atur Jadwal
 								</Link>
-							) : ('')}
+							) : (
+								""
+							)}
 
-							{JSON.parse(localStorage.getItem("user")).role === 'STAF_OPERASIONAL' ? (
-								<Link className="sidebar-menu-btn" to="/jadwal-pengajar">
+							{JSON.parse(localStorage.getItem("user")).role ===
+							"STAF_OPERASIONAL" ? (
+								<Link
+									className="sidebar-menu-btn"
+									to="/jadwal-pengajar"
+								>
 									<img src="/assets/schedule.svg" alt="" />
 									Jadwal Pengajar
 								</Link>
-							) : ('')}
+							) : (
+								""
+							)}
 
-							{JSON.parse(localStorage.getItem("user")).role === 'STAF_OPERASIONAL' ? (
-								<Link className="sidebar-menu-btn" to="/log-pengajar">
+							{JSON.parse(localStorage.getItem("user")).role ===
+							"STAF_OPERASIONAL" ? (
+								<Link
+									className="sidebar-menu-btn"
+									to="/log-pengajar"
+								>
 									<img src="/assets/log.svg" alt="" />
 									Log Pengajar
 								</Link>
-							) : ('')}
+							) : (
+								""
+							)}
 
-							{JSON.parse(localStorage.getItem("user")).role === 'PENGAJAR' ? (
+							{JSON.parse(localStorage.getItem("user")).role ===
+							"PENGAJAR" ? (
 								<Link className="sidebar-menu-btn" to="/log">
 									<img src="/assets/log.svg" alt="" />
 									Log
 								</Link>
-							) : ('')}
+							) : (
+								""
+							)}
 
 							{/* <Link className="sidebar-menu-btn" to="/kelas-pengajar">
 								<img src="/assets/plus.svg" alt="" />
 								Kelas Pengajar
 							</Link> */}
 
-							<Link className="sidebar-menu-btn" to="/profil-saya">
+							<Link
+								className="sidebar-menu-btn"
+								to="/profil-saya"
+							>
 								<img src="/assets/profil-saya.svg" alt="" />
 								Profil Saya
 							</Link>
-							<a onClick={handlerLogout} className="sidebar-menu-btn" href="/login">
+							<a
+								onClick={handlerLogout}
+								className="sidebar-menu-btn"
+								href="/login"
+							>
 								<img src="/assets/logout.svg" alt="" />
 								Logout
 							</a>
@@ -100,14 +166,11 @@ export default function Sidebar(props) {
 							</div>
 						</div>
 					</div>
-
 				</nav>
-
-			) : ("")}
-
-
+			) : (
+				""
+			)}
 		</div>
-
 	);
 }
 

@@ -32,6 +32,7 @@ import ListLogPengajarTerpilih from "./pages/Log/ListLogPengajarTerpilih";
 import ListLogSatuPengajar from "./pages/Log/ListLogSatuPengajar";
 import ListPengajar from "./pages/Log/ListPengajar";
 import DetailLog from "./pages/Log/DetailLog";
+import PilihPengajarPage from "./pages/PilihPengajarPage/PilihPengajarPage";
 
 
 export default function StaffRoute() {
@@ -43,7 +44,9 @@ export default function StaffRoute() {
                     <Switch>
                         <PrivateRoute exact path="/beranda" component={Home} />
                         <PrivateRoute exact path="/akun/create" component={CreateAkunPage} />
-                        <PrivateRoute exact path="/atur-jadwal" component={JadwalPage} />
+                        <PrivateRoute exact path="/atur-jadwal/:username" component={JadwalPage} />
+                        <PrivateRoute exact path="/jadwal-pengajar" component={PilihPengajarPage} />
+                        <PrivateRoute exact path="/jadwal-pengajar/:username" component={JadwalPage} />
                         <PrivateRoute exact path="/atur-mapel" component={ListMapelComponent} />
                         <PrivateRoute exact path="/dashboard" component={DashboardPage} />
                         <PrivateRoute exact path="/atur-mapel/add" component={CreateMapelComponent} />

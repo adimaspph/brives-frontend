@@ -90,7 +90,7 @@
 }
 
 .scheduler .schedule {
-	background: rgba(27, 170, 86, 0.1);
+	background: rgba(155, 155, 155, 0.1);
 	font-size: 12px;
 	font-weight: normal;
 	width: 100%;
@@ -110,7 +110,7 @@
 	/* /* grid-row-start: 2;
 	grid-row-end: 8; */
 
-	border-left: 3px solid #1baa56;
+	border-left: 3px solid #4b4b4b;
 }
 
 .week-selection {
@@ -124,6 +124,17 @@
 	font-weight: bold;
 	font-size: 16px;
 	line-height: 24px;
+}
+
+.link {
+	text-decoration-line: underline;
+	color: #ff4c4c;
+}
+
+.scheduler .schedule-booked {
+	background: rgba(27, 170, 86, 0.1);
+	
+	border-left: 3px solid #1baa56;
 }
 
 @media screen and (max-width: 769px) {

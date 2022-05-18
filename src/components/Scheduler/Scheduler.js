@@ -5,7 +5,7 @@ import Schedule from "./Schedule";
 import "./Scheduler.css";
 import ZebraStrip from "./ZebraStrip";
 
-function Scheduler() {
+function Scheduler(props) {
 	const [curr, setCurr] = useState(new Date());
 	const [firstday, setFirstday] = useState(
 		new Date(curr.setDate(curr.getDate() - curr.getDay() + 1))
@@ -149,14 +149,14 @@ function Scheduler() {
 
 					{/* <div className="schedule">
 						<span>Biologi</span>
-					</div> */}
-					<Schedule date={firstday} hari={1} />
-					<Schedule date={tuesday} hari={2} />
-					<Schedule date={wednesday} hari={3} />
-					<Schedule date={thursday} hari={4} />
-					<Schedule date={friday} hari={5} />
-					<Schedule date={saturday} hari={6} />
-					<Schedule date={lastday} hari={7} />
+					// </div> */}
+					<Schedule username={props.username} date={firstday} hari={1} />
+					<Schedule username={props.username} date={tuesday} hari={2} />
+					<Schedule username={props.username} date={wednesday} hari={3} />
+					<Schedule username={props.username} date={thursday} hari={4} />
+					<Schedule username={props.username} date={friday} hari={5} />
+					<Schedule username={props.username} date={saturday} hari={6} />
+					<Schedule username={props.username} date={lastday} hari={7} />
 				</div>
 			</div>
 		</div>

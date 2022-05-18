@@ -1,4 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect} from "react";
+import {
+	BrowserRouter as Router,
+	Switch,
+	Route,
+	useParams,
+	Link,
+} from "react-router-dom";
 import Modal from "../../components/Modal/Modal";
 // import Form from "react-bootstrap/Form";
 import Scheduler from "../../components/Scheduler/Scheduler";
@@ -24,6 +31,8 @@ function JadwalPage() {
 	const [errorMessage, setErrorMessage] = useState("");
 	const [hasSubmit, setHasSubmit] = useState(false);
 	const [hasSchedule, setHasSchedule] = useState(true);
+	const [username, setUsername] = useState(useParams().username);
+	const [roleAuth, setRoleAuth] = useState(JSON.parse(localStorage.getItem("user")).role);
 
 	function padLeadingZeros(num, size) {
 		var s = num + "";
@@ -61,6 +70,7 @@ function JadwalPage() {
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		const body = {
+			username : username,
 			tahun: Number(tanggal.slice(0, 4)),
 			bulan: Number(tanggal.slice(5, 7)),
 			tanggal: Number(tanggal.slice(8, 10)),
@@ -100,7 +110,18 @@ function JadwalPage() {
 				""
 			)}
 
-			<h1 className="">Atur Jadwal</h1>
+			{roleAuth === "STAF_OPERASIONAL" ? (
+				<ul class="breadcrumb">
+					<li>
+						<a href="/jadwal-pengajar">Pilih Pengajar</a>
+					</li>
+					<li className="bractive">Atur Jadwal</li>
+				</ul>
+			) : (
+				""
+			)}
+
+			<h1 className="text-center">Atur Jadwal</h1>
 
 			<Modal
 				show={modal}
@@ -171,12 +192,18 @@ function JadwalPage() {
 				</form>
 			</Modal>
 
-			<a className="button button-blue" onClick={handleTambahJadwal}>
-				+ Tambah Jadwal
-			</a>
+			<p className="text-center">
+				Username : <b>{username} </b>
+			</p>
+
+			<div className="d-flex center m-4">
+				<a className="button button-blue" onClick={handleTambahJadwal}>
+					+ Tambah Jadwal
+				</a>
+			</div>
+
 			<br />
-			{hasSchedule ? <Scheduler /> : ""}
-			{/* <Scheduler /> */}
+			{hasSchedule ? <Scheduler username={username} /> : ""}
 		</div>
 	);
 }
