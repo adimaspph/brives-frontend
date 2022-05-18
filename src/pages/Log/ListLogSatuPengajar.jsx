@@ -51,41 +51,45 @@ class ListLogPengajarTerpilih extends Component {
         } else {
             this.props.history.push('/login');
         }
+        let status = this.getQueryParams('status')
+        if (status === 'HADIR') {
+            this.setState({status})
+        } else if (status === 'TIDAK_HADIR') {
+            this.setState({status})
+        } else {
+            status = "KOSONG"
+        }
 
         PenggunaService.getAuthenticatedUser().then((res) => {
             let pengguna = res.data;
             this.setState({
                 idStaff: pengguna.result.staff.idStaff,
             });
-
-            LogService.getLogByStatusKehadiranSatuPengajar(this.state.idStaff, "KOSONG").then((res) => {
+            LogService.getLogByStatusKehadiranSatuPengajar(this.state.idStaff, status).then((res) => {
                 this.setState({
                     log: res.data.result,
                 });
-
                 PesananService.getUserByIdStaff(this.state.idStaff).then((res) => {
                     this.setState({
                         namaPengajar: res.data.result[0].namaLengkap,
                     });
-
                 });
-
             });
         });
-
-
     }
 
     clickedHadirHandler = (log) => {
-        console.log('ini click hadir', log.jadwal)
-        this.setState({ isClickedHadir: true, namaMapel: log.jadwal.mapel.namaMapel  });
+        const {tanggal, waktuMulai, waktuSelesai, idJadwal} =  log.jadwal
+        this.setState({ isClickedHadir: true, idLog: log.idLog, namaMapel: log.jadwal.mapel.namaMapel, tanggal, waktuMulai, waktuSelesai, idJadwal  });
         // LogService.getLogByIdLog(idLog);
         // console.log(idLog);
     };
 
-    clickedTidakHadirHandler = (idLog) => {
-        this.setState({ isClickedTidakHadir: true });
-        LogService.getLogByIdLog(idLog);
+    clickedTidakHadirHandler = (log) => {
+        console.log('ini log', log)
+        const {tanggal, waktuMulai, waktuSelesai, idJadwal} =  log.jadwal
+        this.setState({ isClickedTidakHadir: true, idLog: log.idLog, namaMapel: log.jadwal.mapel.namaMapel, tanggal, waktuMulai, waktuSelesai, idJadwal  });
+        // LogService.getLogByIdLog(idLog);
         // console.log(idLog);
     };
 
@@ -106,11 +110,12 @@ class ListLogPengajarTerpilih extends Component {
     }
 
     handleRoleChange = (event) => {
+        window.location.search = '?status=' + event.target.value;
         this.setState({ status: event.target.value });
-        LogService.getLogByStatusKehadiranSatuPengajar(this.state.idStaff, event.target.value).then((res) => {
-            this.setState({ log: res.data.result });
+        // LogService.getLogByStatusKehadiranSatuPengajar(this.state.idStaff, event.target.value).then((res) => {
+        //     this.setState({ log: res.data.result });
 
-        });
+        // });
     };
 
     lihatLog(idLog) {
@@ -121,57 +126,79 @@ class ListLogPengajarTerpilih extends Component {
     saveHadir = async (event) => {
         event.preventDefault();
         let log = { catatan: this.state.catatanBaru, statusKehadiran: 'HADIR' };
-        LogService.updateKehadiran(log, this.state.idLog).then(res => {
+        try {
+            // LogService.updateKehadiran(log, this.state.idLog).then(res => {
 
-            LogService.getJadwalStatusUnique(this.state.idJadwal, 5).then(res => {
-                this.setState({
-                    log: res.data.result,
-                    idPesanan: res.data.result.idPesanan
-                });
-                let status = { idStatusPesanan: 6, jenisStatus: "Selesai" }
-                // try {
-                //     PesananService.updateStatusPesanan(status, this.state.idPesanan).then(res => {
-                //         this.demoHadir(this.state.idLog);
-                //     });
-                // } catch (e) {
-                //     await errorMessage()
-                // }
+            //     LogService.getJadwalStatusUnique(this.state.idJadwal, 5).then(res => {
+            //         this.setState({
+            //             log: res.data.result,
+            //             idPesanan: res.data.result.idPesanan
+            //         });
+            //         let status = { idStatusPesanan: 6, jenisStatus: "Selesai" }
+            //         PesananService.updateStatusPesanan(status, this.state.idPesanan).then(res => {
+            //             this.demoHadir(this.state.idLog);
+            //         });
+            //     });
+            // });
+            const updateKehadiran = await LogService.updateKehadiran(log, this.state.idLog)
+            const getJadwalStatusUnique = await LogService.getJadwalStatusUnique(this.state.idJadwal, 5)
+            this.setState({
+                idPesanan: getJadwalStatusUnique.data.result.idPesanan
             });
-        });
+            let status = { idStatusPesanan: 6, jenisStatus: "Selesai" }
+            const updateStatusPesanan = await PesananService.updateStatusPesanan(status, getJadwalStatusUnique.data.result.idPesanan)
+            this.demoHadir(this.state.idLog);
+        } catch (e) {
+            this.errorMessage()
+        }
     }
 
     saveTidakHadir = async (event) => {
+        event.preventDefault();
         let log = { catatan: this.state.catatanBaru, statusKehadiran: 'TIDAK_HADIR' };
-        LogService.updateKehadiran(log, this.state.idLog).then(res => {
-            LogService.getJadwalStatusUnique(this.state.idJadwal, 5).then(res => {
-                this.setState({
-                    log: res.data.result,
-                    idPesanan: res.data.result.idPesanan
-                });
-                // try {
-                //     let status = { idStatusPesanan: 6, jenisStatus: "Selesai" }
-                //     PesananService.updateStatusPesanan(status, this.state.idPesanan).then(res => {
-                //         this.demoTidakHadir(this.state.idLog);
-                //     });
-                //
-                // } catch (e) {
-                //     await errorMessage()
-                // }
+        try {
+            // LogService.updateKehadiran(log, this.state.idLog).then(res => {
+            //     LogService.getJadwalStatusUnique(this.state.idJadwal, 5).then(res => {
+            //         this.setState({
+            //             log: res.data.result,
+            //             idPesanan: res.data.result.idPesanan
+            //         });
+            //         let status = { idStatusPesanan: 6, jenisStatus: "Selesai" }
+            //         PesananService.updateStatusPesanan(status, this.state.idPesanan).then(res => {
+            //             this.demoTidakHadir(this.state.idLog);
+            //         });
+            //     });
+            // });
+            const updateKehadiran = await LogService.updateKehadiran(log, this.state.idLog)
+            const getJadwalStatusUnique = await LogService.getJadwalStatusUnique(this.state.idJadwal, 5)
+            this.setState({
+                idPesanan: getJadwalStatusUnique.data.result.idPesanan
             });
-        });
+            let status = { idStatusPesanan: 6, jenisStatus: "Selesai" }
+            const updateStatusPesanan = await PesananService.updateStatusPesanan(status, getJadwalStatusUnique.data.result.idPesanan)
+            this.demoTidakHadir(this.state.idLog);
+
+        } catch (e) {
+            this.errorMessage()
+
+        }
     }
 
     async demoHadir(idLog) {
         this.setState({ successHadir: true });
         await this.sleep(1500);
-        window.location.reload();
+        // window.location.reload();
+        window.location.search = '?status=HADIR';
+        this.setState({ isClickedHadir: false });
 
     }
 
     async demoTidakHadir(idLog) {
         this.setState({ successTidakHadir: true });
         await this.sleep(1500);
-        window.location.reload();
+        // window.location.reload();
+        window.location.search = '?status=TIDAK_HADIR';
+        this.setState({ isClickedTidakHadir: false });
 
     }
 
@@ -182,7 +209,16 @@ class ListLogPengajarTerpilih extends Component {
     }
 
 
-
+    getQueryParams(k) {
+        var p = {};
+        this.props.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, (s, k, v) => {
+            p[k] = v;
+        })
+        return k ? p[k] : p;
+    }
+    sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
 
     render() {
         return (
@@ -194,7 +230,7 @@ class ListLogPengajarTerpilih extends Component {
                 <div className='space'>
                     <div className='d-flex flex-row'>
                         <p className="p-2 align-self-end">Pilih Status: </p>
-                        <select onChange={this.handleRoleChange} name="role" id="role" className='twobutton'>
+                        <select onChange={this.handleRoleChange} value={this.state.status} name="role" id="role" className='twobutton'>
                             <option value="KOSONG">Belum Diisi</option>
                             <option value="HADIR">Hadir</option>
                             <option value="TIDAK_HADIR">Tidak Hadir</option>
@@ -225,9 +261,7 @@ class ListLogPengajarTerpilih extends Component {
                         <tbody>
                         {this.state.log.map((satuMapel, index) => (
                             // <tr key={satuMapel.idUser}>
-
-                            <tr>
-                                {  console.log('ini satu mapel', satuMapel)}
+                            <tr key={index}>
                                 <td>{index + 1}</td>
                                 <td> {satuMapel.idLog} </td>
                                 <td>{satuMapel.jadwal.mapel.namaMapel} </td>
@@ -239,8 +273,8 @@ class ListLogPengajarTerpilih extends Component {
                                     <td>
                                         <div className='col'>
                                             <div className='my-2 d-flex flex justify-content-center'>
-                                                <button type="submit" class="btn btn-success px-3" onClick={()=> this.clickedHadirHandler(satuMapel) }>
-                                                    <i class="fa fa-check" aria-hidden="true"></i>
+                                                <button type="submit" className="btn btn-success px-3" onClick={()=> this.clickedHadirHandler(satuMapel) }>
+                                                    <i className="fa fa-check" aria-hidden="true"></i>
                                                 </button>
                                             </div>
                                         </div>
@@ -251,8 +285,8 @@ class ListLogPengajarTerpilih extends Component {
                                     <td>
                                         <div className='col'>
                                             <div className='my-2 d-flex flex justify-content-center'>
-                                                <button type="submit" class="btn btn-danger px-3" onClick={() => this.clickedTidakHadirHandler(satuMapel.idLog)}>
-                                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                                <button type="submit" className="btn btn-danger px-3" onClick={() => this.clickedTidakHadirHandler(satuMapel)}>
+                                                    <i className="fa fa-times" aria-hidden="true"></i>
                                                 </button>
                                             </div>
                                         </div>
