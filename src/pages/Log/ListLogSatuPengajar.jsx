@@ -77,7 +77,7 @@ class ListLogPengajarTerpilih extends Component {
 
     clickedHadirHandler = (log) => {
         console.log('ini click hadir', log.jadwal)
-        this.setState({ isClickedHadir: true, namaMapel: log.jadwal.mapel.namaMapel  });
+        this.setState({ isClickedHadir: true, namaMapel: log.jadwal.mapel.namaMapel});
         // LogService.getLogByIdLog(idLog);
         // console.log(idLog);
     };
