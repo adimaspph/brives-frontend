@@ -118,7 +118,7 @@ class ListLogPengajarTerpilih extends Component {
 
     }
 
-    saveHadir = async (event) => {
+    saveHadir = (event) => {
         event.preventDefault();
         let log = { catatan: this.state.catatanBaru, statusKehadiran: 'HADIR' };
         LogService.updateKehadiran(log, this.state.idLog).then(res => {
@@ -134,13 +134,13 @@ class ListLogPengajarTerpilih extends Component {
                         this.demoHadir(this.state.idLog);
                     });
                 } catch (e) {
-                    await errorMessage()
+                    this.errorMessage()
                 }
             });
         });
     }
 
-    saveTidakHadir = async (event) => {
+    saveTidakHadir = (event) => {
         let log = { catatan: this.state.catatanBaru, statusKehadiran: 'TIDAK_HADIR' };
         LogService.updateKehadiran(log, this.state.idLog).then(res => {
             LogService.getJadwalStatusUnique(this.state.idJadwal, 5).then(res => {
@@ -153,9 +153,8 @@ class ListLogPengajarTerpilih extends Component {
                     PesananService.updateStatusPesanan(status, this.state.idPesanan).then(res => {
                         this.demoTidakHadir(this.state.idLog);
                     });
-
                 } catch (e) {
-                    await errorMessage()
+                    this.errorMessage()
                 }
             });
         });
