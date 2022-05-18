@@ -158,10 +158,6 @@ export default function PilihJadwalPage() {
 		setModal(false);
 	};
 
-	const sleep = (milliseconds) => {
-		return new Promise((resolve) => setTimeout(resolve, milliseconds));
-	};
-
 	const getDesc = () => {
 		if (selectedJadwal != null) {
 			// console.log(selectedJadwal);

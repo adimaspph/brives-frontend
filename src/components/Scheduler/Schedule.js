@@ -3,8 +3,9 @@ import APIConfig from "../../api/APIConfig";
 import ErrorNotification from "../Notification/ErrorNotification";
 import NeutralNotification from "../Notification/NeutralNotification";
 import Modal from "../../components/Modal/Modal";
+import PilihJadwalPage from "../../pages/PilihJadwalPage/PilihJadwalPage";
 
-export default function Schedule({ date, hari }) {
+export default function Schedule({ date, hari, username }) {
 	const [modal, setModal] = useState(false);
 	const [modalView, setModalView] = useState(false);
 	const [selectedJadwal, setSelectedJadwal] = useState();
@@ -39,7 +40,7 @@ export default function Schedule({ date, hari }) {
 			bulan: date.getMonth() + 1,
 			tahun: date.getFullYear(),
 		};
-		APIConfig.get("/jadwal", {
+		APIConfig.get("/jadwal/hari/" + username, {
 			params: parameter,
 		})
 			.then((response) => {
@@ -81,27 +82,22 @@ export default function Schedule({ date, hari }) {
 			});
 	};
 
-	const addLink = (event) => {
-		event.preventDefault();
-		let jadwal = { linkZoom: linkZoom };
-		console.log(selectedJadwal.idJadwal);
-		APIConfig.put("/jadwal/addLink/" + selectedJadwal.idJadwal, jadwal)
-			.then((response) => {
-				console.log(response.data.result);
-				setModalView(false);
-				window.location = "/atur-jadwal";
-			})
-			.catch((error) => {
-				console.log(error.response);
-			});
-		
-	};
-
 	const dateConvert = (tanggal) => {
 		const date = new Date(tanggal);
 		const namaHari = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
-		const monthNames = ["January", "February", "March", "April", "May", "June",
-		"July", "August", "September", "October", "November", "December"
+		const monthNames = [
+			"Jan",
+			"Feb",
+			"Mar",
+			"Apr",
+			"Mei",
+			"Jun",
+			"Jul",
+			"Agt",
+			"Sep",
+			"Oct",
+			"Nov",
+			"Dec",
 		];
 		
 		let result = namaHari[date.getDay()] + ", " + date.getDate() + " " + monthNames[date.getMonth()] + " " + date.getFullYear()
@@ -110,19 +106,45 @@ export default function Schedule({ date, hari }) {
 	};
 
 	const getDesc = () => {
+		// console.log(selectedJadwal);
 		if (selectedJadwal != null) {
 			return (
 				<div>
 					<label>Mata Pelajaran :</label>
-					<p>{selectedJadwal.mapel.namaMapel}</p>
+					<p>{selectedJadwal.jadwal.mapel.namaMapel}</p>
 					<label>Jenis Kelas :</label>
-					<p>{selectedJadwal.jenisKelas}</p>
+					<p>{selectedJadwal.jadwal.jenisKelas}</p>
 					<label>Tanggal :</label>
-					<p>{dateConvert(selectedJadwal.tanggal)}</p>
+					<p>{dateConvert(selectedJadwal.jadwal.tanggal)}</p>
 					<label>Waktu :</label>
 					<p>
-						{selectedJadwal.waktuMulai} -{" "}
-						{selectedJadwal.waktuSelesai} WIB
+						{selectedJadwal.jadwal.waktuMulai} -{" "}
+						{selectedJadwal.jadwal.waktuSelesai} WIB
+					</p>
+					<label>Status :</label>
+					<p>{selectedJadwal.statusPesanan}</p>
+					<label>Link Meeting :</label>
+					<p>
+						{selectedJadwal.jadwal.linkZoom === null ? (
+							"Belum terserdia"
+						) : (
+							<a
+								className="link"
+								href={selectedJadwal.jadwal.linkZoom}
+								target="_blank"
+							>
+								{selectedJadwal.jadwal.linkZoom}
+							</a>
+						)}
+					</p>
+
+					<label>Materi :</label>
+					<p>
+						{selectedJadwal.materi === null ? (
+							"Belum terserdia"
+						) : (
+							<span>{selectedJadwal.materi}</span>
+						)}
 					</p>
 				</div>
 			);
@@ -146,12 +168,12 @@ export default function Schedule({ date, hari }) {
 			>
 				<p>Apakah Anda yakin akan menghapus jadwal berikut</p>
 				<p>
-					<b>Mapel : </b>
+					<b>Mata Pelajaran : </b>
 					{jadwal.mapel.namaMapel}
 				</p>
 				<p>
 					<b>Tanggal : </b>
-					{jadwal.tanggal}
+					{dateConvert(jadwal.tanggal)}
 				</p>
 				<p>
 					<b>Waktu : </b>
@@ -175,49 +197,52 @@ export default function Schedule({ date, hari }) {
 				</div>
 			</Modal>
 			<Modal show={modalView} modalTitle="Detail Jadwal">
-				<form action="" onSubmit={addLink}>
-					{getDesc()}
-					<div className="form-group">
-						<label> Link Zoom </label>
-						<input
-							type="text"
-							className="form-control"
-							value={linkZoom}
-							onChange={(e) => setLinkZoom(e.target.value)}
-							required
-						/>
+				{getDesc()}
+				<div className="modalButtonContainer">
+					<div
+						className="button button-outline"
+						onClick={() => setModalView(false)}
+					>
+						Kembali
 					</div>
 
-					<div className="modalButtonContainer">
+					{selectedJadwal != null && selectedJadwal.statusPesanan === "Terpesan" ? (
+						""
+					) : (
 						<div
-							className="button button-outline"
-							onClick={() => setModalView(false)}
+							className="button button-primary"
+							onClick={() => {
+								setModal(true);
+								setJadwal(selectedJadwal.jadwal);
+								setModalView(false);
+							}}
 						>
-							Kembali
+							Hapus
 						</div>
-						<button type="submit" className="button button-primary">
-							Simpan
-						</button>
-					</div>
-				</form>
+					)}
+				</div>
 			</Modal>
 
 			{listJadwal.map((jadwal, key) => (
 				<div
 					key={key}
-					className="schedule"
+					className={
+						jadwal.statusPesanan === "Terpesan"
+							? "schedule schedule-booked"
+							: "schedule"
+					}
 					style={{
-						gridRowStart: timeToRow(jadwal.waktuMulai),
-						gridRowEnd: timeToRow(jadwal.waktuSelesai),
+						gridRowStart: timeToRow(jadwal.jadwal.waktuMulai),
+						gridRowEnd: timeToRow(jadwal.jadwal.waktuSelesai),
 						gridColumnStart: hari + 1,
 					}}
 				>
 					<div>
 						<div>
-							<b>{jadwal.mapel.namaMapel}</b>
+							<b>{jadwal.jadwal.mapel.namaMapel}</b>
 						</div>
 						<br />
-						<span>{`${jadwal.waktuMulai} - ${jadwal.waktuSelesai}`}</span>
+						<span>{`${jadwal.jadwal.waktuMulai} - ${jadwal.jadwal.waktuSelesai}`}</span>
 					</div>
 
 					<div
@@ -225,20 +250,19 @@ export default function Schedule({ date, hari }) {
 						onClick={() => {
 							setModalView(true);
 							setSelectedJadwal(jadwal);
-							setLinkZoom(jadwal.linkZoom)
 						}}
 					>
 						Detail
 					</div>
-					<div
+					{/* <div
 						className="button button-s button-primary"
 						onClick={() => {
 							setModal(true);
-							setJadwal(jadwal);
+							setJadwal(jadwal.jadwal);
 						}}
 					>
-						Delete
-					</div>
+						Hapus
+					</div> */}
 				</div>
 			))}
 		</React.Fragment>

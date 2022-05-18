@@ -4,6 +4,13 @@ import PesananService from "../../services/PesananService";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import "./RiwayatPesanan.css";
+import {
+	BrowserRouter as Router,
+	Switch,
+	Route,
+	useParams,
+	Link,
+} from "react-router-dom";
 import NeutralNotification from '../../components/Notification/NeutralNotification';
 
 
@@ -11,7 +18,7 @@ export default function BayarPesananComponent(props) {
   const [pesanan, setPesanan] = useState({});
   const [link, setLink] = useState("");
   const [metode, setMetode] = useState("Bank BCA");
-  const [idPesanan, setIdPesanan] = props.match.params.idPesanan;
+  const [idPesanan, setIdPesanan] = useState(props.match.params.idPesanan);
   const [isNotifSubmit, setIsNotifSubmit] = useState(false);
   const [status, setStatus] = useState('');
 
@@ -50,6 +57,7 @@ export default function BayarPesananComponent(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     let updateMapel = { buktiBayar: link, metodePembayaran: metode }
+    console.log(idPesanan);
     PesananService.addPembayaran(updateMapel, idPesanan).then(res => {
       let updateStatus = { idStatusPesanan: 2, jenisStatus: "Menunggu Verifikasi" }
       PesananService.updateStatusPesanan(updateStatus, idPesanan).then(res => {
