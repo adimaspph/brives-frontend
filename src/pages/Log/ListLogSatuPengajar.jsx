@@ -62,14 +62,14 @@ class ListLogPengajarTerpilih extends Component {
                 this.setState({
                     log: res.data.result,
                 });
-    
+
                 PesananService.getUserByIdStaff(this.state.idStaff).then((res) => {
                     this.setState({
                         namaPengajar: res.data.result[0].namaLengkap,
                     });
-    
+
                 });
-    
+
             });
         });
 
@@ -78,7 +78,7 @@ class ListLogPengajarTerpilih extends Component {
 
     clickedHadirHandler = (log) => {
         console.log('ini click hadir', log.jadwal)
-        this.setState({ isClickedHadir: true, namaMapel: log.jadwal.mapel.namaMapel});
+        this.setState({ isClickedHadir: true, namaMapel: log.jadwal.mapel.namaMapel  });
         // LogService.getLogByIdLog(idLog);
         // console.log(idLog);
     };
@@ -129,13 +129,13 @@ class ListLogPengajarTerpilih extends Component {
                     idPesanan: res.data.result.idPesanan
                 });
                 let status = { idStatusPesanan: 6, jenisStatus: "Selesai" }
-                try {
-                    PesananService.updateStatusPesanan(status, this.state.idPesanan).then(res => {
-                        this.demoHadir(this.state.idLog);
-                    });
-                } catch (e) {
-                    await errorMessage()
-                }
+                // try {
+                //     PesananService.updateStatusPesanan(status, this.state.idPesanan).then(res => {
+                //         this.demoHadir(this.state.idLog);
+                //     });
+                // } catch (e) {
+                //     await errorMessage()
+                // }
             });
         });
     }
@@ -148,15 +148,15 @@ class ListLogPengajarTerpilih extends Component {
                     log: res.data.result,
                     idPesanan: res.data.result.idPesanan
                 });
-                try {
-                    let status = { idStatusPesanan: 6, jenisStatus: "Selesai" }
-                    PesananService.updateStatusPesanan(status, this.state.idPesanan).then(res => {
-                        this.demoTidakHadir(this.state.idLog);
-                    });
-
-                } catch (e) {
-                    await errorMessage()
-                }
+                // try {
+                //     let status = { idStatusPesanan: 6, jenisStatus: "Selesai" }
+                //     PesananService.updateStatusPesanan(status, this.state.idPesanan).then(res => {
+                //         this.demoTidakHadir(this.state.idLog);
+                //     });
+                //
+                // } catch (e) {
+                //     await errorMessage()
+                // }
             });
         });
     }
@@ -205,72 +205,72 @@ class ListLogPengajarTerpilih extends Component {
                 <div className=''>
                     <table className='table-max table-none' id='myTable'>
                         <thead>
-                            <tr className=''>
-                                <th scope="col">No</th>
-                                <th className='text-center' scope='col'>Id Log</th>
-                                <th className='text-center' scope='col'>Mata Pelajaran</th>
-                                <th className='text-center' scope='col'>Tanggal Kelas</th>
-                                <th className='text-center' scope='col'>Waktu</th>
-                                <th className='text-center' scope='col'>Jenis Kelas</th>
-                                {this.state.status === 'KOSONG' ? (
-                                    <th className='text-center' scope='col'>Hadir</th>
-                                ) : ('')}
-                                {this.state.status === 'KOSONG' ? (
-                                    <th className='text-center' scope='col'>Tidak Hadir</th>
-                                ) : ('')}
-                                <th className='text-center' scope='col'>Action</th>
-                            </tr>
+                        <tr className=''>
+                            <th scope="col">No</th>
+                            <th className='text-center' scope='col'>Id Log</th>
+                            <th className='text-center' scope='col'>Mata Pelajaran</th>
+                            <th className='text-center' scope='col'>Tanggal Kelas</th>
+                            <th className='text-center' scope='col'>Waktu</th>
+                            <th className='text-center' scope='col'>Jenis Kelas</th>
+                            {this.state.status === 'KOSONG' ? (
+                                <th className='text-center' scope='col'>Hadir</th>
+                            ) : ('')}
+                            {this.state.status === 'KOSONG' ? (
+                                <th className='text-center' scope='col'>Tidak Hadir</th>
+                            ) : ('')}
+                            <th className='text-center' scope='col'>Action</th>
+                        </tr>
                         </thead>
 
                         <tbody>
-                            {this.state.log.map((satuMapel, index) => (
-                                // <tr key={satuMapel.idUser}>
-                                
-                                <tr>
-                                    {  console.log('ini satu mapel', satuMapel)}
-                                    <td>{index + 1}</td>
-                                    <td> {satuMapel.idLog} </td>
-                                    <td>{satuMapel.jadwal.mapel.namaMapel} </td>
-                                    <td>{satuMapel.jadwal.tanggal}</td>
-                                    <td>{satuMapel.jadwal.waktuMulai} - {satuMapel.jadwal.waktuSelesai} </td>
-                                    <td>{satuMapel.jadwal.jenisKelas} </td>
+                        {this.state.log.map((satuMapel, index) => (
+                            // <tr key={satuMapel.idUser}>
 
-                                    {this.state.status === 'KOSONG' ? (
-                                        <td>
-                                            <div className='col'>
-                                                <div className='my-2 d-flex flex justify-content-center'>
-                                                    <button type="submit" class="btn btn-success px-3" onClick={()=> this.clickedHadirHandler(satuMapel) }>
-                                                        <i class="fa fa-check" aria-hidden="true"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    ) : ('')}
+                            <tr>
+                                {  console.log('ini satu mapel', satuMapel)}
+                                <td>{index + 1}</td>
+                                <td> {satuMapel.idLog} </td>
+                                <td>{satuMapel.jadwal.mapel.namaMapel} </td>
+                                <td>{satuMapel.jadwal.tanggal}</td>
+                                <td>{satuMapel.jadwal.waktuMulai} - {satuMapel.jadwal.waktuSelesai} </td>
+                                <td>{satuMapel.jadwal.jenisKelas} </td>
 
-                                    {this.state.status === 'KOSONG' ? (
-                                        <td>
-                                            <div className='col'>
-                                                <div className='my-2 d-flex flex justify-content-center'>
-                                                    <button type="submit" class="btn btn-danger px-3" onClick={() => this.clickedTidakHadirHandler(satuMapel.idLog)}>
-                                                        <i class="fa fa-times" aria-hidden="true"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    ) : ('')}
-
+                                {this.state.status === 'KOSONG' ? (
                                     <td>
                                         <div className='col'>
                                             <div className='my-2 d-flex flex justify-content-center'>
-                                                <a className="button button-outline" onClick={() => this.lihatLog(satuMapel.idLog)}>
-                                                    Pilih
-                                                </a>
+                                                <button type="submit" class="btn btn-success px-3" onClick={()=> this.clickedHadirHandler(satuMapel) }>
+                                                    <i class="fa fa-check" aria-hidden="true"></i>
+                                                </button>
                                             </div>
                                         </div>
                                     </td>
+                                ) : ('')}
 
-                                </tr>
-                            ))}
+                                {this.state.status === 'KOSONG' ? (
+                                    <td>
+                                        <div className='col'>
+                                            <div className='my-2 d-flex flex justify-content-center'>
+                                                <button type="submit" class="btn btn-danger px-3" onClick={() => this.clickedTidakHadirHandler(satuMapel.idLog)}>
+                                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                ) : ('')}
+
+                                <td>
+                                    <div className='col'>
+                                        <div className='my-2 d-flex flex justify-content-center'>
+                                            <a className="button button-outline" onClick={() => this.lihatLog(satuMapel.idLog)}>
+                                                Pilih
+                                            </a>
+                                        </div>
+                                    </div>
+                                </td>
+
+                            </tr>
+                        ))}
                         </tbody>
 
 
