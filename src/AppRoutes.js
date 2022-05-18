@@ -38,32 +38,32 @@ import error404 from "./pages/error404";
 
 function AppRoutes() {
 
-	return (
-		<BrowserRouter>
-			<Router>
-				<Switch>
-					<Route exact path="/login" component={LoginPage} />
-					<Route exact path="/register" component={RegisterPage} />
-					<Route exact path="/akun/profil" component={AkunPage} />
-					<Route exact path="/akun/profil/edit" component={EditAkunPage} />
-					<Route exact path="/akun/profil/ganti-password" component={UbahPasswordPage} />
-					<Route exact path="/design" component={Design} />
-					<Route exact path="/403" component={error403} />
-					<Route exact path="/404" component={error404} />
-					<Route exact path="/pesan-kelas" component={PesanKelasPage} />
-					<Route exact path="/pesan-kelas/:id" component={PilihJadwalPage} />
-					<PrivateRoute exact path="/bayar-pesanan/:idPesanan" component={BayarPesanan} />
-					<Route exact path="/riwayat-pesanan" component={RiwayatPesanan} />
-					<Route exact path="/riwayat-pesanan/:idPesanan" component={DetailRiwayatPesanan} />
-					
-					<Route exact path="/" component={Homepage} />
-					<Route path="/" component={StaffRoute} />
-					<Redirect from="*" to="/404" />
-					
-				</Switch>
-			</Router>
-		</BrowserRouter>
-	);
+    return (
+        <BrowserRouter>
+            <Router>
+                <Switch>
+                    <Route exact path="/login" component={LoginPage} />
+                    <Route exact path="/register" component={RegisterPage} />
+                    <Route exact path="/akun/profil" component={AkunPage} />
+                    <Route exact path="/akun/profil/edit" component={EditAkunPage} />
+                    <Route exact path="/akun/profil/ganti-password" component={UbahPasswordPage} />
+                    <Route exact path="/design" component={Design} />
+                    <Route exact path="/403" component={error403} />
+                    <Route exact path="/404" component={error404} />
+                    <Route exact path="/pesan-kelas" component={PesanKelasPage} />
+                    <Route exact path="/pesan-kelas/:id" component={PilihJadwalPage} />
+                    <PrivateRoute exact path="/bayar-pesanan/:idPesanan" component={BayarPesanan} />
+                    <Route exact path="/riwayat-pesanan" component={RiwayatPesanan} />
+                    <Route exact path="/riwayat-pesanan/:idPesanan" component={DetailRiwayatPesanan} />
+
+                    <Route exact path="/" component={Homepage} />
+                    <Route path="/" component={StaffRoute} />
+                    <Redirect from="*" to="/404" />
+
+                </Switch>
+            </Router>
+        </BrowserRouter>
+    );
 }
 
 export default AppRoutes;
