@@ -14,11 +14,30 @@ class ListLogPengajarTerpilih extends Component {
         super(props)
         this.state = {
             log: [],
+            pesanan: [],
             idStaff: 0,
             namaPengajar: '',
             status: 'KOSONG',
+            catatan: '',
+            catatanBaru: '',
+            statusKehadiran: '',
+            jenisKelas: '',
+            waktuMulai: '',
+            waktuSelesai: '',
+            tanggal: '',
+            namaMapel: '',
+            idJadwal: 0,
+            isClickedHadir: false,
+            isClickedTidakHadir: false,
+            successHadir: false,
+            successTidakHadir: false,
+            idPesanan: 0,
 
         }
+
+        this.handleCancelHadir = this.handleCancelHadir.bind(this);
+        this.saveHadir = this.saveHadir.bind(this);
+        this.saveTidakHadir = this.saveTidakHadir.bind(this);
 
     }
 
@@ -50,10 +69,37 @@ class ListLogPengajarTerpilih extends Component {
     
                 });
     
-    
             });
         });
 
+
+    }
+
+    clickedHadirHandler = (idLog) => {
+        this.setState({ isClickedHadir: true });
+        LogService.getLogByIdLog(idLog);
+        // console.log(idLog);
+    };
+
+    clickedTidakHadirHandler = (idLog) => {
+        this.setState({ isClickedTidakHadir: true });
+        LogService.getLogByIdLog(idLog);
+        // console.log(idLog);
+    };
+
+
+    handleCancelHadir(idPesanan) {
+        this.setState({ isClickedHadir: false, catatanBaru: '' });
+
+    }
+
+    handleCancelTidakHadir(idPesanan) {
+        this.setState({ isClickedTidakHadir: false, catatanBaru: '' });
+
+    }
+
+    changecatatanBaruHandler = (event) => {
+        this.setState({ catatanBaru: event.target.value });
 
     }
 
@@ -69,6 +115,56 @@ class ListLogPengajarTerpilih extends Component {
         this.props.history.push(generatePath("/log/:idLog", { idLog }));
 
     }
+
+    saveHadir = (event) => {
+        event.preventDefault();
+        let log = { catatan: this.state.catatanBaru, statusKehadiran: 'HADIR' };
+        LogService.updateKehadiran(log, this.state.idLog).then(res => {
+
+            LogService.getJadwalStatusUnique(this.state.idJadwal, 5).then(res => {
+                this.setState({
+                    log: res.data.result,
+                    idPesanan: res.data.result.idPesanan
+                });
+                let status = { idStatusPesanan: 6, jenisStatus: "Selesai" }
+                PesananService.updateStatusPesanan(status, this.state.idPesanan).then(res => {
+                    this.demoHadir(this.state.idLog);
+                });
+            });
+        });
+    }
+
+    saveTidakHadir = (event) => {
+        let log = { catatan: this.state.catatanBaru, statusKehadiran: 'TIDAK_HADIR' };
+        LogService.updateKehadiran(log, this.state.idLog).then(res => {
+            LogService.getJadwalStatusUnique(this.state.idJadwal, 5).then(res => {
+                this.setState({
+                    log: res.data.result,
+                    idPesanan: res.data.result.idPesanan
+                });
+                let status = { idStatusPesanan: 6, jenisStatus: "Selesai" }
+                PesananService.updateStatusPesanan(status, this.state.idPesanan).then(res => {
+                    this.demoTidakHadir(this.state.idLog);
+                });
+            });
+        });
+    }
+
+    async demoHadir(idLog) {
+        this.setState({ successHadir: true });
+        await this.sleep(1500);
+        window.location.reload();
+
+    }
+
+    async demoTidakHadir(idLog) {
+        this.setState({ successTidakHadir: true });
+        await this.sleep(1500);
+        window.location.reload();
+
+    }
+
+
 
 
     render() {
@@ -124,7 +220,7 @@ class ListLogPengajarTerpilih extends Component {
                                         <td>
                                             <div className='col'>
                                                 <div className='my-2 d-flex flex justify-content-center'>
-                                                    <button type="button" class="btn btn-success px-3">
+                                                    <button type="submit" class="btn btn-success px-3" onClick={() => this.clickedHadirHandler(satuMapel.idLog)}>
                                                         <i class="fa fa-check" aria-hidden="true"></i>
                                                     </button>
                                                 </div>
@@ -136,7 +232,7 @@ class ListLogPengajarTerpilih extends Component {
                                         <td>
                                             <div className='col'>
                                                 <div className='my-2 d-flex flex justify-content-center'>
-                                                    <button type="button" class="btn btn-danger px-3">
+                                                    <button type="submit" class="btn btn-danger px-3" onClick={() => this.clickedTidakHadirHandler(satuMapel.idLog)}>
                                                         <i class="fa fa-times" aria-hidden="true"></i>
                                                     </button>
                                                 </div>
@@ -161,6 +257,72 @@ class ListLogPengajarTerpilih extends Component {
 
                     </table>
                 </div>
+
+                <Modal
+                    show={this.state.isClickedHadir}
+                    modalTitle="Verifikasi Kehadiran"
+                >
+                    <p>
+                        <b>Mata Pelajaran : </b>
+                        {this.state.namaMapel}
+                    </p>
+                    <p>
+                        <b>Tanggal : </b>
+                        {this.state.tanggal}
+                    </p>
+                    <p>
+                        <b>Waktu : </b>
+                        {this.state.waktuMulai} - {this.state.waktuSelesai} WIB
+                    </p>
+                    <form action="" onSubmit={this.saveHadir}>
+                        <div className='form-group'>
+                            <label htmlFor="">Catatan (Opsional) </label>
+                            <input type="text" className='form-control'
+                                   value={this.state.catatanBaru} onChange={this.changecatatanBaruHandler} />
+                        </div>
+                        <div className='modalButtonContainer'>
+                            <div className="button button-outline-blue" onClick={() => this.handleCancelHadir(this.state.idPesanan)}>
+                                Kembali
+                            </div>
+                            <button type="submit" className="button button-blue">Hadir</button>
+                        </div>
+                    </form>
+                </Modal>
+
+                <Modal
+                    show={this.state.isClickedTidakHadir}
+                    modalTitle="Verifikasi Ketidakhadiran"
+                >
+                    <p>
+                        <b>Mata Pelajaran : </b>
+                        {this.state.namaMapel}
+                    </p>
+                    <p>
+                        <b>Tanggal : </b>
+                        {this.state.tanggal}
+                    </p>
+                    <p>
+                        <b>Waktu : </b>
+                        {this.state.waktuMulai} - {this.state.waktuSelesai} WIB
+                    </p>
+                    <form action="" onSubmit={this.saveTidakHadir}>
+                        <div className='form-group'>
+
+                            <label htmlFor="">Alasan Ketidakhadiran <span className='star'>*</span> </label>
+                            <input type="text" className='form-control'
+                                   value={this.state.catatanBaru} onChange={this.changecatatanBaruHandler} required />
+                        </div>
+                        <div className='modalButtonContainer'>
+                            <div className="button button-outline-blue" onClick={() => this.handleCancelTidakHadir(this.state.idPesanan)}>
+                                Kembali
+                            </div>
+                            <button type="submit" className="button button-blue">Tidak Hadir</button>
+                        </div>
+                    </form>
+                </Modal>
+
+                {this.state.successHadir ? (<NeutralNotification text="Berhasil Memverifikasi Kehadiran!" />) : ("")}
+                {this.state.successTidakHadir ? (<NeutralNotification text="Berhasil Memverifikasi Ketidakhadiran" />) : ("")}
 
             </div>
         );

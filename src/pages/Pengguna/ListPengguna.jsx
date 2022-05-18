@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PenggunaService from '../../services/PenggunaService';
 import "./ListPengguna.css";
 import { generatePath } from 'react-router-dom';
-import searchIcon from "../../image/searchIcon.png"
+//import searchIcon from "../../image/searchIcon.png"
 
 
 
@@ -88,7 +88,7 @@ class ListPengguna extends Component {
                 <div className='space'>
                     <div className="searchbox">
                         {/* <img src={searchIcon} className="search-logo" alt="searchIcon" /> */}
-                        <input onKeyUp={this.myFunction} type="text" id="myInput" placeholder="Cari nama pengguna" />
+                        <input onKeyUp={this.myFunction} type="text" id="myInput" placeholder="Cari berdasarkan nama pengguna" />
                     </div>
                     <div className='d-flex flex-row'>
                     <p className="p-2 align-self-end">Pilih Role: </p>

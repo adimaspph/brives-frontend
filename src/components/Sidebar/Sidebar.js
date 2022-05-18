@@ -44,14 +44,14 @@ export default function Sidebar(props) {
 									<img src="/assets/account.svg" alt="" />
 									Pengguna
 								</Link>
-							) : (
-								""
-							)}
+							) : ('')}
 
-							<Link className="sidebar-menu-btn" to="/dashboard">
-								<img src="/assets/dashboard.svg" alt="" />
-								Dashboard
-							</Link>
+							{JSON.parse(localStorage.getItem("user")).role === 'MANAJEMEN' ? (
+								<Link className="sidebar-menu-btn" to="/dashboard">
+									<img src="/assets/dashboard.svg" alt="" />
+									Dashboard
+								</Link>
+							) : ('')}
 
 							{JSON.parse(localStorage.getItem("user")).role ===
 							"STAF_OPERASIONAL" ? (

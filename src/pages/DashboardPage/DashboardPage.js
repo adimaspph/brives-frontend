@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import APIConfig from "../../api/APIConfig";
-import { BarChart, Bar, Cell, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import './DashboardPage.css'
 
 class DashboardPage extends React.Component {
@@ -175,23 +175,27 @@ class DashboardPage extends React.Component {
     }
 
     handlePendapatanYear = async(e) => {
-        e.preventDefault(e); 
-        this.setState({ pendapatanYear: e.target.value });
-        this.hitAPIPendapatan();
-        
+        this.setState(({ pendapatanYear: e.target.value }), () => {
+            this.hitAPIPendapatan();
+        });
+
 
     }
 
     handleKelasTambahanYear = async(e) => {
         e.preventDefault();
-        this.setState({ tambahanYear: e.target.value });
-        this.hitKelasTambahan();
+        this.setState(({ tambahanYear: e.target.value }), () => {
+            this.hitAPIKelasTambahan();
+        });
+        
     }
 
     handleKelasPrivatYear = async(e) => {
         e.preventDefault();
-        this.setState({ privatYear: e.target.value });
-        this.hitKelasPrivat();
+        this.setState(({ privatYear: e.target.value }), () => {
+            this.hitAPIKelasPrivat();
+        });
+        
     }
 
     hitAPIPendapatan = async(e) => {
@@ -218,13 +222,13 @@ class DashboardPage extends React.Component {
 
     componentDidMount() {
         // otentikasi
-        // if (localStorage.getItem("user") != null) {
-        //     if(!(JSON.parse(localStorage.getItem("user")).role === 'MANAJEMEN')) {
-        //         window.location='/403';
-        //     }
-        // } else {
-        //     window.location='/login';
-        // }
+        if (localStorage.getItem("user") != null) {
+            if(!(JSON.parse(localStorage.getItem("user")).role === 'MANAJEMEN')) {
+                window.location='/403';
+            }
+        } else {
+            window.location='/login';
+        }
         this.hitAPIPendapatan();
         this.hitAPIKelasPrivat();
         this.hitAPIKelasTambahan();
@@ -240,18 +244,19 @@ class DashboardPage extends React.Component {
                         <div className='d-flex'>
                             <p className="p-2 align-self-end">Pilih Tahun: </p>
                             <select onChange={this.handlePendapatanYear} name="role" id="role" className='twobutton'>
-                                <option value="2022">2022</option>
+                                <option value="2020">2020</option>
+                                <option value="2021">2021</option>
+                                <option selected value="2022">2022</option>
                                 <option value="2023">2023</option>
                                 <option value="2024">2024</option>
                                 <option value="2025">2025</option>
-                                <option value="2026">2026</option>
                             </select>
                         </div>
                         <div className='chart-container'>
                         <ResponsiveContainer width="100%" aspect={3/1}>
                             <LineChart data={this.state.dataPendapatan}>
                                 <XAxis dataKey="name"/>
-                                <YAxis type="number" domain={[0, 'dataMax']} />
+                                <YAxis type="number" domain={[0, 'dataMax+1000']} />
                                 <Line type="monotone" dataKey="pendapatan" stroke='#fc182a'/>
                                 <Tooltip/>
                                 <CartesianGrid stroke='#E0DFDF' strokeDasharray="5 5"/>
@@ -267,18 +272,19 @@ class DashboardPage extends React.Component {
                             <div className='d-flex'>
                                 <p className="p-2 align-self-end">Pilih Tahun: </p>
                                 <select onChange={this.handleKelasPrivatYear} name="role" id="role" className='twobutton'>
-                                    <option value="2022">2022</option>
+                                    <option value="2020">2020</option>
+                                    <option value="2021">2021</option>
+                                    <option selected value="2022">2022</option>
                                     <option value="2023">2023</option>
                                     <option value="2024">2024</option>
                                     <option value="2025">2025</option>
-                                    <option value="2026">2026</option>
                                 </select>
                             </div>
                             <div className='chart-container'>
                             <ResponsiveContainer width="100%" aspect={3/1}>
                                 <BarChart data={this.state.dataKelasPrivat}>
                                     <XAxis dataKey="name"/>
-                                    <YAxis type="number" domain={[0, 'dataMax']} />
+                                    <YAxis type="number" domain={[0, 'dataMax   ']} />
                                     <Bar fill="#fc182a" type="monotone" dataKey="kelasPrivat" background={{ fill: '#eee' }}/>
                                     <Tooltip/>
                                 </BarChart>
@@ -293,11 +299,12 @@ class DashboardPage extends React.Component {
                             <div className='d-flex'>
                                 <p className="p-2 align-self-end">Pilih Tahun: </p>
                                 <select onChange={this.handleKelasTambahanYear} name="role" id="role" className='twobutton'>
-                                    <option value="2022">2022</option>
+                                    <option value="2020">2020</option>
+                                    <option value="2021">2021</option>
+                                    <option selected value="2022">2022</option>
                                     <option value="2023">2023</option>
                                     <option value="2024">2024</option>
                                     <option value="2025">2025</option>
-                                    <option value="2026">2026</option>
                                 </select>
                             </div>
                             <div className='chart-container'>

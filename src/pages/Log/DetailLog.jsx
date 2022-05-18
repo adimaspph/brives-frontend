@@ -12,6 +12,7 @@ class DetailLog extends Component {
         super(props)
         this.state = {
             log: [],
+            pesanan: [],
             idLog: this.props.match.params.idLog,
             catatan: '',
             catatanBaru: '',
@@ -29,6 +30,7 @@ class DetailLog extends Component {
             isClickedTidakHadir: false,
             successHadir: false,
             successTidakHadir: false,
+            idPesanan: 0,
 
         }
 
@@ -67,7 +69,6 @@ class DetailLog extends Component {
                 namaMapel: res.data.result.jadwal.mapel.namaMapel,
                 idJadwal: res.data.result.jadwal.idJadwal,
                 jenisKelas: res.data.result.jadwal.jenisKelas,
-
             });
 
             PesananService.getStaffByIdJadwal(this.state.idJadwal).then((res) => {
@@ -109,20 +110,37 @@ class DetailLog extends Component {
 
     }
 
-
     saveHadir = (event) => {
         event.preventDefault();
         let log = { catatan: this.state.catatanBaru, statusKehadiran: 'HADIR' };
         LogService.updateKehadiran(log, this.state.idLog).then(res => {
-            this.demoHadir(this.state.idLog);
+
+            LogService.getJadwalStatusUnique(this.state.idJadwal, 5).then(res => {
+                this.setState({
+                    log: res.data.result,
+                    idPesanan: res.data.result.idPesanan
+                });
+                let status = { idStatusPesanan: 6, jenisStatus: "Selesai" }
+                PesananService.updateStatusPesanan(status, this.state.idPesanan).then(res => {
+                    this.demoHadir(this.state.idLog);
+                });
+            });
         });
     }
 
     saveTidakHadir = (event) => {
-        event.preventDefault();
         let log = { catatan: this.state.catatanBaru, statusKehadiran: 'TIDAK_HADIR' };
         LogService.updateKehadiran(log, this.state.idLog).then(res => {
-            this.demoTidakHadir(this.state.idLog);
+            LogService.getJadwalStatusUnique(this.state.idJadwal, 5).then(res => {
+                this.setState({
+                    log: res.data.result,
+                    idPesanan: res.data.result.idPesanan
+                });
+                let status = { idStatusPesanan: 6, jenisStatus: "Selesai" }
+                PesananService.updateStatusPesanan(status, this.state.idPesanan).then(res => {
+                    this.demoTidakHadir(this.state.idLog);
+                });
+            });
         });
     }
 
@@ -160,6 +178,18 @@ class DetailLog extends Component {
                     show={this.state.isClickedHadir}
                     modalTitle="Verifikasi Kehadiran"
                 >
+                    <p>
+                        <b>Mata Pelajaran : </b>
+                        {this.state.namaMapel}
+                    </p>
+                    <p>
+                        <b>Tanggal : </b>
+                        {this.state.tanggal}
+                    </p>
+                    <p>
+                        <b>Waktu : </b>
+                        {this.state.waktuMulai} - {this.state.waktuSelesai} WIB
+                    </p>
                     <form action="" onSubmit={this.saveHadir}>
                         <div className='form-group'>
                             <label htmlFor="">Catatan (Opsional) </label>
@@ -179,6 +209,18 @@ class DetailLog extends Component {
                     show={this.state.isClickedTidakHadir}
                     modalTitle="Verifikasi Ketidakhadiran"
                 >
+                    <p>
+                        <b>Mata Pelajaran : </b>
+                        {this.state.namaMapel}
+                    </p>
+                    <p>
+                        <b>Tanggal : </b>
+                        {this.state.tanggal}
+                    </p>
+                    <p>
+                        <b>Waktu : </b>
+                        {this.state.waktuMulai} - {this.state.waktuSelesai} WIB
+                    </p>
                     <form action="" onSubmit={this.saveTidakHadir}>
                         <div className='form-group'>
 
