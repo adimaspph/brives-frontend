@@ -4,6 +4,7 @@ import LogService from '../../services/LogService';
 import PesananService from '../../services/PesananService';
 import { generatePath } from 'react-router-dom';
 import NeutralNotification from '../../components/Notification/NeutralNotification';
+import ErrorNotification from '../../components/Notification/ErrorNotification';
 import PenggunaService from '../../services/PenggunaService';
 
 
@@ -117,7 +118,7 @@ class ListLogPengajarTerpilih extends Component {
 
     }
 
-    saveHadir = (event) => {
+    saveHadir = async (event) => {
         event.preventDefault();
         let log = { catatan: this.state.catatanBaru, statusKehadiran: 'HADIR' };
         LogService.updateKehadiran(log, this.state.idLog).then(res => {
@@ -128,14 +129,18 @@ class ListLogPengajarTerpilih extends Component {
                     idPesanan: res.data.result.idPesanan
                 });
                 let status = { idStatusPesanan: 6, jenisStatus: "Selesai" }
-                PesananService.updateStatusPesanan(status, this.state.idPesanan).then(res => {
-                    this.demoHadir(this.state.idLog);
-                });
+                try {
+                    PesananService.updateStatusPesanan(status, this.state.idPesanan).then(res => {
+                        this.demoHadir(this.state.idLog);
+                    });
+                } catch (e) {
+                    await errorMessage()
+                }
             });
         });
     }
 
-    saveTidakHadir = (event) => {
+    saveTidakHadir = async (event) => {
         let log = { catatan: this.state.catatanBaru, statusKehadiran: 'TIDAK_HADIR' };
         LogService.updateKehadiran(log, this.state.idLog).then(res => {
             LogService.getJadwalStatusUnique(this.state.idJadwal, 5).then(res => {
@@ -143,10 +148,15 @@ class ListLogPengajarTerpilih extends Component {
                     log: res.data.result,
                     idPesanan: res.data.result.idPesanan
                 });
-                let status = { idStatusPesanan: 6, jenisStatus: "Selesai" }
-                PesananService.updateStatusPesanan(status, this.state.idPesanan).then(res => {
-                    this.demoTidakHadir(this.state.idLog);
-                });
+                try {
+                    let status = { idStatusPesanan: 6, jenisStatus: "Selesai" }
+                    PesananService.updateStatusPesanan(status, this.state.idPesanan).then(res => {
+                        this.demoTidakHadir(this.state.idLog);
+                    });
+
+                } catch (e) {
+                    await errorMessage()
+                }
             });
         });
     }
@@ -163,6 +173,12 @@ class ListLogPengajarTerpilih extends Component {
         await this.sleep(1500);
         window.location.reload();
 
+    }
+
+    async errorMessage() {
+        this.setState({ errorMessage: true });
+        await this.sleep(1500);
+        window.location.reload();
     }
 
 
@@ -326,6 +342,7 @@ class ListLogPengajarTerpilih extends Component {
 
                 {this.state.successHadir ? (<NeutralNotification text="Berhasil Memverifikasi Kehadiran!" />) : ("")}
                 {this.state.successTidakHadir ? (<NeutralNotification text="Berhasil Memverifikasi Ketidakhadiran" />) : ("")}
+                {this.state.errorMessage ? (<ErrorNotification text="Submisi Gagal!" />) : ("")}
 
             </div>
         );
