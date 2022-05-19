@@ -64,6 +64,7 @@ Deploy-to-digitalocean:
         # - scp -o StrictHostKeyChecking=no test.txt root@$SSH_IP:/testscp
         - ssh -o StrictHostKeyChecking=no root@$SSH_IP "rm -r /frontend/build"
         - scp -o StrictHostKeyChecking=no -r ./build root@$SSH_IP:/frontend
+        # scp -i briveskeyless.key -r ./build root@157.245.63.146:/frontend
         - ssh -o StrictHostKeyChecking=no root@$SSH_IP "systemctl restart nginx"
         # - scp -p22 test.txt root@$SSH_IP:/testscp
         # - scp -p22 -r build/* root@$SSH_IP:/frontend
