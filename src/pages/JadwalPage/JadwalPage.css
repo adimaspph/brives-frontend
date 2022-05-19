@@ -9,5 +9,13 @@
 }
 
 .waktu > select{
-    width: 100px;
+    width: 110px;
+}
+
+.button-tambah-jadwal-container {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 20px;
+    margin-bottom: 16px;
 }

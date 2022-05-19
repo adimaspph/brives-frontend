@@ -1,24 +1,81 @@
 import React, { useState, useEffect } from "react";
+import { s3Client } from "../api/s3Client";
+import {
+	PutObjectCommand,
+	ListObjectsCommand,
+	ListBucketsCommand,
+} from "@aws-sdk/client-s3";
 import Button from "../components/Button/Button";
 import NeutralNotification from "../components/Notification/NeutralNotification";
 
 function Design() {
 	const [nama, setNama] = useState(["adimas", "kari", "salman"]);
+	const [file, setFile] = useState();
 
 	const ubahNama = () => {
 		setNama(nama.filter(word => word.length > 4));
 	}
 
+	const bucketParams = {
+		Bucket: "brives",
+		Key: "test",
+		Body: file,
+	};
+
+	const uploadFile =  async (e) => {
+		e.preventDefault();
+		// try {
+		// 	const data = await s3Client.send(
+		// 		new PutObjectCommand(bucketParams)
+		// 	);
+		// 	console.log(
+		// 		"Successfully uploaded object: " +
+		// 			bucketParams.Bucket +
+		// 			"/" +
+		// 			bucketParams.Key
+		// 	);
+		// 	return data;
+		// } catch (err) {
+		// 	console.log("Error", err);
+		// }
+
+		try {
+			const data = await s3Client.send(
+				new ListObjectsCommand({ Bucket: "brives" })
+			);
+			console.log("Success", data);
+			return data;
+		} catch (err) {
+			console.log("Error", err);
+		}
+	};
+
+	useEffect(() => {
+		console.log(file);
+	}, []);
+
+
 	return (
 		<div>
 			<h2 onClick={ubahNama}>BRIVES</h2>
+			<form onSubmit={(e) => uploadFile(e)}>
+				<input
+					type="file"
+					placeholder="masukan"
+					value={file}
+					accept="image/*"
+					onChange={(e) => setFile(e.target.value)}
+				/>
+				<button
+					className="button button-primary"
+					type="submit"
+				>
+					Submit
+				</button>
+			</form>
 
 			<container>
-				<a
-					className="btn btn-xl btn-primary"
-					
-					href="/"
-				>
+				<a className="btn btn-xl btn-primary" href="/">
 					XLarge Button {nama}
 				</a>
 				<br />

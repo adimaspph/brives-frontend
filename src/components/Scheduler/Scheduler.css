@@ -137,6 +137,12 @@
 	border-left: 3px solid #1baa56;
 }
 
+.scheduler .schedule-tambahan {
+	background: rgba(27, 94, 170, 0.1);
+	
+	border-left: 3px solid #1b41aa;
+}
+
 @media screen and (max-width: 769px) {
 	.scheduler-header span:nth-child(1) {
 		font-family: monospace;
