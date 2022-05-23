@@ -221,7 +221,6 @@ class DashboardPage extends React.Component {
 
 
     componentDidMount() {
-        // otentikasi
         if (localStorage.getItem("user") != null) {
             if(!(JSON.parse(localStorage.getItem("user")).role === 'MANAJEMEN')) {
                 window.location='/403';

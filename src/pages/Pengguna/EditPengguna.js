@@ -4,7 +4,6 @@ import { faEye } from "@fortawesome/free-solid-svg-icons";
 import ErrorNotification from "../../components/Notification/ErrorNotification";
 import NeutralNotification from '../../components/Notification/NeutralNotification';
 import APIConfig from "../../api/APIConfig";
-// import "./EditAkunPage.css";
 import { Link } from 'react-router-dom';
 
 class EditPengguna extends React.Component {
@@ -80,7 +79,6 @@ class EditPengguna extends React.Component {
 
 
     componentDidMount() {
-        // authorization
         if (localStorage.getItem("user") != null) {
             if(!(JSON.parse(localStorage.getItem("user")).role === 'ADMIN')) {
                 window.location='/403';
@@ -89,7 +87,6 @@ class EditPengguna extends React.Component {
             window.location='/login';
         }
 
-        // hit api mapel
         APIConfig.get("/mapel/")
         .then((response) => {
             this.setState({ allMapel : response.data });
