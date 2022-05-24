@@ -1,7 +1,7 @@
 import { S3 } from "@aws-sdk/client-s3";
 
 const region = "sgp1";
-const bucketName = "";
+const bucketName = "brives";
 const accessKeyId = "";
 const secretAccessKey= "";
 var spacesEndpoint = "https://sgp1.digitaloceanspaces.com";

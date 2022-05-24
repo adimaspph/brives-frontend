@@ -10,7 +10,7 @@ class DashboardPage extends React.Component {
             pendapatanYear: "2022",
             privatYear: "2022",
             tambahanYear: "2022",
-            maxPendapatan: [0,0],
+            maxPendapatan: 999,
             maxPrivat: [],
             maxTambahan: [],
             dataPendapatan: [
@@ -201,8 +201,17 @@ class DashboardPage extends React.Component {
     hitAPIPendapatan = async(e) => {
         APIConfig.get("/pesanan/allTransaction/"+this.state.pendapatanYear)
         .then((response) => {
+            console.log(response.data.result);
+            console.log("tost1");
+            console.log(this.state.dataPendapatan);
             this.setState({ dataPendapatan: response.data.result });
+            this.dataPendapatan.forEach(element => {
+                
+                console.log(element);
+            });
 		});
+        console.log(this.dataPendapatan);
+        
     }
 
     hitAPIKelasTambahan = async(e) => {
@@ -256,7 +265,7 @@ class DashboardPage extends React.Component {
                         <ResponsiveContainer width="100%" aspect={3/1}>
                             <LineChart data={this.state.dataPendapatan}>
                                 <XAxis dataKey="name"/>
-                                <YAxis type="number" domain={[0, 'dataMax+1000']} />
+                                <YAxis type="number" domain={[0, "datamax"]} />
                                 <Line type="monotone" dataKey="pendapatan" stroke='#fc182a'/>
                                 <Tooltip/>
                                 <CartesianGrid stroke='#E0DFDF' strokeDasharray="5 5"/>
