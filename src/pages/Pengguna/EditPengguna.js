@@ -71,7 +71,7 @@ class EditPengguna extends React.Component {
                         window.location.href = '/pengguna';
                     }
                     .bind(this),
-                    2000
+                    1500
                 );
             }
 		});
@@ -186,7 +186,7 @@ class EditPengguna extends React.Component {
                         <div className="akun-card">
                             <h3 className='judul-form'>Formulir Edit Pengguna</h3>
                             {this.state.hasError&&this.state.hasSubmit? (<ErrorNotification text={this.state.errMessage}/>) : ("")}
-                            {!this.state.hasError&&this.state.hasSubmit? (<NeutralNotification text="Akun staff berhasil diubah!"/>) : ("")}
+                            {!this.state.hasError&&this.state.hasSubmit? (<NeutralNotification text="Akun Anda berhasil diubah!"/>) : ("")}
                             <div>
                                 <form onSubmit={this.handleChange}>
                                     <div>

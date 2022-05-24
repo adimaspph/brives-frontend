@@ -67,7 +67,7 @@ function CreateAkunPage() {
                         window.location.href = '/pengguna'; 
                     }
                     .bind(this),
-                    2000
+                    1500
                 );
                 
             }
@@ -76,7 +76,6 @@ function CreateAkunPage() {
 
 
     useEffect(() => {
-        // otentikasi
         if (localStorage.getItem("user") != null) {
             if(!(JSON.parse(localStorage.getItem("user")).role === 'ADMIN')) {
                 window.location='/403';
@@ -85,7 +84,6 @@ function CreateAkunPage() {
             window.location='/login';
         }
 
-        // hit api mapel
         APIConfig.get("/mapel/")
         .then((response) => {
             setAllMapel(response.data);

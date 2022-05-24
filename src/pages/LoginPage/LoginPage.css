@@ -81,7 +81,6 @@ label {
 a { color: inherit; } 
 
 .tes {
-/* width: 100%; */
 display: flex;
 justify-content: center;
 }
@@ -90,8 +89,6 @@ justify-content: center;
 font-weight: normal;
 }
 
-
-/* breadcrumb */
 ul.breadcrumb {
 padding: 10px 16px;
 list-style: none;

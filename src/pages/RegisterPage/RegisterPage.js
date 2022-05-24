@@ -106,7 +106,7 @@ function RegisterPage() {
                         window.location.href = '/login';
                     }
                     .bind(this),
-                    2000
+                    1500
                 );
             }
 		});
