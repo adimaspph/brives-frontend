@@ -103,7 +103,7 @@ function RegisterPage() {
             } else {
                 setTimeout(
                     function() {
-                        // window.location.href = '/login';
+                        window.location.href = '/login';
                     }
                     .bind(this),
                     2000
