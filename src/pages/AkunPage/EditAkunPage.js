@@ -103,7 +103,7 @@ class EditAkunPage extends React.Component {
                     window.location.href = '/akun/profil';
                 }
                 .bind(this),
-                2000
+                1500
             );
 
             
@@ -116,9 +116,9 @@ class EditAkunPage extends React.Component {
     render() {
         return (
             <div className="">
-                {this.state.hasError&&this.state.hasSubmit? (<ErrorNotification text="Akun gagal diubah, silahkan coba lagi!"/>) : ("")}
-                {!this.state.hasError&&this.state.hasSubmit? (<NeutralNotification text="Akun Anda berhasil diubah!"/>) : ("")}
                 <Navbar></Navbar>
+                {this.state.hasError && this.state.hasSubmit ? (<ErrorNotification text="Terdapat kesalahan, silahkan masukkan kembali" />) : ("")}
+                {!this.state.hasError && this.state.hasSubmit ? (<NeutralNotification text="Akun Anda berhasil terubah" />) : ("")}
                 <div className="page-container">
                     <div className='d-flex flex justify-content-center'>
                         <h1>Edit Profil Saya</h1>

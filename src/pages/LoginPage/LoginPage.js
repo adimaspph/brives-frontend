@@ -37,7 +37,7 @@ function LoginPage() {
                             window.location = '/';
                         }
                         .bind(this),
-                        2000
+                        1500
                     );
                 } else {
                     setTimeout(
@@ -45,7 +45,7 @@ function LoginPage() {
                             window.location = "/beranda";
                         }
                         .bind(this),
-                        2000
+                        1500
                     );
                 }
                 
