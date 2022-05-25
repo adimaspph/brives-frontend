@@ -213,7 +213,12 @@ class DetailRiwayatPesanan extends Component {
                                     </tr>
                                     <tr>
                                         <td>Bukti Bayar</td>
-                                        <td>{this.state.pesanan.buktiBayar}</td>
+                                        <td> 
+                                            <img 
+                                            src={this.state.pesanan.buktiBayar}
+                                            />
+
+                                        </td>
                                     </tr>
                                 </table>
                                 <hr />

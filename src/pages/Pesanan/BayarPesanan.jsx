@@ -4,23 +4,16 @@ import PesananService from "../../services/PesananService";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import "./RiwayatPesanan.css";
-import {
-	BrowserRouter as Router,
-	Switch,
-	Route,
-	useParams,
-	Link,
-} from "react-router-dom";
-import NeutralNotification from '../../components/Notification/NeutralNotification';
-
+import { BrowserRouter as Router, Switch, Route, useParams, Link } from "react-router-dom";
+import NeutralNotification from "../../components/Notification/NeutralNotification";
 
 export default function BayarPesananComponent(props) {
   const [pesanan, setPesanan] = useState({});
-  const [link, setLink] = useState("");
+  const [file, setFile] = useState("");
   const [metode, setMetode] = useState("Bank BCA");
   const [idPesanan, setIdPesanan] = useState(props.match.params.idPesanan);
   const [isNotifSubmit, setIsNotifSubmit] = useState(false);
-  const [status, setStatus] = useState('');
+  const [status, setStatus] = useState("");
 
   useEffect(async () => {
     await getPesananData();
@@ -32,7 +25,7 @@ export default function BayarPesananComponent(props) {
       const date = new Date(data?.result?.waktuDibuat);
       date.setHours(date.getHours() + 1);
       data.result.waktuDibuat = date.toLocaleString();
-      setStatus(data.result.status.idStatusPesanan)
+      setStatus(data.result.status.idStatusPesanan);
 
       setPesanan(data.result);
     } catch (err) {
@@ -56,7 +49,11 @@ export default function BayarPesananComponent(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    let updateMapel = { buktiBayar: link, metodePembayaran: metode }
+    const updateMapel = new FormData();
+    updateMapel.append("file", file, file.name);
+    updateMapel.append("metodePembayaran", metode);
+    // let updateMapel = { buktiBayar: file, metodePembayaran: metode };
+    console.log(updateMapel);
     console.log(idPesanan);
     PesananService.addPembayaran(updateMapel, idPesanan).then(res => {
       let updateStatus = { idStatusPesanan: 2, jenisStatus: "Menunggu Verifikasi" }
@@ -64,17 +61,15 @@ export default function BayarPesananComponent(props) {
         demoSubmit();
       });
     });
-
-  }
+  };
   const demoSubmit = async () => {
     setIsNotifSubmit(true);
     await sleep(1500);
     window.location = "/riwayat-pesanan/" + idPesanan;
-
-  }
+  };
 
   function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+    return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
   const bayarNanti = () => {
@@ -83,13 +78,12 @@ export default function BayarPesananComponent(props) {
 
   const handleMetodePembayaranChange = (event) => {
     setMetode(event.target.value);
-  }
+  };
 
   return (
     <>
-
       <div className="">
-        {isNotifSubmit ? (<NeutralNotification text="Pembayaran Berhasil Dibuat!" />) : ("")}
+        {isNotifSubmit ? <NeutralNotification text="Pembayaran Berhasil Dibuat!" /> : ""}
 
         <div className="d-flex flex-column page-container">
           <Navbar />
@@ -112,8 +106,8 @@ export default function BayarPesananComponent(props) {
                       <td>
                         <p>Maksimal Pembayaran: </p>
                         <p>
-                          Catatan: Jika Anda tidak membayar dalam kurun waktu 60 menit setelah pesanan
-                          dibuat, maka admin BTA berhak untuk membatalkan pesanan Anda
+                          Catatan: Jika Anda tidak membayar dalam kurun waktu 60 menit setelah
+                          pesanan dibuat, maka admin BTA berhak untuk membatalkan pesanan Anda
                         </p>
                       </td>
                       <td>
@@ -122,58 +116,65 @@ export default function BayarPesananComponent(props) {
                     </tr>
                     {status === 2 ? (
                       <tr>
-                        <td> Link Google Drive Bukti Pembayaran</td>
+                        <td> Link Bukti Pembayaran</td>
                         <td>{pesanan?.buktiBayar}</td>
                       </tr>
-                      
-                    ) : ('')}
+                    ) : (
+                      ""
+                    )}
                     {status === 2 ? (
                       <tr>
                         <td> Metode Pembayaran</td>
                         <td>{pesanan?.metodePembayaran}</td>
                       </tr>
-                      
-                    ) : ('')}
-
+                    ) : (
+                      ""
+                    )}
                   </table>
 
                   {/* form */}
 
                   <form onSubmit={handleSubmit}>
-                    <div className='form-group'>
-                      <label htmlFor="">Pilih Metode Pembayaran <span className='star'>*</span> </label>
-                      <select onChange={handleMetodePembayaranChange} name="role" id="role" className='twobutton p-2'>
+                    <div className="form-group">
+                      <label htmlFor="">
+                        Pilih Metode Pembayaran <span className="star">*</span>{" "}
+                      </label>
+                      <select
+                        onChange={handleMetodePembayaranChange}
+                        name="role"
+                        id="role"
+                        className="twobutton p-2"
+                      >
                         <option value="Bank BCA">Bank BCA - 31730571006</option>
                         <option value="Bank Mandiri">Bank Mandiri - 60029711177</option>
                       </select>
 
                       <br></br>
-                      <label htmlFor="">Masukkan Link Google Drive <span className='star'>*</span> </label>
-                      <input type="text" className='form-control'
-                        value={link} onChange={(e) => setLink(e.target.value)} required />
-
+                      <label htmlFor="">
+                        Masukkan Bukti Bayar <span className="star">*</span>{" "}
+                      </label>
+                      <input
+                        type="file"
+                        className="form-control"
+                        onChange={(e) => setFile(e.target.files[0])}
+                        required
+                      />
                     </div>
                     <hr />
-                    <div className='modalButtonContainer'>
+                    <div className="modalButtonContainer">
                       <div className="button button-outline" onClick={bayarNanti}>
                         Bayar Nanti
                       </div>
-                      <button type="submit" className="button button-primary">Simpan Pembayaran</button>
+                      <button type="submit" className="button button-primary">
+                        Simpan Pembayaran
+                      </button>
                     </div>
                   </form>
-
-                  
-
-                  
-
-
                 </div>
               </div>
             </div>
           </div>
-
         </div>
-
       </div>
       <Footer />
     </>
