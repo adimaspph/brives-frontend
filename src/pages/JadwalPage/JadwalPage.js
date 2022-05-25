@@ -44,10 +44,10 @@ function JadwalPage() {
 
 	const getMapel = () => {
 		// const result = []
-		APIConfig.get("/mapel/")
+		APIConfig.get("/api/v1/user/" + username)
 			.then((response) => {
 				// result = response.data.result;
-				setListMapel(response.data.result);
+				setListMapel(response.data.result.staff.listMapel);
 			})
 			.catch((error) => {
 				console.log(error);

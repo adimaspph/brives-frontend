@@ -7,7 +7,7 @@ import Footer from "../../components/Footer/Footer";
 
 export default function PesanKelasPage() {
 	const [listJenjang, setListJenjang] = useState([]);
-	const [selectedJenjang, setSelectedJenjang] = useState("all");
+	const [selectedJenjang, setSelectedJenjang] = useState(1);
 	const [listMapel, setListMapel] = useState([]);
 	
 	const setJejang = (idJenjang) => {
@@ -16,16 +16,16 @@ export default function PesanKelasPage() {
 	};
 
 	const getMapel = (idJenjang) => {
-		if (idJenjang === "all") {
-			APIConfig.get("/mapel/")
-				.then((response) => {
-					// console.log(response.data.result);
-					setListMapel(response.data.result);
-				})
-				.catch((error) => {
-					console.log(error.response);
-				});
-		} else {
+		// if (idJenjang === "all") {
+		// 	APIConfig.get("/mapel/")
+		// 		.then((response) => {
+		// 			// console.log(response.data.result);
+		// 			setListMapel(response.data.result);
+		// 		})
+		// 		.catch((error) => {
+		// 			console.log(error.response);
+		// 		});
+		// } else {
 			APIConfig.get("/mapel/jenjang/" + idJenjang)
 			.then((response) => {
 				// console.log(response.data.result);
@@ -34,7 +34,7 @@ export default function PesanKelasPage() {
 			.catch((error) => {
 				console.log(error.response);
 			});
-		}
+		// }
 	};
 
 	const getJenjang = () => {
@@ -50,7 +50,7 @@ export default function PesanKelasPage() {
 
 	useEffect(() => {
 		getJenjang();
-		setJejang("all");
+		setJejang(1);
 	}, []);
 
 
@@ -61,7 +61,7 @@ export default function PesanKelasPage() {
 				<h1 className="text-center title">Pilih Mata Pelajaran</h1>
 
 				<div className="jenjang-select">
-					<span
+					{/* <span
 						className={
 							selectedJenjang === "all"
 								? "jenjang-btn jenjang-selected"
@@ -70,7 +70,7 @@ export default function PesanKelasPage() {
 						onClick={() => setJejang("all")}
 					>
 						Semua
-					</span>
+					</span> */}
 					{listJenjang.map((jenjang, key) => (
 						<span
 							key={key}
@@ -93,11 +93,11 @@ export default function PesanKelasPage() {
 								{mapel.namaMapel}
 							</span>
 
-							<div className="jenjang-mapel">
+							{/* <div className="jenjang-mapel">
 								{mapel.listJenjang.map((jenjang, key) => (
 									<span key={key}>{jenjang.namaJenjang}</span>
 								))}
-							</div>
+							</div> */}
 							<Link
 								className="button button-primary btn-mapel"
 								to={`/pesan-kelas/` + mapel.idMapel}
