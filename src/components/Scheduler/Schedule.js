@@ -121,8 +121,25 @@ export default function Schedule({ date, hari, username }) {
 						{selectedJadwal.jadwal.waktuMulai} -{" "}
 						{selectedJadwal.jadwal.waktuSelesai} WIB
 					</p>
-					<label>Status :</label>
-					<p>{selectedJadwal.statusPesanan}</p>
+					
+					{selectedJadwal.jadwal.jenisKelas === "PRIVATE" ?
+						<div>
+							<label>Status :</label>
+							<p>{selectedJadwal.statusPesanan}</p>
+
+							<label>Materi :</label>
+							<p>
+								{selectedJadwal.materi === null ? (
+									"Belum terserdia"
+								) : (
+									<span>{selectedJadwal.materi}</span>
+								)}
+							</p>
+						</div>
+					: ""
+					}
+					
+
 					<label>Link Meeting :</label>
 					<p>
 						{selectedJadwal.jadwal.linkZoom === null ? (
@@ -135,15 +152,6 @@ export default function Schedule({ date, hari, username }) {
 							>
 								{selectedJadwal.jadwal.linkZoom}
 							</a>
-						)}
-					</p>
-
-					<label>Materi :</label>
-					<p>
-						{selectedJadwal.materi === null ? (
-							"Belum terserdia"
-						) : (
-							<span>{selectedJadwal.materi}</span>
 						)}
 					</p>
 				</div>
@@ -170,6 +178,10 @@ export default function Schedule({ date, hari, username }) {
 				<p>
 					<b>Mata Pelajaran : </b>
 					{jadwal.mapel.namaMapel}
+				</p>
+				<p>
+					<b>Jenis Kelas : </b>
+					{jadwal.jenisKelas}
 				</p>
 				<p>
 					<b>Tanggal : </b>
@@ -206,7 +218,8 @@ export default function Schedule({ date, hari, username }) {
 						Kembali
 					</div>
 
-					{selectedJadwal != null && selectedJadwal.statusPesanan === "Terpesan" ? (
+					{selectedJadwal != null &&
+					selectedJadwal.statusPesanan === "Terpesan" ? (
 						""
 					) : (
 						<div
@@ -227,9 +240,11 @@ export default function Schedule({ date, hari, username }) {
 				<div
 					key={key}
 					className={
-						jadwal.statusPesanan === "Terpesan"
-							? "schedule schedule-booked"
-							: "schedule"
+						jadwal.jadwal.jenisKelas === "PRIVATE"
+							? jadwal.statusPesanan === "Terpesan"
+								? "schedule schedule-booked"
+								: "schedule"
+							: "schedule schedule-tambahan"
 					}
 					style={{
 						gridRowStart: timeToRow(jadwal.jadwal.waktuMulai),

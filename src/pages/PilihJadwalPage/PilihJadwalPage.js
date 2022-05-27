@@ -12,6 +12,7 @@ import APIConfig from "../../api/APIConfig";
 import Modal from "../../components/Modal/Modal";
 import NeutralNotification from "../../components/Notification/NeutralNotification";
 import ErrorNotification from "../../components/Notification/ErrorNotification";
+import Footer from "../../components/Footer/Footer";
 
 export default function PilihJadwalPage() {
 	const [today, setToday] = useState(new Date());
@@ -28,10 +29,12 @@ export default function PilihJadwalPage() {
 	const [selectedHari, setSelectedHari] = useState(day1);
 	const [listJadwal, setListJadwal] = useState([]);
 	const [modal, setModal] = useState(false);
+	const [modalPesananTerbuat, setModalPesananTerbuat] = useState(false);
 	const [selectedJadwal, setSelectedJadwal] = useState(null);
 	const [materi, setMateri] = useState("");
 	const [successNotif, setSuccessNotif] = useState(false);
 	const [hasError, setHasError] = useState(false);
+	const [pesananTerbuat, setPesananTerbuat] = useState(null);
 	
 	const namaHari = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
 	const monthNames = [
@@ -127,28 +130,33 @@ export default function PilihJadwalPage() {
 	const handleCancel = (event) => {
 		event.preventDefault();
 		setModal(false);
+		setMateri("");
 	};
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 		const min = 1;
 		const max = 100;
-		const rand = min + Math.random() * (max - min);
+		// const rand = min + Math.random() * (max - min);
 		const body = {
 			materi: materi,
-			nominal: listJadwal[selectedJadwal].tarif + rand,
+			// nominal: listJadwal[selectedJadwal].tarif + rand,
+			nominal: listJadwal[selectedJadwal].tarif,
 			idJadwal: listJadwal[selectedJadwal].jadwal.idJadwal,
 		};
 		setHasError(false);
 		setSuccessNotif(false);
 		APIConfig.post("/pesanan", body)
 			.then((response) => {
-				// console.log(response.data.result);
+				console.log(response.data.result);
 				setModal(false);
 				setSuccessNotif(true);
-				const timer = setTimeout(() => {
-					window.location = "/riwayat-pesanan";
-				}, 1000);
+				setPesananTerbuat(response.data.result);
+				setModalPesananTerbuat(true);
+				setMateri("");
+				// const timer = setTimeout(() => {
+				// 	window.location = "/riwayat-pesanan";
+				// }, 1000);
 				
 			})
 			.catch((error) => {
@@ -156,6 +164,11 @@ export default function PilihJadwalPage() {
 				setHasError(true);
 			});
 		setModal(false);
+	};
+
+	const handleToPembayaran = (event) => {
+		event.preventDefault();
+		window.location = "/bayar-pesanan/" + pesananTerbuat.idPesanan;
 	};
 
 	const getDesc = () => {
@@ -175,6 +188,37 @@ export default function PilihJadwalPage() {
 					</p>
 					<label>Waktu :</label>
 					<p>{listJadwal[selectedJadwal].jadwal.waktuMulai} - {listJadwal[selectedJadwal].jadwal.waktuSelesai} WIB</p>
+				</div>
+			);
+		} 
+	};
+
+	const getDescPesananTerbuat = () => {
+		if (pesananTerbuat != null) {
+			// console.log(selectedJadwal);
+			return (
+				<div>
+					<label>ID Pesanan :</label>
+					<p>{pesananTerbuat.idPesanan}</p>
+					<label>Tanggal Pesanan Terbuat :</label>
+					<p>{dateConvert(pesananTerbuat.waktuDibuat)}</p>
+					<label>Mata Pelajaran :</label>
+					<p>{pesananTerbuat.jadwal.mapel.namaMapel}</p>
+					<label>Pengajar :</label>
+					<p>{listJadwal[selectedJadwal].nama}</p>
+					<label>Tanggal Bimbel :</label>
+					<p>{dateConvert(pesananTerbuat.jadwal.tanggal)}</p>
+					<label>Waktu Bimbel :</label>
+					<p>
+						{pesananTerbuat.jadwal.waktuMulai} -{" "}
+						{pesananTerbuat.jadwal.waktuSelesai}
+					</p>
+					<label>Materi Pelajaran :</label>
+					<p>{pesananTerbuat.materi}</p>
+					<label>Nominal Pembayaran :</label>
+					<p>{curConvert(pesananTerbuat.nominal)}</p>
+					<label>Status Pesanan :</label>
+					<p>{pesananTerbuat.status.jenisStatus}</p>
 				</div>
 			);
 		} 
@@ -215,149 +259,183 @@ export default function PilihJadwalPage() {
 	}
 
 	return (
-		<div>
+		<React.Fragment>
 			<Navbar />
-			
-			{hasError ? <ErrorNotification text="Kelas gagal dipesan" /> : ""}
-			{successNotif ? (
-				<NeutralNotification text="Kelas berhasil dipesan" />
-			) : (
-				""
-			)}
-			<h1 className="title text-center">Pilih Jadwal</h1>
+			<div className="page-container">
+				{hasError ? (
+					<ErrorNotification text="Kelas gagal dipesan" />
+				) : (
+					""
+				)}
+				{successNotif ? (
+					<NeutralNotification text="Kelas berhasil dipesan" />
+				) : (
+					""
+				)}
+				<h1 className="title text-center">Pilih Jadwal</h1>
 
-			<div className="center ubah-mapel-container">
-				<span>{mapel.namaMapel}</span>
-				<Link className="button button-outline" to="/pesan-kelas">
-					Ubah Mapel
-				</Link>
-			</div>
-			<div className="pilih-hari-container center">
-				<div className={compareDate() === day1.toISOString().split('T')[0] ? "hidden" : "button"} onClick={prevWeek}>
-					<svg
-						width="24"
-						height="24"
-						viewBox="0 0 24 24"
-						fill="none"
-						xmlns="http://www.w3.org/2000/svg"
-					>
-						<path
-							d="M11.67 3.86961L9.9 2.09961L0 11.9996L9.9 21.8996L11.67 20.1296L3.54 11.9996L11.67 3.86961Z"
-							fill="#404040"
-						/>
-					</svg>
+				<div className="center ubah-mapel-container">
+					<span>{mapel.namaMapel}</span>
+					<Link className="button button-outline" to="/pesan-kelas">
+						Ubah Mapel
+					</Link>
 				</div>
-
-				<div className="container-hari">
-					{listHari.map((hari, key) => (
-						<div
-							key={key}
-							// className="button-hari hari-selected"
-							className={
-								selectedHari.getDate() === hari.getDate()
-									? "button-hari hari-selected"
-									: "button-hari"
-							}
-							onClick={() => handleSelectHari(hari)}
-						>
-							<span>{namaHari[hari.getDay()]}</span>
-							<span>
-								<b>
-									{hari.getDate() +
-										" " +
-										monthNames[hari.getMonth()]}
-								</b>
-							</span>
-						</div>
-					))}
-				</div>
-
-				<div className="button" >
-					<svg
-						onClick={nextWeek}
-						width="24"
-						height="24"
-						viewBox="0 0 24 24"
-						fill="none"
-						xmlns="http://www.w3.org/2000/svg"
-					>
-						<path
-							d="M12.33 20.1304L14.1 21.9004L24 12.0004L14.1 2.10039L12.33 3.87039L20.46 12.0004L12.33 20.1304Z"
-							fill="#404040"
-						/>
-					</svg>
-				</div>
-			</div>
-
-			<div className="jadwal-tersedia">
-				{/* {listJadwal.} */}
-				{listJadwal.map((jadwal, key) => (
+				<div className="pilih-hari-container center">
 					<div
-						className="jadwal-tersedia-container"
-						key={key}
-						onClick={(e) => handlePilih(e, key)}
+						className={
+							compareDate() === day1.toISOString().split("T")[0]
+								? "hidden"
+								: "button"
+						}
+						onClick={prevWeek}
 					>
-						<div className="jadwal-tersedia-item">
-							<img
-								src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS24XFw4cHA5l7ego7xF2V5fIaUfLajZgZKSA&usqp=CAU"
-								width={50}
-								height={50}
+						<svg
+							width="24"
+							height="24"
+							viewBox="0 0 24 24"
+							fill="none"
+							xmlns="http://www.w3.org/2000/svg"
+						>
+							<path
+								d="M11.67 3.86961L9.9 2.09961L0 11.9996L9.9 21.8996L11.67 20.1296L3.54 11.9996L11.67 3.86961Z"
+								fill="#404040"
 							/>
-							<div className="jadwal-tersedia-item-left">
-								<label>{jadwal.nama}</label>
-								<span>{curConvert(jadwal.tarif)}</span>
-							</div>
-						</div>
-						<div className="jadwal-tersedia-item">
-							<div className="jadwal-tersedia-item-right">
-								<label>
-									{jadwal.jadwal.waktuMulai} -{" "}
-									{jadwal.jadwal.waktuSelesai}
-								</label>
+						</svg>
+					</div>
+
+					<div className="container-hari">
+						{listHari.map((hari, key) => (
+							<div
+								key={key}
+								// className="button-hari hari-selected"
+								className={
+									selectedHari.getDate() === hari.getDate()
+										? "button-hari hari-selected"
+										: "button-hari"
+								}
+								onClick={() => handleSelectHari(hari)}
+							>
+								<span>{namaHari[hari.getDay()]}</span>
 								<span>
-									{dateConvert(jadwal.jadwal.tanggal)}
+									<b>
+										{hari.getDate() +
+											" " +
+											monthNames[hari.getMonth()]}
+									</b>
 								</span>
 							</div>
-							{/* <button className="button button-primary">
+						))}
+					</div>
+
+					<div className="button">
+						<svg
+							onClick={nextWeek}
+							width="24"
+							height="24"
+							viewBox="0 0 24 24"
+							fill="none"
+							xmlns="http://www.w3.org/2000/svg"
+						>
+							<path
+								d="M12.33 20.1304L14.1 21.9004L24 12.0004L14.1 2.10039L12.33 3.87039L20.46 12.0004L12.33 20.1304Z"
+								fill="#404040"
+							/>
+						</svg>
+					</div>
+				</div>
+
+				<div className="jadwal-tersedia">
+					{listJadwal.length === 0 ? (
+						<div>Tidak ada jadwal yang tersedia</div>
+					) : (
+						""
+					)}
+					{listJadwal.map((jadwal, key) => (
+						<div
+							className="jadwal-tersedia-container"
+							key={key}
+							onClick={(e) => handlePilih(e, key)}
+						>
+							<div className="jadwal-tersedia-item">
+								<img
+									src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS24XFw4cHA5l7ego7xF2V5fIaUfLajZgZKSA&usqp=CAU"
+									width={50}
+									height={50}
+								/>
+								<div className="jadwal-tersedia-item-left">
+									<label>{jadwal.nama}</label>
+									<span>{curConvert(jadwal.tarif)}</span>
+								</div>
+							</div>
+							<div className="jadwal-tersedia-item">
+								<div className="jadwal-tersedia-item-right">
+									<label>
+										{jadwal.jadwal.waktuMulai} -{" "}
+										{jadwal.jadwal.waktuSelesai}
+									</label>
+									<span>
+										{dateConvert(jadwal.jadwal.tanggal)}
+									</span>
+								</div>
+								{/* <button className="button button-primary">
 								Pesan
 							</button> */}
-						</div>
-					</div>
-				))}
-
-				<Modal
-					show={modal}
-					handleCloseModal={handleCancel}
-					modalTitle="Tambah Jadwal"
-				>
-					<form onSubmit={handleSubmit}>
-						{getDesc()}
-						<label>Materi yang ingin diajarkan :</label>
-						<br />
-						<textarea
-							className="form-control"
-							type="textarea"
-							onChange={(e) => setMateri(e.target.value)}
-							value={materi}
-							required
-						/>
-						<div className="modalButtonContainer">
-							<div
-								className="button button-outline"
-								onClick={handleCancel}
-							>
-								Close
 							</div>
-							<button
-								type="submit"
-								className="button button-primary"
-							>
-								Pesan
-							</button>
 						</div>
-					</form>
-				</Modal>
+					))}
+
+					<Modal
+						show={modal}
+						handleCloseModal={handleCancel}
+						modalTitle="Tambah Jadwal"
+					>
+						<form onSubmit={handleSubmit}>
+							{getDesc()}
+							<label>Materi yang ingin diajarkan :</label>
+							<br />
+							<textarea
+								className="form-control"
+								type="textarea"
+								onChange={(e) => setMateri(e.target.value)}
+								value={materi}
+								required
+							/>
+							<div className="modalButtonContainer">
+								<div
+									className="button button-outline"
+									onClick={handleCancel}
+								>
+									Close
+								</div>
+								<button
+									type="submit"
+									className="button button-primary"
+								>
+									Pesan
+								</button>
+							</div>
+						</form>
+					</Modal>
+
+					<Modal
+						show={modalPesananTerbuat}
+						modalTitle="Detail Pesanan"
+					>
+						<form onSubmit={handleToPembayaran}>
+							{getDescPesananTerbuat()}
+							<div className="modalButtonContainer">
+								<button
+									type="submit"
+									className="button button-primary"
+								>
+									Lanjut ke Pembayaran
+								</button>
+							</div>
+						</form>
+					</Modal>
+				</div>
 			</div>
-		</div>
+			<Footer />
+		</React.Fragment>
 	);
 }

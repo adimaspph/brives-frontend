@@ -18,6 +18,7 @@ import NeutralNotification from "../../components/Notification/NeutralNotificati
 
 function JadwalPage() {
 	const [modal, setModal] = useState(false);
+	const [modalKelasTambahan, setModalKelasTambahan] = useState(false);
 	const [listJam, setListJam] = useState([
 		4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
 	]);
@@ -26,6 +27,7 @@ function JadwalPage() {
 	const [tanggal, setTanggal] = useState();
 	const [jam, setJam] = useState(4);
 	const [menit, setMenit] = useState(0);
+	const [link, setLink] = useState("");
 
 	const [hasError, setHasError] = useState(false);
 	const [errorMessage, setErrorMessage] = useState("");
@@ -42,10 +44,10 @@ function JadwalPage() {
 
 	const getMapel = () => {
 		// const result = []
-		APIConfig.get("/mapel/")
+		APIConfig.get("/api/v1/user/" + username)
 			.then((response) => {
 				// result = response.data.result;
-				setListMapel(response.data.result);
+				setListMapel(response.data.result.staff.listMapel);
 			})
 			.catch((error) => {
 				console.log(error);
@@ -66,6 +68,48 @@ function JadwalPage() {
 		event.preventDefault();
 		setModal(false);
 	};
+
+	const handleTambahKelasTambahan = (event) => {
+		event.preventDefault();
+		setModalKelasTambahan(true);
+	};
+
+	const handleCancelKelasTambahan = (event) => {
+		event.preventDefault();
+		setModalKelasTambahan(false);
+	};
+
+	const handleSubmitKelasTambahan = (event) => {
+		event.preventDefault();
+		const body = {
+			username: username,
+			tahun: Number(tanggal.slice(0, 4)),
+			bulan: Number(tanggal.slice(5, 7)),
+			tanggal: Number(tanggal.slice(8, 10)),
+			jam: Number(jam),
+			menit: Number(menit),
+			mapel: mapel,
+			jenisKelas: "TAMBAHAN",
+			link: link,
+		};
+		console.log(body);
+		setHasSubmit(false);
+		setHasError(false);
+		APIConfig.post("/jadwal/kelas-tambahan", body)
+			.then((response) => {
+				setHasSubmit(true);
+				setModalKelasTambahan(false);
+				setHasSchedule(false);
+				setHasSchedule(true);
+				console.log(response.data);
+			})
+			.catch((error) => {
+				setErrorMessage(error.response.data.message);
+				setHasError(true);
+				console.log(error.response);
+				setModalKelasTambahan(false);
+			});
+	}
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
@@ -90,7 +134,7 @@ function JadwalPage() {
 				// navigation.push("atur-jadwal");
 				setHasSchedule(false);
 				setHasSchedule(true);
-				console.log(response.data);
+				// console.log(response.data);
 			})
 			.catch((error) => {
 				setErrorMessage(error.response.data.message);
@@ -192,13 +236,98 @@ function JadwalPage() {
 				</form>
 			</Modal>
 
+			<Modal
+				show={modalKelasTambahan}
+				handleCloseModal={handleCancelKelasTambahan}
+				modalTitle="Tambah Kelas Tambahan"
+			>
+				<form onSubmit={handleSubmitKelasTambahan}>
+					<label>Mata Pelajaran</label>
+					<select onChange={(e) => setMapel(e.target.value)} required>
+						<option value={""}>-- Select Mata Pelajaran --</option>
+						{listMapel.map((mapel, key) => (
+							<option key={key} value={mapel.idMapel}>
+								{mapel.namaMapel}
+							</option>
+						))}
+					</select>
+					<br />
+					<br />
+
+					<label>Tanggal</label>
+					<input
+						type="date"
+						onChange={(e) => setTanggal(e.target.value)}
+						required
+					></input>
+					<br />
+					<br />
+
+					<label>Waktu Mulai</label>
+					<div className="waktu">
+						<select
+							required
+							className="waktu-mulai"
+							onChange={(e) => setJam(e.target.value)}
+						>
+							<option value={""}>jam</option>
+							{listJam.map((item, key) => (
+								<option key={key} value={item}>
+									{padLeadingZeros(item, 2)}
+								</option>
+							))}
+						</select>
+						<label> : </label>
+						<select
+							className="waktu-end"
+							onChange={(e) => setMenit(e.target.value)}
+							required
+						>
+							<option value={""}>menit</option>
+							<option value={0}>00</option>
+							<option value={15}>15</option>
+							<option value={30}>30</option>
+							<option value={45}>45</option>
+						</select>
+						<br />
+						<br />
+						<label>Link Meeting</label>
+						<input
+							type="text"
+							onChange={(e) => setLink(e.target.value)}
+							placeholder="Link Meeting"
+							pattern="https://.*"
+							required
+						></input>
+					</div>
+
+					<div className="modalButtonContainer">
+						<div
+							className="button button-outline"
+							onClick={handleCancelKelasTambahan}
+						>
+							Close
+						</div>
+						<button type="submit" className="button button-primary">
+							Simpan
+						</button>
+					</div>
+				</form>
+			</Modal>
+
 			<p className="text-center">
 				Username : <b>{username} </b>
 			</p>
 
-			<div className="d-flex center m-4">
+			<div className="button-tambah-jadwal-container">
 				<a className="button button-blue" onClick={handleTambahJadwal}>
 					+ Tambah Jadwal
+				</a>
+				<a
+					className="button button-blue"
+					onClick={handleTambahKelasTambahan}
+				>
+					+ Tambah Kelas Tambahan
 				</a>
 			</div>
 
