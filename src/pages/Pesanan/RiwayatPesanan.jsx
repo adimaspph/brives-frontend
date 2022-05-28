@@ -106,14 +106,14 @@ class RiwayatPesanan extends Component {
                     <div className="outer-pelajar">
                         <div className='d-flex flex-row'>
                             {/*<p className="p-2 align-self-end">Pilih Status: </p>*/}
-                            <div className="jenjang-select">
+                            <div className="status-select">
                                 {this.state.statusPesanan.map((status, key) => (
                                     <span
                                         key={key}
                                         className={
                                             this.state.selectedPesanan === status
-                                                ? "jenjang-btn jenjang-selected"
-                                                : "jenjang-btn"
+                                                ? "status-btn status-selected"
+                                                : "status-btn"
                                         }
                                         onClick={() => this.handleStatusChange(status, key)}
                                     >
