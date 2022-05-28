@@ -200,7 +200,7 @@ class DetailLog extends Component {
                             <div className="button button-outline-blue" onClick={() => this.handleCancelHadir(this.state.idPesanan)}>
                                 Kembali
                             </div>
-                            <button type="submit" className="button button-blue">Hadir</button>
+                            <button type="submit" className="button button-blue">Simpan</button>
                         </div>
                     </form>
                 </Modal>
@@ -232,7 +232,7 @@ class DetailLog extends Component {
                             <div className="button button-outline-blue" onClick={() => this.handleCancelTidakHadir(this.state.idPesanan)}>
                                 Kembali
                             </div>
-                            <button type="submit" className="button button-blue">Tidak Hadir</button>
+                            <button type="submit" className="button button-blue">Simpan</button>
                         </div>
                     </form>
                 </Modal>

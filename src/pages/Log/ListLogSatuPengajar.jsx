@@ -86,11 +86,11 @@ class ListLogPengajarTerpilih extends Component {
     };
 
     clickedTidakHadirHandler = (log) => {
-        console.log('ini log', log)
         const {tanggal, waktuMulai, waktuSelesai, idJadwal} =  log.jadwal
         this.setState({ isClickedTidakHadir: true, idLog: log.idLog, namaMapel: log.jadwal.mapel.namaMapel, tanggal, waktuMulai, waktuSelesai, idJadwal  });
         // LogService.getLogByIdLog(idLog);
         // console.log(idLog);
+
     };
 
 
@@ -337,7 +337,7 @@ class ListLogPengajarTerpilih extends Component {
                             <div className="button button-outline-blue" onClick={() => this.handleCancelHadir(this.state.idPesanan)}>
                                 Kembali
                             </div>
-                            <button type="submit" className="button button-blue">Hadir</button>
+                            <button type="submit" className="button button-blue">Simpan</button>
                         </div>
                     </form>
                 </Modal>
@@ -369,7 +369,7 @@ class ListLogPengajarTerpilih extends Component {
                             <div className="button button-outline-blue" onClick={() => this.handleCancelTidakHadir(this.state.idPesanan)}>
                                 Kembali
                             </div>
-                            <button type="submit" className="button button-blue">Tidak Hadir</button>
+                            <button type="submit" className="button button-blue">Simpan</button>
                         </div>
                     </form>
                 </Modal>

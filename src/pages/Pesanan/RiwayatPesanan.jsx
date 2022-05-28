@@ -17,6 +17,17 @@ class RiwayatPesanan extends Component {
             usernameSiswa: '',
             siswa: [],
             idSiswa: '',
+            selectedPesanan: "Semua",
+            statusPesanan: [
+                "Semua",
+                "Belum Dibayar",
+                "Menunggu Verifikasi",
+                "Terverifikasi",
+                "Pembayaran Ditolak",
+                "Dijadwalkan",
+                "Selesai",
+                "Dibatalkan"
+            ]
         }
 
         this.viewPesanan = this.viewPesanan.bind(this);
@@ -27,7 +38,7 @@ class RiwayatPesanan extends Component {
 
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         if (localStorage.getItem("user") != null) {
             if (JSON.parse(localStorage.getItem("user")).role === 'PELAJAR') {
             } else {
@@ -38,28 +49,50 @@ class RiwayatPesanan extends Component {
         }
 
         APIConfig.get("/api/v1/user/auth/")
-            .then((response) => {
+            .then(async (response) => {
                 this.setState({ idSiswa: response.data.result.siswa.idSiswa })
 
-                PesananService.getPesananByIdSiswa(this.state.idSiswa).then((res) => {
-                    this.setState({ pesanan: res.data.result });
-                });
-            })
+                let res = await PesananService.getPesananByIdSiswa(this.state.idSiswa)
+                let pesanan = res.data.result
 
 
+                let newPesanan = []
+                for (let i = 0; i < pesanan.length; i++) {
+                    let psn = pesanan[i];
+                    let staffRes = await PesananService.getStaffByIdJadwal(psn.jadwal.idJadwal)
+                    const idStaff =  staffRes.data.result[0].idStaff
 
+                    let resUser = await PesananService.getUserByIdStaff(idStaff)
+                    psn = {...psn, namaPengajar: resUser.data.result[0].namaLengkap}
+                    newPesanan.push(psn)
+                }
 
+                this.setState({ pesanan: newPesanan });
+
+            });
     }
 
 
 
 
-    handleStatusChange = (event) => {
-        PesananService.getPesananByStatusSiswa(this.state.idSiswa, event.target.value).then((res) => {
-            this.setState({ pesanan: res.data.result });
+    handleStatusChange = async (status, index) => {
+        this.setState({ selectedPesanan: status})
+        let res = await  PesananService.getPesananByStatusSiswa(this.state.idSiswa, index)
+        let pesanan = res.data.result
 
-        });
 
+        let newPesanan = []
+        for (let i = 0; i < pesanan.length; i++) {
+            let psn = pesanan[i];
+            let staffRes = await PesananService.getStaffByIdJadwal(psn.jadwal.idJadwal)
+            const idStaff =  staffRes.data.result[0].idStaff
+
+            let resUser = await PesananService.getUserByIdStaff(idStaff)
+            psn = {...psn, namaPengajar: resUser.data.result[0].namaLengkap}
+            newPesanan.push(psn)
+        }
+
+        this.setState({ pesanan: newPesanan });
 
 
     };
@@ -72,26 +105,33 @@ class RiwayatPesanan extends Component {
                     <h1 className="text-center title-riwayat">Riwayat Pesanan</h1>
                     <div className="outer-pelajar">
                         <div className='d-flex flex-row'>
-                            <p className="p-2 align-self-end">Pilih Status: </p>
-                            <select onChange={this.handleStatusChange} name="role" id="role" className='twobutton p-2'>
-                                <option value="0">Semua</option>
-                                <option value="1">Belum Dibayar</option>
-                                <option value="2">Menunggu Verifikasi</option>
-                                <option value="3">Terverifikasi</option>
-                                <option value="4">Pembayaran Ditolak</option>
-                                <option value="5">Dijadwalkan</option>
-                                <option value="6">Selesai</option>
-                                <option value="7">Dibatalkan</option>
-                            </select>
+                            {/*<p className="p-2 align-self-end">Pilih Status: </p>*/}
+                            <div className="jenjang-select">
+                                {this.state.statusPesanan.map((status, key) => (
+                                    <span
+                                        key={key}
+                                        className={
+                                            this.state.selectedPesanan === status
+                                                ? "jenjang-btn jenjang-selected"
+                                                : "jenjang-btn"
+                                        }
+                                        onClick={() => this.handleStatusChange(status, key)}
+                                    >
+                                        {status}
+                                    </span>
+                                ))}
+                            </div>
 
                         </div>
-
+                        {this.state.pesanan.length === 0 ? <><p>Tidak ada riwayat pesanan {this.state.selectedPesanan}</p></> : <div>
                         <table className="table-max table-none">
                             <thead>
                             <tr>
                                 <th scope="col">No</th>
                                 <th scope="col">Tanggal Dibuat</th>
                                 <th scope="col">Nomor Pesanan</th>
+                                <th scope="col">Mata Pelajaran</th>
+                                <th scope="col">Nama Pengajar</th>
                                 <th scope="col">Total Pesanan</th>
                                 <th scope="col">Tanggal Bimbel</th>
                                 <th scope="col">Status</th>
@@ -105,6 +145,8 @@ class RiwayatPesanan extends Component {
                                     <td>{index + 1}</td>
                                     <td> {SatuPesanan.waktuDibuat} </td>
                                     <td scope='row'> {SatuPesanan.idPesanan} </td>
+                                    <td scope='row'> {SatuPesanan.jadwal.mapel.namaMapel} </td>
+                                    <td scope='row'> {SatuPesanan.namaPengajar} </td>
                                     <td> Rp {SatuPesanan.nominal} </td>
                                     <td> {SatuPesanan.jadwal.tanggal} {SatuPesanan.jadwal.waktuMulai} - {SatuPesanan.jadwal.waktuSelesai}  </td>
                                     <td> {SatuPesanan.status.jenisStatus} </td>
@@ -117,11 +159,11 @@ class RiwayatPesanan extends Component {
                             ))}
                             </tbody>
                         </table>
+                            </div>}
                     </div>
                 </div>
                 <Footer />
             </div>
-
 
         );
     }
