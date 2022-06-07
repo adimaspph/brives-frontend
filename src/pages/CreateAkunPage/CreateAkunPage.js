@@ -13,6 +13,7 @@ function CreateAkunPage() {
     const [pengajarShown, setPengajarShown] = useState(false);
     const [hasError, setHasError] = useState(false);
     const [hasSubmit, setHasSubmit] = useState(false);
+    const [file, setFile] = useState("");
     const [role, setRole] = useState("ADMIN");
     const [username, setUsername] = useState("");
     const [namaLengkap, setNamaLengkap] = useState("");
@@ -62,9 +63,11 @@ function CreateAkunPage() {
                 setErrMessage(response.data.message);
                 setHasError(true);
             } else {
+                sendImage();
+                console.log("addd")
                 setTimeout(
                     function() {
-                        window.location.href = '/pengguna'; 
+                        // window.location.href = '/pengguna'; 
                     }
                     .bind(this),
                     1500
@@ -98,6 +101,16 @@ function CreateAkunPage() {
         } else {
             setPengajarShown(false);
         }
+    }
+
+    const sendImage =(e) => {
+        const addImage = new FormData();
+        addImage.append("file", file, file.name);
+        console.log(addImage);
+        APIConfig.post("/api/v1/user/staff/add-image/"+username, addImage, { 'content-type': 'multipart/form-data' }) 
+        .then((response) => {
+            console.log(response);
+		});
     }
 
     const handleUsernameChange = (e) => {
@@ -198,6 +211,17 @@ function CreateAkunPage() {
                                 </div>
                                 {pengajarShown && 
                                 <div>
+                                    <div className="my-3">
+                                    <label htmlFor="">
+                                       Foto Pengajar <span className="star">*</span>{" "}
+                                    </label>
+                                    <input
+                                        type="file"
+                                        // className="form-control"
+                                        onChange={(e) => setFile(e.target.files[0])}
+                                        required
+                                    />
+                                    </div>
                                     <div>
                                         <label htmlFor="">Tarif<span className='star'>*</span> </label>
                                         <input onChange={handleTarifChange} type="text" name="tarif" className='form-control' required />

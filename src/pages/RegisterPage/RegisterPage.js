@@ -13,6 +13,7 @@ function RegisterPage() {
     const [passwordShown, setPasswordShown] = useState(false);
     const [hasError, setHasError] = useState(false);
     const [hasSubmit, setHasSubmit] = useState(false);
+    const [notAvailable, setNotAvailable] = useState(false);
     const [role, setRole] = useState("PELAJAR");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -40,7 +41,16 @@ function RegisterPage() {
 
     const handleUsernameChange = (e) => {
         e.preventDefault();
-        setUsername(e.target.value);
+        setNotAvailable(false);
+        setUsername(e.target.value)
+        console.log(e.target.value)
+        APIConfig.get("/api/v1/user/check/"+e.target.value).then((res) => {
+            if (res.data.status == 999) {
+                setNotAvailable(true);
+            } else {
+                setNotAvailable(false);
+            }
+        });
     }
 
     const handleNamaLengkapChange = (e) => {
@@ -132,6 +142,7 @@ function RegisterPage() {
                                 <div>
                                     <label htmlFor="">Username<span className='star'>*</span> </label>
                                     <input onChange={handleUsernameChange} type="text" name="username" className='form-control' required />
+                                    {/* {notAvailable? (<p>Username tidak tersedia</p>) : (<p>Username tersedia</p>)} */}
                                 </div>
                                 <div>
                                     <label htmlFor="">Jenjang<span className='star'>*</span> </label>

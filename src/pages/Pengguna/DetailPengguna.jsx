@@ -17,6 +17,7 @@ class DetailPengguna extends Component {
             email: '',
             noHP: '',
             idStaff: '',
+            link: '',
             noPegawai: null,
             tarif: null,
             listMapel: [],
@@ -54,6 +55,7 @@ class DetailPengguna extends Component {
                 tarif: pengguna.result.staff.tarif,
                 listMapel: pengguna.result.staff.listMapel,
                 idUserReal: pengguna.result.idUser,
+                link: pengguna.result.staff.urlFoto,
 
             });
         });
@@ -155,6 +157,9 @@ class DetailPengguna extends Component {
                                 <div className='card-body'>
 
                                     <table className='table-none'>
+                                        <tr>    
+                                            <td><img src={this.state.link}  ></img></td>
+                                        </tr>
                                         <tr>
                                             <td>Id User</td>
                                             <td >{this.state.idUserReal}</td>
@@ -223,12 +228,6 @@ class DetailPengguna extends Component {
                                             Ubah
                                         </a>
                                     </div>
-
-
-
-
-
-
                                 </div>
                             </div>
                         </div>
