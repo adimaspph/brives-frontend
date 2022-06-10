@@ -44,7 +44,7 @@ export default function Schedule({ date, hari, username }) {
 			params: parameter,
 		})
 			.then((response) => {
-				// console.log(response.data);
+				console.log(response.data);
 				setListJadwal(response.data.result);
 			})
 			.catch((error) => {
