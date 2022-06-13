@@ -208,14 +208,8 @@ input[type="reset"] {
 	display: flex;
 	flex-grow: 1;
 	box-sizing: border-box;
-
-	/* width: 100%; */
 	margin: 0 12px;
-
-	/* overflow-x: auto; */
 }
-
-
 
 .container-403 {
 	width: 100%;
@@ -315,5 +309,10 @@ input[type="reset"] {
 	.font-403 {
 		font-size: 7vw;
 	}
+}
 
+@media screen and (max-width: 1024px) {
+	.content {
+		margin-top: calc(1rem + 50px);
+	}
 }

@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Switch, Link, Redirect } from "react-router-dom";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Navbar from "./components/Navbar/Navbar";
 import Home from "./pages/Home";
@@ -36,44 +36,145 @@ import PilihPengajarPage from "./pages/PilihPengajarPage/PilihPengajarPage";
 
 
 export default function StaffRoute() {
-    return (
-        <Router>
-            <div className="sidebar-container">
-                <Sidebar />
-                <div className="content">
-                    <Switch>
-                        <PrivateRoute exact path="/beranda" component={Home} />
-                        <PrivateRoute exact path="/akun/create" component={CreateAkunPage} />
-                        <PrivateRoute exact path="/atur-jadwal/:username" component={JadwalPage} />
-                        <PrivateRoute exact path="/jadwal-pengajar" component={PilihPengajarPage} />
-                        <PrivateRoute exact path="/jadwal-pengajar/:username" component={JadwalPage} />
-                        <PrivateRoute exact path="/atur-mapel" component={ListMapelComponent} />
-                        <PrivateRoute exact path="/dashboard" component={DashboardPage} />
-                        <PrivateRoute exact path="/atur-mapel/add" component={CreateMapelComponent} />
-                        <PrivateRoute exact path="/atur-mapel/view/:idMapel" component={DetailMapelComponent} />
-                        <PrivateRoute exact path="/atur-mapel/:idMapel/update" component={UpdateMapelComponent} />
-                        <PrivateRoute exact path="/pengguna" component={ListPengguna} />
-                        <PrivateRoute exact path="/pesanan" component={ListPesanan} />
-                        <PrivateRoute exact path="/pesanan/:idPesanan" component={DetailPesanan} />
-                        <PrivateRoute exact path="/pengguna/:idUser" component={DetailPengguna} />
-                        <PrivateRoute exact path="/pengguna/edit/:idUser" component={EditPengguna} />
-                        <PrivateRoute exact path="/profil-saya" component={ViewProfilePage} />
-                        <PrivateRoute exact path="/detail-pembayaran/:idPesanan" component={DetailPembayaran} />
-                        <PrivateRoute exact path="/detail-pembayaran-staff/:idPesanan" component={DetailPembayaranStaff} />
-                        <PrivateRoute exact path="/daftar-pembayaran" component={DaftarPembayaran} />
-                        <PrivateRoute exact path="/log" component={ListLogSatuPengajar} />
-                        <PrivateRoute exact path="/log-pengajar/:idStaff" component={ListLogPengajarTerpilih} />
-                        <PrivateRoute exact path="/log-pengajar" component={ListPengajar} />
-                        <PrivateRoute exact path="/log/:idLog" component={DetailLog} />
-                        <Route exact path="/404" component={error404} />
-                        <Route exact path="/403" component={error403} />
-                        <Redirect from="*" to="/404" />
-                        
-                        {/* <Route path="/" component={() => (window.location = "/404")} /> */}
+    const [toggleNav, setToggleNav] = useState(false);
 
-                    </Switch>
-                </div>
-            </div>
-        </Router>
-    );
+    const toggleHamburger = () => {
+		setToggleNav(!toggleNav);
+    }
+
+    return (
+		<Router>
+			<div className="sidebar-container">
+				<Sidebar active={toggleNav}/>
+				<div 
+                    className={toggleNav ? "menu-toggle is-active" : "menu-toggle"}
+                    onClick={toggleHamburger}
+                >
+					<div className="hamburger">
+						<span></span>
+					</div>
+				</div>
+				<div className="content">
+					<Switch>
+						<PrivateRoute exact path="/beranda" component={Home} />
+						<PrivateRoute
+							exact
+							path="/akun/create"
+							component={CreateAkunPage}
+						/>
+						<PrivateRoute
+							exact
+							path="/atur-jadwal/:username"
+							component={JadwalPage}
+						/>
+						<PrivateRoute
+							exact
+							path="/jadwal-pengajar"
+							component={PilihPengajarPage}
+						/>
+						<PrivateRoute
+							exact
+							path="/jadwal-pengajar/:username"
+							component={JadwalPage}
+						/>
+						<PrivateRoute
+							exact
+							path="/atur-mapel"
+							component={ListMapelComponent}
+						/>
+						<PrivateRoute
+							exact
+							path="/dashboard"
+							component={DashboardPage}
+						/>
+						<PrivateRoute
+							exact
+							path="/atur-mapel/add"
+							component={CreateMapelComponent}
+						/>
+						<PrivateRoute
+							exact
+							path="/atur-mapel/view/:idMapel"
+							component={DetailMapelComponent}
+						/>
+						<PrivateRoute
+							exact
+							path="/atur-mapel/:idMapel/update"
+							component={UpdateMapelComponent}
+						/>
+						<PrivateRoute
+							exact
+							path="/pengguna"
+							component={ListPengguna}
+						/>
+						<PrivateRoute
+							exact
+							path="/pesanan"
+							component={ListPesanan}
+						/>
+						<PrivateRoute
+							exact
+							path="/pesanan/:idPesanan"
+							component={DetailPesanan}
+						/>
+						<PrivateRoute
+							exact
+							path="/pengguna/:idUser"
+							component={DetailPengguna}
+						/>
+						<PrivateRoute
+							exact
+							path="/pengguna/edit/:idUser"
+							component={EditPengguna}
+						/>
+						<PrivateRoute
+							exact
+							path="/profil-saya"
+							component={ViewProfilePage}
+						/>
+						<PrivateRoute
+							exact
+							path="/detail-pembayaran/:idPesanan"
+							component={DetailPembayaran}
+						/>
+						<PrivateRoute
+							exact
+							path="/detail-pembayaran-staff/:idPesanan"
+							component={DetailPembayaranStaff}
+						/>
+						<PrivateRoute
+							exact
+							path="/daftar-pembayaran"
+							component={DaftarPembayaran}
+						/>
+						<PrivateRoute
+							exact
+							path="/log"
+							component={ListLogSatuPengajar}
+						/>
+						<PrivateRoute
+							exact
+							path="/log-pengajar/:idStaff"
+							component={ListLogPengajarTerpilih}
+						/>
+						<PrivateRoute
+							exact
+							path="/log-pengajar"
+							component={ListPengajar}
+						/>
+						<PrivateRoute
+							exact
+							path="/log/:idLog"
+							component={DetailLog}
+						/>
+						<Route exact path="/404" component={error404} />
+						<Route exact path="/403" component={error403} />
+						<Redirect from="*" to="/404" />
+
+						{/* <Route path="/" component={() => (window.location = "/404")} /> */}
+					</Switch>
+				</div>
+			</div>
+		</Router>
+	);
 }
