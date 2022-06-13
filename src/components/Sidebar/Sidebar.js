@@ -29,130 +29,142 @@ export default function Sidebar(props) {
 		<div>
 			{localStorage.getItem("user") != null &&
 			JSON.parse(localStorage.getItem("user")).role != "PELAJAR" ? (
-				<nav className="sidebar">
+				<nav
+					className={
+						props.active ? "sidebar sidebar-active" : "sidebar"
+					}
+				>
 					<div>
-						<Link className="sidebar-logo" to="/beranda">
+						<a className="sidebar-logo" href="/beranda">
 							<img src="/logo-bta.png" width={132} alt="" />
-						</Link>
+						</a>
 						<div className="sidebar-menu">
 							{JSON.parse(localStorage.getItem("user")).role ===
 							"ADMIN" ? (
-								<Link
+								<a
 									className="sidebar-menu-btn"
-									to="/pengguna"
+									href="/pengguna"
 								>
 									<img src="/assets/account.svg" alt="" />
 									Pengguna
-								</Link>
-							) : ('')}
+								</a>
+							) : (
+								""
+							)}
 
-							{JSON.parse(localStorage.getItem("user")).role === 'MANAJEMEN' ? (
-								<Link className="sidebar-menu-btn" to="/dashboard">
+							{JSON.parse(localStorage.getItem("user")).role ===
+							"MANAJEMEN" ? (
+								<a
+									className="sidebar-menu-btn"
+									href="/dashboard"
+								>
 									<img src="/assets/dashboard.svg" alt="" />
 									Dashboard
-								</Link>
-							) : ('')}
+								</a>
+							) : (
+								""
+							)}
 
 							{JSON.parse(localStorage.getItem("user")).role ===
 							"STAF_OPERASIONAL" ? (
-								<Link
+								<a
 									className="sidebar-menu-btn"
-									to="/pesanan"
+									href="/pesanan"
 								>
 									<img src="/assets/checkout.svg" alt="" />
 									Pesanan
-								</Link>
+								</a>
 							) : (
 								""
 							)}
 
 							{JSON.parse(localStorage.getItem("user")).role ===
 							"STAF_KEUANGAN" ? (
-								<Link
+								<a
 									className="sidebar-menu-btn"
-									to="/daftar-pembayaran"
+									href="/daftar-pembayaran"
 								>
 									<img src="/assets/checkout.svg" alt="" />
 									Pembayaran
-								</Link>
+								</a>
 							) : (
 								""
 							)}
 
 							{JSON.parse(localStorage.getItem("user")).role ===
 							"STAF_OPERASIONAL" ? (
-								<Link
+								<a
 									className="sidebar-menu-btn"
-									to="/atur-mapel"
+									href="/atur-mapel"
 								>
 									<img src="/assets/book.svg" alt="" />
 									Mata Pelajaran
-								</Link>
+								</a>
 							) : (
 								""
 							)}
 
 							{JSON.parse(localStorage.getItem("user")).role ===
 							"PENGAJAR" ? (
-								<Link
+								<a
 									className="sidebar-menu-btn"
-									to={"/atur-jadwal/" + username}
+									href={"/atur-jadwal/" + username}
 								>
 									<img src="/assets/schedule.svg" alt="" />
 									Atur Jadwal
-								</Link>
+								</a>
 							) : (
 								""
 							)}
 
 							{JSON.parse(localStorage.getItem("user")).role ===
 							"STAF_OPERASIONAL" ? (
-								<Link
+								<a
 									className="sidebar-menu-btn"
-									to="/jadwal-pengajar"
+									href="/jadwal-pengajar"
 								>
 									<img src="/assets/schedule.svg" alt="" />
 									Jadwal Pengajar
-								</Link>
+								</a>
 							) : (
 								""
 							)}
 
 							{JSON.parse(localStorage.getItem("user")).role ===
 							"STAF_OPERASIONAL" ? (
-								<Link
+								<a
 									className="sidebar-menu-btn"
-									to="/log-pengajar"
+									href="/log-pengajar"
 								>
 									<img src="/assets/log.svg" alt="" />
 									Log Pengajar
-								</Link>
+								</a>
 							) : (
 								""
 							)}
 
 							{JSON.parse(localStorage.getItem("user")).role ===
 							"PENGAJAR" ? (
-								<Link className="sidebar-menu-btn" to="/log">
+								<a className="sidebar-menu-btn" href="/log">
 									<img src="/assets/log.svg" alt="" />
 									Log
-								</Link>
+								</a>
 							) : (
 								""
 							)}
 
-							{/* <Link className="sidebar-menu-btn" to="/kelas-pengajar">
+							{/* <a className="sidebar-menu-btn" href="/kelas-pengajar">
 								<img src="/assets/plus.svg" alt="" />
 								Kelas Pengajar
-							</Link> */}
+							</a> */}
 
-							<Link
+							<a
 								className="sidebar-menu-btn"
-								to="/profil-saya"
+								href="/profil-saya"
 							>
 								<img src="/assets/profil-saya.svg" alt="" />
 								Profil Saya
-							</Link>
+							</a>
 							<a
 								onClick={handlerLogout}
 								className="sidebar-menu-btn"
