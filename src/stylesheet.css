@@ -268,7 +268,7 @@ input[type="reset"] {
 	position: relative;
 	min-height: calc(100vh - 277px);
 	box-sizing: border-box;
-	margin-top: 100px;
+	margin-top: 120px;
 }
 
 @media (max-width: 570px) {
