@@ -1,3 +1,4 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { Component, useState, useEffect } from 'react';
 
 import { Link } from "react-router-dom";
@@ -32,96 +33,98 @@ export default function Navbar(props) {
 
 	return (
 		<div>
-			<nav className="navbar navbar-expand-lg navbar-dark">
+			<nav className="navbar">
+				<input type="checkbox" id="check" />
 
-				<div className="navbar-menu">
-					<Link className="navbar-logo" to="/">
+				<div className="nav-logo">
+					<Link className="" to="/">
 						<img src="/logo-navbar.png" width={60} alt="" />
 					</Link>
+				</div>
 
-					<div className='navbar-menu-btn'>
-						<div className='navbar-text'>
-							<a className="" href="/">
-								Beranda
+				<ul>
+					<li>
+						<a className="" href="/">
+							Beranda
+						</a>
+					</li>
+
+					<li>
+						<a className="" href="/pesan-kelas">
+							Pesan Kelas Privat
+						</a>
+					</li>
+
+					{localStorage.getItem("user") != null &&
+					JSON.parse(localStorage.getItem("user")).role ===
+						"PELAJAR" ? (
+						<li>
+							<a className="" href="/riwayat-pesanan">
+								Riwayat Pesanan
 							</a>
-						</div>
-					</div>
+						</li>
+					) : (
+						""
+					)}
 
-					<div className='navbar-menu-btn'>
-						<div className='navbar-text'>
-							<a className="" href="/pesan-kelas">
-								Pesan Kelas Privat
+					{localStorage.getItem("user") != null &&
+					JSON.parse(localStorage.getItem("user")).role ===
+						"PELAJAR" ? (
+						<li>
+							<a className="" href="/akun/profil">
+								Profil
 							</a>
-						</div>
-					</div>
-
-					{localStorage.getItem("user") != null && JSON.parse(localStorage.getItem("user")).role === 'PELAJAR' ? (
-						// <Link className="navbar-menu-btn" to="/riwayat-pesanan">
-						// 	<div className="navbar-text">
-						// 		Riwayat Pesanan
-						// 	</div>
-						// </Link>
-
-						<div className='navbar-menu-btn'>
-							<div className='navbar-text'>
-								<a className="" href="/riwayat-pesanan">
-									Riwayat Pesanan
-								</a>
-							</div>
-						</div>
-
-					) : ("")}
-					{localStorage.getItem("user") != null && JSON.parse(localStorage.getItem("user")).role === 'PELAJAR' ? (
-						// <Link className="navbar-menu-btn" to="/akun/profil">
-						// 	<div className="navbar-text">
-						// 		Profil
-						// 	</div>
-						// </Link>
-						<div className='navbar-menu-btn'>
-							<div className='navbar-text'>
-								<a className="" href="/akun/profil">
-									Profil
-								</a>
-							</div>
-						</div>
-
-					) : ("")}
+						</li>
+					) : (
+						""
+					)}
 
 					{localStorage.getItem("user") === null ? (
-						// <Link className="navbar-menu-btn" to="/login">
-						// 	<div className="navbar-text">
-						// 		Login
-						// 	</div>
-						// </Link>
-						<div className='navbar-menu-btn'>
-							<div className='navbar-text'>
-								<a className="" href="/login">
-									Login
-								</a>
-							</div>
-						</div>
-					) : ("")}
+						<li>
+							<a className="" href="/login">
+								Login
+							</a>
+						</li>
+					) : (
+						""
+					)}
 
-					{localStorage.getItem("user") != null && JSON.parse(localStorage.getItem("user")).role === 'PELAJAR' ? (
-						<div className='navbar-menu-btn'>
-							<div className='navbar-text'>
-								<a onClick={handlerLogout} className="" href="/login">
-									Logout
-								</a>
-							</div>
-						</div>
-					) : ("")}
+					{localStorage.getItem("user") != null &&
+					JSON.parse(localStorage.getItem("user")).role ===
+						"PELAJAR" ? (
+						<li>
+							<a
+								onClick={handlerLogout}
+								className=""
+								href="/login"
+							>
+								Logout
+							</a>
+						</li>
+					) : (
+						""
+					)}
+				</ul>
 
-
-
-
-
-				</div>
+				<label className="checkbtn" for="check">
+					<svg
+						width="36"
+						height="36"
+						viewBox="0 0 16 16"
+						fill="none"
+						xmlns="http://www.w3.org/2000/svg"
+					>
+						<path
+							d="M2.75 4.25H13.25M2.75 12.25H13.25H2.75ZM2.75 8.25H13.25H2.75Z"
+							stroke="white"
+							stroke-width="1.5"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						/>
+					</svg>
+				</label>
 			</nav>
-
 		</div>
-
-
 
 		// <nav class="navbar navbar-expand-lg navbar-dark">
 		// 	<Link className="navbar-logo navbar-brand" to="/">
