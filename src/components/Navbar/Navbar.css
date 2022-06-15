@@ -27,7 +27,7 @@ nav ul {
 
 nav ul li {
 	display: inline-block;
-	line-height:  80px;
+	line-height: 80px;
 	margin: 0 5px;
 }
 
@@ -67,6 +67,10 @@ nav label{
 }
 
 @media (max-width: 1000px) {
+	.navbar {
+		padding: 0 24px 0 24px;
+	}
+
 	.checkbtn {
 		display: block;
 	}
